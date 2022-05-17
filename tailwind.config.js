@@ -1,7 +1,11 @@
 module.exports = {
   content: ['./src/**/*.{html,ts}', './projects/**/*.{html,ts}'],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        'ibmplex': 'IBM Plex Sans'
+      }
+    },
     colors: {
       accent: '#3545E9',
       warning: '#FEFD54',
