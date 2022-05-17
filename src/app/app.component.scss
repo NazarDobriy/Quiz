@@ -1,0 +1,69 @@
+.nav {
+    &-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        height: 80px;
+        margin-left: 32px;
+        margin-right: 32px;
+
+        &-logo {
+            display: flex;
+            align-items: center;
+            .logo-img {
+                height: 32px;
+                width: 33.15px;
+                margin-bottom: 10px;
+            }
+
+            .logo-text {
+                font-weight: 600;
+                font-size: 28.5714px;
+                line-height: 40px;
+            }
+
+            .items {
+                display: flex;
+                font-family: 'IBM Plex Sans';
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+
+                .item:first-child {
+                    padding-left: 84px;
+                }
+
+                .item {
+                    cursor: pointer;
+                    padding-left: 25px;
+                }
+            }
+        }
+
+        &-btns {
+            .btn {
+                cursor: pointer;
+                padding: 8px 24px;
+                font-weight: 500;
+                line-height: 18px;
+                border-radius: 4px;
+            }
+
+            .btn-left {
+                margin-right: 36px;
+                .link-create {
+                    font-size: 14px;
+                    text-decoration: none;
+                }
+            }
+
+            .btn-right {
+                .link-create {
+                    font-size: 14px;
+                    text-decoration: none;
+                }
+            }
+        }
+    }
+}
