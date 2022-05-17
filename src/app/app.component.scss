@@ -44,7 +44,7 @@
         &-btns {
             .btn {
                 cursor: pointer;
-                padding: 8px 24px;
+                padding: 6px 22px;
                 font-weight: 500;
                 line-height: 18px;
                 border-radius: 4px;
@@ -52,7 +52,7 @@
 
             .btn-left {
                 margin-right: 36px;
-                .link-create {
+                .link {
                     font-size: 14px;
                     text-decoration: none;
                 }
@@ -95,5 +95,18 @@
         font-weight: 300;
         font-size: 56px;
         padding: 10px;
+    }
+}
+
+.pass-btn-container {
+    margin: 0 auto;
+    width: 120px;
+
+    .pass-btn {
+        cursor: pointer;
+        font-size: 14px;
+        padding: 16px 24px;
+        border-radius: 4px;
+        margin-top: 69px;
     }
 }
