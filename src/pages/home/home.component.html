@@ -6,13 +6,16 @@
         <span class="font-semibold leading-10 text-[28.57px] lg:mr-32 md:mr-28 sm:mr-16">uiz</span>
       </div>
 
-      <div class="sm:hidden flex items-center cursor-pointer">
+      <div class="sm:hidden flex items-center cursor-pointer" (click)="openDropDownMenu()">
         <img src="../assets/img/burger-menu.png" alt="Burger menu">
         <span class="text-base">Menu</span>
       </div>
     </div>
 
-    <ul class="sm:flex hidden list-none m-0 p-0 w-full text-center sm:text-base text-lg sm:bg-primary sm:text-bright bg-shade text-primary">
+    <ul
+      [ngClass]="{'block': isMenuClicked, 'hidden': !isMenuClicked}" 
+      class="sm:flex hidden list-none m-0 p-0 w-full text-center sm:text-base text-lg sm:bg-primary sm:text-bright bg-shade text-primary"
+    >
       <li class="pl-0 sm:pt-0 pt-1 sm:pb-0 pb-1 cursor-pointer hover:bg-primary hover:text-bright"><a [routerLink]="">Item</a></li>
       <li class="sm:pl-6 pl-0 sm:pt-0 pt-1 sm:pb-0 pb-1 cursor-pointer hover:bg-primary hover:text-bright"><a [routerLink]="">Item</a></li>
       <li class="sm:pl-6 pl-0 sm:pt-0 pt-1 sm:pb-0 pb-1 cursor-pointer hover:bg-primary hover:text-bright"><a [routerLink]="">Item</a></li>
@@ -20,7 +23,10 @@
       <li class="sm:pl-6 pl-0 sm:pt-0 pt-1 sm:pb-0 pb-1 cursor-pointer hover:bg-primary hover:text-bright"><a [routerLink]="">Item</a></li>
     </ul>
 
-    <div class="sm:flex sm:bg-primary bg-shade sm:pb-0 pb-[2px] sm:pt-0 pt-[10px] relative sm:bottom-0 bottom-[1px]">
+    <div 
+      [ngClass]="{'block': isMenuClicked, 'hidden': !isMenuClicked}"
+      class="sm:flex sm:bg-primary bg-shade sm:pb-0 pb-[2px] sm:pt-0 pt-[10px] relative sm:bottom-0 bottom-[1px]"
+    >
         <button class="px-5 py-[6px] border-accent border-2 cursor-pointer rounded md:mr-9 sm:mr-4 sm:text-bright text-primary sm:block grid m-auto">
             <a [routerLink]="">Button</a>
         </button>
@@ -32,7 +38,7 @@
   </div>
 </nav>
 
-<div class="text-center text-bright">
+<div [ngClass]="{'mt-[22rem]': isMenuClicked, 'mt-40': !isMenuClicked}" class="text-center text-bright">
   <span class="sm:mr-2 sm:text-7xl text-[4rem] font-semibold">Make <br class="sm:hidden"> your</span>
   <br class="sm:hidden">
   <span class="right-text text-[3.5rem] bg-warning text-primary relative sm:top-2 top-[1rem] p-3 font-light">choice</span>
