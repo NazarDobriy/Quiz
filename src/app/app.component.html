@@ -1,39 +1,47 @@
 <nav class="text-bright">
-  <div class="nav-container flex justify-between items-center h-20 ml-8 mr-8">
-    <div class="nav-container-logo flex items-center">
-        <img src="../assets/img/Q.png" alt="Q" class="h-8 w-[2.125rem] mb-[0.625rem]">
-        <span class="logo-text font-semibold leading-10 text-[1.7857125rem]">uiz</span>
+  <div class="sm:flex sm:justify-start sm:items-center sm:h-20 h-0 ml-8 mr-8">
+    <div class="flex justify-between items-center sm:h-0 h-[3.75rem]">
+      <div class="inline-flex">
+        <img src="../assets/img/Q.png" alt="Q" class="h-8 w-[2.125rem]">
+        <span class="font-semibold leading-10 text-[1.7857125rem] lg:mr-[130px] md:mr-[115px] sm:mr-16">uiz</span>
+      </div>
 
-        <ul class="flex list-none m-0 p-0">
-          <li class="pl-[5.25rem]"><a [routerLink]="" class="cursor-pointer">Item</a></li>
-          <li class="pl-[1.5625rem]"><a [routerLink]="" class="cursor-pointer">Item</a></li>
-          <li class="pl-[1.5625rem]"><a [routerLink]="" class="cursor-pointer">Item</a></li>
-          <li class="pl-[1.5625rem]"><a [routerLink]="" class="cursor-pointer">Item</a></li>
-          <li class="pl-[1.5625rem]"><a [routerLink]="" class="cursor-pointer">Item</a></li>
-        </ul>
+      <div class="sm:hidden flex items-center cursor-pointer">
+        <img src="../assets/img/burger-menu.png" alt="Burger menu">
+        <span class="text-base">Menu</span>
+      </div>
     </div>
 
-    <div class="nav-container-btns">
-        <button class="px-[1.375rem] py-[0.375rem] border-accent border-2 cursor-pointer rounded mr-9">
+    <ul class="sm:flex hidden list-none m-0 p-0 w-full text-center sm:text-base text-[18px] sm:bg-primary sm:text-bright bg-shade text-primary">
+      <li class="pl-0 sm:pt-0 pt-1 sm:pb-0 pb-1 cursor-pointer hover:bg-primary hover:text-bright"><a [routerLink]="">Item</a></li>
+      <li class="sm:pl-[1.5625rem] pl-0 sm:pt-0 pt-1 sm:pb-0 pb-1 cursor-pointer hover:bg-primary hover:text-bright"><a [routerLink]="">Item</a></li>
+      <li class="sm:pl-[1.5625rem] pl-0 sm:pt-0 pt-1 sm:pb-0 pb-1 cursor-pointer hover:bg-primary hover:text-bright"><a [routerLink]="">Item</a></li>
+      <li class="sm:pl-[1.5625rem] pl-0 sm:pt-0 pt-1 sm:pb-0 pb-1 cursor-pointer hover:bg-primary hover:text-bright"><a [routerLink]="">Item</a></li>
+      <li class="sm:pl-[1.5625rem] pl-0 sm:pt-0 pt-1 sm:pb-0 pb-1 cursor-pointer hover:bg-primary hover:text-bright"><a [routerLink]="">Item</a></li>
+    </ul>
+
+    <div class="sm:flex sm:bg-primary bg-shade sm:pb-0 pb-[2px] sm:pt-0 pt-[10px] relative sm:bottom-0 bottom-[1px]">
+        <button 
+          class="px-[1.375rem] py-[0.375rem] border-accent border-2 cursor-pointer rounded md:mr-9 sm:mr-4 sm:text-bright text-primary sm:block grid m-auto">
             <a [routerLink]="">Button</a>
         </button>
-        <button class="bg-accent btn-right px-[1.375rem] py-[0.375rem] border-accent border-2 cursor-pointer rounded">
+        <br class="sm:hidden">
+        <button class="bg-accent btn-right px-[1.375rem] py-[0.375rem] border-accent border-2 cursor-pointer rounded sm:mt-0 sm:block grid m-auto relative sm:bottom-0 bottom-2">
           <a [routerLink]="">Button</a>
       </button>
     </div>
   </div>
 </nav>
 
-<div class="mt-40 text-center">
-  <div class="text-bright">
-    <span class="mr-2 text-7xl font-semibold">Make your</span>
-    <span class="right-text text-[3.5rem] bg-warning text-primary relative top-[0.4375rem] p-[0.625rem] font-ibmplex font-light">choice</span>
-    <span class="bg-error inline-block h-2 w-2 relative left-1 top-[0.4375rem] rounded-full"></span>
-  </div>
+<div class="text-center text-bright">
+  <span class="sm:mr-2 sm:text-7xl text-[4rem] font-semibold">Make <br class="sm:hidden"> your</span>
+  <br class="sm:hidden">
+  <span class="right-text text-[3.5rem] bg-warning text-primary relative sm:top-[0.4375rem] top-[1rem] p-[0.625rem] font-light">choice</span>
+  <span class="bg-error inline-block h-2 w-2 relative left-1 sm:top-[0.4375rem] top-[1rem] rounded-full"></span>
 </div>
 
-<div class="pass-btn-container m-auto w-[7.5rem]">
-  <button class="bg-accent text-bright cursor-pointer px-6 py-4 rounded mt-[4.3125rem]">
+<div class="m-auto w-[7.5rem]">
+  <button class="bg-accent text-bright cursor-pointer px-6 py-4 rounded sm:mt-[4.3125rem] mt-[3.375rem]">
     <a [routerLink]="">Pass a text</a>
   </button>
 </div>
