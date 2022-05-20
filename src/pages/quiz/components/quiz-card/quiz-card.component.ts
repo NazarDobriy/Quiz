@@ -7,7 +7,7 @@ enum Colors {
   Accent = "accent",
   Bright = "bright",
   Warning = "warning",
-  Skyblue = "#7199FF"
+  Lightblue = "lightblue"
 }
 
 @Component({
@@ -16,7 +16,7 @@ enum Colors {
   styleUrls: ['./quiz-card.component.scss']
 })
 export class QuizCardComponent implements OnInit {
-  @Input() currentCardColor: string = "";
+  @Input() currentCardColor: string = Colors.Success;
 
   public quizCard: IQuizCard = {
     title: {
@@ -68,7 +68,7 @@ export class QuizCardComponent implements OnInit {
       tempQuizCard.subtitle.content = "Easter Emoji Quiz: Can You Get 100 Percent?";
       tempQuizCard.subtitle.color = "bright";
       tempQuizCard.iconSrc = formPath("Meg");
-      this.circleProfileColor = Colors.Skyblue;
+      this.circleProfileColor = Colors.Lightblue;
     }
 
     if (this.currentCardColor === Colors.Accent) {
