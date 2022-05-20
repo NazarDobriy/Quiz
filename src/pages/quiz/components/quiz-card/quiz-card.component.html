@@ -4,5 +4,8 @@
             <p class="text-base">{{ quizCard.title.content }}</p>
             <img [src]="quizCard.iconSrc" [alt]="personName" class="rounded-full bg-{{ circleProfileColor }}">
         </div>
+        <p class="text-{{ quizCard.subtitle.color }} text-[28px] font-bold leading-[38px]">
+            {{ quizCard.subtitle.content }}
+        </p>
     </div>
 </div>
