@@ -5,7 +5,13 @@
   <span class="bg-bright inline-block h-2 w-2 relative left-1 sm:top-2 top-[1rem] rounded-full"></span>
 </div>
 
-
+<ng-container *ngFor="let index of numSequence(counterCardRows)">
+  <div class="flex">
+    <ng-container *ngFor="let color of cardsColors">
+      <app-quiz-card [currentCardColor]="color"></app-quiz-card>
+    </ng-container>
+  </div>
+</ng-container>
 
 <button class="grid m-auto bg-accent text-bright cursor-pointer px-6 py-4 rounded sm:mt-[69px] mt-[54px]">
   <a [routerLink]="">I'm lucky</a>
