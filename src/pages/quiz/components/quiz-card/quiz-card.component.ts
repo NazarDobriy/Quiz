@@ -16,7 +16,7 @@ enum Colors {
   styleUrls: ['./quiz-card.component.scss']
 })
 export class QuizCardComponent implements OnInit {
-  @Input() currentCardColor: string = Colors.Success;
+  @Input() currentCardColor: string = '';
 
   public quizCard: IQuizCard = {
     title: {
@@ -32,6 +32,7 @@ export class QuizCardComponent implements OnInit {
   };
 
   public circleProfileColor: string = '';
+  public personName: string = '';
 
   constructor() { }
 
@@ -61,6 +62,7 @@ export class QuizCardComponent implements OnInit {
       tempQuizCard.subtitle.color = "bright";
       tempQuizCard.iconSrc = formPath("Mili");
       this.circleProfileColor = Colors.Warning;
+      this.personName = "Mili";
     }
 
     if (this.currentCardColor === Colors.Error) {
@@ -69,6 +71,7 @@ export class QuizCardComponent implements OnInit {
       tempQuizCard.subtitle.color = "bright";
       tempQuizCard.iconSrc = formPath("Meg");
       this.circleProfileColor = Colors.Lightblue;
+      this.personName = "Meg";
     }
 
     if (this.currentCardColor === Colors.Accent) {
@@ -77,6 +80,7 @@ export class QuizCardComponent implements OnInit {
       tempQuizCard.subtitle.color = "bright";
       tempQuizCard.iconSrc = formPath("Steven");
       this.circleProfileColor = Colors.Error;
+      this.personName = "Steven";
     }
 
     if (this.currentCardColor === Colors.Bright) {
@@ -85,6 +89,7 @@ export class QuizCardComponent implements OnInit {
       tempQuizCard.subtitle.color = "primary";
       tempQuizCard.iconSrc = formPath("Mili");
       this.circleProfileColor = Colors.Warning;
+      this.personName = "Mili";
     }
 
     if (this.currentCardColor === Colors.Warning) {
@@ -93,6 +98,7 @@ export class QuizCardComponent implements OnInit {
       tempQuizCard.subtitle.color = "primary";
       tempQuizCard.iconSrc = formPath("Steven");
       this.circleProfileColor = Colors.Error;
+      this.personName = "Steven";
     }
 
     return tempQuizCard;

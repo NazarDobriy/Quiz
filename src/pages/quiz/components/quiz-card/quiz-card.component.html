@@ -2,7 +2,7 @@
     <div class="container w-52 m-auto pt-[14px]">
         <div class="flex justify-between items-end">
             <p class="text-base">{{ quizCard.title.content }}</p>
-            <img [src]="quizCard.iconSrc" alt="" class="rounded-full bg-{{ circleProfileColor }}">
+            <img [src]="quizCard.iconSrc" [alt]="personName" class="rounded-full bg-{{ circleProfileColor }}">
         </div>
     </div>
 </div>
