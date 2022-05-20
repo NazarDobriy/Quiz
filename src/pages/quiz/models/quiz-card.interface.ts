@@ -1,4 +1,4 @@
-export interface ICardQuiz {
+export interface IQuizCard {
     title: string;
     subtitle: string;
     iconSrc: string;
