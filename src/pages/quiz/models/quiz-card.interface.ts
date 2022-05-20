@@ -1,6 +1,11 @@
+interface IText {
+    content: string;
+    color: string;
+}
+
 export interface IQuizCard {
-    title: string;
-    subtitle: string;
+    title: IText;
+    subtitle: IText;
     iconSrc: string;
     theme: string;
 }

@@ -6,7 +6,7 @@
 </div>
 
 <ng-container *ngFor="let index of numSequence(counterCardRows)">
-  <div class="flex">
+  <div class="flex justify-center items-center mt-[70px]">
     <ng-container *ngFor="let color of cardsColors">
       <app-quiz-card [currentCardColor]="color"></app-quiz-card>
     </ng-container>
