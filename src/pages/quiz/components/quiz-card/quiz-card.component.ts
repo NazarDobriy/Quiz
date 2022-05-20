@@ -32,7 +32,7 @@ export class QuizCardComponent implements OnInit {
 
   public defineCardByColor(): IQuizCard {
     const tempQuizCard: IQuizCard = {
-      title: '',
+      title: '10 Qusstions',
       subtitle: '',
       iconSrc: '',
       theme: this.currentCardColor
@@ -41,32 +41,27 @@ export class QuizCardComponent implements OnInit {
     const formPath = (name: string): string => { return `assets/img/${name}.png` };
 
     if (this.currentCardColor === Colors.Success) {
-      tempQuizCard.title = "primary";
-      tempQuizCard.subtitle = "bright";
+      tempQuizCard.subtitle = "Emoji Bands Quiz!";
       tempQuizCard.iconSrc = formPath("Mili");
     }
 
     if (this.currentCardColor === Colors.Error) {
-      tempQuizCard.title = "primary"
-      tempQuizCard.subtitle = "bright";
+      tempQuizCard.subtitle = "Easter Emoji Quiz: Can You Get 100 Percent?";
       tempQuizCard.iconSrc = formPath("Meg");
     }
 
     if (this.currentCardColor === Colors.Accent) {
-      tempQuizCard.title = "secondary"
-      tempQuizCard.subtitle = "bright";
+      tempQuizCard.subtitle = "London Underground & Tube Station Emoji Quiz";
       tempQuizCard.iconSrc = formPath("Steven");
     }
 
     if (this.currentCardColor === Colors.Bright) {
-      tempQuizCard.title = "secondary"
-      tempQuizCard.subtitle = "primary";
+      tempQuizCard.subtitle = "Trivia Quiz: Guess The WWE Star From The Emoji!";
       tempQuizCard.iconSrc = formPath("Mili");
     }
 
     if (this.currentCardColor === Colors.Warning) {
-      tempQuizCard.title = "secondary"
-      tempQuizCard.subtitle = "primary";
+      tempQuizCard.subtitle = "What Emoji Am I? Quiz";
       tempQuizCard.iconSrc = formPath("Steven");
     }
 
