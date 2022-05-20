@@ -1,3 +1,8 @@
 <div class="h-60 w-64 mr-3 bg-{{ quizCard.theme }} rounded-[20px]">
-    <img [src]="quizCard.iconSrc" alt="" class="rounded-full">
+    <div class="container w-52 m-auto pt-[14px]">
+        <div class="flex justify-between items-end">
+            <p class="text-base">{{ quizCard.title.content }}</p>
+            <img [src]="quizCard.iconSrc" alt="" class="rounded-full">
+        </div>
+    </div>
 </div>
