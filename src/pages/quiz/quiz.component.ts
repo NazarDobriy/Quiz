@@ -62,9 +62,15 @@ export class QuizComponent implements OnInit {
     }
   ];
 
+  public initialCards: ICard[] = this.quizCards;
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  public loadCards(): void {
+    this.quizCards = [...this.quizCards, ...this.initialCards];
   }
 
 }
