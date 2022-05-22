@@ -1,11 +1,11 @@
-interface IText {
-    content: string;
-    color: string;
+export interface CardTheme {
+    titleClass: string;
+    subtitleClass: string;
+    iconSrc: string;
+    backgroudClass: string;
 }
 
-export interface IQuizCard {
-    title: IText;
-    subtitle: IText;
-    iconSrc: string;
-    theme: string;
+export interface ICard {
+    title: string;
+    subtitle: string;
 }
