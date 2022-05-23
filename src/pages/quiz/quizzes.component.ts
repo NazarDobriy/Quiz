@@ -16,7 +16,7 @@ export class QuizzesComponent implements OnInit {
   }
 
   public loadCards(): void {
-    this.quizCards = [...this.quizCards, ...this.initialCards];
+    this.quizCards = [...this.quizCards, ...this.quizService.getQuizzes()];
   }
 
 }

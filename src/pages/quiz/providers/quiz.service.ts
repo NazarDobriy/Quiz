@@ -80,8 +80,8 @@ export class QuizService {
 
   constructor() { }
 
-  public getQuizzes() {
-    
+  public getQuizzes(): ICard[] {
+    return this.quizCards;
   }
 
 }
