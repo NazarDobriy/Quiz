@@ -7,8 +7,8 @@ export interface CardTheme {
   backgroudClass: string;
 }
 
-export interface ICard {
-  id?: number;
+export interface SimpleQuiz {
+  id: number;
   title: string;
   subtitle: string;
 }
@@ -17,7 +17,7 @@ export interface ICard {
   providedIn: 'root'
 })
 export class QuizService {
-  public quizCards: ICard[] = [
+  public quizCards: SimpleQuiz[] = [
     {
       id: 1,
       title: '10 Qusstions',
@@ -80,7 +80,7 @@ export class QuizService {
 
   constructor() { }
 
-  public getQuizzes(): ICard[] {
+  public getQuizzes(): SimpleQuiz[] {
     return this.quizCards;
   }
 
