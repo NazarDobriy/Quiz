@@ -1,5 +1,17 @@
 import { Injectable } from '@angular/core';
-import { CardTheme, ICard } from '../models/quiz-card.interface';
+
+export interface CardTheme {
+  titleClass: string;
+  subtitleClass: string;
+  iconSrc: string;
+  backgroudClass: string;
+}
+
+export interface ICard {
+  id?: number;
+  title: string;
+  subtitle: string;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -67,4 +79,9 @@ export class QuizService {
   ];
 
   constructor() { }
+
+  public getQuizzes() {
+    
+  }
+
 }

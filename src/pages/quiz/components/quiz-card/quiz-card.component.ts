@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { CardTheme, ICard } from '../../models/quiz-card.interface';
+import { CardTheme, ICard } from '../../providers/quiz.service';
 
 @Component({
   selector: 'app-quiz-card',
