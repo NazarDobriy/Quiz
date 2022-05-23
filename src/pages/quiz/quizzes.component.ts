@@ -6,6 +6,7 @@ import { ICardTheme, QuizService, IQuiz } from './providers/quiz.service';
   templateUrl: './quizzes.component.html'
 })
 export class QuizzesComponent implements OnInit {
+  readonly CARDS_IN_ROW: number = 5;
   public quizCards!: IQuiz[];
   public cardThemes!: ICardTheme[];
 
@@ -18,6 +19,10 @@ export class QuizzesComponent implements OnInit {
 
   public loadCards(): void {
     this.quizCards = [...this.quizCards, ...this.quizService.getQuizzes()];
+  }
+
+  public isFullCardsRow(index: number = 0): boolean {
+    return (index + 1) % this.CARDS_IN_ROW === 0;
   }
 
 }

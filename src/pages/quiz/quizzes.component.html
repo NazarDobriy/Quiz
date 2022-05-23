@@ -8,6 +8,9 @@
 <div class="flex flex-wrap justify-center items-center mt-[70px] gap-x-5">
   <ng-container *ngFor="let card of quizCards; let i = index">
     <app-quiz-card [card]="card" [theme]="cardThemes[i % 5]"></app-quiz-card>
+    <ng-container *ngIf="isFullCardsRow(i)">
+      <br class="w-full content-['']">
+    </ng-container>
   </ng-container>
 </div>
 
