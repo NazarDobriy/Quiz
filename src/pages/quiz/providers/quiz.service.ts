@@ -131,6 +131,99 @@ export class QuizService {
     }
   ];
 
+  public mathematicalQuestions: IQuestion[] = [
+    {
+      name: 'Simplify the expression 0.8b^9 : 8b^3, where b not = 0',
+      listAnswers: [
+        '0.1b^6',
+        '10b^6',
+        '0.1b^3',
+        '10b^3'
+      ],
+      correctAnswer: '0.1b^6'
+    },
+    {
+      name: 'Solve the equation: (x + 1) * (2x - 3) = 0',
+      listAnswers: [
+        '-3; 1',
+        '-1.5; 1',
+        '-1; 3',
+        '-1; 1.5'
+      ],
+      correctAnswer: '-1; 1.5'
+    },
+    {
+      name: 'Which of the following numbers is the solution of the inequality |x| > 3?',
+      listAnswers: [
+        '3',
+        '1',
+        '-8',
+        '-3'
+      ],
+      correctAnswer: '-8'
+    },
+    {
+      name: 'Simplify the expression (1 - sin^2(a) * tg^2(a))',
+      listAnswers: [
+        'sin(2a)',
+        'cos(2a)',
+        'sin^2(a)',
+        'ctg^2(a)'
+      ],
+      correctAnswer: 'sin^2(a)'
+    },
+    {
+      name: 'Reduce the fraction (a^2 - b^2) / (a^2 - a * b)',
+      listAnswers: [
+        '(a + b) / a',
+        '(a - b) / a',
+        'b / a',
+        'b'
+      ],
+      correctAnswer: '(a + b) / a'
+    },
+    {
+      name: 'Which of the following intervals belongs to the number log2(1/3)',
+      listAnswers: [
+        '(-inf; -3)',
+        '(-3; -1)',
+        '(-1; 1)',
+        '(1; 3)'
+      ],
+      correctAnswer: '(-3; -1)'
+    },
+    {
+      name: 'Which of the following intervals belongs to the root of the equation: 2^(x + 3) - 3 * 2^x = 10 * sqrt(2)?',
+      listAnswers: [
+        '(-inf; 0)',
+        '[0; 5)',
+        '[0.5; 1)',
+        '[1; 2)'
+      ],
+      correctAnswer: '[1; 2)'
+    },
+    {
+      name: 'Which is derived from the number?',
+      listAnswers: [
+        '0',
+        '1',
+        'inf',
+        '-1'
+      ],
+      correctAnswer: '0'
+    },
+    {
+      name: 'Which is derived from the sin(a)?',
+      listAnswers: [
+        '0',
+        '1',
+        'cos(x)',
+        '-cos(x)'
+      ],
+      correctAnswer: '-cos(x)'
+    }
+  ];
+
   public quizCards: IQuiz[] = [
     {
       id: 1,
@@ -144,7 +237,7 @@ export class QuizService {
       title: '10 Qusstions',
       subtitle: 'Easter Emoji Quiz: Can You Get 100 Percent?',
       name: 'History',
-      listQuestions: this.historicalQuestions
+      listQuestions: this.mathematicalQuestions
     },
     {
       id: 3,
@@ -165,7 +258,7 @@ export class QuizService {
       title: '10 Qusstions',
       subtitle: 'What Emoji Am I? Quiz',
       name: 'History',
-      listQuestions: this.historicalQuestions
+      listQuestions: this.mathematicalQuestions
     }
   ];
 
