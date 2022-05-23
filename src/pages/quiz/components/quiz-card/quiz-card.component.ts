@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { CardTheme, IQuiz } from '../../providers/quiz.service';
+import { ICardTheme, IQuiz } from '../../providers/quiz.service';
 
 @Component({
   selector: 'app-quiz-card',
@@ -8,7 +8,7 @@ import { CardTheme, IQuiz } from '../../providers/quiz.service';
 })
 export class QuizCardComponent implements OnInit {
   @Input() card!: IQuiz;
-  @Input() theme!: CardTheme;
+  @Input() theme!: ICardTheme;
 
   constructor() { }
 

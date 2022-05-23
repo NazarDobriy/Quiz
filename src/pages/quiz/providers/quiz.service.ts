@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 
-export interface CardTheme {
+export interface ICardTheme {
   titleClass: string;
   subtitleClass: string;
   iconSrc: string;
   backgroudClass: string;
 }
 
-export interface SimpleQuiz {
+export interface ISimpleQuiz {
   id: number;
   title: string;
   subtitle: string;
@@ -19,7 +19,7 @@ export interface IQuestion {
   correctAnswer: string;
 }
 
-export interface IQuiz extends SimpleQuiz {
+export interface IQuiz extends ISimpleQuiz {
   name: string;
   listQuestions: IQuestion[];
 }
@@ -262,7 +262,7 @@ export class QuizService {
     }
   ];
 
-  public cardThemes: CardTheme[] = [
+  public cardThemes: ICardTheme[] = [
     {
       titleClass: 'text-primary',
       subtitleClass: 'text-bright',
