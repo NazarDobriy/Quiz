@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { QuizComponent } from './quiz.component';
 import { RouterModule, Routes } from '@angular/router';
+import { QuizCardComponent } from './components/quiz-card/quiz-card.component';
 
 const routes: Routes = [
   { path: '', component: QuizComponent }
@@ -10,7 +11,8 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    QuizComponent
+    QuizComponent,
+    QuizCardComponent
   ],
   imports: [
     CommonModule,
