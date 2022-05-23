@@ -1,6 +1,6 @@
 import { ICardTheme, IQuestion, IQuiz } from "./providers/quiz.service";
 
-export const HISTORICALQUESTIONS: IQuestion[] = [
+export const HISTORICAL_QUESTIONS: IQuestion[] = [
     {
       name: 'When the city of Lviv received the Magdeburg Law?',
       listAnswers: [
@@ -103,7 +103,7 @@ export const HISTORICALQUESTIONS: IQuestion[] = [
     }
 ];
 
-export const MATHEMATICALQUESTIONS: IQuestion[] = [
+export const MATHEMATICAL_QUESTIONS: IQuestion[] = [
         {
       name: 'Simplify the expression 0.8b^9 : 8b^3, where b not = 0',
       listAnswers: [
@@ -202,35 +202,35 @@ export const QUIZCARDS: IQuiz[] = [
       title: '10 Qusstions',
       subtitle: 'Emoji Bands Quiz!',
       name: 'History',
-      listQuestions: HISTORICALQUESTIONS
+      listQuestions: HISTORICAL_QUESTIONS
     },
     {
       id: 2,
       title: '10 Qusstions',
       subtitle: 'Easter Emoji Quiz: Can You Get 100 Percent?',
       name: 'Maths',
-      listQuestions: MATHEMATICALQUESTIONS
+      listQuestions: MATHEMATICAL_QUESTIONS
     },
     {
       id: 3,
       title: '10 Qusstions',
       subtitle: 'London Underground & Tube Station Emoji Quiz',
       name: 'History',
-      listQuestions: HISTORICALQUESTIONS
+      listQuestions: HISTORICAL_QUESTIONS
     },
     {
       id: 4,
       title: '10 Qusstions',
       subtitle: 'Trivia Quiz: Guess The WWE Star From The Emoji!',
       name: 'History',
-      listQuestions: HISTORICALQUESTIONS
+      listQuestions: HISTORICAL_QUESTIONS
     },
     {
       id: 5,
       title: '10 Qusstions',
       subtitle: 'What Emoji Am I? Quiz',
       name: 'Maths',
-      listQuestions: MATHEMATICALQUESTIONS
+      listQuestions: MATHEMATICAL_QUESTIONS
     }
 ];
 
