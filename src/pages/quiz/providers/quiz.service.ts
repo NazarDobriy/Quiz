@@ -297,7 +297,7 @@ export class QuizService {
 
   constructor() { }
 
-  public getQuizzes(): SimpleQuiz[] {
+  public getQuizzes(): IQuiz[] {
     return this.quizCards;
   }
 

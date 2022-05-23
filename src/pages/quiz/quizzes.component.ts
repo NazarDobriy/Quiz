@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { CardTheme, SimpleQuiz, QuizService } from './providers/quiz.service';
+import { CardTheme, QuizService, IQuiz } from './providers/quiz.service';
 
 @Component({
   selector: 'app-quiz',
   templateUrl: './quizzes.component.html'
 })
 export class QuizzesComponent implements OnInit {
-  public quizCards: SimpleQuiz[] = this.quizService.quizCards;
+  public quizCards: IQuiz[] = this.quizService.quizCards;
   public cardThemes: CardTheme[] = this.quizService.cardThemes;
 
   constructor(private quizService: QuizService) { }
