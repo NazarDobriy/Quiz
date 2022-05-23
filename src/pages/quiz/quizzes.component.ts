@@ -6,12 +6,14 @@ import { ICardTheme, QuizService, IQuiz } from './providers/quiz.service';
   templateUrl: './quizzes.component.html'
 })
 export class QuizzesComponent implements OnInit {
-  public quizCards: IQuiz[] = this.quizService.quizCards;
-  public cardThemes: ICardTheme[] = this.quizService.cardThemes;
+  public quizCards!: IQuiz[];
+  public cardThemes!: ICardTheme[];
 
   constructor(private quizService: QuizService) { }
 
   ngOnInit(): void {
+    this.quizCards = this.quizService.quizCards;
+    this.cardThemes = this.quizService.cardThemes;
   }
 
   public loadCards(): void {
