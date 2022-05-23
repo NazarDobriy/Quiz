@@ -3,9 +3,9 @@ import { CardTheme, ICard } from './models/quiz-card.interface';
 
 @Component({
   selector: 'app-quiz',
-  templateUrl: './quiz.component.html'
+  templateUrl: './quizzes.component.html'
 })
-export class QuizComponent implements OnInit {
+export class QuizzesComponent implements OnInit {
   public quizCards: ICard[] = [
     {
       title: '10 Qusstions',
