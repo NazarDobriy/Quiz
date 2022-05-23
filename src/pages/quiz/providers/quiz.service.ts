@@ -236,7 +236,7 @@ export class QuizService {
       id: 2,
       title: '10 Qusstions',
       subtitle: 'Easter Emoji Quiz: Can You Get 100 Percent?',
-      name: 'History',
+      name: 'Maths',
       listQuestions: this.mathematicalQuestions
     },
     {
@@ -257,7 +257,7 @@ export class QuizService {
       id: 5,
       title: '10 Qusstions',
       subtitle: 'What Emoji Am I? Quiz',
-      name: 'History',
+      name: 'Maths',
       listQuestions: this.mathematicalQuestions
     }
   ];
