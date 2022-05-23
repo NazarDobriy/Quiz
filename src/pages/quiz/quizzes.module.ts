@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { QuizComponent } from './quiz.component';
 import { RouterModule, Routes } from '@angular/router';
 import { QuizCardComponent } from './components/quiz-card/quiz-card.component';
+import { QuizzesComponent } from './quizzes.component';
 
 const routes: Routes = [
-  { path: '', component: QuizComponent }
+  { path: '', component: QuizzesComponent }
 ];
 
 
 @NgModule({
   declarations: [
-    QuizComponent,
+    QuizzesComponent,
     QuizCardComponent
   ],
   imports: [
@@ -19,4 +19,4 @@ const routes: Routes = [
     RouterModule.forChild(routes)
   ]
 })
-export class QuizModule { }
+export class QuizzesModule { }
