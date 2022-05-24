@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { QuizService } from '../../providers/quiz.service';
+import { IQuiz, QuizService } from '../../providers/quiz.service';
 
 @Component({
   selector: 'app-quiz',
@@ -9,6 +9,8 @@ import { QuizService } from '../../providers/quiz.service';
 })
 export class QuizComponent implements OnInit {
   public quizId!: number;
+  public quizzes!: IQuiz[];
+  public currentQuiz!: IQuiz;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -16,7 +18,9 @@ export class QuizComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.quizzes = this.quizService.getQuizzes();
     this.quizId = parseInt(this.activatedRoute.snapshot.params['id']);
+    this.currentQuiz = this.quizzes[this.quizId - 1];
   }
 
 }
