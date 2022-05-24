@@ -21,6 +21,17 @@ export class QuizComponent implements OnInit {
     this.quizzes = this.quizService.getQuizzes();
     this.quizId = parseInt(this.activatedRoute.snapshot.params['id']);
     this.currentQuiz = this.quizzes[this.quizId - 1];
+    
+    if (this.lastWordIncludeQuiz()) {
+      const tempQuizSubtitle: string[] = this.currentQuiz.subtitle.split(' ');
+      tempQuizSubtitle.pop();
+      this.currentQuiz.subtitle = tempQuizSubtitle.join(' ');
+    }
+  }
+
+  public lastWordIncludeQuiz(): boolean {
+    const subtitleArray: string[] = this.currentQuiz.subtitle.split(' ');
+    return subtitleArray[subtitleArray.length - 1].toLocaleLowerCase().includes('quiz')
   }
 
 }
