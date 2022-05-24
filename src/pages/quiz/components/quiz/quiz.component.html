@@ -36,8 +36,20 @@
         </div>
 
         <div class="flex justify-between text-bright mt-24">
-            <button class="py-[10px] px-6 rounded" [disabled]="questionCounter <= 1" (click)="prevQuestion()">Prev question</button>
-            <button class="bg-accent py-[10px] px-6 rounded" [disabled]="questionCounter >= 10" (click)="nextQuestion()">Next question</button>
+            <button 
+                class="py-[10px] px-6 rounded" 
+                [disabled]="questionCounter <= MIN_AMOUNT_QUESTIONS" 
+                (click)="prevQuestion()"
+            >
+                Prev question
+            </button>
+            <button 
+                class="bg-accent py-[10px] px-6 rounded" 
+                [disabled]="questionCounter >= MAX_AMOUNT_QUESTIONS" 
+                (click)="nextQuestion()"
+            >
+                Next question
+            </button>
         </div>
     </div>
 </div>

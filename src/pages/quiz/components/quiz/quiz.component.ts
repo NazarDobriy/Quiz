@@ -8,6 +8,9 @@ import { IQuiz, QuizService } from '../../providers/quiz.service';
   styleUrls: ['./quiz.component.scss']
 })
 export class QuizComponent implements OnInit {
+  readonly MIN_AMOUNT_QUESTIONS: number = 1;
+  readonly MAX_AMOUNT_QUESTIONS: number = 10;
+
   public quizId!: number;
   public quizzes!: IQuiz[];
   public currentQuiz!: IQuiz;
