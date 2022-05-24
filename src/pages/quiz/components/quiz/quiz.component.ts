@@ -11,6 +11,7 @@ export class QuizComponent implements OnInit {
   public quizId!: number;
   public quizzes!: IQuiz[];
   public currentQuiz!: IQuiz;
+  public questionCounter: number = 1;
 
   constructor(
     private activatedRoute: ActivatedRoute,
