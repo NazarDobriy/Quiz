@@ -5,12 +5,9 @@
   <span class="bg-bright inline-block h-2 w-2 relative left-1 sm:top-2 top-[1rem] rounded-full"></span>
 </div>
 
-<div class="flex flex-wrap justify-center items-center mt-[70px] gap-x-5">
+<div class="flex flex-wrap justify-center items-center mt-[70px] gap-x-5 m-auto max-w-[1400px]">
   <ng-container *ngFor="let card of quizCards; let i = index">
     <app-quiz-card [card]="card" [theme]="cardThemes[i % 5]"></app-quiz-card>
-    <ng-container *ngIf="isFullCardsRow(i)">
-      <br class="separator w-full content-['']">
-    </ng-container>
   </ng-container>
 </div>
 
