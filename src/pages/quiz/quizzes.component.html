@@ -9,7 +9,7 @@
   <ng-container *ngFor="let card of quizCards; let i = index">
     <app-quiz-card [card]="card" [theme]="cardThemes[i % 5]"></app-quiz-card>
     <ng-container *ngIf="isFullCardsRow(i)">
-      <br class="w-full content-['']">
+      <br class="separator w-full content-['']">
     </ng-container>
   </ng-container>
 </div>

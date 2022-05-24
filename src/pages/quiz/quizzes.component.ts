@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { ICardTheme, QuizService, IQuiz } from './providers/quiz.service';
 
 @Component({
@@ -6,7 +6,7 @@ import { ICardTheme, QuizService, IQuiz } from './providers/quiz.service';
   templateUrl: './quizzes.component.html'
 })
 export class QuizzesComponent implements OnInit {
-  readonly CARDS_IN_ROW: number = 5;
+  readonly MAX_CARDS_IN_ROW: number = 5;
   public quizCards!: IQuiz[];
   public cardThemes!: ICardTheme[];
 
@@ -17,12 +17,22 @@ export class QuizzesComponent implements OnInit {
     this.cardThemes = this.quizService.cardThemes;
   }
 
+  @HostListener('window:resize', ['$event'])
+  public onResize(): void {
+    if(window.innerWidth < 1400) {
+      const separators: NodeListOf<HTMLElement> = document.querySelectorAll('.separator');
+      separators.forEach((separator: HTMLElement) => {
+        separator.style.display = 'none';
+      });
+    }
+  }
+
   public loadCards(): void {
     this.quizCards = [...this.quizCards, ...this.quizService.getQuizzes()];
   }
 
   public isFullCardsRow(index: number = 0): boolean {
-    return (index + 1) % this.CARDS_IN_ROW === 0;
+    return (index + 1) % this.MAX_CARDS_IN_ROW === 0;
   }
 
 }
