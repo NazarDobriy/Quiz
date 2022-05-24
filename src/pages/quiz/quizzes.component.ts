@@ -6,6 +6,7 @@ import { ICardTheme, QuizService, IQuiz } from './providers/quiz.service';
   templateUrl: './quizzes.component.html'
 })
 export class QuizzesComponent implements OnInit {
+  readonly MAX_CARDS_IN_ROW: number = 5;
   public quizCards!: IQuiz[];
   public cardThemes!: ICardTheme[];
 
