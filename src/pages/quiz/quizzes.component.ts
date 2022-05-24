@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ICardTheme, QuizService, IQuiz } from './providers/quiz.service';
 
 @Component({
-  selector: 'app-quiz',
+  selector: 'app-quizzes',
   templateUrl: './quizzes.component.html'
 })
 export class QuizzesComponent implements OnInit {
