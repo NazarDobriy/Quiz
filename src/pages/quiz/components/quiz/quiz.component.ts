@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { QuizService } from '../../providers/quiz.service';
 
 @Component({
   selector: 'app-quiz',
@@ -10,7 +11,8 @@ export class QuizComponent implements OnInit {
   public quizId!: number;
 
   constructor(
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private quizService: QuizService
   ) { }
 
   ngOnInit(): void {
