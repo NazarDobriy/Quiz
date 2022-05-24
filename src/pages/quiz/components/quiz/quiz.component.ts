@@ -37,4 +37,12 @@ export class QuizComponent implements OnInit {
     return subtitleArray[subtitleArray.length - 1].toLocaleLowerCase().includes('quiz')
   }
 
+  public nextQuestion(): void {
+    this.listAnswers = this.currentQuiz.listQuestions[++this.questionCounter - 1].listAnswers;
+  }
+
+  public prevQuestion(): void {
+    this.listAnswers = this.currentQuiz.listQuestions[--this.questionCounter - 1].listAnswers;
+  }
+
 }
