@@ -12,6 +12,7 @@ export class QuizComponent implements OnInit {
   public quizzes!: IQuiz[];
   public currentQuiz!: IQuiz;
   public questionCounter: number = 1;
+  public listAnswers!: string[];
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -22,6 +23,7 @@ export class QuizComponent implements OnInit {
     this.quizzes = this.quizService.getQuizzes();
     this.quizId = parseInt(this.activatedRoute.snapshot.params['id']);
     this.currentQuiz = this.quizzes[this.quizId - 1];
+    this.listAnswers = this.currentQuiz.listQuestions[this.questionCounter - 1].listAnswers;
     
     if (this.lastWordIncludeQuiz()) {
       const tempQuizSubtitle: string[] = this.currentQuiz.subtitle.split(' ');

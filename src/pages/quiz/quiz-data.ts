@@ -104,7 +104,7 @@ export const HISTORICAL_QUESTIONS: IQuestion[] = [
 ];
 
 export const MATHEMATICAL_QUESTIONS: IQuestion[] = [
-        {
+    {
       name: 'Simplify the expression 0.8b^9 : 8b^3, where b not = 0',
       listAnswers: [
         '0.1b^6',

@@ -8,16 +8,36 @@
   </div>
 </div>
 
-<div class="h-[636px] w-[744px] mt-5 m-auto rounded-3xl bg-success">
-    <div class="flex justify-between items-center mx-10 pt-10">
-        <div>
-            <span class="bg-warning text-[34px] p-[10px]">{{ questionCounter }}</span>
-            <span class="text-bright text-base ml-2 relative bottom-[6px]">/10</span>
+<div class="h-[636px] w-[690px] mt-5 m-auto rounded-3xl bg-success">
+    <div class="mx-10">
+        <div class="flex justify-between items-center pt-10">
+            <div>
+                <span class="bg-warning text-[34px] p-[10px]">{{ questionCounter }}</span>
+                <span class="text-bright text-base ml-2 relative bottom-[6px]">/10</span>
+            </div>
+            <div class="flex">
+                <img class="rounded-full h-24 w-24 mr-3" src="assets/img/Mili.svg" alt="Mili">
+                <img class="rounded-full h-24 w-24 mr-3" src="assets/img/Jake.svg" alt="Jake">
+                <img class="rounded-full h-24 w-24" src="assets/img/Steven.svg" alt="Steven">
+            </div>
         </div>
-        <div class="flex">
-            <img class="rounded-full h-24 w-24 mr-3" src="assets/img/Mili.svg" alt="Mili">
-            <img class="rounded-full h-24 w-24 mr-3" src="assets/img/Jake.svg" alt="Jake">
-            <img class="rounded-full h-24 w-24" src="assets/img/Steven.svg" alt="Steven">
+    
+        <div class="text-bright text-[34px] mt-10 leading-[44px]">
+            {{ currentQuiz.listQuestions[questionCounter - 1].name }}
+        </div>
+
+        <div class="grid justify-center mt-10 text-base gap-y-[17px]">
+            <ng-container *ngFor="let answer of listAnswers">
+                <div>
+                    <input type="radio" class="h-[19px] w-[19px]">
+                    <label class="ml-3 relative bottom-[2px]">{{ answer }}</label>
+                </div>
+            </ng-container>
+        </div>
+
+        <div class="flex justify-between text-bright mt-24">
+            <button class="py-[10px] px-6 rounded">Prev question</button>
+            <button class="bg-accent py-[10px] px-6 rounded">Next question</button>
         </div>
     </div>
 </div>
