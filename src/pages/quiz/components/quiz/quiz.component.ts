@@ -37,7 +37,7 @@ export class QuizComponent implements OnInit {
 
   public lastWordIncludeQuiz(): boolean {
     const subtitleArray: string[] = this.currentQuiz.subtitle.split(' ');
-    return subtitleArray[subtitleArray.length - 1].toLocaleLowerCase().includes('quiz')
+    return subtitleArray[subtitleArray.length - 1].toLocaleLowerCase().includes('quiz');
   }
 
   public nextQuestion(): void {
