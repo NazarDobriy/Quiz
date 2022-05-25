@@ -38,4 +38,8 @@ export class QuizService {
     return this.quizCards;
   }
 
+  public getQuizById(id: number = 1): IQuiz {
+    return this.quizCards[id];
+  } 
+
 }
