@@ -193,6 +193,16 @@ export const MATHEMATICAL_QUESTIONS: IQuestion[] = [
         '-cos(x)'
       ],
       correctAnswer: '-cos(x)'
+    },
+    {
+      name: 'Which is derived from the cos(a)?',
+      listAnswers: [
+        '0',
+        '1',
+        '-cos(x)',
+        '-sin(x)'
+      ],
+      correctAnswer: '-cos(x)'
     }
 ];
 

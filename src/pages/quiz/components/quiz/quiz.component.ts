@@ -20,7 +20,6 @@ export class QuizComponent implements OnInit {
   };
 
   public quizId: number = 0;
-  public quizzes: IQuiz[] = [];
   public questionCounter: number = 1;
   public listAnswers: string[] = [];
 
@@ -30,9 +29,8 @@ export class QuizComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.quizzes = this.quizService.getQuizzes();
     this.quizId = parseInt(this.activatedRoute.snapshot.params['id']);
-    this.currentQuiz = this.quizzes[this.quizId - 1];
+    this.currentQuiz = this.quizService.getQuizById(this.quizId);
     this.listAnswers = this.currentQuiz.listQuestions[this.questionCounter - 1].listAnswers;
     
     if (this.lastWordIncludeQuiz()) {
@@ -50,23 +48,17 @@ export class QuizComponent implements OnInit {
     return this.currentQuiz?.listQuestions[this.questionCounter - 1]?.listAnswers || [];
   }
 
-  set fillAnswers(answers: string[]) {
-    this.listAnswers = answers;
-  }
-
   public lastWordIncludeQuiz(): boolean {
     const subtitleArray: string[] = this.currentQuiz.subtitle.split(' ');
     return subtitleArray[subtitleArray.length - 1].toLocaleLowerCase().includes('quiz');
   }
 
   public nextQuestion(): void {
-    this.questionCounter++;
-    this.fillAnswers = this.currentQuiz.listQuestions[this.questionCounter - 1].listAnswers;
+    this.currentQuiz.listQuestions[++this.questionCounter - 1].listAnswers;
   }
 
   public prevQuestion(): void {
-    this.questionCounter--;
-    this.fillAnswers = this.currentQuiz.listQuestions[this.questionCounter - 1].listAnswers;
+    this.currentQuiz.listQuestions[--this.questionCounter - 1].listAnswers;
   }
 
 }
