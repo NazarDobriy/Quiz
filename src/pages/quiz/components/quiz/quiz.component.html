@@ -1,59 +1,63 @@
-<div class="text-center text-bright sm:mt-25 mt-20">
-  <span class="sm:text-[3rem] text-[34px] font-semibold">{{ currentQuiz.subtitle }}</span>
-  <br class="sm:hidden">
-  <span class="sm:ml-2 right-text text-[3.5rem] text-bright font-light">Quiz</span>
-  <span class="bg-error inline-block h-2 w-2 relative left-1 sm:top-2 top-[1rem] rounded-full"></span>
-  <div class="mt-2 max-w-[430px] m-auto">
+<header class="text-center text-bright sm:mt-25 mt-20">
+  <span class="sm:text-[3rem] text-[2.125rem] font-semibold">{{ currentQuiz.subtitle }}</span>
+  <span class="sm:ml-2 sm:inline block right-text text-[3.5rem] text-bright font-light">
+    Quiz<span class="bg-error inline-block h-2 w-2 relative left-1 sm:top-2 top-1 rounded-full"></span>
+  </span>
+  <div class="max-w-[26.875rem] m-auto">
     Can you decipher these emoji clues to answer these {{ currentQuiz.name }}-related questions?
   </div>
-</div>
+</header>
 
-<div class="h-[636px] w-[690px] mt-5 m-auto rounded-3xl bg-success">
-    <div class="mx-10">
-        <div class="flex justify-between items-center pt-10">
+<main class="h-[39.75rem] w-[43.125rem] mt-5 m-auto rounded-3xl bg-success">
+    <section class="mx-10">
+        <section class="flex justify-between items-center pt-10">
             <div>
-                <span class="bg-warning text-[34px] p-[10px]">{{ questionCounter }}</span>
+                <span class="bg-warning text-[2.125rem] p-[0.625rem]">{{ questionCounter }}</span>
                 <span class="text-bright text-base ml-2 relative bottom-[6px]">/10</span>
             </div>
             <div class="flex">
-                <img class="rounded-full h-24 w-24 mr-3" src="assets/img/Mili.svg" alt="Mili">
-                <img class="rounded-full h-24 w-24 mr-3" src="assets/img/Jake.svg" alt="Jake">
-                <img class="rounded-full h-24 w-24" src="assets/img/Steven.svg" alt="Steven">
+                <img height="92" width="92" class="rounded-full mr-3" src="assets/img/Mili.svg" alt="Mili">
+                <img height="92" width="92" class="rounded-full mr-3" src="assets/img/Jake.svg" alt="Jake">
+                <img height="92" width="92" class="rounded-full" src="assets/img/Steven.svg" alt="Steven">
             </div>
-        </div>
+        </section>
     
-        <div class="text-bright text-[34px] mt-10 leading-[44px]">
-            {{ currentQuiz.listQuestions[questionCounter - 1].name }}
-        </div>
+        <section class="h-72">
+            <div class="text-bright text-[2.125rem] mt-10 leading-[2.75rem]">
+                {{ currentQuestionName }}
+            </div>
+    
+            <aside class="grid justify-center mt-10 text-base gap-y-4">
+                <ng-container *ngFor="let answer of currentQuestionAnswers; let i = index">
+                    <div>
+                        <input id="{{ i }}" type="radio" class="h-[1.25rem] w-[1.25rem] cursor-pointer" name="question">
+                        <label for="{{ i }}" class="ml-3 relative bottom-[2px] cursor-pointer">{{ answer }}</label>
+                    </div>
+                </ng-container>
+            </aside>
+        </section>
 
-        <div class="grid justify-center mt-10 text-base gap-y-[17px]">
-            <ng-container *ngFor="let answer of listAnswers">
-                <div>
-                    <input type="radio" class="h-[19px] w-[19px]" name="question">
-                    <label class="ml-3 relative bottom-[2px]">{{ answer }}</label>
-                </div>
-            </ng-container>
-        </div>
-
-        <div class="flex justify-between text-bright mt-24">
+        <section class="flex justify-between text-bright mt-[5.5rem]">
             <button 
-                class="py-[10px] px-6 rounded" 
-                [disabled]="questionCounter <= MIN_AMOUNT_QUESTIONS" 
+                class="py-[0.625rem] px-6 rounded"
+                [ngClass]="{'bg-accent': questionCounter > MIN_AMOUNT_QUESTIONS}"
+                [disabled]="questionCounter <= MIN_AMOUNT_QUESTIONS"
                 (click)="prevQuestion()"
             >
                 Prev question
             </button>
             <button 
-                class="bg-accent py-[10px] px-6 rounded" 
-                [disabled]="questionCounter >= MAX_AMOUNT_QUESTIONS" 
+                class="bg-accent py-[0.625rem] px-6 rounded"
+                [ngClass]="{'bg-success': questionCounter >= MAX_AMOUNT_QUESTIONS}"
+                [disabled]="questionCounter >= MAX_AMOUNT_QUESTIONS"
                 (click)="nextQuestion()"
             >
                 Next question
             </button>
-        </div>
-    </div>
-</div>
+        </section>
+    </section>
+</main>
 
-<button class="grid m-auto bg-accent text-bright cursor-pointer px-6 py-4 rounded sm:my-[30px] my-[54px]">
+<button class="grid m-auto bg-accent text-bright cursor-pointer px-6 py-4 rounded sm:my-[1.875rem] my-[3.375rem]">
   <a routerLink="/quizzes">Back to all Quizzes</a>
 </button>

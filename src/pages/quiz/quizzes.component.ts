@@ -6,8 +6,8 @@ import { ICardTheme, QuizService, IQuiz } from './providers/quiz.service';
   templateUrl: './quizzes.component.html'
 })
 export class QuizzesComponent implements OnInit {
-  public quizCards!: IQuiz[];
-  public cardThemes!: ICardTheme[];
+  public quizCards: IQuiz[] = [];
+  public cardThemes: ICardTheme[] = [];
 
   constructor(private quizService: QuizService) { }
 
