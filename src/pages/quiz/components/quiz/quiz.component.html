@@ -8,7 +8,7 @@
   </div>
 </header>
 
-<main class="h-[39.75rem] w-[43.125rem] mt-5 m-auto rounded-3xl bg-success">
+<main class="{{ quizThemeColor }} h-[39.75rem] w-[43.125rem] mt-5 m-auto rounded-3xl">
     <section class="mx-10">
         <section class="flex justify-between items-center pt-10">
             <div>
@@ -42,15 +42,15 @@
                 class="py-[0.625rem] px-6 rounded"
                 [ngClass]="{'bg-accent': questionCounter > MIN_AMOUNT_QUESTIONS}"
                 [disabled]="questionCounter <= MIN_AMOUNT_QUESTIONS"
-                (click)="prevQuestion()"
+                (click)="switchPrevQuestion()"
             >
                 Prev question
             </button>
             <button 
                 class="bg-accent py-[0.625rem] px-6 rounded"
-                [ngClass]="{'bg-success': questionCounter >= MAX_AMOUNT_QUESTIONS}"
+                [ngClass]="{'bg-accent': questionCounter < MAX_AMOUNT_QUESTIONS}"
                 [disabled]="questionCounter >= MAX_AMOUNT_QUESTIONS"
-                (click)="nextQuestion()"
+                (click)="switchNextQuestion()"
             >
                 Next question
             </button>

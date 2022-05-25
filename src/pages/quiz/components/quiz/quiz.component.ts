@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ColorService } from '../../providers/color.service';
 import { IQuiz, QuizService } from '../../providers/quiz.service';
 
 @Component({
@@ -22,16 +23,21 @@ export class QuizComponent implements OnInit {
   public quizId: number = 0;
   public questionCounter: number = 1;
   public listAnswers: string[] = [];
+  public quizThemeColor: string = '';
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private quizService: QuizService
+    private quizService: QuizService,
+    private colorService: ColorService
   ) { }
 
   ngOnInit(): void {
     this.quizId = parseInt(this.activatedRoute.snapshot.params['id']);
     this.currentQuiz = this.quizService.getQuizById(this.quizId);
     this.listAnswers = this.currentQuiz.listQuestions[this.questionCounter - 1].listAnswers;
+
+    let colorId: number = this.colorService.calculateColor(this.currentQuiz.subtitle);
+    this.quizThemeColor = this.colorService.getColorById(colorId);
     
     if (this.lastWordIncludeQuiz()) {
       const tempQuizSubtitle: string[] = this.currentQuiz.subtitle.split(' ');
@@ -53,11 +59,11 @@ export class QuizComponent implements OnInit {
     return subtitleArray[subtitleArray.length - 1].toLocaleLowerCase().includes('quiz');
   }
 
-  public nextQuestion(): void {
+  public switchNextQuestion(): void {
     this.currentQuiz.listQuestions[++this.questionCounter - 1].listAnswers;
   }
 
-  public prevQuestion(): void {
+  public switchPrevQuestion(): void {
     this.currentQuiz.listQuestions[--this.questionCounter - 1].listAnswers;
   }
 

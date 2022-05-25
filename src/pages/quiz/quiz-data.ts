@@ -1,5 +1,13 @@
 import { ICardTheme, IQuestion, IQuiz } from "./providers/quiz.service";
 
+export const QUIZ_CARDS_BACKGROUND_COLORS: string[] = [
+  'bg-success',
+  'bg-error',
+  'bg-accent',
+  'bg-bright',
+  'bg-warning'
+];
+
 export const HISTORICAL_QUESTIONS: IQuestion[] = [
     {
       name: 'When the city of Lviv received the Magdeburg Law?',
