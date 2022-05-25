@@ -10,7 +10,7 @@ export const QUIZ_THEMES = [
     totalNumberClass: 'text-bright',
     backgroudClass: 'bg-success',
     btnsBackgroudClass: 'bg-accent',
-    btnsTextClass: 'bg-bright'
+    btnsTextClass: 'text-bright'
   },
   {
     questionClass: 'text-bright',
@@ -21,7 +21,7 @@ export const QUIZ_THEMES = [
     totalNumberClass: 'text-bright',
     backgroudClass: 'bg-error',
     btnsBackgroudClass: 'bg-accent',
-    btnsTextClass: 'bg-bright'
+    btnsTextClass: 'text-bright'
   },
   {
     questionClass: 'text-bright',
@@ -32,7 +32,7 @@ export const QUIZ_THEMES = [
     totalNumberClass: 'text-bright',
     backgroudClass: 'bg-accent',
     btnsBackgroudClass: 'bg-error',
-    btnsTextClass: 'bg-bright'
+    btnsTextClass: 'text-bright'
   },
   {
     questionClass: 'text-bright',
@@ -43,7 +43,7 @@ export const QUIZ_THEMES = [
     totalNumberClass: 'text-bright',
     backgroudClass: 'bg-bright',
     btnsBackgroudClass: 'bg-error',
-    btnsTextClass: 'bg-bright'
+    btnsTextClass: 'text-bright'
   },
   {
     questionClass: 'text-primary',
@@ -54,7 +54,7 @@ export const QUIZ_THEMES = [
     totalNumberClass: 'text-bright',
     backgroudClass: 'bg-warning',
     btnsBackgroudClass: 'bg-accent',
-    btnsTextClass: 'bg-primary'
+    btnsTextClass: 'text-primary'
   }
 ];
 

@@ -8,12 +8,12 @@
   </div>
 </header>
 
-<main class="{{ quizThemeColor }} h-[39.75rem] w-[43.125rem] mt-5 m-auto rounded-3xl">
+<main class="{{ quizTheme.backgroudClass }} h-[39.75rem] w-[43.125rem] mt-5 m-auto rounded-3xl">
     <section class="mx-10">
         <section class="flex justify-between items-center pt-10">
             <div>
-                <span class="bg-warning text-[2.125rem] p-[0.625rem]">{{ questionCounter }}</span>
-                <span class="text-bright text-base ml-2 relative bottom-[6px]">/10</span>
+                <span class="{{ quizTheme.numberBackgroudClass }} text-[2.125rem] p-[0.625rem]">{{ questionCounter }}</span>
+                <span class="{{ quizTheme.totalNumberClass }} text-base ml-2 relative bottom-[6px]">/10</span>
             </div>
             <div class="flex">
                 <img height="92" width="92" class="rounded-full mr-3" src="assets/img/Mili.svg" alt="Mili">
@@ -23,7 +23,7 @@
         </section>
     
         <section class="h-72">
-            <div class="text-bright text-[2.125rem] mt-10 leading-[2.75rem]">
+            <div class="{{ quizTheme.questionClass }} text-[2.125rem] mt-10 leading-[2.75rem]">
                 {{ currentQuestionName }}
             </div>
     
@@ -31,29 +31,54 @@
                 <ng-container *ngFor="let answer of currentQuestionAnswers; let i = index">
                     <div>
                         <input id="{{ i }}" type="radio" class="h-[1.25rem] w-[1.25rem] cursor-pointer" name="question">
-                        <label for="{{ i }}" class="ml-3 relative bottom-[2px] cursor-pointer">{{ answer }}</label>
+                        <label for="{{ i }}" class="{{ quizTheme.answerClass }} ml-3 relative bottom-[2px] cursor-pointer">
+                            {{ answer }}
+                        </label>
                     </div>
                 </ng-container>
             </aside>
         </section>
 
-        <section class="flex justify-between text-bright mt-[5.5rem]">
-            <button 
-                class="py-[0.625rem] px-6 rounded"
-                [ngClass]="{'bg-accent': questionCounter > MIN_AMOUNT_QUESTIONS}"
+        <section class="flex justify-between mt-[5.5rem]">
+            <ng-container *ngIf="questionCounter > MIN_AMOUNT_QUESTIONS">
+                <button 
+                class="{{ quizTheme.btnsBackgroudClass }} {{ quizTheme.btnsTextClass }} py-[0.625rem] px-6 rounded"
                 [disabled]="questionCounter <= MIN_AMOUNT_QUESTIONS"
                 (click)="switchPrevQuestion()"
-            >
-                Prev question
-            </button>
-            <button 
-                class="py-[0.625rem] px-6 rounded"
-                [ngClass]="{'bg-accent': questionCounter < MAX_AMOUNT_QUESTIONS}"
+                >
+                    Prev question
+                </button>
+            </ng-container>
+
+            <ng-container *ngIf="questionCounter <= MIN_AMOUNT_QUESTIONS">
+                <button 
+                class="{{ quizTheme.btnsTextClass }} py-[0.625rem] px-6 rounded"
+                [disabled]="questionCounter <= MIN_AMOUNT_QUESTIONS"
+                (click)="switchPrevQuestion()"
+                >
+                    Prev question
+                </button>
+            </ng-container>
+
+            <ng-container *ngIf="questionCounter < MAX_AMOUNT_QUESTIONS">
+                <button 
+                class="{{ quizTheme.btnsBackgroudClass }} {{ quizTheme.btnsTextClass }} py-[0.625rem] px-6 rounded"
                 [disabled]="questionCounter >= MAX_AMOUNT_QUESTIONS"
                 (click)="switchNextQuestion()"
-            >
-                Next question
-            </button>
+                >
+                    Next question
+                </button>
+            </ng-container>
+
+            <ng-container *ngIf="questionCounter >= MAX_AMOUNT_QUESTIONS">
+                <button 
+                class="{{ quizTheme.btnsTextClass }} py-[0.625rem] px-6 rounded"
+                [disabled]="questionCounter >= MAX_AMOUNT_QUESTIONS"
+                (click)="switchNextQuestion()"
+                >
+                    Next question
+                </button>
+            </ng-container>
         </section>
     </section>
 </main>
