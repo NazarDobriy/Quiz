@@ -47,7 +47,7 @@
                 Prev question
             </button>
             <button 
-                class="bg-accent py-[0.625rem] px-6 rounded"
+                class="py-[0.625rem] px-6 rounded"
                 [ngClass]="{'bg-accent': questionCounter < MAX_AMOUNT_QUESTIONS}"
                 [disabled]="questionCounter >= MAX_AMOUNT_QUESTIONS"
                 (click)="switchNextQuestion()"

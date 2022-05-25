@@ -39,7 +39,7 @@ export class QuizService {
   }
 
   public getQuizById(id: number = 0): IQuiz {
-    return this.quizCards[id];
+    return this.quizCards[id - 1];
   } 
 
 }
