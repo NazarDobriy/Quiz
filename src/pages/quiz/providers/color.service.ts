@@ -1,11 +1,22 @@
 import { Injectable } from '@angular/core';
-import { QUIZ_CARDS_BACKGROUND_COLORS } from '../quiz-data';
+import { QUIZ_THEMES } from '../quiz-data';
+
+export interface IQuizTheme {
+  questionClass: string;
+  answerClass: string;
+  answerActiveClass: string;
+  numberBackgroudClass: string;
+  totalNumberClass: string;
+  backgroudClass: string;
+  btnsBackgroudClass: string;
+  btnsTextClass: string;
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class ColorService {
-  public backgroundColors: string[] = QUIZ_CARDS_BACKGROUND_COLORS;
+  public quizThemes: IQuizTheme[] = QUIZ_THEMES;
 
   constructor() { }
 
@@ -14,11 +25,11 @@ export class ColorService {
     for (let i = 0; i < text.length; i++) {
       sum += text.charCodeAt(i);
     }
-    return sum % this.backgroundColors.length;
+    return sum % this.quizThemes.length;
   }
 
-  public getColorById(id: number = 0): string {
-    return this.backgroundColors[id];
+  public getColorById(id: number = 0): IQuizTheme {
+    return this.quizThemes[id];
   }
 
 }

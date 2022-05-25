@@ -1,11 +1,61 @@
 import { ICardTheme, IQuestion, IQuiz } from "./providers/quiz.service";
 
-export const QUIZ_CARDS_BACKGROUND_COLORS: string[] = [
-  'bg-success',
-  'bg-error',
-  'bg-accent',
-  'bg-bright',
-  'bg-warning'
+export const QUIZ_THEMES = [
+  {
+    questionClass: 'text-bright',
+    answerClass: 'text-primary',
+    answerActiveClass: 'text-bright',
+    numberClass: 'text-primary',
+    numberBackgroudClass: 'bg-warning',
+    totalNumberClass: 'text-bright',
+    backgroudClass: 'bg-success',
+    btnsBackgroudClass: 'bg-accent',
+    btnsTextClass: 'bg-bright'
+  },
+  {
+    questionClass: 'text-bright',
+    answerClass: 'text-primary',
+    answerActiveClass: 'text-bright',
+    numberClass: 'text-primary',
+    numberBackgroudClass: 'bg-warning',
+    totalNumberClass: 'text-bright',
+    backgroudClass: 'bg-error',
+    btnsBackgroudClass: 'bg-accent',
+    btnsTextClass: 'bg-bright'
+  },
+  {
+    questionClass: 'text-bright',
+    answerClass: 'text-primary',
+    answerActiveClass: 'text-bright',
+    numberClass: 'text-primary',
+    numberBackgroudClass: 'bg-warning',
+    totalNumberClass: 'text-bright',
+    backgroudClass: 'bg-accent',
+    btnsBackgroudClass: 'bg-error',
+    btnsTextClass: 'bg-bright'
+  },
+  {
+    questionClass: 'text-bright',
+    answerClass: 'text-primary',
+    answerActiveClass: 'text-bright',
+    numberClass: 'text-primary',
+    numberBackgroudClass: 'bg-warning',
+    totalNumberClass: 'text-bright',
+    backgroudClass: 'bg-bright',
+    btnsBackgroudClass: 'bg-error',
+    btnsTextClass: 'bg-bright'
+  },
+  {
+    questionClass: 'text-primary',
+    answerClass: 'text-primary',
+    answerActiveClass: 'text-accent',
+    numberClass: 'text-bright',
+    numberBackgroudClass: 'bg-error',
+    totalNumberClass: 'text-bright',
+    backgroudClass: 'bg-warning',
+    btnsBackgroudClass: 'bg-accent',
+    btnsTextClass: 'bg-primary'
+  }
 ];
 
 export const HISTORICAL_QUESTIONS: IQuestion[] = [
@@ -252,7 +302,7 @@ export const QUIZCARDS: IQuiz[] = [
     }
 ];
 
-export const CARDTHEMES: ICardTheme[] = [
+export const CARD_THEMES: ICardTheme[] = [
     {
         titleClass: 'text-primary',
         subtitleClass: 'text-bright',
