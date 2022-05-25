@@ -5,7 +5,7 @@
   <span class="bg-bright inline-block h-2 w-2 relative left-1 sm:top-2 top-[1rem] rounded-full"></span>
 </header>
 
-<section class="flex flex-wrap justify-center items-center mt-[70px] gap-x-5">
+<section class="flex flex-wrap justify-center items-center mt-[70px] gap-x-5 m-auto max-w-[88rem]">
   <ng-container *ngFor="let card of quizCards; let i = index">
     <app-quiz-card [card]="card" [theme]="cardThemes[i % 5]"></app-quiz-card>
   </ng-container>
