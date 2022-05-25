@@ -38,8 +38,8 @@ export class QuizService {
     return this.quizCards;
   }
 
-  public getQuizById(id: number = 1): IQuiz {
-    return this.quizCards[id - 1];
+  public getQuizById(id: number = 0): IQuiz {
+    return this.quizCards[id];
   } 
 
 }
