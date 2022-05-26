@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ColorService, IQuizTheme } from '../../providers/color.service';
+import { ThemeService, IQuizTheme } from '../../providers/color.service';
 import { IQuiz, QuizService } from '../../providers/quiz.service';
 
 @Component({
@@ -39,14 +39,14 @@ export class QuizComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private quizService: QuizService,
-    private colorService: ColorService
+    private themeService: ThemeService
   ) { }
 
   ngOnInit(): void {
     this.quizId = parseInt(this.activatedRoute.snapshot.params['id']);
     this.currentQuiz = this.quizService.getQuizById(this.quizId);
     this.listAnswers = this.currentQuiz.listQuestions[this.questionCounter - 1].listAnswers;
-    this.quizTheme = this.colorService.getThemeByText(this.currentQuiz.subtitle);
+    this.quizTheme = this.themeService.getThemeByText(this.currentQuiz.subtitle);
     
     if (this.lastWordIncludeQuiz()) {
       const tempQuizSubtitle: string[] = this.currentQuiz.subtitle.split(' ');

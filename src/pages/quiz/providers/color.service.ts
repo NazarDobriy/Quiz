@@ -15,12 +15,12 @@ export interface IQuizTheme {
 @Injectable({
   providedIn: 'root'
 })
-export class ColorService {
+export class ThemeService {
   public quizThemes: IQuizTheme[] = QUIZ_THEMES;
 
   constructor() { }
 
-  public calculateColor(text: string): number {
+  public calculateTheme(text: string): number {
     let sum: number = 0;
     for (let i = 0; i < text.length; i++) {
       sum += text.charCodeAt(i);
@@ -33,7 +33,7 @@ export class ColorService {
   }
 
   public getThemeByText(text: string): IQuizTheme {
-    return this.getThemeById(this.calculateColor(text));
+    return this.getThemeById(this.calculateTheme(text));
   }
 
 }
