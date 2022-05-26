@@ -46,9 +46,7 @@ export class QuizComponent implements OnInit {
     this.quizId = parseInt(this.activatedRoute.snapshot.params['id']);
     this.currentQuiz = this.quizService.getQuizById(this.quizId);
     this.listAnswers = this.currentQuiz.listQuestions[this.questionCounter - 1].listAnswers;
-
-    let colorId: number = this.colorService.calculateColor(this.currentQuiz.subtitle);
-    this.quizTheme = this.colorService.getColorById(colorId);
+    this.quizTheme = this.colorService.getThemeByText(this.currentQuiz.subtitle);
     
     if (this.lastWordIncludeQuiz()) {
       const tempQuizSubtitle: string[] = this.currentQuiz.subtitle.split(' ');

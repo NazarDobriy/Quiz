@@ -33,4 +33,8 @@ export class ColorService {
     return this.quizThemes[id];
   }
 
+  public getThemeByText(text: string): IQuizTheme {
+    return this.getColorById(this.calculateColor(text));
+  }
+
 }
