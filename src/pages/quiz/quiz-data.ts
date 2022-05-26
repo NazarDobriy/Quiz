@@ -1,6 +1,7 @@
+import { IQuizTheme } from "./providers/color.service";
 import { ICardTheme, IQuestion, IQuiz } from "./providers/quiz.service";
 
-export const QUIZ_THEMES = [
+export const QUIZ_THEMES: IQuizTheme[] = [
   {
     questionClass: 'text-bright',
     answerClass: 'text-primary',
@@ -51,7 +52,7 @@ export const QUIZ_THEMES = [
     answerActiveClass: 'text-accent',
     numberClass: 'text-bright',
     numberBackgroudClass: 'bg-error',
-    totalNumberClass: 'text-bright',
+    totalNumberClass: 'text-primary',
     backgroudClass: 'bg-warning',
     btnsBackgroudClass: 'bg-accent',
     btnsTextClass: 'text-primary'

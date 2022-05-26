@@ -24,6 +24,7 @@ export class QuizComponent implements OnInit {
     questionClass: '',
     answerClass: '',
     answerActiveClass: '',
+    numberClass: '',
     numberBackgroudClass: '',
     totalNumberClass: '',
     backgroudClass: '',

@@ -5,6 +5,7 @@ export interface IQuizTheme {
   questionClass: string;
   answerClass: string;
   answerActiveClass: string;
+  numberClass: string;
   numberBackgroudClass: string;
   totalNumberClass: string;
   backgroudClass: string;
