@@ -30,8 +30,8 @@
             <aside class="grid justify-center mt-10 text-base gap-y-4">
                 <ng-container *ngFor="let answer of currentQuestionAnswers; let i = index">
                     <div 
-                    class="{{ isSameAnswer(answer) ? quizTheme.secondaryActiveTextClass : quizTheme.secondaryTextClass }}" 
-                    (click)="setAnswer(i)"
+                        class="{{ isSameAnswer(answer) ? quizTheme.secondaryActiveTextClass : quizTheme.secondaryTextClass }}" 
+                        (click)="setAnswer(i)"
                     >
                         <input
                             id="{{ i }}" 
@@ -51,15 +51,15 @@
                 class="{{ questionCounter > MIN_AMOUNT_QUESTIONS ? quizTheme.btnsBackgroudClass : '' }} {{ quizTheme.btnsTextClass }} py-[0.625rem] px-6 rounded"
                 [disabled]="questionCounter <= MIN_AMOUNT_QUESTIONS"
                 (click)="switchPrevQuestion()"
-                >
-                    Prev question
+            >
+                Prev question
             </button>
             <button 
                 class="{{ questionCounter < MAX_AMOUNT_QUESTIONS ? quizTheme.btnsBackgroudClass : '' }} {{ quizTheme.btnsTextClass }} py-[0.625rem] px-6 rounded"
                 [disabled]="questionCounter >= MAX_AMOUNT_QUESTIONS"
                 (click)="switchNextQuestion()"
-                >
-                    Next question
+            >
+                Next question
             </button>
         </section>
     </section>
