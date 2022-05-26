@@ -2,12 +2,11 @@ import { Injectable } from '@angular/core';
 import { QUIZ_THEMES } from '../quiz-data';
 
 export interface IQuizTheme {
-  questionClass: string;
-  answerClass: string;
-  answerActiveClass: string;
+  primaryTextClass: string;
+  secondaryTextClass: string;
+  secondaryActiveTextClass: string;
   numberClass: string;
   numberBackgroudClass: string;
-  totalNumberClass: string;
   backgroudClass: string;
   btnsBackgroudClass: string;
   btnsTextClass: string;

@@ -21,12 +21,11 @@ export class QuizComponent implements OnInit {
   };
 
   public quizTheme: IQuizTheme = {
-    questionClass: '',
-    answerClass: '',
-    answerActiveClass: '',
+    primaryTextClass: '',
+    secondaryTextClass: '',
+    secondaryActiveTextClass: '',
     numberClass: '',
     numberBackgroudClass: '',
-    totalNumberClass: '',
     backgroudClass: '',
     btnsBackgroudClass: '',
     btnsTextClass: ''

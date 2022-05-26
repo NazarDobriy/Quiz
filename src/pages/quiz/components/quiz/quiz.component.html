@@ -13,7 +13,7 @@
         <section class="flex justify-between items-center pt-10">
             <div>
                 <span class="{{ quizTheme.numberBackgroudClass }} {{ quizTheme.numberClass }} text-[2.125rem] p-[0.625rem]">{{ questionCounter }}</span>
-                <span class="{{ quizTheme.totalNumberClass }} text-base ml-2 relative bottom-[6px]">/10</span>
+                <span class="{{ quizTheme.primaryTextClass }} text-base ml-2 relative bottom-1.5">/10</span>
             </div>
             <div class="flex">
                 <img height="92" width="92" class="rounded-full mr-3" src="assets/img/Mili.svg" alt="Mili">
@@ -23,7 +23,7 @@
         </section>
     
         <section class="h-72">
-            <div class="{{ quizTheme.questionClass }} text-[2.125rem] mt-10 leading-[2.75rem]">
+            <div class="{{ quizTheme.primaryTextClass }} text-[2.125rem] mt-10 leading-10">
                 {{ currentQuestionName }}
             </div>
     
@@ -33,7 +33,7 @@
                         <input id="{{ i }}" type="radio" class="h-[1.25rem] w-[1.25rem] cursor-pointer" name="question">
                         <label 
                         for="{{ i }}"
-                        class="ml-3 relative bottom-[2px] cursor-pointer"
+                        class="{{ quizTheme.secondaryTextClass }} ml-3 relative bottom-[2px] cursor-pointer"
                         >
                             {{ answer }}
                         </label>
