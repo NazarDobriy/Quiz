@@ -1,4 +1,63 @@
+import { IQuizTheme } from "./providers/theme.service";
 import { ICardTheme, IQuestion, IQuiz } from "./providers/quiz.service";
+
+export const QUIZ_THEMES: IQuizTheme[] = [
+  {
+    primaryTextClass: 'text-bright',
+    secondaryTextClass: 'text-primary',
+    secondaryActiveTextClass: 'text-bright',
+    numberTextClass: 'text-primary',
+    numberBackgroudClass: 'bg-warning',
+    backgroudClass: 'bg-success',
+    btnsBackgroudClass: 'bg-accent',
+    btnsTextClass: 'text-bright',
+    radioButtonText: 'text-error'
+  },
+  {
+    primaryTextClass: 'text-bright',
+    secondaryTextClass: 'text-primary',
+    secondaryActiveTextClass: 'text-bright',
+    numberTextClass: 'text-primary',
+    numberBackgroudClass: 'bg-warning',
+    backgroudClass: 'bg-error',
+    btnsBackgroudClass: 'bg-accent',
+    btnsTextClass: 'text-bright',
+    radioButtonText: 'text-accent'
+  },
+  {
+    primaryTextClass: 'text-bright',
+    secondaryTextClass: 'text-primary',
+    secondaryActiveTextClass: 'text-bright',
+    numberTextClass: 'text-primary',
+    numberBackgroudClass: 'bg-warning',
+    backgroudClass: 'bg-accent',
+    btnsBackgroudClass: 'bg-error',
+    btnsTextClass: 'text-bright',
+    radioButtonText: 'text-error'
+  },
+  {
+    primaryTextClass: 'text-bright',
+    secondaryTextClass: 'text-primary',
+    secondaryActiveTextClass: 'text-bright',
+    numberTextClass: 'text-primary',
+    numberBackgroudClass: 'bg-warning',
+    backgroudClass: 'bg-bright',
+    btnsBackgroudClass: 'bg-error',
+    btnsTextClass: 'text-bright',
+    radioButtonText: 'text-error'
+  },
+  {
+    primaryTextClass: 'text-primary',
+    secondaryTextClass: 'text-primary',
+    secondaryActiveTextClass: 'text-accent',
+    numberTextClass: 'text-bright',
+    numberBackgroudClass: 'bg-error',
+    backgroudClass: 'bg-warning',
+    btnsBackgroudClass: 'bg-accent',
+    btnsTextClass: 'text-primary',
+    radioButtonText: 'text-error'
+  }
+];
 
 export const HISTORICAL_QUESTIONS: IQuestion[] = [
     {
@@ -244,7 +303,7 @@ export const QUIZCARDS: IQuiz[] = [
     }
 ];
 
-export const CARDTHEMES: ICardTheme[] = [
+export const CARD_THEMES: ICardTheme[] = [
     {
         titleClass: 'text-primary',
         subtitleClass: 'text-bright',

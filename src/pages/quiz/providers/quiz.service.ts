@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CARDTHEMES, QUIZCARDS } from '../quiz-data';
+import { CARD_THEMES, QUIZCARDS } from '../quiz-data';
 
 export interface ICardTheme {
   titleClass: string;
@@ -30,7 +30,7 @@ export interface IQuiz extends ISimpleQuiz {
 })
 export class QuizService {
   public quizCards: IQuiz[] = QUIZCARDS;
-  public cardThemes: ICardTheme[] = CARDTHEMES;
+  public cardThemes: ICardTheme[] = CARD_THEMES;
 
   constructor() { }
 
@@ -38,8 +38,8 @@ export class QuizService {
     return this.quizCards;
   }
 
-  public getQuizById(id: number = 1): IQuiz {
-    return this.quizCards[id];
+  public getQuizById(id: number = 0): IQuiz {
+    return this.quizCards[id - 1];
   } 
 
 }

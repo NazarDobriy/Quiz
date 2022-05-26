@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ThemeService, IQuizTheme } from '../../providers/theme.service';
 import { IQuiz, QuizService } from '../../providers/quiz.service';
 
 @Component({
@@ -19,19 +20,34 @@ export class QuizComponent implements OnInit {
     subtitle: ''
   };
 
+  public quizTheme: IQuizTheme = {
+    primaryTextClass: '',
+    secondaryTextClass: '',
+    secondaryActiveTextClass: '',
+    numberTextClass: '',
+    numberBackgroudClass: '',
+    backgroudClass: '',
+    btnsBackgroudClass: '',
+    btnsTextClass: '',
+    radioButtonText: ''
+  };
+
   public quizId: number = 0;
   public questionCounter: number = 1;
   public listAnswers: string[] = [];
+  public selectedAnswer: string = '';
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private quizService: QuizService
+    private quizService: QuizService,
+    private themeService: ThemeService
   ) { }
 
   ngOnInit(): void {
     this.quizId = parseInt(this.activatedRoute.snapshot.params['id']);
     this.currentQuiz = this.quizService.getQuizById(this.quizId);
     this.listAnswers = this.currentQuiz.listQuestions[this.questionCounter - 1].listAnswers;
+    this.quizTheme = this.themeService.getThemeByText(this.currentQuiz.subtitle);
     
     if (this.lastWordIncludeQuiz()) {
       const tempQuizSubtitle: string[] = this.currentQuiz.subtitle.split(' ');
@@ -53,12 +69,20 @@ export class QuizComponent implements OnInit {
     return subtitleArray[subtitleArray.length - 1].toLocaleLowerCase().includes('quiz');
   }
 
-  public nextQuestion(): void {
-    this.currentQuiz.listQuestions[++this.questionCounter - 1].listAnswers;
+  public switchNextQuestion(): void {
+    this.questionCounter++;
   }
 
-  public prevQuestion(): void {
-    this.currentQuiz.listQuestions[--this.questionCounter - 1].listAnswers;
+  public switchPrevQuestion(): void {
+    this.questionCounter--;
+  }
+
+  public setAnswer(index: number = 0): void {
+    this.selectedAnswer = this.currentQuestionAnswers[index];
+  }
+
+  public isSameAnswer(currentAnswer: string): boolean {
+    return currentAnswer === this.selectedAnswer;
   }
 
 }

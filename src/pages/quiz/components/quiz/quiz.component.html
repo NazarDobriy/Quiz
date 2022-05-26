@@ -8,12 +8,12 @@
   </div>
 </header>
 
-<main class="h-[39.75rem] w-[43.125rem] mt-5 m-auto rounded-3xl bg-success">
+<main class="{{ quizTheme.backgroudClass }} h-[39.75rem] w-[43.125rem] mt-5 m-auto rounded-3xl">
     <section class="mx-10">
         <section class="flex justify-between items-center pt-10">
             <div>
-                <span class="bg-warning text-[2.125rem] p-[0.625rem]">{{ questionCounter }}</span>
-                <span class="text-bright text-base ml-2 relative bottom-[6px]">/10</span>
+                <span class="{{ quizTheme.numberBackgroudClass }} {{ quizTheme.numberTextClass }} text-[2.125rem] p-[0.625rem]">{{ questionCounter }}</span>
+                <span class="{{ quizTheme.primaryTextClass }} text-base ml-2 relative bottom-1.5">/{{ currentQuiz.listQuestions.length }}</span>
             </div>
             <div class="flex">
                 <img height="92" width="92" class="rounded-full mr-3" src="assets/img/Mili.svg" alt="Mili">
@@ -23,34 +23,41 @@
         </section>
     
         <section class="h-72">
-            <div class="text-bright text-[2.125rem] mt-10 leading-[2.75rem]">
+            <div class="{{ quizTheme.primaryTextClass }} text-[2.125rem] mt-10 leading-10">
                 {{ currentQuestionName }}
             </div>
     
             <aside class="grid justify-center mt-10 text-base gap-y-4">
                 <ng-container *ngFor="let answer of currentQuestionAnswers; let i = index">
-                    <div>
-                        <input id="{{ i }}" type="radio" class="h-[1.25rem] w-[1.25rem] cursor-pointer" name="question">
-                        <label for="{{ i }}" class="ml-3 relative bottom-[2px] cursor-pointer">{{ answer }}</label>
+                    <div 
+                        class="{{ isSameAnswer(answer) ? quizTheme.secondaryActiveTextClass : quizTheme.secondaryTextClass }}" 
+                        (click)="setAnswer(i)"
+                    >
+                        <input
+                            id="{{ i }}" 
+                            type="radio"
+                            name="question"
+                            class="{{ quizTheme.radioButtonText }} h-[1.25rem] w-[1.25rem] cursor-pointer"  
+                            [checked]="isSameAnswer(answer)"
+                        >
+                        <label for="{{ i }}" class="ml-3 relative top-[1px] cursor-pointer">{{ answer }}</label>
                     </div>
                 </ng-container>
             </aside>
         </section>
 
-        <section class="flex justify-between text-bright mt-[5.5rem]">
+        <section class="flex justify-between mt-[5.5rem]">
             <button 
-                class="py-[0.625rem] px-6 rounded"
-                [ngClass]="{'bg-accent': questionCounter > MIN_AMOUNT_QUESTIONS}"
+                class="{{ questionCounter > MIN_AMOUNT_QUESTIONS ? quizTheme.btnsBackgroudClass : '' }} {{ quizTheme.btnsTextClass }} py-[0.625rem] px-6 rounded"
                 [disabled]="questionCounter <= MIN_AMOUNT_QUESTIONS"
-                (click)="prevQuestion()"
+                (click)="switchPrevQuestion()"
             >
                 Prev question
             </button>
             <button 
-                class="bg-accent py-[0.625rem] px-6 rounded"
-                [ngClass]="{'bg-success': questionCounter >= MAX_AMOUNT_QUESTIONS}"
+                class="{{ questionCounter < MAX_AMOUNT_QUESTIONS ? quizTheme.btnsBackgroudClass : '' }} {{ quizTheme.btnsTextClass }} py-[0.625rem] px-6 rounded"
                 [disabled]="questionCounter >= MAX_AMOUNT_QUESTIONS"
-                (click)="nextQuestion()"
+                (click)="switchNextQuestion()"
             >
                 Next question
             </button>
