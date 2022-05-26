@@ -29,15 +29,12 @@
     
             <aside class="grid justify-center mt-10 text-base gap-y-4">
                 <ng-container *ngFor="let answer of currentQuestionAnswers; let i = index">
-                    <div>
+                    <div 
+                    class="{{ isSameAnswer(answer) ? quizTheme.secondaryActiveTextClass : quizTheme.secondaryTextClass }}" 
+                    (click)="setAnswer(i)"
+                    >
                         <input id="{{ i }}" type="radio" class="h-[1.25rem] w-[1.25rem] cursor-pointer" name="question">
-                        <label 
-                        for="{{ i }}"
-                        class="{{ isSameAnswer(answer) ? quizTheme.secondaryActiveTextClass : quizTheme.secondaryTextClass }} ml-3 relative bottom-[2px] cursor-pointer"
-                        (click)="setAnswer(i)"
-                        >
-                            {{ answer }}
-                        </label>
+                        <label for="{{ i }}" class="ml-3 relative bottom-[2px] cursor-pointer">{{ answer }}</label>
                     </div>
                 </ng-container>
             </aside>
