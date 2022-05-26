@@ -31,7 +31,10 @@
                 <ng-container *ngFor="let answer of currentQuestionAnswers; let i = index">
                     <div>
                         <input id="{{ i }}" type="radio" class="h-[1.25rem] w-[1.25rem] cursor-pointer" name="question">
-                        <label for="{{ i }}" class="{{ quizTheme.answerClass }} ml-3 relative bottom-[2px] cursor-pointer">
+                        <label 
+                        for="{{ i }}"
+                        class="ml-3 relative bottom-[2px] cursor-pointer"
+                        >
                             {{ answer }}
                         </label>
                     </div>
@@ -40,45 +43,20 @@
         </section>
 
         <section class="flex justify-between mt-[5.5rem]">
-            <ng-container *ngIf="questionCounter > MIN_AMOUNT_QUESTIONS">
-                <button 
-                class="{{ quizTheme.btnsBackgroudClass }} {{ quizTheme.btnsTextClass }} py-[0.625rem] px-6 rounded"
+            <button 
+                class="{{ questionCounter > MIN_AMOUNT_QUESTIONS ? quizTheme.btnsBackgroudClass : '' }} {{ quizTheme.btnsTextClass }} py-[0.625rem] px-6 rounded"
                 [disabled]="questionCounter <= MIN_AMOUNT_QUESTIONS"
                 (click)="switchPrevQuestion()"
                 >
                     Prev question
-                </button>
-            </ng-container>
-
-            <ng-container *ngIf="questionCounter <= MIN_AMOUNT_QUESTIONS">
-                <button 
-                class="{{ quizTheme.btnsTextClass }} py-[0.625rem] px-6 rounded"
-                [disabled]="questionCounter <= MIN_AMOUNT_QUESTIONS"
-                (click)="switchPrevQuestion()"
-                >
-                    Prev question
-                </button>
-            </ng-container>
-
-            <ng-container *ngIf="questionCounter < MAX_AMOUNT_QUESTIONS">
-                <button 
-                class="{{ quizTheme.btnsBackgroudClass }} {{ quizTheme.btnsTextClass }} py-[0.625rem] px-6 rounded"
+            </button>
+            <button 
+                class="{{ questionCounter < MAX_AMOUNT_QUESTIONS ? quizTheme.btnsBackgroudClass : '' }} {{ quizTheme.btnsTextClass }} py-[0.625rem] px-6 rounded"
                 [disabled]="questionCounter >= MAX_AMOUNT_QUESTIONS"
                 (click)="switchNextQuestion()"
                 >
                     Next question
-                </button>
-            </ng-container>
-
-            <ng-container *ngIf="questionCounter >= MAX_AMOUNT_QUESTIONS">
-                <button 
-                class="{{ quizTheme.btnsTextClass }} py-[0.625rem] px-6 rounded"
-                [disabled]="questionCounter >= MAX_AMOUNT_QUESTIONS"
-                (click)="switchNextQuestion()"
-                >
-                    Next question
-                </button>
-            </ng-container>
+            </button>
         </section>
     </section>
 </main>
