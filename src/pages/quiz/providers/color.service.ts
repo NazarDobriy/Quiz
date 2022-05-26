@@ -28,12 +28,12 @@ export class ColorService {
     return sum % this.quizThemes.length;
   }
 
-  public getColorById(id: number = 0): IQuizTheme {
+  private getThemeById(id: number = 0): IQuizTheme {
     return this.quizThemes[id];
   }
 
   public getThemeByText(text: string): IQuizTheme {
-    return this.getColorById(this.calculateColor(text));
+    return this.getThemeById(this.calculateColor(text));
   }
 
 }
