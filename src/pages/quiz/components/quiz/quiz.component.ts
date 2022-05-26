@@ -28,7 +28,8 @@ export class QuizComponent implements OnInit {
     numberBackgroudClass: '',
     backgroudClass: '',
     btnsBackgroudClass: '',
-    btnsTextClass: ''
+    btnsTextClass: '',
+    radioButtonText: ''
   };
 
   public quizId: number = 0;

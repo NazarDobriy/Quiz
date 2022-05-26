@@ -10,7 +10,8 @@ export const QUIZ_THEMES: IQuizTheme[] = [
     numberBackgroudClass: 'bg-warning',
     backgroudClass: 'bg-success',
     btnsBackgroudClass: 'bg-accent',
-    btnsTextClass: 'text-bright'
+    btnsTextClass: 'text-bright',
+    radioButtonText: 'text-error'
   },
   {
     primaryTextClass: 'text-bright',
@@ -20,7 +21,8 @@ export const QUIZ_THEMES: IQuizTheme[] = [
     numberBackgroudClass: 'bg-warning',
     backgroudClass: 'bg-error',
     btnsBackgroudClass: 'bg-accent',
-    btnsTextClass: 'text-bright'
+    btnsTextClass: 'text-bright',
+    radioButtonText: 'text-accent'
   },
   {
     primaryTextClass: 'text-bright',
@@ -30,7 +32,8 @@ export const QUIZ_THEMES: IQuizTheme[] = [
     numberBackgroudClass: 'bg-warning',
     backgroudClass: 'bg-accent',
     btnsBackgroudClass: 'bg-error',
-    btnsTextClass: 'text-bright'
+    btnsTextClass: 'text-bright',
+    radioButtonText: 'text-error'
   },
   {
     primaryTextClass: 'text-bright',
@@ -40,7 +43,8 @@ export const QUIZ_THEMES: IQuizTheme[] = [
     numberBackgroudClass: 'bg-warning',
     backgroudClass: 'bg-bright',
     btnsBackgroudClass: 'bg-error',
-    btnsTextClass: 'text-bright'
+    btnsTextClass: 'text-bright',
+    radioButtonText: 'text-error'
   },
   {
     primaryTextClass: 'text-primary',
@@ -50,7 +54,8 @@ export const QUIZ_THEMES: IQuizTheme[] = [
     numberBackgroudClass: 'bg-error',
     backgroudClass: 'bg-warning',
     btnsBackgroudClass: 'bg-accent',
-    btnsTextClass: 'text-primary'
+    btnsTextClass: 'text-primary',
+    radioButtonText: 'text-error'
   }
 ];
 

@@ -10,6 +10,7 @@ export interface IQuizTheme {
   backgroudClass: string;
   btnsBackgroudClass: string;
   btnsTextClass: string;
+  radioButtonText: string;
 }
 
 @Injectable({
