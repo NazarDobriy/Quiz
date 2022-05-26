@@ -5,7 +5,7 @@ export interface IQuizTheme {
   primaryTextClass: string;
   secondaryTextClass: string;
   secondaryActiveTextClass: string;
-  numberClass: string;
+  numberTextClass: string;
   numberBackgroudClass: string;
   backgroudClass: string;
   btnsBackgroudClass: string;
