@@ -84,4 +84,16 @@ export class QuizComponent implements OnInit {
     return currentAnswer === this.selectedAnswer;
   }
 
+  public switchMode(event: Event): void {
+    const elementChildren: HTMLCollection = (event.target as HTMLElement).children;
+
+    if (elementChildren.length) {
+      for (let i = 0; i < elementChildren.length; i++) {
+        if (elementChildren[i].tagName === 'INPUT') {
+          (elementChildren[i] as HTMLInputElement).checked = true;
+        }
+      }
+    }
+  }
+
 }

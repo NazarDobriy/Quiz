@@ -31,9 +31,9 @@
                 <ng-container *ngFor="let answer of currentQuestionAnswers; let i = index">
                     <div 
                     class="{{ isSameAnswer(answer) ? quizTheme.secondaryActiveTextClass : quizTheme.secondaryTextClass }}" 
-                    (click)="setAnswer(i)"
+                    (click)="setAnswer(i); switchMode($event)"
                     >
-                        <input id="{{ i }}" type="radio" class="h-[1.25rem] w-[1.25rem] cursor-pointer" name="question">
+                        <input id="{{ i }}" type="radio" class=" checked:bg-error h-[1.25rem] w-[1.25rem] cursor-pointer" name="question">
                         <label for="{{ i }}" class="ml-3 relative bottom-[2px] cursor-pointer">{{ answer }}</label>
                     </div>
                 </ng-container>
