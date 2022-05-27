@@ -1,33 +1,40 @@
 <header class="text-center text-bright sm:mt-25 mt-20">
-  <span class="sm:text-[3rem] text-[2.125rem] font-semibold">{{ currentQuiz.subtitle }}</span>
-  <span class="sm:ml-2 sm:inline block right-text text-[3.5rem] text-bright font-light">
-    Quiz<span class="bg-error inline-block h-2 w-2 relative left-1 sm:top-2 top-1 rounded-full"></span>
+  <span class="sm:text-4xl md:text-[3rem] text-[2.125rem] font-semibold">{{ currentQuiz.subtitle }}</span>
+  <span class="sm:text-4xl md:text-[3.5rem] sm:text-bright text-error right-text text-[2.125rem] font-light">
+    Quiz<span class="bg-error inline-block h-2 w-2 relative left-2.5 sm:top-2 top-1 rounded-full"></span>
   </span>
-  <div class="max-w-[26.875rem] m-auto">
+  <div class="max-w-[26.875rem] m-auto mt-3">
     Can you decipher these emoji clues to answer these {{ currentQuiz.name }}-related questions?
   </div>
 </header>
 
-<main class="{{ quizTheme.backgroudClass }} h-[39.75rem] w-[43.125rem] mt-5 m-auto rounded-3xl">
-    <section class="mx-10">
-        <section class="flex justify-between items-center pt-10">
+<main class="
+    {{ quizTheme.backgroudClass }}
+    sm:h-[35.5rem] sm:w-[30rem]
+    md:h-[36.75rem] md:w-[39.75rem]
+    lg:h-[39.75rem] lg:w-[43.125rem]
+    h-[35rem] w-[20rem]
+    mt-5 m-auto rounded-3xl
+">
+    <section class="md:mx-10 mx-5">
+        <section class="flex justify-between items-center sm:pt-10 pt-6">
             <div>
                 <span class="{{ quizTheme.numberBackgroudClass }} {{ quizTheme.numberTextClass }} text-[2.125rem] p-[0.625rem]">{{ questionCounter }}</span>
                 <span class="{{ quizTheme.primaryTextClass }} text-base ml-2 relative bottom-1.5">/{{ currentQuiz.listQuestions.length }}</span>
             </div>
             <div class="flex">
-                <img height="92" width="92" class="rounded-full mr-3" src="assets/img/Mili.svg" alt="Mili">
-                <img height="92" width="92" class="rounded-full mr-3" src="assets/img/Jake.svg" alt="Jake">
-                <img height="92" width="92" class="rounded-full" src="assets/img/Steven.svg" alt="Steven">
+                <img class="lg:h-24 lg:w-24 h-20 w-20 rounded-full sm:mr-3 mr-0" src="assets/img/Mili.svg" alt="Mili">
+                <img class="lg:h-24 lg:w-24 h-20 w-20 rounded-full mr-3 sm:block hidden" src="assets/img/Jake.svg" alt="Jake">
+                <img class="lg:h-24 lg:w-24 h-20 w-20 rounded-full sm:block hidden" src="assets/img/Steven.svg" alt="Steven">
             </div>
         </section>
     
-        <section class="h-72">
-            <div class="{{ quizTheme.primaryTextClass }} text-[2.125rem] mt-10 leading-10">
+        <section class="ms:h-72 h-[19rem]">
+            <div class="{{ quizTheme.primaryTextClass }} md:text-3xl lg:text-[2.125rem] text-[1.75rem] sm:mt-8 lg:mt-10 mt-7 leading-10">
                 {{ currentQuestionName }}
             </div>
     
-            <aside class="grid justify-center mt-10 text-base gap-y-4">
+            <aside class="grid justify-center md:mt-10 mt-9 text-base gap-y-4">
                 <ng-container *ngFor="let answer of currentQuestionAnswers; let i = index">
                     <div 
                         class="{{ isSameAnswer(answer) ? quizTheme.secondaryActiveTextClass : quizTheme.secondaryTextClass }}" 
@@ -46,20 +53,20 @@
             </aside>
         </section>
 
-        <section class="flex justify-between mt-[5.5rem]">
+        <section class="flex justify-between md:mt-[4rem] lg:mt-[5.5rem] mt-12">
             <button 
                 class="{{ questionCounter > MIN_AMOUNT_QUESTIONS ? quizTheme.btnsBackgroudClass : '' }} {{ quizTheme.btnsTextClass }} py-[0.625rem] px-6 rounded"
                 [disabled]="questionCounter <= MIN_AMOUNT_QUESTIONS"
                 (click)="switchPrevQuestion()"
             >
-                Prev question
+                Prev <span class="sm:inline hidden">question</span>
             </button>
             <button 
                 class="{{ questionCounter < MAX_AMOUNT_QUESTIONS ? quizTheme.btnsBackgroudClass : '' }} {{ quizTheme.btnsTextClass }} py-[0.625rem] px-6 rounded"
                 [disabled]="questionCounter >= MAX_AMOUNT_QUESTIONS"
                 (click)="switchNextQuestion()"
             >
-                Next question
+                Next <span class="sm:inline hidden">question</span>
             </button>
         </section>
     </section>
