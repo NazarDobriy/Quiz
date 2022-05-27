@@ -36,6 +36,7 @@ export class QuizComponent implements OnInit {
   public questionCounter: number = 1;
   public listAnswers: string[] = [];
   public selectedAnswer: string = '';
+  public inputName: string = 'question';
 
   constructor(
     private activatedRoute: ActivatedRoute,
