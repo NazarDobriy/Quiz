@@ -1,0 +1,13 @@
+<ng-container *ngFor="let option of options">
+    <div>
+        <app-radio-button 
+            [name]="inputName"
+            [option]="option"
+            [buttonStyle]="buttonStyle"
+            [isChecked]="isOptionSelected(option)"
+            [labelClass]="isOptionSelected(option) ? activeLabelClass : labelClass"
+            (click)="selectOption(option)"
+        >
+        </app-radio-button>
+    </div>
+</ng-container>

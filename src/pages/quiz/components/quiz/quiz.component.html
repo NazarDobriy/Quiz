@@ -33,24 +33,14 @@
             <div class="{{ quizTheme.primaryTextClass }} md:text-3xl lg:text-[2.125rem] text-[1.75rem] sm:mt-8 lg:mt-10 mt-7 leading-10">
                 {{ currentQuestionName }}
             </div>
-    
-            <aside class="grid justify-center md:mt-10 mt-9 text-base gap-y-4">
-                <ng-container *ngFor="let answer of currentQuestionAnswers; let i = index">
-                    <div 
-                        class="{{ isSameAnswer(answer) ? quizTheme.secondaryActiveTextClass : quizTheme.secondaryTextClass }}" 
-                        (click)="setAnswer(i)"
-                    >
-                        <input
-                            id="{{ i }}" 
-                            type="radio"
-                            name="question"
-                            class="{{ quizTheme.radioButtonText }} h-[1.25rem] w-[1.25rem] cursor-pointer"  
-                            [checked]="isSameAnswer(answer)"
-                        >
-                        <label for="{{ i }}" class="ml-3 relative top-[1px] cursor-pointer">{{ answer }}</label>
-                    </div>
-                </ng-container>
-            </aside>
+            <app-radio-group-button
+                class="grid justify-center md:mt-10 mt-9 text-base gap-y-4" 
+                [options]="currentQuestionAnswers"
+                [buttonStyle]="quizTheme.radioButtonColor"
+                [labelClass]="quizTheme.secondaryTextClass"
+                [activeLabelClass]="quizTheme.secondaryActiveTextClass"
+                (onSelect)="onSelect($event)"
+            ></app-radio-group-button>
         </section>
 
         <section class="flex justify-between md:mt-[4rem] lg:mt-[5.5rem] mt-12">

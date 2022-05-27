@@ -19,7 +19,5 @@ module.exports = {
       lightblue: '#7199FF'
     }
   },
-  plugins: [
-    require('@tailwindcss/forms')
-  ],
+  plugins: [],
 }

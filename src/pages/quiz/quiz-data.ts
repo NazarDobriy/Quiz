@@ -11,7 +11,7 @@ export const QUIZ_THEMES: IQuizTheme[] = [
     backgroudClass: 'bg-success',
     btnsBackgroudClass: 'bg-accent',
     btnsTextClass: 'text-bright',
-    radioButtonText: 'text-error'
+    radioButtonColor: 'accent-error'
   },
   {
     primaryTextClass: 'text-bright',
@@ -22,7 +22,7 @@ export const QUIZ_THEMES: IQuizTheme[] = [
     backgroudClass: 'bg-error',
     btnsBackgroudClass: 'bg-accent',
     btnsTextClass: 'text-bright',
-    radioButtonText: 'text-accent'
+    radioButtonColor: 'accent-accent'
   },
   {
     primaryTextClass: 'text-bright',
@@ -33,7 +33,7 @@ export const QUIZ_THEMES: IQuizTheme[] = [
     backgroudClass: 'bg-accent',
     btnsBackgroudClass: 'bg-error',
     btnsTextClass: 'text-bright',
-    radioButtonText: 'text-error'
+    radioButtonColor: 'accent-error'
   },
   {
     primaryTextClass: 'text-bright',
@@ -44,7 +44,7 @@ export const QUIZ_THEMES: IQuizTheme[] = [
     backgroudClass: 'bg-bright',
     btnsBackgroudClass: 'bg-error',
     btnsTextClass: 'text-bright',
-    radioButtonText: 'text-error'
+    radioButtonColor: 'accent-error'
   },
   {
     primaryTextClass: 'text-primary',
@@ -55,7 +55,7 @@ export const QUIZ_THEMES: IQuizTheme[] = [
     backgroudClass: 'bg-warning',
     btnsBackgroudClass: 'bg-accent',
     btnsTextClass: 'text-primary',
-    radioButtonText: 'text-error'
+    radioButtonColor: 'accent-error'
   }
 ];
 

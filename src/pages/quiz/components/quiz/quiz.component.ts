@@ -29,13 +29,12 @@ export class QuizComponent implements OnInit {
     backgroudClass: '',
     btnsBackgroudClass: '',
     btnsTextClass: '',
-    radioButtonText: ''
+    radioButtonColor: ''
   };
 
   public quizId: number = 0;
   public questionCounter: number = 1;
   public listAnswers: string[] = [];
-  public selectedAnswer: string = '';
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -77,12 +76,8 @@ export class QuizComponent implements OnInit {
     this.questionCounter--;
   }
 
-  public setAnswer(index: number = 0): void {
-    this.selectedAnswer = this.currentQuestionAnswers[index];
-  }
-
-  public isSameAnswer(currentAnswer: string): boolean {
-    return currentAnswer === this.selectedAnswer;
+  public onSelect(option: string) {
+    console.log(option);
   }
 
 }
