@@ -76,4 +76,8 @@ export class QuizComponent implements OnInit {
     this.questionCounter--;
   }
 
+  public onSelect(option: string) {
+    console.log(option);
+  }
+
 }

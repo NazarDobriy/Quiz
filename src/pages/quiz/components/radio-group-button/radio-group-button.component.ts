@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { IQuizTheme } from '../../providers/theme.service';
 
 @Component({
@@ -6,28 +6,27 @@ import { IQuizTheme } from '../../providers/theme.service';
   templateUrl: './radio-group-button.component.html'
 })
 export class RadioGroupButtonComponent {
-  @Input() answers: string[] = [];
-  @Input() theme: IQuizTheme = {
-    primaryTextClass: '',
-    secondaryTextClass: '',
-    secondaryActiveTextClass: '',
-    numberTextClass: '',
-    numberBackgroudClass: '',
-    backgroudClass: '',
-    btnsBackgroudClass: '',
-    btnsTextClass: '',
-    radioButtonColor: ''
-  };
+  @Input() options: string[] = [];
+  @Input() buttonStyle: string = '';
+  @Input() labelClass: string = '';
+  @Input() activeLabelClass: string = '';
 
-  public selectedAnswer: string = '';
+  @Output() onSelect = new EventEmitter<string>();
+
+  public selectedOption: string = '';
   public inputName: string = 'question';
 
-  public setAnswer(index: number = 0): void {
-    this.selectedAnswer = this.answers[index];
+  public setOption(index: number = 0): void {
+    this.selectedOption = this.options[index];
   }
 
-  public isSameAnswer(currentAnswer: string): boolean {
-    return currentAnswer === this.selectedAnswer;
+  public selectOption(option: string): void {
+    this.selectedOption = option;
+    this.onSelect.emit(option);
+  }
+
+  public isOptionSelected(option: string): boolean {
+    return option === this.selectedOption;
   }
 
 }

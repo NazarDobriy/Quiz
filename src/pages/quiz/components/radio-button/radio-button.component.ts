@@ -5,8 +5,9 @@ import { Component, Input } from '@angular/core';
   templateUrl: './radio-button.component.html'
 })
 export class RadioButtonComponent {
-  @Input() answer: string = '';
+  @Input() option: string = '';
   @Input() name: string = '';
-  @Input() styleClass: string = '';
+  @Input() buttonStyle: string = '';
   @Input() isChecked: boolean = false;
+  @Input() labelClass: string = '';
 }

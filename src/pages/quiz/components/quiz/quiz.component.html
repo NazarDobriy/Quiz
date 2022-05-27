@@ -33,10 +33,13 @@
             <div class="{{ quizTheme.primaryTextClass }} md:text-3xl lg:text-[2.125rem] text-[1.75rem] sm:mt-8 lg:mt-10 mt-7 leading-10">
                 {{ currentQuestionName }}
             </div>
-            <app-radio-group-button 
+            <app-radio-group-button
                 class="grid justify-center md:mt-10 mt-9 text-base gap-y-4" 
-                [answers]="currentQuestionAnswers" 
-                [theme]="quizTheme"
+                [options]="currentQuestionAnswers"
+                [buttonStyle]="quizTheme.radioButtonColor"
+                [labelClass]="quizTheme.secondaryTextClass"
+                [activeLabelClass]="quizTheme.secondaryActiveTextClass"
+                (onSelect)="onSelect($event)"
             ></app-radio-group-button>
         </section>
 
