@@ -35,8 +35,6 @@ export class QuizComponent implements OnInit {
   public quizId: number = 0;
   public questionCounter: number = 1;
   public listAnswers: string[] = [];
-  public selectedAnswer: string = '';
-  public inputName: string = 'question';
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -76,14 +74,6 @@ export class QuizComponent implements OnInit {
 
   public switchPrevQuestion(): void {
     this.questionCounter--;
-  }
-
-  public setAnswer(index: number = 0): void {
-    this.selectedAnswer = this.currentQuestionAnswers[index];
-  }
-
-  public isSameAnswer(currentAnswer: string): boolean {
-    return currentAnswer === this.selectedAnswer;
   }
 
 }

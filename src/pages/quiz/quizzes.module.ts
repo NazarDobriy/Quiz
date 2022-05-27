@@ -6,6 +6,7 @@ import { QuizzesComponent } from './quizzes.component';
 import { QuizComponent } from './components/quiz/quiz.component';
 import { QuizService } from './providers/quiz.service';
 import { RadioButtonComponent } from './components/radio-button/radio-button.component';
+import { RadioGroupButtonComponent } from './components/radio-group-button/radio-group-button.component';
 
 const routes: Routes = [
   { path: '', component: QuizzesComponent },
@@ -18,7 +19,8 @@ const routes: Routes = [
     QuizzesComponent,
     QuizCardComponent,
     QuizComponent,
-    RadioButtonComponent
+    RadioButtonComponent,
+    RadioGroupButtonComponent
   ],
   imports: [
     CommonModule,

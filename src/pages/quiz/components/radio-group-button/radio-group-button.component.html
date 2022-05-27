@@ -1,0 +1,14 @@
+<ng-container *ngFor="let answer of answers; let i = index">
+    <div 
+        class="{{ isSameAnswer(answer) ? theme.secondaryActiveTextClass : theme.secondaryTextClass }}" 
+        (click)="setAnswer(i)"
+    >
+        <app-radio-button 
+            [name]="inputName"
+            [answer]="answer"
+            [styleClass]="theme.radioButtonColor"
+            [isChecked]="isSameAnswer(answer)"
+        >
+        </app-radio-button>
+    </div>
+</ng-container>
