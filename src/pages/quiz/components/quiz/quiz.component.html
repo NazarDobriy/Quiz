@@ -41,13 +41,12 @@
                         (click)="setAnswer(i)"
                     >
                         <app-radio-button 
-                            [id]="i" 
-                            [name]="inputName" 
-                            [color]="quizTheme.radioButtonColor" 
+                            [name]="inputName"
+                            [answer]="answer"
+                            [styleClass]="quizTheme.radioButtonColor"
                             [isChecked]="isSameAnswer(answer)"
                         >
                         </app-radio-button>
-                        <label for="{{ i }}" class="ml-3 relative bottom-1 cursor-pointer">{{ answer }}</label>
                     </div>
                 </ng-container>
             </aside>
