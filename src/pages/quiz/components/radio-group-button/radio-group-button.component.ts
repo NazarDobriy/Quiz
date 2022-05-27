@@ -3,10 +3,9 @@ import { IQuizTheme } from '../../providers/theme.service';
 
 @Component({
   selector: 'app-radio-group-button',
-  templateUrl: './radio-group-button.component.html',
-  styleUrls: ['./radio-group-button.component.scss']
+  templateUrl: './radio-group-button.component.html'
 })
-export class RadioGroupButtonComponent implements OnInit {
+export class RadioGroupButtonComponent {
   @Input() answers: string[] = [];
   @Input() theme: IQuizTheme = {
     primaryTextClass: '',
@@ -22,11 +21,6 @@ export class RadioGroupButtonComponent implements OnInit {
 
   public selectedAnswer: string = '';
   public inputName: string = 'question';
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
 
   public setAnswer(index: number = 0): void {
     this.selectedAnswer = this.answers[index];
