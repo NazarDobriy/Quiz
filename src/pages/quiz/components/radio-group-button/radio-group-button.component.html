@@ -1,5 +1,5 @@
-<ng-container *ngFor="let option of options; let i = index">
-    <div (click)="setOption(i)">
+<ng-container *ngFor="let option of options">
+    <div>
         <app-radio-button 
             [name]="inputName"
             [option]="option"

@@ -16,10 +16,6 @@ export class RadioGroupButtonComponent {
   public selectedOption: string = '';
   public inputName: string = 'question';
 
-  public setOption(index: number = 0): void {
-    this.selectedOption = this.options[index];
-  }
-
   public selectOption(option: string): void {
     this.selectedOption = option;
     this.onSelect.emit(option);
