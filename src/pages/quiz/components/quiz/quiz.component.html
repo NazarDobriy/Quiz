@@ -44,10 +44,10 @@
                             id="{{ i }}" 
                             type="radio"
                             name="question"
-                            class="{{ quizTheme.radioButtonText }} h-[1.25rem] w-[1.25rem] cursor-pointer"  
+                            class="{{ quizTheme.radioButtonColor }} h-[1.25rem] w-[1.25rem] cursor-pointer"  
                             [checked]="isSameAnswer(answer)"
                         >
-                        <label for="{{ i }}" class="ml-3 relative top-[1px] cursor-pointer">{{ answer }}</label>
+                        <label for="{{ i }}" class="ml-3 relative bottom-1 cursor-pointer">{{ answer }}</label>
                     </div>
                 </ng-container>
             </aside>
