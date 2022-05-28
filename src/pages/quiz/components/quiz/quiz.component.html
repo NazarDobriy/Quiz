@@ -56,7 +56,13 @@
                 [disabled]="questionCounter >= MAX_AMOUNT_QUESTIONS"
                 (click)="switchNextQuestion()"
             >
-                Next <span class="sm:inline hidden">question</span>
+                <ng-container *ngIf="!isLastQuestion(); else completeStep">
+                    Next <span class="sm:inline hidden">question</span>
+                    <span class="text-2xl leading-[0] relative left-2.5 top-0.5">></span>
+                </ng-container>
+                <ng-template #completeStep>
+                    Complete
+                </ng-template>
             </button>
         </section>
     </section>

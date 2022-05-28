@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { IQuizTheme } from '../../providers/theme.service';
 
 @Component({
   selector: 'app-radio-group-button',
