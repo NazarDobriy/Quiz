@@ -52,7 +52,12 @@
                 Prev <span class="sm:inline hidden">question</span>
             </button>
             <button 
-                class="{{ questionCounter < MAX_AMOUNT_QUESTIONS ? quizTheme.btnsBackgroudClass : '' }} {{ quizTheme.btnsTextClass }} py-[0.625rem] px-6 rounded"
+                class="
+                    {{ quizTheme.btnsBackgroudClass }}
+                    {{ quizTheme.btnsTextClass }}
+                    py-[0.625rem] px-6 rounded
+                    w-[9.375rem] cursor-pointer
+                "
                 [disabled]="questionCounter >= MAX_AMOUNT_QUESTIONS"
                 (click)="switchNextQuestion()"
             >
