@@ -8,19 +8,21 @@
   </div>
 </header>
 
-<main class="
-    {{ quizTheme.backgroudClass }}
-    sm:h-[35.5rem] sm:w-[30rem]
-    md:h-[36.75rem] md:w-[39.75rem]
-    lg:h-[39.75rem] lg:w-[43.125rem]
-    h-[35rem] w-[20rem]
-    mt-5 m-auto rounded-3xl
-">
+<main 
+    class="
+        sm:h-[35.5rem] sm:w-[30rem]
+        md:h-[36.75rem] md:w-[39.75rem]
+        lg:h-[39.75rem] lg:w-[43.125rem]
+        h-[35rem] w-[20rem]
+        mt-5 m-auto rounded-3xl
+    "
+    [ngClass]="quizTheme.backgroudClass"
+>
     <section class="md:mx-10 mx-5">
         <section class="flex justify-between items-center sm:pt-10 pt-6">
             <div>
-                <span class="{{ quizTheme.numberBackgroudClass }} {{ quizTheme.numberTextClass }} text-[2.125rem] p-[0.625rem]">{{ questionCounter }}</span>
-                <span class="{{ quizTheme.primaryTextClass }} text-base ml-2 relative bottom-1.5">/{{ currentQuiz.listQuestions.length }}</span>
+                <span class="text-[2.125rem] p-[0.625rem]" [ngClass]="[quizTheme.numberBackgroudClass, quizTheme.numberTextClass]">{{ questionCounter }}</span>
+                <span class="text-base ml-2 relative bottom-1.5" [ngClass]="quizTheme.primaryTextClass">/{{ currentQuiz.listQuestions.length }}</span>
             </div>
             <div class="flex">
                 <img class="lg:h-24 lg:w-24 h-20 w-20 rounded-full sm:mr-3 mr-0" src="assets/img/Mili.svg" alt="Mili">
@@ -30,7 +32,10 @@
         </section>
     
         <section class="ms:h-72 h-[19rem]">
-            <div class="{{ quizTheme.primaryTextClass }} md:text-3xl lg:text-[2.125rem] text-[1.75rem] sm:mt-8 lg:mt-10 mt-7 leading-10">
+            <div 
+                class="md:text-3xl lg:text-[2.125rem] text-[1.75rem] sm:mt-8 lg:mt-10 mt-7 leading-10"
+                [ngClass]="quizTheme.primaryTextClass"
+            >
                 {{ currentQuestionName }}
             </div>
             <app-radio-group-button
@@ -45,18 +50,32 @@
 
         <section class="flex justify-between md:mt-[4rem] lg:mt-[5.5rem] mt-12">
             <button 
-                class="{{ questionCounter > MIN_AMOUNT_QUESTIONS ? quizTheme.btnsBackgroudClass : '' }} {{ quizTheme.btnsTextClass }} py-[0.625rem] px-6 rounded"
+                class="py-[0.625rem] px-6 rounded sm:w-[9.5rem] w-24"
+                [ngClass]="[
+                    questionCounter > MIN_AMOUNT_QUESTIONS ? quizTheme.btnsBackgroudClass : '',
+                    quizTheme.btnsTextClass
+                ]"
                 [disabled]="questionCounter <= MIN_AMOUNT_QUESTIONS"
                 (click)="switchPrevQuestion()"
             >
-                Prev <span class="sm:inline hidden">question</span>
+                <ng-container *ngIf="questionCounter > MIN_AMOUNT_QUESTIONS">
+                    <span class="text-2xl leading-[0] relative right-2.5 top-0.5"><</span>
+                    Prev <span class="sm:inline hidden">question</span>
+                </ng-container>
             </button>
             <button 
-                class="{{ questionCounter < MAX_AMOUNT_QUESTIONS ? quizTheme.btnsBackgroudClass : '' }} {{ quizTheme.btnsTextClass }} py-[0.625rem] px-6 rounded"
+                class="py-[0.625rem] px-6 rounded sm:w-[9.5rem] cursor-pointer"
+                [ngClass]="[quizTheme.btnsBackgroudClass, quizTheme.btnsTextClass]"
                 [disabled]="questionCounter >= MAX_AMOUNT_QUESTIONS"
                 (click)="switchNextQuestion()"
             >
-                Next <span class="sm:inline hidden">question</span>
+                <ng-container *ngIf="!isLastQuestion(); else completeStep">
+                    Next <span class="sm:inline hidden">question</span>
+                    <span class="text-2xl leading-[0] relative left-2.5 top-0.5">></span>
+                </ng-container>
+                <ng-template #completeStep>
+                    Complete
+                </ng-template>
             </button>
         </section>
     </section>

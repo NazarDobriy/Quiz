@@ -80,4 +80,8 @@ export class QuizComponent implements OnInit {
     console.log(option);
   }
 
+  public isLastQuestion(): boolean {
+    return this.questionCounter === this.MAX_AMOUNT_QUESTIONS;
+  }
+
 }
