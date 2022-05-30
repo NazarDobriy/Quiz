@@ -16,7 +16,7 @@ export interface ISimpleQuiz {
 
 export interface IQuestion {
   name: string;
-  listAnswers: string[];
+  answers: string[];
   correctAnswer: string;
 }
 

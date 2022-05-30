@@ -65,7 +65,7 @@ export class QuizComponent implements OnInit {
   }
 
   get currentQuestionAnswers(): string[] {
-    return this.currentQuiz?.questions[this.questionIndex]?.listAnswers || [];
+    return this.currentQuiz?.questions[this.questionIndex]?.answers || [];
   }
 
   get userSelectedAnswer(): string | null {
