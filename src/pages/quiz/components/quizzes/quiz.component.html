@@ -58,8 +58,10 @@
                 [disabled]="questionCounter <= MIN_AMOUNT_QUESTIONS"
                 (click)="switchPrevQuestion()"
             >
-                <span class="text-2xl leading-[0] relative right-2.5 top-0.5"><</span>
-                Prev <span class="sm:inline hidden">question</span>
+                <ng-container *ngIf="questionCounter > MIN_AMOUNT_QUESTIONS">
+                    <span class="text-2xl leading-[0] relative right-2.5 top-0.5"><</span>
+                    Prev <span class="sm:inline hidden">question</span>
+                </ng-container>
             </button>
             <button 
                 class="py-[0.625rem] px-6 rounded sm:w-[9.5rem] cursor-pointer"

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { QuizCardComponent } from './components/quiz-card/quiz-card.component';
 import { QuizzesComponent } from './quizzes.component';
-import { QuizComponent } from './components/quiz/quiz.component';
+import { QuizComponent } from './components/quizzes/quiz.component';
 import { QuizService } from './providers/quiz.service';
 import { RadioButtonComponent } from './components/radio-button/radio-button.component';
 import { RadioGroupButtonComponent } from './components/radio-group-button/radio-group-button.component';
