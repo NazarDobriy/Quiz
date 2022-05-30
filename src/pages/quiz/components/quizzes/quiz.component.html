@@ -64,9 +64,9 @@
                 </ng-container>
             </button>
             <button 
-                class="py-[0.625rem] px-6 rounded sm:w-[9.5rem] cursor-pointer"
+                class="py-[0.625rem] px-6 rounded sm:w-[9.5rem]"
                 [ngClass]="[quizTheme.btnsBackgroudClass, quizTheme.btnsTextClass]"
-                [disabled]="questionId + 1 >= MAX_AMOUNT_QUESTIONS"
+                [disabled]="questionId + 1 > MAX_AMOUNT_QUESTIONS || (isUnselectedOption() && isLastQuestion())"
                 (click)="switchNextQuestion()"
             >
                 <ng-container *ngIf="!isLastQuestion(); else completeStep">
