@@ -57,7 +57,7 @@
                     quizTheme.btnsTextClass
                 ]"
                 [disabled]="isNextQuestionAvailable"
-                (click)="switchPrevQuestion()"
+                (click)="handlePrevQuestion()"
             >
                 <ng-container *ngIf="isPrevQuestionAvailable">
                     <span class="text-2xl leading-[0] relative right-2.5 top-0.5"><</span>
@@ -68,7 +68,7 @@
                 class="py-[0.625rem] px-6 rounded sm:w-[9.5rem]"
                 [ngClass]="[quizTheme.btnsBackgroudClass, quizTheme.btnsTextClass]"
                 [disabled]="questionCounter > MAX_AMOUNT_QUESTIONS || (!allQuestionsCompleted() && isLastQuestion())"
-                (click)="switchNextQuestion()"
+                (click)="handleNextQuestion()"
             >
                 <ng-container *ngIf="!isLastQuestion(); else completeStep">
                     Next <span class="sm:inline hidden">question</span>

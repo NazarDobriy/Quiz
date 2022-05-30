@@ -72,7 +72,7 @@ export class QuizComponent implements OnInit {
     return this.userAnswers.get(this.questionIndex) || null;
   }
 
-  public switchNextQuestion(): void {
+  public handleNextQuestion(): void {
     if (this.isLastQuestion()) {
       console.log(this.quizService.calcQuizResult(this.quizId, this.userAnswers));
       return;
@@ -80,7 +80,7 @@ export class QuizComponent implements OnInit {
     this.questionIndex++;
   }
 
-  public switchPrevQuestion(): void {
+  public handlePrevQuestion(): void {
     this.questionIndex--;
   }
 
