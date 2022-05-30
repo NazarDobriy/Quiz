@@ -35,7 +35,8 @@ export class QuizComponent implements OnInit {
   public quizId: number = 0;
   public questionId: number = 0;
   public listAnswers: string[] = [];
-  public userAnswers: string[] = [];
+  public userAnswers: string[] = Array(this.MAX_AMOUNT_QUESTIONS).fill('');
+  public isCorrectAnswer: boolean[] = Array(this.MAX_AMOUNT_QUESTIONS).fill(false);
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -54,8 +55,6 @@ export class QuizComponent implements OnInit {
       tempQuizSubtitle.pop();
       this.currentQuiz.subtitle = tempQuizSubtitle.join(' ');
     }
-
-    this.userAnswers = this.quizService.userAnswers;
   }
 
   get currentQuestionName(): string {
@@ -76,6 +75,14 @@ export class QuizComponent implements OnInit {
   }
 
   public switchNextQuestion(): void {
+    if (this.isLastQuestion()) {
+      this.checkAnswer();
+      const amountCorrectAnswers: number = this.isCorrectAnswer.filter((ans: boolean) => { 
+        return ans;
+      }).length;
+      console.log(amountCorrectAnswers);
+      return;
+    }
     this.questionId++;
   }
 
@@ -95,5 +102,14 @@ export class QuizComponent implements OnInit {
     return this.userAnswers.filter((ans: string) => {
       return !ans;
     }).length > 0;
+  }
+
+  public checkAnswer(): void {
+    const correctAnswers: string[] = this.quizService.getCorrectAnswers(this.quizId);
+    for (let i = 0; i < this.MAX_AMOUNT_QUESTIONS; i++) {
+      if (correctAnswers[i] === this.userAnswers[i]) {
+        this.isCorrectAnswer[i] = true;
+      }
+    }
   }
 }

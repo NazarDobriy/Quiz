@@ -29,11 +29,8 @@ export interface IQuiz extends ISimpleQuiz {
   providedIn: 'root'
 })
 export class QuizService {
-  readonly MAX_AMOUNT_QUESTIONS: number = 10;
-
   public quizCards: IQuiz[] = QUIZCARDS;
   public cardThemes: ICardTheme[] = CARD_THEMES;
-  public userAnswers: string[] = Array(this.MAX_AMOUNT_QUESTIONS).fill('');
 
   constructor() { }
 
@@ -41,8 +38,14 @@ export class QuizService {
     return this.quizCards;
   }
 
-  public getQuizById(id: number = 0): IQuiz {
+  public getQuizById(id: number = 1): IQuiz {
     return this.quizCards[id - 1];
-  } 
+  }
+
+  public getCorrectAnswers(id: number = 1): string[] {
+    return this.quizCards[id - 1].listQuestions.map((question: IQuestion) => { 
+      return question.correctAnswer;
+    });
+  }
 
 }
