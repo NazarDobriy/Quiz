@@ -66,6 +66,10 @@ export class QuizComponent implements OnInit {
     return this.currentQuiz?.listQuestions[this.questionId]?.listAnswers || [];
   }
 
+  get initialSelectedAnswer(): string {
+    return this.userAnswers[this.questionId] || '';
+  }
+
   public lastWordIncludeQuiz(): boolean {
     const subtitleArray: string[] = this.currentQuiz.subtitle.split(' ');
     return subtitleArray[subtitleArray.length - 1].toLocaleLowerCase().includes('quiz');

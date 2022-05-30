@@ -39,7 +39,8 @@
                 {{ currentQuestionName }}
             </div>
             <app-radio-group-button
-                class="grid justify-center md:mt-10 mt-9 text-base gap-y-4" 
+                class="grid justify-center md:mt-10 mt-9 text-base gap-y-4"
+                [initialSelectedOption]="initialSelectedAnswer"
                 [options]="currentQuestionAnswers"
                 [buttonStyle]="quizTheme.radioButtonColor"
                 [labelClass]="quizTheme.secondaryTextClass"
