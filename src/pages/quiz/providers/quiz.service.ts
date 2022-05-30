@@ -21,8 +21,8 @@ export interface IQuestion {
 }
 
 export interface IQuiz extends ISimpleQuiz {
-  name: string;
-  listQuestions: IQuestion[];
+  description: string;
+  questions: IQuestion[];
 }
 
 @Injectable({
@@ -38,14 +38,25 @@ export class QuizService {
     return this.quizCards;
   }
 
-  public getQuizById(id: number = 1): IQuiz {
+  public getQuizById(id: number): IQuiz {
     return this.quizCards[id - 1];
   }
 
-  public getCorrectAnswers(id: number = 1): string[] {
-    return this.quizCards[id - 1].listQuestions.map((question: IQuestion) => { 
-      return question.correctAnswer;
-    });
+  private getCorrectAnswers(id: number): string[] {
+    return this.quizCards[id - 1].questions.map((question: IQuestion) => question.correctAnswer);
+  }
+
+  public calcQuizResult(id: number, userAnswers: Map<number, string>): number {
+    const correctAnswers: string[] = this.getCorrectAnswers(id);
+    let amountCorrectAnswers: number = 0;
+    for (let i = 0; i < this.getCorrectAnswers(id).length; i++) {
+      if (userAnswers.has(i)) {
+        if (userAnswers.get(i) === correctAnswers[i]) {
+          amountCorrectAnswers++;
+        }
+      }
+    }
+    return amountCorrectAnswers;
   }
 
 }

@@ -5,7 +5,7 @@ import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange
   templateUrl: './radio-group-button.component.html'
 })
 export class RadioGroupButtonComponent implements OnInit, OnChanges {
-  @Input() initialSelectedOption: string = '';
+  @Input() userSelectedOption: string | null = null;
   @Input() options: string[] = [];
   @Input() buttonStyle: string = '';
   @Input() labelClass: string = '';
@@ -20,8 +20,8 @@ export class RadioGroupButtonComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['initialSelectedOption']) {
-      this.selectedOption = changes['initialSelectedOption'].currentValue;
+    if (changes['userSelectedOption']) {
+      this.selectedOption = changes['userSelectedOption'].currentValue;
     }
   }
 

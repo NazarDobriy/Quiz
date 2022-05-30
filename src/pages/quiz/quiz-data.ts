@@ -269,37 +269,37 @@ export const QUIZCARDS: IQuiz[] = [
     {
       id: 1,
       title: '10 Qusstions',
-      subtitle: 'Emoji Bands Quiz!',
-      name: 'historical',
-      listQuestions: HISTORICAL_QUESTIONS
+      subtitle: 'Emoji Bands',
+      description: 'historical',
+      questions: HISTORICAL_QUESTIONS
     },
     {
       id: 2,
       title: '10 Qusstions',
       subtitle: 'Easter Emoji Quiz: Can You Get 100 Percent?',
-      name: 'mathematical',
-      listQuestions: MATHEMATICAL_QUESTIONS
+      description: 'mathematical',
+      questions: MATHEMATICAL_QUESTIONS
     },
     {
       id: 3,
       title: '10 Qusstions',
-      subtitle: 'London Underground & Tube Station Emoji Quiz',
-      name: 'historical',
-      listQuestions: HISTORICAL_QUESTIONS
+      subtitle: 'London Underground & Tube Station Emoji',
+      description: 'historical',
+      questions: HISTORICAL_QUESTIONS
     },
     {
       id: 4,
       title: '10 Qusstions',
       subtitle: 'Trivia Quiz: Guess The WWE Star From The Emoji!',
-      name: 'historical',
-      listQuestions: HISTORICAL_QUESTIONS
+      description: 'historical',
+      questions: HISTORICAL_QUESTIONS
     },
     {
       id: 5,
       title: '10 Qusstions',
-      subtitle: 'What Emoji Am I? Quiz',
-      name: 'mathematical',
-      listQuestions: MATHEMATICAL_QUESTIONS
+      subtitle: 'What Emoji Am I?',
+      description: 'mathematical',
+      questions: MATHEMATICAL_QUESTIONS
     }
 ];
 

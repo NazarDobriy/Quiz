@@ -4,7 +4,7 @@
     Quiz<span class="bg-error inline-block h-2 w-2 relative left-2.5 sm:top-2 top-1 rounded-full"></span>
   </span>
   <div class="max-w-[26.875rem] m-auto mt-3">
-    Can you decipher these emoji clues to answer these {{ currentQuiz.name }}-related questions?
+    Can you decipher these emoji clues to answer these {{ currentQuiz.description }}-related questions?
   </div>
 </header>
 
@@ -21,8 +21,8 @@
     <section class="md:mx-10 mx-5">
         <section class="flex justify-between items-center sm:pt-10 pt-6">
             <div>
-                <span class="text-[2.125rem] p-[0.625rem]" [ngClass]="[quizTheme.numberBackgroudClass, quizTheme.numberTextClass]">{{ questionId + 1 }}</span>
-                <span class="text-base ml-2 relative bottom-1.5" [ngClass]="quizTheme.primaryTextClass">/{{ currentQuiz.listQuestions.length }}</span>
+                <span class="text-[2.125rem] p-[0.625rem]" [ngClass]="[quizTheme.numberBackgroudClass, quizTheme.numberTextClass]">{{ questionCounter }}</span>
+                <span class="text-base ml-2 relative bottom-1.5" [ngClass]="quizTheme.primaryTextClass">/{{ MAX_AMOUNT_QUESTIONS }}</span>
             </div>
             <div class="flex">
                 <img class="lg:h-24 lg:w-24 h-20 w-20 rounded-full sm:mr-3 mr-0" src="assets/img/Mili.svg" alt="Mili">
@@ -40,7 +40,7 @@
             </div>
             <app-radio-group-button
                 class="grid justify-center md:mt-10 mt-9 text-base gap-y-4"
-                [initialSelectedOption]="initialSelectedAnswer"
+                [userSelectedOption]="userSelectedAnswer"
                 [options]="currentQuestionAnswers"
                 [buttonStyle]="quizTheme.radioButtonColor"
                 [labelClass]="quizTheme.secondaryTextClass"
@@ -53,13 +53,13 @@
             <button 
                 class="py-[0.625rem] px-6 rounded sm:w-[9.5rem] w-24"
                 [ngClass]="[
-                    questionId + 1 > MIN_AMOUNT_QUESTIONS ? quizTheme.btnsBackgroudClass : '',
+                    isPrevQuestionAvailable ? quizTheme.btnsBackgroudClass : '',
                     quizTheme.btnsTextClass
                 ]"
-                [disabled]="questionId + 1 <= MIN_AMOUNT_QUESTIONS"
+                [disabled]="isNextQuestionAvailable"
                 (click)="switchPrevQuestion()"
             >
-                <ng-container *ngIf="questionId + 1 > MIN_AMOUNT_QUESTIONS">
+                <ng-container *ngIf="isPrevQuestionAvailable">
                     <span class="text-2xl leading-[0] relative right-2.5 top-0.5"><</span>
                     Prev <span class="sm:inline hidden">question</span>
                 </ng-container>
@@ -67,7 +67,7 @@
             <button 
                 class="py-[0.625rem] px-6 rounded sm:w-[9.5rem]"
                 [ngClass]="[quizTheme.btnsBackgroudClass, quizTheme.btnsTextClass]"
-                [disabled]="questionId + 1 > MAX_AMOUNT_QUESTIONS || (isUnselectedOption() && isLastQuestion())"
+                [disabled]="questionCounter > MAX_AMOUNT_QUESTIONS || (!allQuestionsCompleted() && isLastQuestion())"
                 (click)="switchNextQuestion()"
             >
                 <ng-container *ngIf="!isLastQuestion(); else completeStep">
