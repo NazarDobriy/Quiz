@@ -21,7 +21,7 @@
     <section class="md:mx-10 mx-5">
         <section class="flex justify-between items-center sm:pt-10 pt-6">
             <div>
-                <span class="text-[2.125rem] p-[0.625rem]" [ngClass]="[quizTheme.numberBackgroudClass, quizTheme.numberTextClass]">{{ questionCounter }}</span>
+                <span class="text-[2.125rem] p-[0.625rem]" [ngClass]="[quizTheme.numberBackgroudClass, quizTheme.numberTextClass]">{{ questionId + 1 }}</span>
                 <span class="text-base ml-2 relative bottom-1.5" [ngClass]="quizTheme.primaryTextClass">/{{ currentQuiz.listQuestions.length }}</span>
             </div>
             <div class="flex">
@@ -52,13 +52,13 @@
             <button 
                 class="py-[0.625rem] px-6 rounded sm:w-[9.5rem] w-24"
                 [ngClass]="[
-                    questionCounter > MIN_AMOUNT_QUESTIONS ? quizTheme.btnsBackgroudClass : '',
+                    questionId + 1 > MIN_AMOUNT_QUESTIONS ? quizTheme.btnsBackgroudClass : '',
                     quizTheme.btnsTextClass
                 ]"
-                [disabled]="questionCounter <= MIN_AMOUNT_QUESTIONS"
+                [disabled]="questionId + 1 <= MIN_AMOUNT_QUESTIONS"
                 (click)="switchPrevQuestion()"
             >
-                <ng-container *ngIf="questionCounter > MIN_AMOUNT_QUESTIONS">
+                <ng-container *ngIf="questionId + 1 > MIN_AMOUNT_QUESTIONS">
                     <span class="text-2xl leading-[0] relative right-2.5 top-0.5"><</span>
                     Prev <span class="sm:inline hidden">question</span>
                 </ng-container>
@@ -66,7 +66,7 @@
             <button 
                 class="py-[0.625rem] px-6 rounded sm:w-[9.5rem] cursor-pointer"
                 [ngClass]="[quizTheme.btnsBackgroudClass, quizTheme.btnsTextClass]"
-                [disabled]="questionCounter >= MAX_AMOUNT_QUESTIONS"
+                [disabled]="questionId + 1 >= MAX_AMOUNT_QUESTIONS"
                 (click)="switchNextQuestion()"
             >
                 <ng-container *ngIf="!isLastQuestion(); else completeStep">

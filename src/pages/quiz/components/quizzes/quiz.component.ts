@@ -33,8 +33,9 @@ export class QuizComponent implements OnInit {
   };
 
   public quizId: number = 0;
-  public questionCounter: number = 1;
+  public questionId: number = 0;
   public listAnswers: string[] = [];
+  public userAnswers: string[] = [];
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -45,7 +46,7 @@ export class QuizComponent implements OnInit {
   ngOnInit(): void {
     this.quizId = parseInt(this.activatedRoute.snapshot.params['id']);
     this.currentQuiz = this.quizService.getQuizById(this.quizId);
-    this.listAnswers = this.currentQuiz.listQuestions[this.questionCounter - 1].listAnswers;
+    this.listAnswers = this.currentQuiz.listQuestions[this.questionId].listAnswers;
     this.quizTheme = this.themeService.getThemeByText(this.currentQuiz.subtitle);
     
     if (this.lastWordIncludeQuiz()) {
@@ -53,14 +54,16 @@ export class QuizComponent implements OnInit {
       tempQuizSubtitle.pop();
       this.currentQuiz.subtitle = tempQuizSubtitle.join(' ');
     }
+
+    this.userAnswers = this.quizService.userAnswers;
   }
 
   get currentQuestionName(): string {
-    return this.currentQuiz?.listQuestions[this.questionCounter - 1]?.name || 'N/A';
+    return this.currentQuiz?.listQuestions[this.questionId]?.name || 'N/A';
   }
 
   get currentQuestionAnswers(): string[] {
-    return this.currentQuiz?.listQuestions[this.questionCounter - 1]?.listAnswers || [];
+    return this.currentQuiz?.listQuestions[this.questionId]?.listAnswers || [];
   }
 
   public lastWordIncludeQuiz(): boolean {
@@ -69,19 +72,24 @@ export class QuizComponent implements OnInit {
   }
 
   public switchNextQuestion(): void {
-    this.questionCounter++;
+    this.questionId++;
   }
 
   public switchPrevQuestion(): void {
-    this.questionCounter--;
+    this.questionId--;
   }
 
-  public onSelect(option: string) {
-    console.log(option);
+  public onSelect(option: string = ''): void {
+    this.userAnswers[this.questionId] = option;
   }
 
   public isLastQuestion(): boolean {
-    return this.questionCounter === this.MAX_AMOUNT_QUESTIONS;
+    return this.questionId + 1 === this.MAX_AMOUNT_QUESTIONS;
   }
 
+  public isUnselectedOption(): boolean {
+    return this.userAnswers.filter((ans: string) => {
+      return !ans;
+    }).length > 0;
+  }
 }

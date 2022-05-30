@@ -29,8 +29,11 @@ export interface IQuiz extends ISimpleQuiz {
   providedIn: 'root'
 })
 export class QuizService {
+  readonly MAX_AMOUNT_QUESTIONS: number = 10;
+
   public quizCards: IQuiz[] = QUIZCARDS;
   public cardThemes: ICardTheme[] = CARD_THEMES;
+  public userAnswers: string[] = Array(this.MAX_AMOUNT_QUESTIONS).fill('');
 
   constructor() { }
 
