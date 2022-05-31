@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { ThemeService } from './theme.service';
 
-describe('ColorService', () => {
+describe('ThemeService', () => {
   let service: ThemeService;
 
   beforeEach(() => {

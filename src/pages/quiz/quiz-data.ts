@@ -1,8 +1,9 @@
 import { IQuizTheme } from "./providers/theme.service";
-import { ICardTheme, IQuestion, IQuiz } from "./providers/quiz.service";
+import { IQuestion, IQuiz } from "./providers/quiz.service";
 
 export const QUIZ_THEMES: IQuizTheme[] = [
   {
+    titleTextClass: 'text-primary',
     primaryTextClass: 'text-bright',
     secondaryTextClass: 'text-primary',
     secondaryActiveTextClass: 'text-bright',
@@ -11,9 +12,12 @@ export const QUIZ_THEMES: IQuizTheme[] = [
     backgroudClass: 'bg-success',
     btnsBackgroudClass: 'bg-accent',
     btnsTextClass: 'text-bright',
-    radioButtonColor: 'accent-error'
+    radioButtonColor: 'accent-error',
+    iconSrc: 'assets/img/Mili.svg',
+    personName: 'Mili'
   },
   {
+    titleTextClass: 'text-primary',
     primaryTextClass: 'text-bright',
     secondaryTextClass: 'text-primary',
     secondaryActiveTextClass: 'text-bright',
@@ -22,9 +26,12 @@ export const QUIZ_THEMES: IQuizTheme[] = [
     backgroudClass: 'bg-error',
     btnsBackgroudClass: 'bg-accent',
     btnsTextClass: 'text-bright',
-    radioButtonColor: 'accent-accent'
+    radioButtonColor: 'accent-accent',
+    iconSrc: 'assets/img/Meg.svg',
+    personName: 'Meg'
   },
   {
+    titleTextClass: 'text-secondary',
     primaryTextClass: 'text-bright',
     secondaryTextClass: 'text-primary',
     secondaryActiveTextClass: 'text-bright',
@@ -33,10 +40,13 @@ export const QUIZ_THEMES: IQuizTheme[] = [
     backgroudClass: 'bg-accent',
     btnsBackgroudClass: 'bg-error',
     btnsTextClass: 'text-bright',
-    radioButtonColor: 'accent-error'
+    radioButtonColor: 'accent-error',
+    iconSrc: 'assets/img/Steven.svg',
+    personName: 'Steven'
   },
   {
-    primaryTextClass: 'text-bright',
+    titleTextClass: 'text-secondary',
+    primaryTextClass: 'text-primary',
     secondaryTextClass: 'text-primary',
     secondaryActiveTextClass: 'text-bright',
     numberTextClass: 'text-primary',
@@ -44,9 +54,12 @@ export const QUIZ_THEMES: IQuizTheme[] = [
     backgroudClass: 'bg-bright',
     btnsBackgroudClass: 'bg-error',
     btnsTextClass: 'text-bright',
-    radioButtonColor: 'accent-error'
+    radioButtonColor: 'accent-error',
+    iconSrc: 'assets/img/Mili.svg',
+    personName: 'Mili'
   },
   {
+    titleTextClass: 'text-secondary',
     primaryTextClass: 'text-primary',
     secondaryTextClass: 'text-primary',
     secondaryActiveTextClass: 'text-accent',
@@ -55,7 +68,9 @@ export const QUIZ_THEMES: IQuizTheme[] = [
     backgroudClass: 'bg-warning',
     btnsBackgroudClass: 'bg-accent',
     btnsTextClass: 'text-primary',
-    radioButtonColor: 'accent-error'
+    radioButtonColor: 'accent-error',
+    iconSrc: 'assets/img/Steven.svg',
+    personName: 'Steven'
   }
 ];
 
@@ -265,7 +280,7 @@ export const MATHEMATICAL_QUESTIONS: IQuestion[] = [
     }
 ];
 
-export const QUIZCARDS: IQuiz[] = [
+export const QUIZ_CARDS: IQuiz[] = [
     {
       id: 1,
       title: '10 Qusstions',
@@ -301,37 +316,4 @@ export const QUIZCARDS: IQuiz[] = [
       group: 'mathematical',
       questions: MATHEMATICAL_QUESTIONS
     }
-];
-
-export const CARD_THEMES: ICardTheme[] = [
-    {
-        titleClass: 'text-primary',
-        subtitleClass: 'text-bright',
-        iconSrc: 'assets/img/Mili.svg',
-        backgroudClass: 'bg-success'
-      },
-      {
-        titleClass: 'text-primary',
-        subtitleClass: 'text-bright',
-        iconSrc: 'assets/img/Meg.svg',
-        backgroudClass: 'bg-error'
-      },
-      {
-        titleClass: 'text-secondary',
-        subtitleClass: 'text-bright',
-        iconSrc: 'assets/img/Steven.svg',
-        backgroudClass: 'bg-accent'
-      },
-      {
-        titleClass: 'text-secondary',
-        subtitleClass: 'text-primary',
-        iconSrc: 'assets/img/Mili.svg',
-        backgroudClass: 'bg-bright'
-      },
-      {
-        titleClass: 'text-secondary',
-        subtitleClass: 'text-primary',
-        iconSrc: 'assets/img/Steven.svg',
-        backgroudClass: 'bg-warning'
-      }
 ];

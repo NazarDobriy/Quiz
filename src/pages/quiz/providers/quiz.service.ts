@@ -1,12 +1,6 @@
 import { Injectable } from '@angular/core';
-import { CARD_THEMES, QUIZCARDS } from '../quiz-data';
-
-export interface ICardTheme {
-  titleClass: string;
-  subtitleClass: string;
-  iconSrc: string;
-  backgroudClass: string;
-}
+import { QUIZ_CARDS, QUIZ_THEMES } from '../quiz-data';
+import { IQuizTheme } from './theme.service';
 
 export interface ISimpleQuiz {
   id: number;
@@ -29,8 +23,8 @@ export interface IQuiz extends ISimpleQuiz {
   providedIn: 'root'
 })
 export class QuizService {
-  public quizCards: IQuiz[] = QUIZCARDS;
-  public cardThemes: ICardTheme[] = CARD_THEMES;
+  public quizCards: IQuiz[] = QUIZ_CARDS;
+  public quizThemes: IQuizTheme[] = QUIZ_THEMES;
 
   public getQuizzes(): IQuiz[] {
     return this.quizCards;
