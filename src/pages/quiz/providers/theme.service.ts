@@ -11,6 +11,9 @@ export interface IQuizTheme {
   btnsBackgroudClass: string;
   btnsTextClass: string;
   radioButtonColor: string;
+  titleTextClass: string;
+  iconSrc: string;
+  personName: string;
 }
 
 @Injectable({

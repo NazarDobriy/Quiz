@@ -6,8 +6,8 @@
 </header>
 
 <section class="flex flex-wrap justify-center items-center mt-[70px] gap-x-5 m-auto max-w-[88rem]">
-  <ng-container *ngFor="let card of quizCards; let i = index">
-    <app-quiz-card [card]="card" [theme]="cardThemes[i % 5]"></app-quiz-card>
+  <ng-container *ngFor="let quiz of quizzes; let i = index">
+    <app-quiz-card [quiz]="quiz" [theme]="quizThemes[i % 5]"></app-quiz-card>
   </ng-container>
 </section>
 
