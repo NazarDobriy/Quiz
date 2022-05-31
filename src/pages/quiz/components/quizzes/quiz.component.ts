@@ -33,7 +33,7 @@ export class QuizComponent implements OnInit {
 
   public quizId: number = 0;
   public questionIndex: number = 0;
-  public userAnswers: Map<number, string> = new Map();
+  public userAnswers: string[] = [];
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -68,7 +68,7 @@ export class QuizComponent implements OnInit {
   }
 
   get userSelectedAnswer(): string | null {
-    return this.userAnswers.get(this.questionIndex) || null;
+    return this.userAnswers[this.questionIndex] || null;
   }
 
   get isLastQuestion(): boolean {
@@ -76,7 +76,7 @@ export class QuizComponent implements OnInit {
   }
 
   get allQuestionsCompleted(): boolean {
-    return this.userAnswers.size === this.currentQuiz.questions.length;
+    return this.userAnswers.length === this.currentQuiz.questions.length;
   }
 
   public handleNextQuestion(): void {
@@ -88,7 +88,7 @@ export class QuizComponent implements OnInit {
   }
 
   public onSelect(option: string): void {
-    this.userAnswers.set(this.questionIndex, option);
+    this.userAnswers[this.questionIndex] = option;
   }
 
   public finishQuiz(): void {
