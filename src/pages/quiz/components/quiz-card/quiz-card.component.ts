@@ -1,13 +1,13 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { IQuiz } from '../../providers/quiz.service';
-import { IQuizTheme } from '../../providers/theme.service';
+import { IQuizTheme, ThemeService } from '../../providers/theme.service';
 
 @Component({
   selector: 'app-quiz-card',
   templateUrl: './quiz-card.component.html',
   styleUrls: ['./quiz-card.component.scss']
 })
-export class QuizCardComponent {
+export class QuizCardComponent implements OnInit {
   @Input() quiz: IQuiz = {
     group: '',
     questions: [],
@@ -29,4 +29,11 @@ export class QuizCardComponent {
     iconSrc: '',
     personName: ''
   };
+
+  constructor(private themeService: ThemeService) {}
+
+  ngOnInit(): void {
+    this.theme = this.themeService.getThemeByText(this.quiz.subtitle);
+  }
+
 }
