@@ -10,10 +10,9 @@ import { IQuiz, QuizService } from '../../providers/quiz.service';
 })
 export class QuizComponent implements OnInit {
   readonly MIN_AMOUNT_QUESTIONS: number = 1;
-  readonly MAX_AMOUNT_QUESTIONS: number = 10;
 
   public currentQuiz: IQuiz = {
-    description: '',
+    group: '',
     questions: [],
     id: 0,
     title: '',
@@ -57,7 +56,7 @@ export class QuizComponent implements OnInit {
   }
 
   get isNextQuestionAvailable(): boolean {
-    return this.questionCounter <= this.MIN_AMOUNT_QUESTIONS;
+    return this.questionCounter > this.currentQuiz.questions.length;
   }
 
   get currentQuestionName(): string {
@@ -72,11 +71,15 @@ export class QuizComponent implements OnInit {
     return this.userAnswers.get(this.questionIndex) || null;
   }
 
+  get isLastQuestion(): boolean {
+    return this.questionIndex + 1 === this.currentQuiz.questions.length;
+  }
+
+  get allQuestionsCompleted(): boolean {
+    return this.userAnswers.size === this.currentQuiz.questions.length;
+  }
+
   public handleNextQuestion(): void {
-    if (this.isLastQuestion()) {
-      console.log(this.quizService.calcQuizResult(this.quizId, this.userAnswers));
-      return;
-    }
     this.questionIndex++;
   }
 
@@ -88,12 +91,8 @@ export class QuizComponent implements OnInit {
     this.userAnswers.set(this.questionIndex, option);
   }
 
-  public isLastQuestion(): boolean {
-    return this.questionIndex + 1 === this.MAX_AMOUNT_QUESTIONS;
-  }
-
-  public allQuestionsCompleted(): boolean {
-    return this.userAnswers.size === this.currentQuiz.questions.length;
+  public finishQuiz(): void {
+    console.log(this.quizService.calcQuizResult(this.quizId, this.userAnswers));
   }
 
 }

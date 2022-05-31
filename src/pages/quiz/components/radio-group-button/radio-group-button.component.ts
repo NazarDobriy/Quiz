@@ -4,8 +4,8 @@ import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange
   selector: 'app-radio-group-button',
   templateUrl: './radio-group-button.component.html'
 })
-export class RadioGroupButtonComponent implements OnInit, OnChanges {
-  @Input() userSelectedOption: string | null = null;
+export class RadioGroupButtonComponent {
+  @Input() selectedOption: string | null = null;
   @Input() options: string[] = [];
   @Input() buttonStyle: string = '';
   @Input() labelClass: string = '';
@@ -13,17 +13,7 @@ export class RadioGroupButtonComponent implements OnInit, OnChanges {
 
   @Output() onSelect = new EventEmitter<string>();
 
-  public selectedOption: string = '';
   public inputName: string = 'question';
-
-  ngOnInit(): void {
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['userSelectedOption']) {
-      this.selectedOption = changes['userSelectedOption'].currentValue;
-    }
-  }
 
   public selectOption(option: string): void {
     this.selectedOption = option;

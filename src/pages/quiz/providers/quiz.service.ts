@@ -21,7 +21,7 @@ export interface IQuestion {
 }
 
 export interface IQuiz extends ISimpleQuiz {
-  description: string;
+  group: string;
   questions: IQuestion[];
 }
 
@@ -31,8 +31,6 @@ export interface IQuiz extends ISimpleQuiz {
 export class QuizService {
   public quizCards: IQuiz[] = QUIZCARDS;
   public cardThemes: ICardTheme[] = CARD_THEMES;
-
-  constructor() { }
 
   public getQuizzes(): IQuiz[] {
     return this.quizCards;
@@ -49,7 +47,7 @@ export class QuizService {
   public calcQuizResult(id: number, userAnswers: Map<number, string>): number {
     const correctAnswers: string[] = this.getCorrectAnswers(id);
     let amountCorrectAnswers: number = 0;
-    for (let i = 0; i < this.getCorrectAnswers(id).length; i++) {
+    for (let i = 0; i < correctAnswers.length; i++) {
       if (userAnswers.has(i)) {
         if (userAnswers.get(i) === correctAnswers[i]) {
           amountCorrectAnswers++;
