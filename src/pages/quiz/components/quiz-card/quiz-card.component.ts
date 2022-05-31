@@ -8,27 +8,9 @@ import { IQuizTheme, ThemeService } from '../../providers/theme.service';
   styleUrls: ['./quiz-card.component.scss']
 })
 export class QuizCardComponent implements OnInit {
-  @Input() quiz: IQuiz = {
-    group: '',
-    questions: [],
-    id: 0,
-    title: '',
-    subtitle: ''
-  };
-  @Input() theme: IQuizTheme = {
-    primaryTextClass: '',
-    secondaryTextClass: '',
-    secondaryActiveTextClass: '',
-    numberTextClass: '',
-    numberBackgroudClass: '',
-    backgroudClass: '',
-    btnsBackgroudClass: '',
-    btnsTextClass: '',
-    radioButtonColor: '',
-    titleTextClass: '',
-    iconSrc: '',
-    personName: ''
-  };
+  @Input() quiz!: IQuiz;
+  
+  public theme!: IQuizTheme;
 
   constructor(private themeService: ThemeService) {}
 
