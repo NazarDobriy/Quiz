@@ -62,7 +62,7 @@ export const QUIZ_THEMES: IQuizTheme[] = [
 export const HISTORICAL_QUESTIONS: IQuestion[] = [
     {
       name: 'When the city of Lviv received the Magdeburg Law?',
-      listAnswers: [
+      answers: [
         '1256',
         '1356',
         '1288',
@@ -72,7 +72,7 @@ export const HISTORICAL_QUESTIONS: IQuestion[] = [
     },
     {
       name: 'When hetman Petro Sagaidachny made a military campaign to the city of Kafa?',
-      listAnswers: [
+      answers: [
         '1607',
         '1588',
         '1616',
@@ -82,7 +82,7 @@ export const HISTORICAL_QUESTIONS: IQuestion[] = [
     },
     {
       name: 'Who led the national leberation war against the Commonwealth?',
-      listAnswers: [
+      answers: [
         'Bogdan Khmelnitsky',
         'Petro Sagaidachny',
         'Ivan Mazapa',
@@ -92,7 +92,7 @@ export const HISTORICAL_QUESTIONS: IQuestion[] = [
     },
     {
       name: 'When the national leberation war against the Commonwealth began?',
-      listAnswers: [
+      answers: [
         '1635',
         '1650',
         '1648',
@@ -102,7 +102,7 @@ export const HISTORICAL_QUESTIONS: IQuestion[] = [
     },
     {
       name: 'When World War I began?',
-      listAnswers: [
+      answers: [
         '1915',
         '1938',
         '1939',
@@ -112,7 +112,7 @@ export const HISTORICAL_QUESTIONS: IQuestion[] = [
     },
     {
       name: 'Who headed Central Council of Ukraine?',
-      listAnswers: [
+      answers: [
         'Pavlo Skoropadsky',
         'Mykola Hrushevsky',
         'Ivan Franko',
@@ -122,7 +122,7 @@ export const HISTORICAL_QUESTIONS: IQuestion[] = [
     },
     {
       name: 'When the industrialization started?',
-      listAnswers: [
+      answers: [
         '1930',
         '1925',
         '1940',
@@ -132,7 +132,7 @@ export const HISTORICAL_QUESTIONS: IQuestion[] = [
     },
     {
       name: 'When independence was proclaimed in Ukraine?',
-      listAnswers: [
+      answers: [
         '1991',
         '1990',
         '1940',
@@ -142,7 +142,7 @@ export const HISTORICAL_QUESTIONS: IQuestion[] = [
     },
     {
       name: 'Who became the first president of Ukraine?',
-      listAnswers: [
+      answers: [
         'Leonid Kravchuk',
         'Leonid Kuchma',
         'Petro Poroshenko',
@@ -152,7 +152,7 @@ export const HISTORICAL_QUESTIONS: IQuestion[] = [
     },
     {
       name: 'When the Budapest Memorandum was signed?',
-      listAnswers: [
+      answers: [
         '1990',
         '2000',
         '1994',
@@ -165,7 +165,7 @@ export const HISTORICAL_QUESTIONS: IQuestion[] = [
 export const MATHEMATICAL_QUESTIONS: IQuestion[] = [
     {
       name: 'Simplify the expression 0.8b^9 : 8b^3, where b not = 0',
-      listAnswers: [
+      answers: [
         '0.1b^6',
         '10b^6',
         '0.1b^3',
@@ -175,7 +175,7 @@ export const MATHEMATICAL_QUESTIONS: IQuestion[] = [
     },
     {
       name: 'Solve the equation: (x + 1) * (2x - 3) = 0',
-      listAnswers: [
+      answers: [
         '-3; 1',
         '-1.5; 1',
         '-1; 3',
@@ -185,7 +185,7 @@ export const MATHEMATICAL_QUESTIONS: IQuestion[] = [
     },
     {
       name: 'Which of the following numbers is the solution of the inequality |x| > 3?',
-      listAnswers: [
+      answers: [
         '3',
         '1',
         '-8',
@@ -195,7 +195,7 @@ export const MATHEMATICAL_QUESTIONS: IQuestion[] = [
     },
     {
       name: 'Simplify the expression (1 - sin^2(a) * tg^2(a))',
-      listAnswers: [
+      answers: [
         'sin(2a)',
         'cos(2a)',
         'sin^2(a)',
@@ -205,7 +205,7 @@ export const MATHEMATICAL_QUESTIONS: IQuestion[] = [
     },
     {
       name: 'Reduce the fraction (a^2 - b^2) / (a^2 - a * b)',
-      listAnswers: [
+      answers: [
         '(a + b) / a',
         '(a - b) / a',
         'b / a',
@@ -215,7 +215,7 @@ export const MATHEMATICAL_QUESTIONS: IQuestion[] = [
     },
     {
       name: 'Which of the following intervals belongs to the number log2(1/3)',
-      listAnswers: [
+      answers: [
         '(-inf; -3)',
         '(-3; -1)',
         '(-1; 1)',
@@ -225,7 +225,7 @@ export const MATHEMATICAL_QUESTIONS: IQuestion[] = [
     },
     {
       name: 'Which of the following intervals belongs to the root of the equation: 2^(x + 3) - 3 * 2^x = 10 * sqrt(2)?',
-      listAnswers: [
+      answers: [
         '(-inf; 0)',
         '[0; 5)',
         '[0.5; 1)',
@@ -235,7 +235,7 @@ export const MATHEMATICAL_QUESTIONS: IQuestion[] = [
     },
     {
       name: 'Which is derived from the number?',
-      listAnswers: [
+      answers: [
         '0',
         '1',
         'inf',
@@ -245,7 +245,7 @@ export const MATHEMATICAL_QUESTIONS: IQuestion[] = [
     },
     {
       name: 'Which is derived from the sin(a)?',
-      listAnswers: [
+      answers: [
         '0',
         '1',
         'cos(x)',
@@ -255,7 +255,7 @@ export const MATHEMATICAL_QUESTIONS: IQuestion[] = [
     },
     {
       name: 'Which is derived from the cos(a)?',
-      listAnswers: [
+      answers: [
         '0',
         '1',
         '-cos(x)',
@@ -269,37 +269,37 @@ export const QUIZCARDS: IQuiz[] = [
     {
       id: 1,
       title: '10 Qusstions',
-      subtitle: 'Emoji Bands Quiz!',
-      name: 'historical',
-      listQuestions: HISTORICAL_QUESTIONS
+      subtitle: 'Emoji Bands',
+      group: 'historical',
+      questions: HISTORICAL_QUESTIONS
     },
     {
       id: 2,
       title: '10 Qusstions',
       subtitle: 'Easter Emoji Quiz: Can You Get 100 Percent?',
-      name: 'mathematical',
-      listQuestions: MATHEMATICAL_QUESTIONS
+      group: 'mathematical',
+      questions: MATHEMATICAL_QUESTIONS
     },
     {
       id: 3,
       title: '10 Qusstions',
-      subtitle: 'London Underground & Tube Station Emoji Quiz',
-      name: 'historical',
-      listQuestions: HISTORICAL_QUESTIONS
+      subtitle: 'London Underground & Tube Station Emoji',
+      group: 'historical',
+      questions: HISTORICAL_QUESTIONS
     },
     {
       id: 4,
       title: '10 Qusstions',
       subtitle: 'Trivia Quiz: Guess The WWE Star From The Emoji!',
-      name: 'historical',
-      listQuestions: HISTORICAL_QUESTIONS
+      group: 'historical',
+      questions: HISTORICAL_QUESTIONS
     },
     {
       id: 5,
       title: '10 Qusstions',
-      subtitle: 'What Emoji Am I? Quiz',
-      name: 'mathematical',
-      listQuestions: MATHEMATICAL_QUESTIONS
+      subtitle: 'What Emoji Am I?',
+      group: 'mathematical',
+      questions: MATHEMATICAL_QUESTIONS
     }
 ];
 

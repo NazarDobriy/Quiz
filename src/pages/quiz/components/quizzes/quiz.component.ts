@@ -10,11 +10,10 @@ import { IQuiz, QuizService } from '../../providers/quiz.service';
 })
 export class QuizComponent implements OnInit {
   readonly MIN_AMOUNT_QUESTIONS: number = 1;
-  readonly MAX_AMOUNT_QUESTIONS: number = 10;
 
   public currentQuiz: IQuiz = {
-    name: '',
-    listQuestions: [],
+    group: '',
+    questions: [],
     id: 0,
     title: '',
     subtitle: ''
@@ -33,8 +32,8 @@ export class QuizComponent implements OnInit {
   };
 
   public quizId: number = 0;
-  public questionCounter: number = 1;
-  public listAnswers: string[] = [];
+  public questionIndex: number = 0;
+  public userAnswers: string[] = [];
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -45,43 +44,55 @@ export class QuizComponent implements OnInit {
   ngOnInit(): void {
     this.quizId = parseInt(this.activatedRoute.snapshot.params['id']);
     this.currentQuiz = this.quizService.getQuizById(this.quizId);
-    this.listAnswers = this.currentQuiz.listQuestions[this.questionCounter - 1].listAnswers;
     this.quizTheme = this.themeService.getThemeByText(this.currentQuiz.subtitle);
-    
-    if (this.lastWordIncludeQuiz()) {
-      const tempQuizSubtitle: string[] = this.currentQuiz.subtitle.split(' ');
-      tempQuizSubtitle.pop();
-      this.currentQuiz.subtitle = tempQuizSubtitle.join(' ');
-    }
+  }
+
+  get questionCounter(): number {
+    return this.questionIndex + 1;
+  }
+
+  get isPrevQuestionAvailable(): boolean {
+    return this.questionCounter > this.MIN_AMOUNT_QUESTIONS;
+  }
+
+  get isNextQuestionAvailable(): boolean {
+    return this.questionCounter > this.currentQuiz.questions.length;
   }
 
   get currentQuestionName(): string {
-    return this.currentQuiz?.listQuestions[this.questionCounter - 1]?.name || 'N/A';
+    return this.currentQuiz?.questions[this.questionIndex]?.name || 'N/A';
   }
 
   get currentQuestionAnswers(): string[] {
-    return this.currentQuiz?.listQuestions[this.questionCounter - 1]?.listAnswers || [];
+    return this.currentQuiz?.questions[this.questionIndex]?.answers || [];
   }
 
-  public lastWordIncludeQuiz(): boolean {
-    const subtitleArray: string[] = this.currentQuiz.subtitle.split(' ');
-    return subtitleArray[subtitleArray.length - 1].toLocaleLowerCase().includes('quiz');
+  get selectedAnswer(): string | null {
+    return this.userAnswers[this.questionIndex] || null;
   }
 
-  public switchNextQuestion(): void {
-    this.questionCounter++;
+  get isLastQuestion(): boolean {
+    return this.questionIndex + 1 === this.currentQuiz.questions.length;
   }
 
-  public switchPrevQuestion(): void {
-    this.questionCounter--;
+  get allQuestionsCompleted(): boolean {
+    return this.userAnswers.length === this.currentQuiz.questions.length;
   }
 
-  public onSelect(option: string) {
-    console.log(option);
+  public handleNextQuestion(): void {
+    this.questionIndex++;
   }
 
-  public isLastQuestion(): boolean {
-    return this.questionCounter === this.MAX_AMOUNT_QUESTIONS;
+  public handlePrevQuestion(): void {
+    this.questionIndex--;
+  }
+
+  public onSelect(option: string): void {
+    this.userAnswers[this.questionIndex] = option;
+  }
+
+  public finishQuiz(): void {
+    console.log(this.quizService.calcQuizResult(this.quizId, this.userAnswers));
   }
 
 }
