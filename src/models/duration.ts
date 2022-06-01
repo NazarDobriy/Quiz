@@ -16,30 +16,30 @@ export class Duration {
         return this.end.getTime() - this.start.getTime();
     }
 
-    get daysDuration(): number {
+    get days(): number {
         return Math.floor(this.duration / 1000 / 60 / 60 / 24) % 365;
     }
 
-    get hoursDuration(): number {
+    get hours(): number {
         return Math.floor(this.duration / 1000 / 60 / 60) % 24;
     }
 
-    get minutesDuration(): number {
+    get minutes(): number {
         return Math.floor(this.duration / 1000 / 60) % 60;
     }
 
-    get secondsDuration(): number {
+    get seconds(): number {
         return Math.floor(this.duration / 1000) % 60;
     }
 
-    get stringDuration(): string {
+    public toString(): string {
         let durationString: string = "";
         const durationCollection: Map<string, number> = new Map();
 
-        durationCollection.set('days', this.daysDuration);
-        durationCollection.set('hours', this.hoursDuration);
-        durationCollection.set('min', this.minutesDuration);
-        durationCollection.set('sec', this.secondsDuration);
+        durationCollection.set('days', this.days);
+        durationCollection.set('hours', this.hours);
+        durationCollection.set('min', this.minutes);
+        durationCollection.set('sec', this.seconds);
 
         for (const [key, value] of durationCollection.entries()) {
             durationString += `${value ? `${value} ${key} ` : ''}`;
