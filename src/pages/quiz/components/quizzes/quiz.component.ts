@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ThemeService, IQuizTheme } from '../../providers/theme.service';
 import { IQuiz, QuizService } from '../../providers/quiz.service';
+import { TimeService } from '../../providers/time.service';
 
 @Component({
   selector: 'app-quiz',
@@ -37,14 +38,17 @@ export class QuizComponent implements OnInit {
   public quizId: number = 0;
   public questionIndex: number = 0;
   public userAnswers: string[] = [];
+  public timeStart!: Date;
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private quizService: QuizService,
-    private themeService: ThemeService
+    private themeService: ThemeService,
+    private timeService: TimeService
   ) { }
 
   ngOnInit(): void {
+    this.timeStart = new Date();
     this.quizId = parseInt(this.activatedRoute.snapshot.params['id']);
     this.currentQuiz = this.quizService.getQuizById(this.quizId);
     this.quizTheme = this.themeService.getThemeByText(this.currentQuiz.subtitle);
@@ -95,6 +99,7 @@ export class QuizComponent implements OnInit {
   }
 
   public finishQuiz(): void {
+    this.timeService.countTimeSpent(this.timeStart, new Date());
     console.log(this.quizService.calcQuizResult(this.quizId, this.userAnswers));
   }
 
