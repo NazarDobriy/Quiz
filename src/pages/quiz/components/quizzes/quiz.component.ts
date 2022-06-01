@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ThemeService, IQuizTheme } from '../../providers/theme.service';
 import { IQuiz, QuizService } from '../../providers/quiz.service';
-import { TimeService } from '../../providers/time.service';
+import { Duration } from 'src/models/duration';
 
 @Component({
   selector: 'app-quiz',
@@ -43,8 +43,7 @@ export class QuizComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private quizService: QuizService,
-    private themeService: ThemeService,
-    private timeService: TimeService
+    private themeService: ThemeService
   ) { }
 
   ngOnInit(): void {
@@ -99,7 +98,8 @@ export class QuizComponent implements OnInit {
   }
 
   public finishQuiz(): void {
-    this.timeService.countTimeSpent(this.timeStart, new Date());
+    let duration: Duration = new Duration(this.timeStart, new Date());
+    console.log(duration.stringDuration);
     console.log(this.quizService.calcQuizResult(this.quizId, this.userAnswers));
   }
 
