@@ -1,17 +1,17 @@
-<section class="text-center md:w-[28rem] w-96">
+<section class="text-center sm:w-96 md:w-[28rem] w-64">
     <h2 class="md:text-3xl text-2xl text-primary font-semibold mb-4">Leave quiz</h2>
     <main class="px-4 mb-4">
         Are you sure you want to exit and cancel the quiz? Your answers will not be saved.
     </main>
     <div>
         <button
-            class="border-2 py-3 md:w-36 w-32 mr-2 text-accent bg-bright rounded"
+            class="sm:inline-block block border-2 py-3 md:w-36 w-32 sm:mr-2 m-auto text-accent bg-bright rounded"
             mat-dialog-close
         >
             Back to quiz
         </button>
         <button
-            class="py-[14px] md:w-36 w-32 ml-2 text-bright bg-accent rounded"
+            class="sm:inline-block block py-[14px] md:w-36 w-32 sm:ml-2 m-auto mt-4 text-bright bg-accent rounded"
             mat-dialog-close
             (click)="redirectionToMainPage()"
         >
