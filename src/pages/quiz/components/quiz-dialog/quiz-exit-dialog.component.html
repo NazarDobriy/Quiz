@@ -12,8 +12,7 @@
         </button>
         <button
             class="sm:inline-block block py-[14px] md:w-36 w-32 sm:ml-2 m-auto mt-4 text-bright bg-accent rounded"
-            mat-dialog-close
-            (click)="redirectionToMainPage()"
+            [mat-dialog-close]="true"
         >
             Go on main page
         </button>

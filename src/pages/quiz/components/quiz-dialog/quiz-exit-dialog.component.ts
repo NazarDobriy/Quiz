@@ -19,8 +19,4 @@ export class QuizExitDialogComponent implements OnInit {
     this.title = this.data;
   }
 
-  public redirectionToMainPage(): void {
-    this.router.navigate(['/']);
-  }
-
 }

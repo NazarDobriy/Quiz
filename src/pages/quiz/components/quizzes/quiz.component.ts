@@ -2,9 +2,10 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ThemeService, IQuizTheme } from '../../providers/theme.service';
 import { IQuiz, QuizService } from '../../providers/quiz.service';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { QuizExitDialogComponent } from '../quiz-dialog/quiz-exit-dialog.component';
 import { Duration } from 'src/models/duration';
+import { Observable, of } from 'rxjs';
 
 enum DialogExit {
   Leave = "Leave",
@@ -47,10 +48,12 @@ export class QuizComponent implements OnInit {
   public userAnswers: string[] = [];
   public timeStart!: Date;
   public screenWidth: number = window.innerWidth;
+  public screenExit: string = DialogExit.Leave;
 
   @HostListener('window:resize')
   public onResize(): void {
     this.screenWidth = window.innerWidth;
+    this.screenExit = this.screenWidth < 640 ?  DialogExit.Cancel : DialogExit.Leave;
   }
 
   constructor(
@@ -116,11 +119,14 @@ export class QuizComponent implements OnInit {
     this.quizService.finishQuiz(this.quizId, this.userAnswers, duration);
   }
 
-  public openExitDialog(): void {
-    const exit: string = this.screenWidth < 640 ?  DialogExit.Cancel : DialogExit.Leave;
-    this.dialog.open(QuizExitDialogComponent, {
-      data: exit
+  private openExitDialog(): MatDialogRef<QuizExitDialogComponent> {
+    return this.dialog.open(QuizExitDialogComponent, {
+      data: this.screenExit
     });
+  }
+
+  canDeactivate(): Observable<boolean> {
+    return this.openExitDialog().afterClosed();
   }
 
 }

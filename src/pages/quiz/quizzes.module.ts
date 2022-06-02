@@ -9,10 +9,16 @@ import { RadioButtonComponent } from './components/radio-button/radio-button.com
 import { RadioGroupButtonComponent } from './components/radio-group-button/radio-group-button.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { QuizExitDialogComponent } from './components/quiz-dialog/quiz-exit-dialog.component';
+import { CanDeactivateGuard } from './providers/can-deactivate-guard.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
   { path: '', component: QuizzesComponent },
-  { path: 'quiz/:id', component: QuizComponent }
+  { 
+    path: 'quiz/:id',
+    canDeactivate: [CanDeactivateGuard],
+    component: QuizComponent
+  }
 ];
 
 
@@ -31,7 +37,8 @@ const routes: Routes = [
     RouterModule.forChild(routes)
   ],
   providers: [
-    QuizService
+    QuizService,
+    CanDeactivateGuard
   ]
 })
 export class QuizzesModule { }
