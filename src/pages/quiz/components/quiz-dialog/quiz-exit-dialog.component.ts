@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { IDialogExit } from '../../providers/quiz.service';
+import { IDialogExit } from '../../providers/dialog.service';
 
 @Component({
   selector: 'app-quiz-exit-dialog',

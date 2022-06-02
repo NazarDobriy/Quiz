@@ -1,5 +1,6 @@
 import { IQuizTheme } from "./providers/theme.service";
-import { IDialogExit, IQuestion, IQuiz } from "./providers/quiz.service";
+import { IQuestion, IQuiz } from "./providers/quiz.service";
+import { IDialogExit } from "./providers/dialog.service";
 
 export const DIALOG_EXIT_DATA: IDialogExit = {
   title: "Leave",
