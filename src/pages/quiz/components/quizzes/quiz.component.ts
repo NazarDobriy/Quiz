@@ -111,7 +111,7 @@ export class QuizComponent implements OnInit {
   }
 
   canDeactivate(): Observable<boolean> {
-    return this.dialogService.openExitDialog(window.innerWidth).afterClosed();
+    return this.dialogService.openExitDialog().afterClosed();
   }
 
 }

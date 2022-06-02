@@ -1,30 +1,28 @@
 import { Injectable } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { QuizExitDialogComponent } from '../components/quiz-dialog/quiz-exit-dialog.component';
-import { DIALOG_EXIT_DATA } from '../quiz-data';
 
-export interface IDialogExit {
+export interface IConfirmDialog {
   title: string;
   message: string;
-  textBack: string;
-  textMainPage: string;
-}
-
-enum DialogExit {
-  Leave = "Leave",
-  Cancel = "Cancel"
+  dismissText: string;
+  confirmText: string;
 }
 
 @Injectable({
   providedIn: 'root'
 })
 export class DialogService {
-  public dialogExitData: IDialogExit = DIALOG_EXIT_DATA;
+  public dialogExitData: IConfirmDialog = {
+    title: "Leave",
+    message: "Are you sure you want to exit and cancel the quiz? Your answers will not be saved.",
+    dismissText: "Back to quiz",
+    confirmText: "Go on main page"
+  };
 
   constructor(private dialog: MatDialog) { }
 
-  public openExitDialog(screenWidth: number): MatDialogRef<QuizExitDialogComponent> {
-    this.dialogExitData.title = screenWidth < 640 ? DialogExit.Cancel : DialogExit.Leave;
+  public openExitDialog(): MatDialogRef<QuizExitDialogComponent> {
     return this.dialog.open(QuizExitDialogComponent, { data: this.dialogExitData });
   }
 

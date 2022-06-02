@@ -1,13 +1,5 @@
 import { IQuizTheme } from "./providers/theme.service";
 import { IQuestion, IQuiz } from "./providers/quiz.service";
-import { IDialogExit } from "./providers/dialog.service";
-
-export const DIALOG_EXIT_DATA: IDialogExit = {
-  title: "Leave",
-  message: "Are you sure you want to exit and cancel the quiz? Your answers will not be saved.",
-  textBack: "Back to quiz",
-  textMainPage: "Go on main page"
-};
 
 export const QUIZ_THEMES: IQuizTheme[] = [
   {
