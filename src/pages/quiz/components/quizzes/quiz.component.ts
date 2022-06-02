@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ThemeService, IQuizTheme } from '../../providers/theme.service';
 import { IQuiz, QuizService } from '../../providers/quiz.service';
+import { MatDialog } from '@angular/material/dialog';
+import { QuizExitDialogComponent } from '../quiz-dialog/quiz-exit-dialog.component';
 
 @Component({
   selector: 'app-quiz',
@@ -41,7 +43,8 @@ export class QuizComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private quizService: QuizService,
-    private themeService: ThemeService
+    private themeService: ThemeService,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -96,6 +99,10 @@ export class QuizComponent implements OnInit {
 
   public finishQuiz(): void {
     console.log(this.quizService.calcQuizResult(this.quizId, this.userAnswers));
+  }
+
+  public openExitDialog(): void {
+    this.dialog.open(QuizExitDialogComponent);
   }
 
 }
