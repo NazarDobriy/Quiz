@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Duration } from 'src/models/duration';
-import { QUIZ_CARDS, QUIZ_THEMES } from '../quiz-data';
+import { DIALOG_EXIT_DATA, QUIZ_CARDS, QUIZ_THEMES } from '../quiz-data';
 import { IQuizTheme } from './theme.service';
 
 export interface ISimpleQuiz {
@@ -20,6 +20,13 @@ export interface IQuiz extends ISimpleQuiz {
   questions: IQuestion[];
 }
 
+export interface IDialogExit {
+  title: string;
+  message: string;
+  textBack: string;
+  textMainPage: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -28,6 +35,11 @@ export class QuizService {
   public quizThemes: IQuizTheme[] = QUIZ_THEMES;
   public duration: string = '';
   public correctAnswersAmount: number = 0;
+  public dialogExitData: IDialogExit = DIALOG_EXIT_DATA;
+
+  public getDialogExitData(): IDialogExit {
+    return this.dialogExitData;
+  }
 
   public getQuizzes(): IQuiz[] {
     return this.quizCards;
