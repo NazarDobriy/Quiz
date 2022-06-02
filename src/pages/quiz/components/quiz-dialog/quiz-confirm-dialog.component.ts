@@ -3,10 +3,10 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { IConfirmDialog } from '../../providers/dialog.service';
 
 @Component({
-  selector: 'app-quiz-exit-dialog',
-  templateUrl: './quiz-exit-dialog.component.html'
+  selector: 'app-quiz-confirm-dialog',
+  templateUrl: './quiz-confirm-dialog.component.html'
 })
-export class QuizExitDialogComponent {
+export class QuizConfirmDialogComponent {
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: IConfirmDialog) {}
 

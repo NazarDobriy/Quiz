@@ -8,7 +8,7 @@ import { QuizService } from './providers/quiz.service';
 import { RadioButtonComponent } from './components/radio-button/radio-button.component';
 import { RadioGroupButtonComponent } from './components/radio-group-button/radio-group-button.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import { QuizExitDialogComponent } from './components/quiz-dialog/quiz-exit-dialog.component';
+import { QuizConfirmDialogComponent } from './components/quiz-dialog/quiz-confirm-dialog.component';
 import { DialogService } from './providers/dialog.service';
 
 const routes: Routes = [
@@ -28,7 +28,7 @@ const routes: Routes = [
     QuizComponent,
     RadioButtonComponent,
     RadioGroupButtonComponent,
-    QuizExitDialogComponent
+    QuizConfirmDialogComponent
   ],
   imports: [
     CommonModule,

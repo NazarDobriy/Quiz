@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { QuizExitDialogComponent } from '../components/quiz-dialog/quiz-exit-dialog.component';
+import { QuizConfirmDialogComponent } from '../components/quiz-dialog/quiz-confirm-dialog.component';
 
 export interface IConfirmDialog {
   title: string;
@@ -22,8 +22,8 @@ export class DialogService {
 
   constructor(private dialog: MatDialog) { }
 
-  public openExitDialog(): MatDialogRef<QuizExitDialogComponent> {
-    return this.dialog.open(QuizExitDialogComponent, { data: this.dialogExitData });
+  public openExitDialog(): MatDialogRef<QuizConfirmDialogComponent> {
+    return this.dialog.open(QuizConfirmDialogComponent, { data: this.dialogExitData });
   }
 
 }
