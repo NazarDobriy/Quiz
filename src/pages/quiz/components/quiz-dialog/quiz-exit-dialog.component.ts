@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-quiz-exit-dialog',
   templateUrl: './quiz-exit-dialog.component.html',
   styleUrls: ['./quiz-exit-dialog.component.scss']
 })
-export class QuizExitDialogComponent implements OnInit {
+export class QuizExitDialogComponent {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
-  ngOnInit(): void {
+  public redirectionToMainPage(): void {
+    this.router.navigate(['/']);
   }
 
 }
