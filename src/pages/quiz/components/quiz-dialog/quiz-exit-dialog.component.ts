@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 
 @Component({
@@ -6,9 +7,17 @@ import { Router } from '@angular/router';
   templateUrl: './quiz-exit-dialog.component.html',
   styleUrls: ['./quiz-exit-dialog.component.scss']
 })
-export class QuizExitDialogComponent {
+export class QuizExitDialogComponent implements OnInit {
+  public title: string = '';
 
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router,
+    @Inject(MAT_DIALOG_DATA) private data: string
+  ) {}
+
+  ngOnInit(): void {
+    this.title = this.data;
+  }
 
   public redirectionToMainPage(): void {
     this.router.navigate(['/']);
