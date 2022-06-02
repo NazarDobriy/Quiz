@@ -4,6 +4,7 @@ import { ThemeService, IQuizTheme } from '../../providers/theme.service';
 import { IQuiz, QuizService } from '../../providers/quiz.service';
 import { MatDialog } from '@angular/material/dialog';
 import { QuizExitDialogComponent } from '../quiz-dialog/quiz-exit-dialog.component';
+import { Duration } from 'src/models/duration';
 
 @Component({
   selector: 'app-quiz',
@@ -39,6 +40,7 @@ export class QuizComponent implements OnInit {
   public quizId: number = 0;
   public questionIndex: number = 0;
   public userAnswers: string[] = [];
+  public timeStart!: Date;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -48,6 +50,7 @@ export class QuizComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.timeStart = new Date();
     this.quizId = parseInt(this.activatedRoute.snapshot.params['id']);
     this.currentQuiz = this.quizService.getQuizById(this.quizId);
     this.quizTheme = this.themeService.getThemeByText(this.currentQuiz.subtitle);
@@ -98,7 +101,8 @@ export class QuizComponent implements OnInit {
   }
 
   public finishQuiz(): void {
-    console.log(this.quizService.calcQuizResult(this.quizId, this.userAnswers));
+    const duration: Duration = new Duration(this.timeStart, new Date());
+    this.quizService.finishQuiz(this.quizId, this.userAnswers, duration);
   }
 
   public openExitDialog(): void {
