@@ -1,8 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ThemeService, IQuizTheme } from '../../providers/theme.service';
 import { IQuiz, QuizService } from '../../providers/quiz.service';
 import { Duration } from 'src/models/duration';
+import { Observable } from 'rxjs';
+import { DialogService } from '../../providers/dialog.service';
+import { MatDialogRef } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-quiz',
@@ -40,10 +44,16 @@ export class QuizComponent implements OnInit {
   public userAnswers: string[] = [];
   public timeStart!: Date;
 
+  @HostListener('window:beforeunload')
+  public beforeunloadHandler(): boolean {
+    return false;
+  }
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private quizService: QuizService,
-    private themeService: ThemeService
+    private themeService: ThemeService,
+    private dialogService: DialogService
   ) { }
 
   ngOnInit(): void {
@@ -100,6 +110,19 @@ export class QuizComponent implements OnInit {
   public finishQuiz(): void {
     const duration: Duration = new Duration(this.timeStart, new Date());
     this.quizService.finishQuiz(this.quizId, this.userAnswers, duration);
+  }
+
+  private openExitDialog(): MatDialogRef<ConfirmDialogComponent> {
+    return this.dialogService.open({
+      title: "Leave",
+      message: "Are you sure you want to exit and cancel the quiz? Your answers will not be saved.",
+      dismissText: "Back to quiz",
+      confirmText: "Go on main page"
+    });
+  }
+
+  canDeactivate(): Observable<boolean> {
+    return this.openExitDialog().afterClosed();
   }
 
 }
