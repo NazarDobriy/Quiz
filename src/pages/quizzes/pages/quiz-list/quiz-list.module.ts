@@ -2,7 +2,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { QuizCardComponent } from './components/quiz-card/quiz-card.component';
 import { QuizzesComponent } from './quizzes.component';
+import { RouterModule, Routes } from '@angular/router';
 
+const routes: Routes = [
+  { path: '', component: QuizzesComponent }
+];
 
 
 @NgModule({
@@ -11,7 +15,8 @@ import { QuizzesComponent } from './quizzes.component';
     QuizCardComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule.forChild(routes)
   ]
 })
 export class QuizListModule { }
