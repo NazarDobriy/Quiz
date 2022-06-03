@@ -5,6 +5,8 @@ import { IQuiz, QuizService } from '../../providers/quiz.service';
 import { Duration } from 'src/models/duration';
 import { Observable } from 'rxjs';
 import { DialogService } from '../../providers/dialog.service';
+import { MatDialogRef } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-quiz',
@@ -110,8 +112,17 @@ export class QuizComponent implements OnInit {
     this.quizService.finishQuiz(this.quizId, this.userAnswers, duration);
   }
 
+  private openExitDialog(): MatDialogRef<ConfirmDialogComponent> {
+    return this.dialogService.openExitDialog({
+      title: "Leave",
+      message: "Are you sure you want to exit and cancel the quiz? Your answers will not be saved.",
+      dismissText: "Back to quiz",
+      confirmText: "Go on main page"
+    });
+  }
+
   canDeactivate(): Observable<boolean> {
-    return this.dialogService.openExitDialog().afterClosed();
+    return this.openExitDialog().afterClosed();
   }
 
 }
