@@ -113,7 +113,7 @@ export class QuizComponent implements OnInit {
   }
 
   private openExitDialog(): MatDialogRef<ConfirmDialogComponent> {
-    return this.dialogService.openExitDialog({
+    return this.dialogService.open({
       title: "Leave",
       message: "Are you sure you want to exit and cancel the quiz? Your answers will not be saved.",
       dismissText: "Back to quiz",

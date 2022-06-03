@@ -16,8 +16,8 @@ export class DialogService {
 
   constructor(private dialog: MatDialog) { }
 
-  public openExitDialog(dialogData: IDialogConfig): MatDialogRef<ConfirmDialogComponent> {
-    return this.dialog.open(ConfirmDialogComponent, { data: dialogData });
+  public open(config: IDialogConfig): MatDialogRef<ConfirmDialogComponent> {
+    return this.dialog.open(ConfirmDialogComponent, { data: config });
   }
 
 }
