@@ -4,14 +4,13 @@ import { ThemeService, IQuizTheme } from '../../providers/theme.service';
 import { IQuiz, QuizService } from '../../providers/quiz.service';
 import { Duration } from 'src/models/duration';
 import { Observable } from 'rxjs';
-import { DialogService } from '../../providers/dialog.service';
+import { DialogService } from './providers/dialog.service';
 import { MatDialogRef } from '@angular/material/dialog';
-import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-quiz',
-  templateUrl: './quiz.component.html',
-  styleUrls: ['./quiz.component.scss']
+  templateUrl: './quiz.component.html'
 })
 export class QuizComponent implements OnInit {
   readonly MIN_AMOUNT_QUESTIONS: number = 1;

@@ -1,0 +1,28 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { QuizComponent } from './quiz.component';
+import { RadioButtonComponent } from './components/radio-button/radio-button.component';
+import { RadioGroupButtonComponent } from './components/radio-group-button/radio-group-button.component';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import { DialogService } from './providers/dialog.service';
+import { MatDialogModule } from '@angular/material/dialog';
+
+
+
+@NgModule({
+  declarations: [
+    QuizComponent,
+    RadioButtonComponent,
+    RadioGroupButtonComponent,
+    ConfirmDialogComponent
+  ],
+  imports: [
+    CommonModule,
+    MatDialogModule
+  ],
+  providers: [
+    QuizComponent,
+    DialogService
+  ]
+})
+export class ActiveQuizModule { }

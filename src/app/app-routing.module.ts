@@ -6,7 +6,7 @@ const routes: Routes = [
     path: '', loadChildren: ()=>import('../pages/home/home.module').then(m => m.HomeModule)
   },
   {
-    path: 'quizzes', loadChildren: ()=>import('../pages/quiz/quizzes.module').then(m => m.QuizzesModule)
+    path: 'quizzes', loadChildren: ()=>import('../pages/quizzes/quizzes.module').then(m => m.QuizzesModule)
   }
 ];
 
