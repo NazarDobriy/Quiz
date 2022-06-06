@@ -11,7 +11,7 @@ const routes: Routes = [
     path: '/', loadChildren: ()=>import('../quizzes/pages/quiz-list/quiz-list.module').then(m => m.QuizListModule)
   },
   {
-    path: '/active/:id', loadChildren: ()=>import('../quizzes/pages/active/active-quiz.module').then(m => m.ActiveQuizModule)
+    path: 'active/:id', loadChildren: ()=>import('../quizzes/pages/active/active-quiz.module').then(m => m.ActiveQuizModule)
   }
 ];
 
