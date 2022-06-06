@@ -7,7 +7,7 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
 import { DialogService } from './providers/dialog.service';
 import { MatDialogModule } from '@angular/material/dialog';
 import { RouterModule, Routes } from '@angular/router';
-import { ScoreComponent } from '../score/score.component';
+import { ScoreComponent } from './components/score/score.component';
 
 const routes: Routes = [
   { 
@@ -16,7 +16,7 @@ const routes: Routes = [
     component: QuizComponent
   },
   {
-    path: 'score', 
+    path: 'score',
     component: ScoreComponent
   }
 ];
