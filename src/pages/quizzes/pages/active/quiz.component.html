@@ -20,14 +20,16 @@
 >
     <section class="md:mx-10 mx-5">
         <section class="flex justify-between items-center sm:pt-10 pt-6">
-            <app-score-counter
+            <div>
+                <app-score-counter
                 [backgroundClass]="quizTheme.numberBackgroundClass"
                 [textClass]="quizTheme.numberTextClass"
                 [secondaryTextClass]="quizTheme.primaryTextClass"
                 [counter]="questionCounter"
                 [limit]="currentQuiz.questions.length"
-            >
-            </app-score-counter>
+                >
+                </app-score-counter>
+            </div>
             <div class="flex">
                 <img class="lg:h-24 lg:w-24 h-20 w-20 rounded-full sm:mr-3 mr-0" src="assets/img/Mili.svg" alt="Mili">
                 <img class="lg:h-24 lg:w-24 h-20 w-20 rounded-full mr-3 sm:block hidden" src="assets/img/Jake.svg" alt="Jake">
