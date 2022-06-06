@@ -1,5 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ThemeService, IQuizTheme } from '../../providers/theme.service';
 import { IQuiz, QuizService } from '../../providers/quiz.service';
 import { Duration } from 'src/models/duration';
@@ -49,6 +49,7 @@ export class QuizComponent implements OnInit {
   }
 
   constructor(
+    private router: Router,
     private activatedRoute: ActivatedRoute,
     private quizService: QuizService,
     private themeService: ThemeService,
@@ -108,7 +109,7 @@ export class QuizComponent implements OnInit {
 
   public finishQuiz(): void {
     const duration: Duration = new Duration(this.timeStart, new Date());
-    this.quizService.finishQuiz(this.quizId, this.userAnswers, duration);
+    this.quizService.finishQuiz(this.quizId, this.userAnswers, duration, this.router);
   }
 
   private openExitDialog(): MatDialogRef<ConfirmDialogComponent> {
@@ -120,7 +121,10 @@ export class QuizComponent implements OnInit {
     });
   }
 
-  canDeactivate(): Observable<boolean> {
+  canDeactivate(): Observable<boolean> | boolean {
+    if (this.quizService.completed) {
+      return true;
+    }
     return this.openExitDialog().afterClosed();
   }
 

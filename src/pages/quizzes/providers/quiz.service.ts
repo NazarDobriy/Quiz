@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Duration } from 'src/models/duration';
 import { QUIZ_CARDS, QUIZ_THEMES } from '../quiz-data';
 import { IQuizTheme } from './theme.service';
@@ -28,6 +29,7 @@ export class QuizService {
   public quizThemes: IQuizTheme[] = QUIZ_THEMES;
   public duration: string = '';
   public correctAnswersAmount: number = 0;
+  public completed: boolean = false;
 
   public getQuizzes(): IQuiz[] {
     return this.quizCards;
@@ -52,9 +54,11 @@ export class QuizService {
     return amountCorrectAnswers;
   }
 
-  public finishQuiz(id: number, answers: string[], duration: Duration): void {
+  public finishQuiz(id: number, answers: string[], duration: Duration, router: Router): void {
+    this.completed = true;
     this.duration = duration.toString();
     this.correctAnswersAmount = this.calcQuizResult(id, answers);
+    router.navigateByUrl(`/quizzes/active/${id}/score`);
   }
 
 }
