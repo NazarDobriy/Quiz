@@ -1,5 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { ThemeService, IQuizTheme } from '../../providers/theme.service';
 import { IQuiz, QuizService } from '../../providers/quiz.service';
 import { Duration } from 'src/models/duration';
@@ -49,7 +49,6 @@ export class QuizComponent implements OnInit {
   }
 
   constructor(
-    private router: Router,
     private activatedRoute: ActivatedRoute,
     private quizService: QuizService,
     private themeService: ThemeService,

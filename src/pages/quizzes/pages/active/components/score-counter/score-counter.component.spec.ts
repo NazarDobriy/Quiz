@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ScoreCounterComponent } from './correct-score-counter.component';
+import { ScoreCounterComponent } from './score-counter.component';
 
 describe('ScoreCounterComponent', () => {
   let component: ScoreCounterComponent;

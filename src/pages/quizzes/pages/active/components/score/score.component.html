@@ -2,6 +2,11 @@
   <span class="sm:text-4xl md:text-[3rem] text-[2.125rem] font-semibold">
     Your Score<span class="text-error ml-1">:</span>
   </span>
+  <app-score-counter
+    [counter]="correctAnswersAmount"
+    [limit]="questionsLength"
+  >
+  </app-score-counter>
   <div class="max-w-[26.875rem] m-auto mt-3">
     Good try! Why not have another go? You might get a bigger score!
   </div>

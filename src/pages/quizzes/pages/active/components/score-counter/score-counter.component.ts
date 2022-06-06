@@ -2,12 +2,12 @@ import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-score-counter',
-  templateUrl: './correct-score-counter.component.html'
+  templateUrl: './score-counter.component.html'
 })
 export class ScoreCounterComponent {
-  @Input() backgroundClass = '';
-  @Input() textClass = '';
-  @Input() secondaryTextClass = '';
+  @Input() backgroundClass = 'bg-warning';
+  @Input() textClass = 'text-primary';
+  @Input() secondaryTextClass = 'text-bright';
   @Input() counter = 0;
   @Input() limit = 0;
 }

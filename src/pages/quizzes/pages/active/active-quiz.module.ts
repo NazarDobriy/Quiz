@@ -8,7 +8,7 @@ import { DialogService } from './providers/dialog.service';
 import { MatDialogModule } from '@angular/material/dialog';
 import { RouterModule, Routes } from '@angular/router';
 import { ScoreComponent } from './components/score/score.component';
-import { ScoreCounterComponent } from './components/correct-score-counter/correct-score-counter.component';
+import { ScoreCounterComponent } from './components/score-counter/score-counter.component';
 
 const routes: Routes = [
   { 
@@ -29,7 +29,8 @@ const routes: Routes = [
     RadioButtonComponent,
     RadioGroupButtonComponent,
     ConfirmDialogComponent,
-    ScoreCounterComponent
+    ScoreCounterComponent,
+    ScoreComponent
   ],
   imports: [
     CommonModule,
