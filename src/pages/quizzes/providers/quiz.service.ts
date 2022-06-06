@@ -46,12 +46,12 @@ export class QuizService {
     return this.quizCards[id - 1];
   }
 
-  private getCorrectAnswers(id: number): string[] {
+  private getCorrectAnswers(id: number): number[] {
     return this.quizCards[id - 1].questions.map((question: IQuestion) => question.correctAnswer);
   }
 
-  private calcQuizResult(id: number, userAnswers: string[]): number {
-    const correctAnswers: string[] = this.getCorrectAnswers(id);
+  private calcQuizResult(id: number, userAnswers: number[]): number {
+    const correctAnswers: number[] = this.getCorrectAnswers(id);
     let amountCorrectAnswers: number = 0;
     for (let i = 0; i < correctAnswers.length; i++) {
       if (userAnswers[i] === correctAnswers[i]) {
@@ -61,7 +61,7 @@ export class QuizService {
     return amountCorrectAnswers;
   }
 
-  public finishQuiz(id: number, answers: string[], duration: Duration): void {
+  public finishQuiz(id: number, answers: number[], duration: Duration): void {
     this.completed = true;
     this.duration = duration.toString();
     this.correctAnswersAmount = this.calcQuizResult(id, answers);
