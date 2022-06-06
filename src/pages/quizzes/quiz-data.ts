@@ -283,35 +283,35 @@ export const MATHEMATICAL_QUESTIONS: IQuestion[] = [
 export const QUIZ_CARDS: IQuiz[] = [
   {
     id: 1,
-    title: '10 Qusstions',
+    title: '10 Questions',
     subtitle: 'Emoji Bands',
     group: 'historical',
     questions: HISTORICAL_QUESTIONS
   },
   {
     id: 2,
-    title: '10 Qusstions',
+    title: '10 Questions',
     subtitle: 'Easter Emoji Quiz: Can You Get 100 Percent?',
     group: 'mathematical',
     questions: MATHEMATICAL_QUESTIONS
   },
   {
     id: 3,
-    title: '10 Qusstions',
+    title: '10 Questions',
     subtitle: 'London Underground & Tube Station Emoji',
     group: 'historical',
     questions: HISTORICAL_QUESTIONS
   },
   {
     id: 4,
-    title: '10 Qusstions',
+    title: '10 Questions',
     subtitle: 'Trivia Quiz: Guess The WWE Star From The Emoji!',
     group: 'historical',
     questions: HISTORICAL_QUESTIONS
   },
   {
     id: 5,
-    title: '10 Qusstions',
+    title: '10 Questions',
     subtitle: 'What Emoji Am I?',
     group: 'mathematical',
     questions: MATHEMATICAL_QUESTIONS
