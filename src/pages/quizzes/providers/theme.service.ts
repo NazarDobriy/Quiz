@@ -6,9 +6,9 @@ export interface IQuizTheme {
   secondaryTextClass: string;
   secondaryActiveTextClass: string;
   numberTextClass: string;
-  numberBackgroudClass: string;
-  backgroudClass: string;
-  btnsBackgroudClass: string;
+  numberBackgroundClass: string;
+  backgroundClass: string;
+  btnsBackgroundClass: string;
   btnsTextClass: string;
   radioButtonColor: string;
   titleTextClass: string;
