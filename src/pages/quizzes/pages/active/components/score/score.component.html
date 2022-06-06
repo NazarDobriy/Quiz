@@ -1,0 +1,25 @@
+<header class="text-center text-bright sm:mt-25 mt-20">
+  <section>
+    <span class="sm:text-4xl md:text-[3rem] text-[2.125rem] font-semibold">
+      Your Score<span class="text-error ml-1">:</span>
+    </span>
+    <div class="mt-9">
+      <app-score-counter
+      [counter]="correctAnswersAmount"
+      [limit]="questionsLength"
+      >
+      </app-score-counter>
+    </div>
+    <p class="text-2xl mt-5 font-semibold">{{ duration }}</p>
+    <div class="max-w-[26.875rem] m-auto mt-3">
+      Good try! Why not have another go? You might get a bigger score!
+    </div>
+  </section>
+  <section class="bg-bright w-[40rem] h-[26rem] m-auto mt-20 rounded-3xl">
+  </section>
+  <section>
+    <a routerLink="/">
+      <button class="bg-accent text-bright px-6 py-4 my-10 rounded">Back on main page</button>
+    </a>
+  </section>
+</header>

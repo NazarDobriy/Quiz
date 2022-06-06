@@ -28,9 +28,9 @@ export class QuizComponent implements OnInit {
     secondaryTextClass: '',
     secondaryActiveTextClass: '',
     numberTextClass: '',
-    numberBackgroudClass: '',
-    backgroudClass: '',
-    btnsBackgroudClass: '',
+    numberBackgroundClass: '',
+    backgroundClass: '',
+    btnsBackgroundClass: '',
     btnsTextClass: '',
     radioButtonColor: '',
     titleTextClass: '',
@@ -120,7 +120,10 @@ export class QuizComponent implements OnInit {
     });
   }
 
-  canDeactivate(): Observable<boolean> {
+  canDeactivate(): Observable<boolean> | boolean {
+    if (this.quizService.completed) {
+      return true;
+    }
     return this.openExitDialog().afterClosed();
   }
 

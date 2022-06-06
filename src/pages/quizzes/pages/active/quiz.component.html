@@ -16,13 +16,19 @@
         h-[35rem] w-[20rem]
         mt-5 m-auto rounded-3xl
     "
-    [ngClass]="quizTheme.backgroudClass"
+    [ngClass]="quizTheme.backgroundClass"
 >
     <section class="md:mx-10 mx-5">
         <section class="flex justify-between items-center sm:pt-10 pt-6">
             <div>
-                <span class="text-[2.125rem] p-[0.625rem]" [ngClass]="[quizTheme.numberBackgroudClass, quizTheme.numberTextClass]">{{ questionCounter }}</span>
-                <span class="text-base ml-2 relative bottom-1.5" [ngClass]="quizTheme.primaryTextClass">/{{ currentQuiz.questions.length }}</span>
+                <app-score-counter
+                [backgroundClass]="quizTheme.numberBackgroundClass"
+                [textClass]="quizTheme.numberTextClass"
+                [secondaryTextClass]="quizTheme.primaryTextClass"
+                [counter]="questionCounter"
+                [limit]="currentQuiz.questions.length"
+                >
+                </app-score-counter>
             </div>
             <div class="flex">
                 <img class="lg:h-24 lg:w-24 h-20 w-20 rounded-full sm:mr-3 mr-0" src="assets/img/Mili.svg" alt="Mili">
@@ -53,7 +59,7 @@
             <button 
                 class="py-[0.625rem] px-6 rounded sm:w-[9.5rem] w-24"
                 [ngClass]="[
-                    isPrevQuestionAvailable ? quizTheme.btnsBackgroudClass : '',
+                    isPrevQuestionAvailable ? quizTheme.btnsBackgroundClass : '',
                     quizTheme.btnsTextClass
                 ]"
                 [disabled]="!isPrevQuestionAvailable"
@@ -66,7 +72,7 @@
             </button>
             <button 
                 class="py-[0.625rem] px-6 rounded sm:w-[9.5rem]"
-                [ngClass]="[quizTheme.btnsBackgroudClass, quizTheme.btnsTextClass]"
+                [ngClass]="[quizTheme.btnsBackgroundClass, quizTheme.btnsTextClass]"
                 [disabled]="isNextQuestionAvailable || (!allQuestionsCompleted && isLastQuestion)"
                 (click)="isLastQuestion ? finishQuiz() : handleNextQuestion()"
             >
@@ -83,7 +89,7 @@
 </main>
 
 <a routerLink="/">
-    <button class="grid m-auto bg-accent text-bright cursor-pointer px-6 py-4 rounded sm:my-[1.875rem] my-[3.375rem]">
+    <button class="grid m-auto bg-accent text-bright px-6 py-4 rounded sm:my-[1.875rem] my-[3.375rem]">
         Back to all Quizzes
     </button>
 </a>

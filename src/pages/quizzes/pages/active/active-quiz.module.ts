@@ -7,12 +7,18 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
 import { DialogService } from './providers/dialog.service';
 import { MatDialogModule } from '@angular/material/dialog';
 import { RouterModule, Routes } from '@angular/router';
+import { ScoreComponent } from './components/score/score.component';
+import { ScoreCounterComponent } from './components/score-counter/score-counter.component';
 
 const routes: Routes = [
   { 
-    path: 'active/:id',
+    path: '',
     canDeactivate: [QuizComponent],
     component: QuizComponent
+  },
+  {
+    path: 'score',
+    component: ScoreComponent
   }
 ];
 
@@ -22,7 +28,9 @@ const routes: Routes = [
     QuizComponent,
     RadioButtonComponent,
     RadioGroupButtonComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    ScoreCounterComponent,
+    ScoreComponent
   ],
   imports: [
     CommonModule,
