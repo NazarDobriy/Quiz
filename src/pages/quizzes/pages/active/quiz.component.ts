@@ -1,7 +1,7 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ThemeService, IQuizTheme } from '../../providers/theme.service';
-import { IQuiz, QuizService } from '../../providers/quiz.service';
+import { IAnswer, IQuiz, QuizService } from '../../providers/quiz.service';
 import { Duration } from 'src/models/duration';
 import { Observable } from 'rxjs';
 import { DialogService } from './providers/dialog.service';
@@ -79,11 +79,11 @@ export class QuizComponent implements OnInit {
   }
 
   get currentQuestionAnswers(): string[] {
-    return this.currentQuiz?.questions[this.questionIndex]?.answers || [];
+    return this.currentQuiz?.questions[this.questionIndex]?.answers.map((ans: IAnswer) => ans.text) || [];
   }
 
-  get selectedAnswer(): number | null {
-    return this.userAnswers[this.questionIndex] || null;
+  get selectedAnswer(): number {
+    return this.userAnswers[this.questionIndex];
   }
 
   get isLastQuestion(): boolean {
@@ -108,7 +108,8 @@ export class QuizComponent implements OnInit {
 
   public finishQuiz(): void {
     const duration: Duration = new Duration(this.timeStart, new Date());
-    this.quizService.finishQuiz(this.quizId, this.userAnswers, duration);
+    console.log(this.userAnswers);
+    //this.quizService.finishQuiz(this.quizId, this.userAnswers, duration);
   }
 
   private openExitDialog(): MatDialogRef<ConfirmDialogComponent> {
