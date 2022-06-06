@@ -4,6 +4,11 @@ import { Duration } from 'src/models/duration';
 import { QUIZ_CARDS, QUIZ_THEMES } from '../quiz-data';
 import { IQuizTheme } from './theme.service';
 
+export interface IAnswer {
+  id: number;
+  text: string;
+}
+
 export interface ISimpleQuiz {
   id: number;
   title: string;
@@ -12,8 +17,8 @@ export interface ISimpleQuiz {
 
 export interface IQuestion {
   name: string;
-  answers: string[];
-  correctAnswer: string;
+  answers: IAnswer[];
+  correctAnswer: number;
 }
 
 export interface IQuiz extends ISimpleQuiz {

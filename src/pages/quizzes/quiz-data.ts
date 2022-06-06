@@ -78,102 +78,102 @@ export const HISTORICAL_QUESTIONS: IQuestion[] = [
   {
     name: 'When the city of Lviv received the Magdeburg Law?',
     answers: [
-      '1256',
-      '1356',
-      '1288',
-      '1367'
+      { id: 0, text: '1256' },
+      { id: 1, text: '1356' },
+      { id: 2, text: '1288' },
+      { id: 3, text: '1367' }
     ],
-    correctAnswer: '1356'
+    correctAnswer: 1
   },
   {
     name: 'When hetman Petro Sagaidachny made a military campaign to the city of Kafa?',
     answers: [
-      '1607',
-      '1588',
-      '1616',
-      '1618'
+      { id: 0, text: '1607' },
+      { id: 1, text: '1588' },
+      { id: 2, text: '1616' },
+      { id: 3, text: '1618' }
     ],
-    correctAnswer: '1616'
+    correctAnswer: 2
   },
   {
-    name: 'Who led the national leberation war against the Commonwealth?',
+    name: 'Who led the national liberation war against the Commonwealth?',
     answers: [
-      'Bogdan Khmelnitsky',
-      'Petro Sagaidachny',
-      'Ivan Mazapa',
-      'Yurii Khmelnitsky'
+      { id: 0, text: 'Bogdan Khmelnitsky' },
+      { id: 1, text: 'Petro Sagaidachny' },
+      { id: 2, text: 'Ivan Mazapa' },
+      { id: 3, text: 'Yurii Khmelnitsky' }
     ],
-    correctAnswer: 'Bogdan Khmelnitsky'
+    correctAnswer: 0
   },
   {
-    name: 'When the national leberation war against the Commonwealth began?',
+    name: 'When the national liberation war against the Commonwealth began?',
     answers: [
-      '1635',
-      '1650',
-      '1648',
-      '1655'
+      { id: 0, text: '1635' },
+      { id: 1, text: '1650' },
+      { id: 2, text: '1648' },
+      { id: 3, text: '1655' }
     ],
-    correctAnswer: '1648'
+    correctAnswer: 2
   },
   {
     name: 'When World War I began?',
     answers: [
-      '1915',
-      '1938',
-      '1939',
-      '1914'
+      { id: 0, text: '1915' },
+      { id: 1, text: '1938' },
+      { id: 2, text: '1939' },
+      { id: 3, text: '1914' }
     ],
-    correctAnswer: '1914'
+    correctAnswer: 3
   },
   {
     name: 'Who headed Central Council of Ukraine?',
     answers: [
-      'Pavlo Skoropadsky',
-      'Mykola Hrushevsky',
-      'Ivan Franko',
-      'Taras Shevchenko'
+      { id: 0, text: 'Pavlo Skoropadsky' },
+      { id: 1, text: 'Mykola Hrushevsky' },
+      { id: 2, text: 'Ivan Franko' },
+      { id: 3, text: 'Taras Shevchenko' }
     ],
-    correctAnswer: 'Mykola Hrushevsky'
+    correctAnswer: 1
   },
   {
     name: 'When the industrialization started?',
     answers: [
-      '1930',
-      '1925',
-      '1940',
-      '1927'
+      { id: 0, text: '1930' },
+      { id: 1, text: '1925' },
+      { id: 2, text: '1940' },
+      { id: 3, text: '1927' }
     ],
-    correctAnswer: '1925'
+    correctAnswer: 1
   },
   {
     name: 'When independence was proclaimed in Ukraine?',
     answers: [
-      '1991',
-      '1990',
-      '1940',
-      '1927'
+      { id: 0, text: '1991' },
+      { id: 1, text: '1990' },
+      { id: 2, text: '1940' },
+      { id: 3, text: '1927' }
     ],
-    correctAnswer: '1991'
+    correctAnswer: 0
   },
   {
     name: 'Who became the first president of Ukraine?',
     answers: [
-      'Leonid Kravchuk',
-      'Leonid Kuchma',
-      'Petro Poroshenko',
-      'Volodymyr Zelenskyy'
+      { id: 0, text: 'Leonid Kravchuk' },
+      { id: 1, text: 'Leonid Kuchma' },
+      { id: 2, text: 'Petro Poroshenko' },
+      { id: 3, text: 'Volodymyr Zelenskyy' }
     ],
-    correctAnswer: 'Leonid Kravchuk'
+    correctAnswer: 0
   },
   {
     name: 'When the Budapest Memorandum was signed?',
     answers: [
-      '1990',
-      '2000',
-      '1994',
-      '1995'
+      { id: 0, text: '1990' },
+      { id: 1, text: '2000' },
+      { id: 2, text: '1994' },
+      { id: 3, text: '1995' }
     ],
-    correctAnswer: '1994'
+    correctAnswer: 2
   }
 ];
 
@@ -181,102 +181,102 @@ export const MATHEMATICAL_QUESTIONS: IQuestion[] = [
   {
     name: 'Simplify the expression 0.8b^9 : 8b^3, where b not = 0',
     answers: [
-      '0.1b^6',
-      '10b^6',
-      '0.1b^3',
-      '10b^3'
+      { id: 0, text: '0.1b^6' },
+      { id: 1, text: '10b^6' },
+      { id: 2, text: '0.1b^3' },
+      { id: 3, text: '10b^3' }
     ],
-    correctAnswer: '0.1b^6'
+    correctAnswer: 0
   },
   {
     name: 'Solve the equation: (x + 1) * (2x - 3) = 0',
     answers: [
-      '-3; 1',
-      '-1.5; 1',
-      '-1; 3',
-      '-1; 1.5'
+      { id: 0, text: '-3; 1' },
+      { id: 1, text: '-1.5; 1' },
+      { id: 2, text: '-1; 3' },
+      { id: 3, text: '-1; 1.5' }
     ],
-    correctAnswer: '-1; 1.5'
+    correctAnswer: 3
   },
   {
     name: 'Which of the following numbers is the solution of the inequality |x| > 3?',
     answers: [
-      '3',
-      '1',
-      '-8',
-      '-3'
+      { id: 0, text: '3' },
+      { id: 1, text: '1' },
+      { id: 2, text: '-8' },
+      { id: 3, text: '-3' }
     ],
-    correctAnswer: '-8'
+    correctAnswer: 2
   },
   {
     name: 'Simplify the expression (1 - sin^2(a) * tg^2(a))',
     answers: [
-      'sin(2a)',
-      'cos(2a)',
-      'sin^2(a)',
-      'ctg^2(a)'
+      { id: 0, text: 'sin(2a)' },
+      { id: 1, text: 'cos(2a)' },
+      { id: 2, text: 'sin^2(a)' },
+      { id: 3, text: 'ctg^2(a)' }
     ],
-    correctAnswer: 'sin^2(a)'
+    correctAnswer: 2
   },
   {
     name: 'Reduce the fraction (a^2 - b^2) / (a^2 - a * b)',
     answers: [
-      '(a + b) / a',
-      '(a - b) / a',
-      'b / a',
-      'b'
+      { id: 0, text: '(a + b) / a' },
+      { id: 1, text: '(a - b) / a' },
+      { id: 2, text: 'b / a' },
+      { id: 3, text: 'b' }
     ],
-    correctAnswer: '(a + b) / a'
+    correctAnswer: 0
   },
   {
     name: 'Which of the following intervals belongs to the number log2(1/3)',
     answers: [
-      '(-inf; -3)',
-      '(-3; -1)',
-      '(-1; 1)',
-      '(1; 3)'
+      { id: 0, text: '(-inf; -3)' },
+      { id: 1, text: '(-3; -1)' },
+      { id: 2, text: '(-1; 1)' },
+      { id: 3, text: '(1; 3)' }
     ],
-    correctAnswer: '(-3; -1)'
+    correctAnswer: 1
   },
   {
     name: 'Which of the following intervals belongs to the root of the equation: 2^(x + 3) - 3 * 2^x = 10 * sqrt(2)?',
     answers: [
-      '(-inf; 0)',
-      '[0; 5)',
-      '[0.5; 1)',
-      '[1; 2)'
+      { id: 0, text: '(-inf; 0)' },
+      { id: 1, text: '[0; 5)' },
+      { id: 2, text: '[0.5; 1)' },
+      { id: 3, text: '[1; 2)' }
     ],
-    correctAnswer: '[1; 2)'
+    correctAnswer: 3
   },
   {
     name: 'Which is derived from the number?',
     answers: [
-      '0',
-      '1',
-      'inf',
-      '-1'
+      { id: 0, text: '0' },
+      { id: 1, text: '1' },
+      { id: 2, text: 'inf' },
+      { id: 3, text: '-1' }
     ],
-    correctAnswer: '0'
+    correctAnswer: 0
   },
   {
     name: 'Which is derived from the sin(a)?',
     answers: [
-      '0',
-      '1',
-      'cos(x)',
-      '-cos(x)'
+      { id: 0, text: '0' },
+      { id: 1, text: '1' },
+      { id: 2, text: 'cos(x)' },
+      { id: 3, text: '-cos(x)' }
     ],
-    correctAnswer: '-cos(x)'
+    correctAnswer: 3
   },
   {
     name: 'Which is derived from the cos(a)?',
     answers: [
-      '0',
-      '1',
-      '-cos(x)',
-      '-sin(x)'
+      { id: 0, text: '0' },
+      { id: 1, text: '1' },
+      { id: 2, text: '-cos(x)' },
+      { id: 3, text: '-sin(x)' }
     ],
-    correctAnswer: '-cos(x)'
+    correctAnswer: 2
   }
 ];
 
