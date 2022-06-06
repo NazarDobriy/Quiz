@@ -31,6 +31,8 @@ export class QuizService {
   public correctAnswersAmount: number = 0;
   public completed: boolean = false;
 
+  constructor(private router: Router) {}
+
   public getQuizzes(): IQuiz[] {
     return this.quizCards;
   }
@@ -54,11 +56,11 @@ export class QuizService {
     return amountCorrectAnswers;
   }
 
-  public finishQuiz(id: number, answers: string[], duration: Duration, router: Router): void {
+  public finishQuiz(id: number, answers: string[], duration: Duration): void {
     this.completed = true;
     this.duration = duration.toString();
     this.correctAnswersAmount = this.calcQuizResult(id, answers);
-    router.navigateByUrl(`/quizzes/active/${id}/score`);
+    this.router.navigateByUrl(`/quizzes/active/${id}/score`);
   }
 
 }

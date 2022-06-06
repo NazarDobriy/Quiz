@@ -109,7 +109,7 @@ export class QuizComponent implements OnInit {
 
   public finishQuiz(): void {
     const duration: Duration = new Duration(this.timeStart, new Date());
-    this.quizService.finishQuiz(this.quizId, this.userAnswers, duration, this.router);
+    this.quizService.finishQuiz(this.quizId, this.userAnswers, duration);
   }
 
   private openExitDialog(): MatDialogRef<ConfirmDialogComponent> {
