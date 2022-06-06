@@ -40,7 +40,7 @@ export class QuizComponent implements OnInit {
 
   public quizId: number = 0;
   public questionIndex: number = 0;
-  public userAnswers: string[] = [];
+  public userAnswers: number[] = [];
   public timeStart!: Date;
 
   @HostListener('window:beforeunload')
@@ -82,7 +82,7 @@ export class QuizComponent implements OnInit {
     return this.currentQuiz?.questions[this.questionIndex]?.answers || [];
   }
 
-  get selectedAnswer(): string | null {
+  get selectedAnswer(): number | null {
     return this.userAnswers[this.questionIndex] || null;
   }
 
@@ -102,7 +102,7 @@ export class QuizComponent implements OnInit {
     this.questionIndex--;
   }
 
-  public onSelect(option: string): void {
+  public onSelect(option: number): void {
     this.userAnswers[this.questionIndex] = option;
   }
 
