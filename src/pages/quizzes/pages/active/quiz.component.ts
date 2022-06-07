@@ -40,7 +40,7 @@ export class QuizComponent implements OnInit {
 
   public quizId: number = 0;
   public questionIndex: number = 0;
-  public userAnswers: number[] = [];
+  public userAnswers: string[] = [];
   public timeStart!: Date;
 
   @HostListener('window:beforeunload')
@@ -82,7 +82,7 @@ export class QuizComponent implements OnInit {
     return this.currentQuiz?.questions[this.questionIndex]?.answers.map((ans: IAnswer) => ans.text) || [];
   }
 
-  get selectedAnswer(): number {
+  get selectedAnswer(): string {
     return this.userAnswers[this.questionIndex];
   }
 
@@ -102,11 +102,12 @@ export class QuizComponent implements OnInit {
     this.questionIndex--;
   }
 
-  public onSelect(option: number): void {
-    this.userAnswers[this.questionIndex] = option;
+  public onSelect(optionId: string): void {
+    this.userAnswers[this.questionIndex] = optionId;
   }
 
   public finishQuiz(): void {
+    console.log(this.userAnswers);
     const duration: Duration = new Duration(this.timeStart, new Date());
     this.quizService.finishQuiz(this.quizId, this.userAnswers, duration);
   }
