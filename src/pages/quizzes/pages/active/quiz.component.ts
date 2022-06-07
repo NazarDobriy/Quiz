@@ -107,7 +107,6 @@ export class QuizComponent implements OnInit {
   }
 
   public finishQuiz(): void {
-    console.log(this.userAnswers);
     const duration: Duration = new Duration(this.timeStart, new Date());
     this.quizService.finishQuiz(this.quizId, this.userAnswers, duration);
   }
