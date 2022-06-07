@@ -1,7 +1,7 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ThemeService, IQuizTheme } from '../../providers/theme.service';
-import { IAnswer, IQuiz, QuizService } from '../../providers/quiz.service';
+import { IQuiz, QuizService } from '../../providers/quiz.service';
 import { Duration } from 'src/models/duration';
 import { Observable } from 'rxjs';
 import { DialogService } from './providers/dialog.service';
@@ -40,8 +40,10 @@ export class QuizComponent implements OnInit {
 
   public quizId: number = 0;
   public questionIndex: number = 0;
-  public userAnswers: string[] = [];
   public timeStart!: Date;
+
+  private userAnswersIndexes: number[] = [];
+  private userAnswersIds: string[] = [];
 
   @HostListener('window:beforeunload')
   public beforeunloadHandler(): boolean {
@@ -75,15 +77,15 @@ export class QuizComponent implements OnInit {
   }
 
   get currentQuestionName(): string {
-    return this.currentQuiz?.questions[this.questionIndex]?.name || 'N/A';
+    return this.quizService.getQuestionNameByIndex(this.quizId, this.questionIndex);
   }
 
   get currentQuestionAnswers(): string[] {
-    return this.currentQuiz?.questions[this.questionIndex]?.answers.map((ans: IAnswer) => ans.text) || [];
+    return this.quizService.getQuestionAnswersByIndex(this.quizId, this.questionIndex);
   }
 
-  get selectedAnswer(): string {
-    return this.userAnswers[this.questionIndex];
+  get selectedAnswer(): number {
+    return this.userAnswersIndexes[this.questionIndex];
   }
 
   get isLastQuestion(): boolean {
@@ -91,7 +93,7 @@ export class QuizComponent implements OnInit {
   }
 
   get allQuestionsCompleted(): boolean {
-    return this.userAnswers.length === this.currentQuiz.questions.length;
+    return this.userAnswersIndexes.length === this.currentQuiz.questions.length;
   }
 
   public handleNextQuestion(): void {
@@ -102,13 +104,15 @@ export class QuizComponent implements OnInit {
     this.questionIndex--;
   }
 
-  public onSelect(optionId: string): void {
-    this.userAnswers[this.questionIndex] = optionId;
+  public onSelect(optionId: number): void {
+    const params: [number, number, number] = [this.quizId, this.questionIndex, optionId];
+    this.userAnswersIndexes[this.questionIndex] = optionId;
+    this.userAnswersIds[this.questionIndex] = this.quizService.getAnswerByIndex(...params).id;
   }
 
   public finishQuiz(): void {
     const duration: Duration = new Duration(this.timeStart, new Date());
-    this.quizService.finishQuiz(this.quizId, this.userAnswers, duration);
+    this.quizService.finishQuiz(this.quizId, this.userAnswersIds, duration);
   }
 
   private openExitDialog(): MatDialogRef<ConfirmDialogComponent> {

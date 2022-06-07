@@ -68,4 +68,16 @@ export class QuizService {
     this.router.navigateByUrl(`/quizzes/active/${id}/score`);
   }
 
+  public getQuestionAnswersByIndex(id: number, index: number): string[] {
+    return this.getQuizById(id)?.questions[index]?.answers.map((ans: IAnswer) => ans.text) || [];
+  }
+
+  public getQuestionNameByIndex(id: number, index: number): string {
+    return this.getQuizById(id)?.questions[index]?.name || 'N/A';
+  }
+
+  public getAnswerByIndex(id: number, questionIndex: number, answerIndex: number): IAnswer {
+    return this.getQuizById(id)?.questions[questionIndex]?.answers[answerIndex];
+  }
+
 }
