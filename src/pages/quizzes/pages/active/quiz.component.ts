@@ -41,7 +41,7 @@ export class QuizComponent implements OnInit {
   public quizId: number = 0;
   public questionIndex: number = 0;
   public timeStart!: Date;
-  public isLoading: boolean = false;
+  public isLoading: boolean = true;
 
   private userAnswersIds: string[] = [];
 
@@ -113,7 +113,7 @@ export class QuizComponent implements OnInit {
 
   private async getData(): Promise<void> {
     this.currentQuiz = await this.quizService.getQuizById(this.quizId);
-    this.isLoading = true;
+    this.isLoading = false;
   }
 
   public handleNextQuestion(): void {
@@ -129,7 +129,6 @@ export class QuizComponent implements OnInit {
   }
 
   public finishQuiz(): void {
-    console.log(this.userAnswersIds);
     const duration: Duration = new Duration(this.timeStart, new Date());
     this.quizService.finishQuiz(this.quizId, this.userAnswersIds, duration);
   }

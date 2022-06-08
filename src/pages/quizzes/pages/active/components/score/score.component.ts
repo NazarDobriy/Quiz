@@ -10,7 +10,7 @@ export class ScoreComponent implements OnInit {
   private quizId: number = 0;
   public duration: string = '';
   public correctAnswersAmount: number = 0;
-  public isLoading: boolean = false;
+  public isLoading: boolean = true;
 
   private currentQuiz: IQuiz = {
     group: '',
@@ -34,7 +34,7 @@ export class ScoreComponent implements OnInit {
 
   private async getData(): Promise<void> {
     this.currentQuiz = await this.quizService.getQuizById(this.quizId);
-    this.isLoading = true;
+    this.isLoading = false;
   }
 
   get questionsLength(): number {
