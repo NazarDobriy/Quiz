@@ -111,14 +111,17 @@ export class QuizComponent implements OnInit {
   }
 
   public onSelect(optionId: number): void {
-    const params: [number, number, number] = [this.quizId, this.questionIndex, optionId];
     this.userAnswersIndexes[this.questionIndex] = optionId;
-    this.userAnswersIds[this.questionIndex] = this.quizService.getAnswerByIndex(...params).id;
+    this.userAnswersIds[this.questionIndex] = this.getAnswerById(optionId).id;
   }
 
   public finishQuiz(): void {
     const duration: Duration = new Duration(this.timeStart, new Date());
     this.quizService.finishQuiz(this.quizId, this.userAnswersIds, duration);
+  }
+
+  private getAnswerById(id: number): IAnswer {
+    return this.currentQuiz?.questions[this.questionIndex]?.answers[id];
   }
 
   private openExitDialog(): MatDialogRef<ConfirmDialogComponent> {
