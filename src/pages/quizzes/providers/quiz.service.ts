@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { Duration } from 'src/models/duration';
+import { ApiService } from 'src/pages/providers/api.service';
 import { QUIZ_CARDS, QUIZ_THEMES } from '../quiz-data';
 import { IQuizTheme } from './theme.service';
 
@@ -36,10 +38,10 @@ export class QuizService {
   public correctAnswersAmount: number = 0;
   public completed: boolean = false;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private apiService: ApiService) {}
 
-  public getQuizzes(): IQuiz[] {
-    return this.quizCards;
+  public getQuizzes(): Observable<IQuiz[]> {
+    return this.apiService.getAll();
   }
 
   public getQuizById(id: number): Promise<IQuiz> {
