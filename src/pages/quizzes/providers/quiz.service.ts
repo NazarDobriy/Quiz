@@ -32,7 +32,6 @@ export interface IQuiz extends ISimpleQuiz {
   providedIn: 'root'
 })
 export class QuizService {
-  public quizCards: IQuiz[] = QUIZ_CARDS;
   public quizThemes: IQuizTheme[] = QUIZ_THEMES;
   public duration: string = '';
   public correctAnswersAmount: number = 0;
@@ -44,16 +43,12 @@ export class QuizService {
     return this.apiService.getAll();
   }
 
-  public getQuizById(id: number): Promise<IQuiz> {
-    return Promise.resolve(this.quizCards[id - 1]);
+  private getCorrectAnswers(quiz: IQuiz): string[] {
+    return quiz.questions.map((question: IQuestion) => question.correctAnswer);
   }
 
-  private getCorrectAnswers(id: number): string[] {
-    return this.quizCards[id - 1].questions.map((question: IQuestion) => question.correctAnswer);
-  }
-
-  private calcQuizResult(id: number, userAnswers: string[]): number {
-    const correctAnswers: string[] = this.getCorrectAnswers(id);
+  private calcQuizResult(quiz: IQuiz, userAnswers: string[]): number {
+    const correctAnswers: string[] = this.getCorrectAnswers(quiz);
     let amountCorrectAnswers: number = 0;
     for (let i = 0; i < correctAnswers.length; i++) {
       if (userAnswers[i] === correctAnswers[i]) {
@@ -63,11 +58,11 @@ export class QuizService {
     return amountCorrectAnswers;
   }
 
-  public finishQuiz(id: number, answers: string[], duration: Duration): void {
+  public finishQuiz(quiz: IQuiz, answers: string[], duration: Duration): void {
     this.completed = true;
     this.duration = duration.toString();
-    this.correctAnswersAmount = this.calcQuizResult(id, answers);
-    this.router.navigateByUrl(`/quizzes/active/${id}/score`);
+    this.correctAnswersAmount = this.calcQuizResult(quiz, answers);
+    this.router.navigateByUrl(`/quizzes/active/${quiz.id + 1}/score`);
   }
 
 }

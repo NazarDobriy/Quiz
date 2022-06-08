@@ -59,8 +59,8 @@ export class QuizComponent implements OnInit {
 
   ngOnInit(): void {
     this.timeStart = new Date();
-    this.quizId = parseInt(this.activatedRoute.snapshot.params['id']);
-    this.getData();
+    this.quizId = parseInt(this.activatedRoute.snapshot.params['id']) - 1;
+    this.setQuiz();
     this.quizTheme = this.themeService.getThemeByText(this.currentQuiz.subtitle);
   }
 
@@ -111,9 +111,11 @@ export class QuizComponent implements OnInit {
     return false;
   }
 
-  private async getData(): Promise<void> {
-    this.currentQuiz = await this.quizService.getQuizById(this.quizId);
-    this.isLoading = false;
+  private setQuiz(): void {
+    this.quizService.getQuizzes().subscribe((quizzes: IQuiz[]) => {
+      this.currentQuiz = quizzes[this.quizId];
+      this.isLoading = false;
+    })
   }
 
   public handleNextQuestion(): void {
@@ -129,8 +131,9 @@ export class QuizComponent implements OnInit {
   }
 
   public finishQuiz(): void {
+    console.log(this.userAnswersIds);
     const duration: Duration = new Duration(this.timeStart, new Date());
-    this.quizService.finishQuiz(this.quizId, this.userAnswersIds, duration);
+    this.quizService.finishQuiz(this.currentQuiz, this.userAnswersIds, duration);
   }
 
   private getAnswerByIndex(id: number): IAnswer {
