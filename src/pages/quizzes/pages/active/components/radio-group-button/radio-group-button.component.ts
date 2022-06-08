@@ -20,8 +20,8 @@ export class RadioGroupButtonComponent {
     this.onSelect.emit(index);
   }
 
-  public isOptionSelected(option: number): boolean {
-    return this.options[option] === this.selectedOption;
+  public isOptionSelected(optionIndex: number): boolean {
+    return this.options[optionIndex] === this.selectedOption;
   }
 
 }
