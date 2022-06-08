@@ -124,8 +124,8 @@ export class QuizComponent implements OnInit {
     this.questionIndex--;
   }
 
-  public onSelect(optionId: number): void {
-    this.userAnswersIds[this.questionIndex] = this.getAnswerByIndex(optionId).id;
+  public onSelect(optionIndex: number): void {
+    this.userAnswersIds[this.questionIndex] = this.getAnswerByIndex(optionIndex).id;
   }
 
   public finishQuiz(): void {
