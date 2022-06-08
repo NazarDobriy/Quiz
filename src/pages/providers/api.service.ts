@@ -10,7 +10,7 @@ export class ApiService {
 
   constructor(private db: AngularFireDatabase) { }
 
-  public getAll(): Observable<IQuiz[]> {
+  public getAllCards(): Observable<IQuiz[]> {
     return this.db.list<IQuiz>('quiz_cards').valueChanges();
   }
 
