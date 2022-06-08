@@ -9,20 +9,33 @@ import { IQuizTheme } from '../../providers/theme.service';
 export class QuizzesComponent implements OnInit {
   public quizzes: IQuiz[] = [];
   public quizThemes: IQuizTheme[] = [];
-  public isLoading: boolean = true;
+
+  private isLoadingThemes: boolean = true;
+  private isLoadingQuizzes: boolean = true;
 
   constructor(private quizService: QuizService) { }
 
   ngOnInit(): void {
-    this.quizThemes = this.quizService.quizThemes;
-    this.getData();
+    this.setThemes();
+    this.setQuizzes();
   }
 
-  private getData(): void {
+  get isLoading(): boolean {
+    return this.isLoadingQuizzes && this.isLoadingThemes;
+  }
+
+  private setQuizzes(): void {
     this.quizService.getQuizzes().subscribe((quizzes: IQuiz[]) => {
       this.quizzes = quizzes;
-      this.isLoading = false;
+      this.isLoadingQuizzes = false;
     });
+  }
+
+  private setThemes(): void {
+    this.quizService.getThemes().subscribe((themes: IQuizTheme[]) => {
+      this.quizThemes = themes;
+      this.isLoadingThemes = false;
+    })
   }
 
   public loadCards(): void {

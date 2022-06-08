@@ -32,7 +32,6 @@ export interface IQuiz extends ISimpleQuiz {
   providedIn: 'root'
 })
 export class QuizService {
-  public quizThemes: IQuizTheme[] = QUIZ_THEMES;
   public duration: string = '';
   public correctAnswersAmount: number = 0;
   public completed: boolean = false;
@@ -41,6 +40,10 @@ export class QuizService {
 
   public getQuizzes(): Observable<IQuiz[]> {
     return this.apiService.getAllQuizCards();
+  }
+
+  public getThemes(): Observable<IQuizTheme[]> {
+    return this.apiService.getAllQuizThemes();
   }
 
   private getCorrectAnswers(quiz: IQuiz): string[] {
