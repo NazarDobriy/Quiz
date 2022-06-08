@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-radio-group-button',
@@ -11,17 +11,17 @@ export class RadioGroupButtonComponent {
   @Input() labelClass: string = '';
   @Input() activeLabelClass: string = '';
 
-  @Output() onSelect = new EventEmitter<string>();
+  @Output() onSelect = new EventEmitter<number>();
 
   public inputName: string = 'question';
 
-  public selectOption(option: string): void {
-    this.selectedOption = option;
-    this.onSelect.emit(option);
+  public selectOption(index: number): void {
+    this.selectedOption = this.options[index];
+    this.onSelect.emit(index);
   }
 
-  public isOptionSelected(option: string): boolean {
-    return option === this.selectedOption;
+  public isOptionSelected(optionIndex: number): boolean {
+    return this.options[optionIndex] === this.selectedOption;
   }
 
 }

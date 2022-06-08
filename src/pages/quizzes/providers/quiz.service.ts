@@ -4,6 +4,11 @@ import { Duration } from 'src/models/duration';
 import { QUIZ_CARDS, QUIZ_THEMES } from '../quiz-data';
 import { IQuizTheme } from './theme.service';
 
+export interface IAnswer {
+  id: string;
+  text: string;
+}
+
 export interface ISimpleQuiz {
   id: number;
   title: string;
@@ -12,7 +17,7 @@ export interface ISimpleQuiz {
 
 export interface IQuestion {
   name: string;
-  answers: string[];
+  answers: IAnswer[];
   correctAnswer: string;
 }
 
@@ -37,8 +42,8 @@ export class QuizService {
     return this.quizCards;
   }
 
-  public getQuizById(id: number): IQuiz {
-    return this.quizCards[id - 1];
+  public getQuizById(id: number): Promise<IQuiz> {
+    return Promise.resolve(this.quizCards[id - 1]);
   }
 
   private getCorrectAnswers(id: number): string[] {
