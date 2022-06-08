@@ -76,8 +76,8 @@ export class QuizService {
     return this.getQuizById(id)?.questions[index]?.name || 'N/A';
   }
 
-  public getAnswerByIndex(id: number, questionIndex: number, answerIndex: number): IAnswer {
-    return this.getQuizById(id)?.questions[questionIndex]?.answers[answerIndex];
+  public getAnswerByIndex(id: number, questionIndex: number, answerId: number): IAnswer {
+    return this.getQuizById(id)?.questions[questionIndex]?.answers[answerId];
   }
 
 }
