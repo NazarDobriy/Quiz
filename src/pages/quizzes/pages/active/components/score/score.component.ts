@@ -11,6 +11,7 @@ export class ScoreComponent implements OnInit {
   public duration: string = '';
   public correctAnswersAmount: number = 0;
   public questionsLength: number = 0;
+  public isLoading: boolean = false;
 
   private currentQuiz: IQuiz = {
     group: '',
@@ -28,9 +29,14 @@ export class ScoreComponent implements OnInit {
   ngOnInit(): void {
     this.duration = this.quizService.duration;
     this.quizId = parseInt(this.activatedRoute.snapshot.params['id']);
-    this.currentQuiz = this.quizService.getQuizById(this.quizId);
+    this.getData();
     this.correctAnswersAmount = this.quizService.correctAnswersAmount;
     this.questionsLength = this.currentQuiz.questions.length;
+  }
+
+  private async getData(): Promise<void> {
+    this.currentQuiz = await this.quizService.getQuizById(this.quizId);
+    this.isLoading = true;
   }
 
 }

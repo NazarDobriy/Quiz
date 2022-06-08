@@ -1,7 +1,7 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ThemeService, IQuizTheme } from '../../providers/theme.service';
-import { IQuiz, QuizService } from '../../providers/quiz.service';
+import { IAnswer, IQuiz, QuizService } from '../../providers/quiz.service';
 import { Duration } from 'src/models/duration';
 import { Observable } from 'rxjs';
 import { DialogService } from './providers/dialog.service';
@@ -41,6 +41,7 @@ export class QuizComponent implements OnInit {
   public quizId: number = 0;
   public questionIndex: number = 0;
   public timeStart!: Date;
+  public isLoading: boolean = false;
 
   private userAnswersIndexes: number[] = [];
   private userAnswersIds: string[] = [];
@@ -60,7 +61,7 @@ export class QuizComponent implements OnInit {
   ngOnInit(): void {
     this.timeStart = new Date();
     this.quizId = parseInt(this.activatedRoute.snapshot.params['id']);
-    this.currentQuiz = this.quizService.getQuizById(this.quizId);
+    this.getData();
     this.quizTheme = this.themeService.getThemeByText(this.currentQuiz.subtitle);
   }
 
@@ -77,11 +78,11 @@ export class QuizComponent implements OnInit {
   }
 
   get currentQuestionName(): string {
-    return this.quizService.getQuestionNameByIndex(this.quizId, this.questionIndex);
+    return this.currentQuiz?.questions[this.questionIndex]?.name || 'N/A';
   }
 
   get currentQuestionAnswers(): string[] {
-    return this.quizService.getQuestionAnswersByIndex(this.quizId, this.questionIndex);
+    return this.currentQuiz?.questions[this.questionIndex]?.answers.map((ans: IAnswer) => ans.text) || [];
   }
 
   get selectedAnswer(): number {
@@ -94,6 +95,11 @@ export class QuizComponent implements OnInit {
 
   get allQuestionsCompleted(): boolean {
     return this.userAnswersIndexes.length === this.currentQuiz.questions.length;
+  }
+
+  private async getData(): Promise<void> {
+    this.currentQuiz = await this.quizService.getQuizById(this.quizId);
+    this.isLoading = true;
   }
 
   public handleNextQuestion(): void {

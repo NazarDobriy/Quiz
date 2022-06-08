@@ -42,8 +42,9 @@ export class QuizService {
     return this.quizCards;
   }
 
-  public getQuizById(id: number): IQuiz {
-    return this.quizCards[id - 1];
+  public getQuizById(id: number): Promise<IQuiz> {
+    return Promise.resolve(this.quizCards[id - 1]);
+    //return new Promise<IQuiz>((resolve) => resolve(this.quizCards[id - 1]));
   }
 
   private getCorrectAnswers(id: number): string[] {
@@ -68,16 +69,12 @@ export class QuizService {
     this.router.navigateByUrl(`/quizzes/active/${id}/score`);
   }
 
-  public getQuestionAnswersByIndex(id: number, index: number): string[] {
-    return this.getQuizById(id)?.questions[index]?.answers.map((ans: IAnswer) => ans.text) || [];
-  }
-
-  public getQuestionNameByIndex(id: number, index: number): string {
-    return this.getQuizById(id)?.questions[index]?.name || 'N/A';
-  }
-
   public getAnswerByIndex(id: number, questionIndex: number, answerId: number): IAnswer {
-    return this.getQuizById(id)?.questions[questionIndex]?.answers[answerId];
+    //return this.getQuizById(id)?.questions[questionIndex]?.answers[answerId];
+    this.getQuizById(id)?.then((quiz: IQuiz) => {
+      return quiz.questions[questionIndex]?.answers[answerId];
+    });
+    return { id: '', text: '' };
   }
 
 }
