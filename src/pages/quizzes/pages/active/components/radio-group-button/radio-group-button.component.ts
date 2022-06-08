@@ -5,7 +5,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   templateUrl: './radio-group-button.component.html'
 })
 export class RadioGroupButtonComponent {
-  @Input() selectedOption: number = 0;
+  @Input() selectedOption: string = '';
   @Input() options: string[] = [];
   @Input() buttonStyle: string = '';
   @Input() labelClass: string = '';
@@ -16,12 +16,12 @@ export class RadioGroupButtonComponent {
   public inputName: string = 'question';
 
   public selectOption(index: number): void {
-    this.selectedOption = index;
+    this.selectedOption = this.options[index];
     this.onSelect.emit(index);
   }
 
   public isOptionSelected(option: number): boolean {
-    return option === this.selectedOption;
+    return this.options[option] === this.selectedOption;
   }
 
 }

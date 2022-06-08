@@ -43,7 +43,6 @@ export class QuizComponent implements OnInit {
   public timeStart!: Date;
   public isLoading: boolean = false;
 
-  private userAnswersIndexes: number[] = [];
   private userAnswersIds: string[] = [];
 
   @HostListener('window:beforeunload')
@@ -85,8 +84,14 @@ export class QuizComponent implements OnInit {
     return this.currentQuiz?.questions[this.questionIndex]?.answers.map((ans: IAnswer) => ans.text) || [];
   }
 
-  get selectedAnswer(): number {
-    return this.userAnswersIndexes[this.questionIndex];
+  get selectedAnswer(): string {
+    const answers: IAnswer[] = this.currentQuiz?.questions[this.questionIndex]?.answers;
+    for (const answer of answers) {
+      if (answer.id === this.userAnswersIds[this.questionIndex]) {
+        return answer.text;
+      }
+    }
+    return '';
   }
 
   get isLastQuestion(): boolean {
@@ -94,7 +99,7 @@ export class QuizComponent implements OnInit {
   }
 
   get allQuestionsCompleted(): boolean {
-    return this.userAnswersIndexes.length === this.currentQuiz.questions.length;
+    return this.userAnswersIds.length === this.currentQuiz.questions.length;
   }
 
   private async getData(): Promise<void> {
@@ -111,11 +116,11 @@ export class QuizComponent implements OnInit {
   }
 
   public onSelect(optionId: number): void {
-    this.userAnswersIndexes[this.questionIndex] = optionId;
     this.userAnswersIds[this.questionIndex] = this.getAnswerById(optionId).id;
   }
 
   public finishQuiz(): void {
+    console.log(this.userAnswersIds);
     const duration: Duration = new Duration(this.timeStart, new Date());
     this.quizService.finishQuiz(this.quizId, this.userAnswersIds, duration);
   }
