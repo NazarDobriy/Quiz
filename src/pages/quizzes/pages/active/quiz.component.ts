@@ -84,14 +84,14 @@ export class QuizComponent implements OnInit {
     return this.currentQuiz?.questions[this.questionIndex]?.answers.map((ans: IAnswer) => ans.text) || [];
   }
 
-  get selectedAnswer(): string {
+  get selectedAnswer(): string | null {
     const answers: IAnswer[] = this.currentQuiz?.questions[this.questionIndex]?.answers;
     for (const answer of answers) {
       if (answer.id === this.userAnswersIds[this.questionIndex]) {
         return answer.text;
       }
     }
-    return '';
+    return null;
   }
 
   get isLastQuestion(): boolean {

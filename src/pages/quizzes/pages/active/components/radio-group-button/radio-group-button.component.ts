@@ -5,7 +5,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   templateUrl: './radio-group-button.component.html'
 })
 export class RadioGroupButtonComponent {
-  @Input() selectedOption: string = '';
+  @Input() selectedOption: string | null = null;
   @Input() options: string[] = [];
   @Input() buttonStyle: string = '';
   @Input() labelClass: string = '';
