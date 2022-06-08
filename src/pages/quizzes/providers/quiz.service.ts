@@ -40,7 +40,7 @@ export class QuizService {
   constructor(private router: Router, private apiService: ApiService) {}
 
   public getQuizzes(): Observable<IQuiz[]> {
-    return this.apiService.getAllCards();
+    return this.apiService.getAllQuizCards();
   }
 
   private getCorrectAnswers(quiz: IQuiz): string[] {
