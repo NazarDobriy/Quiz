@@ -99,7 +99,16 @@ export class QuizComponent implements OnInit {
   }
 
   get allQuestionsCompleted(): boolean {
-    return this.userAnswersIds.length === this.currentQuiz.questions.length;
+    return this.userAnswersIds.length === this.currentQuiz.questions.length && !this.isArrayHasEmptyElement;
+  }
+
+  get isArrayHasEmptyElement(): boolean {
+    for (const id of this.userAnswersIds) {
+      if (id === undefined) {
+        return true;
+      }
+    }
+    return false;
   }
 
   private async getData(): Promise<void> {
