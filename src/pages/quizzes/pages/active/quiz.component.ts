@@ -125,7 +125,7 @@ export class QuizComponent implements OnInit {
   }
 
   public onSelect(optionId: number): void {
-    this.userAnswersIds[this.questionIndex] = this.getAnswerById(optionId).id;
+    this.userAnswersIds[this.questionIndex] = this.getAnswerByIndex(optionId).id;
   }
 
   public finishQuiz(): void {
@@ -133,7 +133,7 @@ export class QuizComponent implements OnInit {
     this.quizService.finishQuiz(this.quizId, this.userAnswersIds, duration);
   }
 
-  private getAnswerById(id: number): IAnswer {
+  private getAnswerByIndex(id: number): IAnswer {
     return this.currentQuiz?.questions[this.questionIndex]?.answers[id];
   }
 
