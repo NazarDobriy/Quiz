@@ -60,7 +60,7 @@ export class QuizComponent implements OnInit {
   ngOnInit(): void {
     this.timeStart = new Date();
     this.quizId = parseInt(this.activatedRoute.snapshot.params['id']);
-    this.setQuiz();
+    this.setQuizById();
     this.quizTheme = this.themeService.getThemeByText(this.currentQuiz.subtitle);
   }
 
@@ -111,9 +111,8 @@ export class QuizComponent implements OnInit {
     return false;
   }
 
-  private async setQuiz(): Promise<void> {
-    const quizzes: IQuiz[] = await this.quizService.getQuizzes();
-    this.currentQuiz = quizzes[this.quizId];
+  private async setQuizById(): Promise<void> {
+    this.currentQuiz = await this.quizService.getQuizById(this.quizId);
     this.isLoading = false;
   }
 

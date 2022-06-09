@@ -38,6 +38,10 @@ export class QuizService {
     return this.quizzesApiService.getAllQuizzes();
   }
 
+  public getQuizById(id: number) {
+    return this.quizzesApiService.getQuizById(id);
+  }
+
   public getThemes(): Promise<IQuizTheme[]> {
     return this.quizzesApiService.getAllQuizThemes();
   }
