@@ -38,7 +38,7 @@ export class QuizService {
     return this.quizzesApiService.getAllQuizzes();
   }
 
-  public getQuizById(id: number) {
+  public getQuizById(id: number): Promise<IQuiz> {
     return this.quizzesApiService.getQuizById(id);
   }
 
