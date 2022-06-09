@@ -95,11 +95,11 @@ export class QuizComponent implements OnInit {
   }
 
   get isLastQuestion(): boolean {
-    return this.questionIndex + 1 === this.currentQuiz.questions.length;
+    return this.questionIndex + 1 === this.currentQuiz?.questions.length;
   }
 
   get allQuestionsCompleted(): boolean {
-    return this.userAnswersIds.length === this.currentQuiz.questions.length && !this.isArrayHasEmptyElement;
+    return this.userAnswersIds.length === this.currentQuiz?.questions.length && !this.isArrayHasEmptyElement;
   }
 
   get isArrayHasEmptyElement(): boolean {

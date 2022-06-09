@@ -6,6 +6,13 @@ import { IQuizTheme } from './theme.service';
 
 @Injectable()
 export class QuizzesApiService {
+  private quiz: IQuiz = {
+    group: '',
+    questions: [],
+    id: 0,
+    title: '',
+    subtitle: ''
+  };
 
   constructor(private db: AngularFireDatabase) { }
 
@@ -19,7 +26,10 @@ export class QuizzesApiService {
 
   public getQuizById(id: number): Promise<IQuiz> {
     return firstValueFrom(this.db.list<IQuiz>('quizzes').valueChanges().pipe(
-      map(quizzes => quizzes[id])
+      map(quizzes => {
+        const selectedQuiz: IQuiz | undefined = quizzes.find((quiz: IQuiz) => quiz.id === id);
+        return selectedQuiz ? selectedQuiz : this.quiz;
+      })
     ));
   }
 
