@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { firstValueFrom, map } from 'rxjs';
-import { IQuiz } from '../quizzes/providers/quiz.service';
-import { IQuizTheme } from '../quizzes/providers/theme.service';
+import { IQuiz } from './quiz.service';
+import { IQuizTheme } from './theme.service';
 
 @Injectable()
 export class QuizzesApiService {
@@ -10,7 +10,7 @@ export class QuizzesApiService {
   constructor(private db: AngularFireDatabase) { }
 
   public getAllQuizzes(): Promise<IQuiz[]> {
-    return firstValueFrom(this.db.list<IQuiz>('quiz_cards').valueChanges());
+    return firstValueFrom(this.db.list<IQuiz>('quizzes').valueChanges());
   }
 
   public getAllQuizThemes(): Promise<IQuizTheme[]> {
@@ -18,7 +18,7 @@ export class QuizzesApiService {
   }
 
   public getQuizById(id: number): Promise<IQuiz> {
-    return firstValueFrom(this.db.list<IQuiz>('quiz_cards').valueChanges().pipe(
+    return firstValueFrom(this.db.list<IQuiz>('quizzes').valueChanges().pipe(
       map(quizzes => quizzes[id])
     ));
   }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Duration } from 'src/models/duration';
-import { QuizzesApiService } from 'src/pages/providers/api.service';
+import { QuizzesApiService } from './api.service';
 import { IQuizTheme } from './theme.service';
 
 export interface IAnswer {
