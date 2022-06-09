@@ -5,6 +5,7 @@ import { QuizListModule } from './pages/quiz-list/quiz-list.module';
 import { ActiveQuizModule } from './pages/active/active-quiz.module';
 import { ThemeService } from './providers/theme.service';
 import { RouterModule, Routes } from '@angular/router';
+import { QuizzesApiService } from '../providers/api.service';
 
 const routes: Routes = [
   {
@@ -25,7 +26,8 @@ const routes: Routes = [
   ],
   providers: [
     QuizService,
-    ThemeService
+    ThemeService,
+    QuizzesApiService
   ]
 })
 export class QuizzesModule { }

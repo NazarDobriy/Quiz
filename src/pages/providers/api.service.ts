@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
-import { firstValueFrom, map, Observable, pipe } from 'rxjs';
+import { firstValueFrom, map } from 'rxjs';
 import { IQuiz } from '../quizzes/providers/quiz.service';
 import { IQuizTheme } from '../quizzes/providers/theme.service';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class QuizzesApiService {
 
   constructor(private db: AngularFireDatabase) { }
