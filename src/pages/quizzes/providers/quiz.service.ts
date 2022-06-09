@@ -28,9 +28,7 @@ export interface IQuiz extends ISimpleQuiz {
   questions: IQuestion[];
 }
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class QuizService {
   public duration: string = '';
   public correctAnswersAmount: number = 0;
@@ -39,7 +37,7 @@ export class QuizService {
   constructor(private router: Router, private apiService: ApiService) {}
 
   public getQuizzes(): Observable<IQuiz[]> {
-    return this.apiService.getAllQuizCards();
+    return this.apiService.getAllQuizzes();
   }
 
   public getThemes(): Observable<IQuizTheme[]> {

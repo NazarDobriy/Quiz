@@ -16,9 +16,7 @@ export interface IQuizTheme {
   personName: string;
 }
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class ThemeService {
   public quizThemes: IQuizTheme[] = QUIZ_THEMES;
 

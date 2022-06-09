@@ -9,9 +9,7 @@ export interface IDialogConfig  {
   confirmText: string;
 }
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class DialogService {
 
   constructor(private dialog: MatDialog) { }
