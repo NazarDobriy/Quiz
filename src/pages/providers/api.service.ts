@@ -7,7 +7,7 @@ import { IQuizTheme } from '../quizzes/providers/theme.service';
 @Injectable({
   providedIn: 'root'
 })
-export class ApiService {
+export class QuizzesApiService {
 
   constructor(private db: AngularFireDatabase) { }
 
