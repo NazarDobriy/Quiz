@@ -6,7 +6,7 @@ import { IQuizTheme } from './theme.service';
 
 @Injectable()
 export class QuizzesApiService {
-  private quiz: IQuiz = {
+  private primaryQuiz: IQuiz = {
     group: '',
     questions: [],
     id: 0,
@@ -28,7 +28,7 @@ export class QuizzesApiService {
     return firstValueFrom(this.db.list<IQuiz>('quizzes').valueChanges().pipe(
       map(quizzes => {
         const selectedQuiz: IQuiz | undefined = quizzes.find((quiz: IQuiz) => quiz.id === id);
-        return selectedQuiz ? selectedQuiz : this.quiz;
+        return selectedQuiz ? selectedQuiz : this.primaryQuiz;
       })
     ));
   }
