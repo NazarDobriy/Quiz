@@ -32,11 +32,10 @@ export class ScoreComponent implements OnInit {
     this.correctAnswersAmount = this.quizService.correctAnswersAmount;
   }
 
-  private setQuiz(): void {
-    this.quizService.getQuizzes().subscribe((quizzes: IQuiz[]) => {
-      this.currentQuiz = quizzes[this.quizId];
-      this.isLoading = false;
-    })
+  private async setQuiz(): Promise<void> {
+    const quizzes: IQuiz[] = await this.quizService.getQuizzes();
+    this.currentQuiz = quizzes[this.quizId];
+    this.isLoading = false;
   }
 
   get questionsLength(): number {

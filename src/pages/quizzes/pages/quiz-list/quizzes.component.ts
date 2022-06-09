@@ -24,18 +24,14 @@ export class QuizzesComponent implements OnInit {
     return this.isLoadingQuizzes && this.isLoadingThemes;
   }
 
-  private setQuizzes(): void {
-    this.quizService.getQuizzes().subscribe((quizzes: IQuiz[]) => {
-      this.quizzes = quizzes;
-      this.isLoadingQuizzes = false;
-    });
+  private async setQuizzes(): Promise<void> {
+    this.quizzes = await this.quizService.getQuizzes();
+    this.isLoadingQuizzes = false;
   }
 
-  private setThemes(): void {
-    this.quizService.getThemes().subscribe((themes: IQuizTheme[]) => {
-      this.quizThemes = themes;
-      this.isLoadingThemes = false;
-    })
+  private async setThemes(): Promise<void> {
+    this.quizThemes = await this.quizService.getThemes();
+    this.isLoadingThemes = false;
   }
 
   public loadCards(): void {

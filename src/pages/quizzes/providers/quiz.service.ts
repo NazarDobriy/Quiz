@@ -36,11 +36,11 @@ export class QuizService {
 
   constructor(private router: Router, private apiService: ApiService) {}
 
-  public getQuizzes(): Observable<IQuiz[]> {
+  public getQuizzes(): Promise<IQuiz[]> {
     return this.apiService.getAllQuizzes();
   }
 
-  public getThemes(): Observable<IQuizTheme[]> {
+  public getThemes(): Promise<IQuizTheme[]> {
     return this.apiService.getAllQuizThemes();
   }
 
