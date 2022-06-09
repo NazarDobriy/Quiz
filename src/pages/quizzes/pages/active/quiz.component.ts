@@ -41,8 +41,9 @@ export class QuizComponent implements OnInit {
   public quizId: number = 0;
   public questionIndex: number = 0;
   public timeStart!: Date;
-  public isLoading: boolean = true;
 
+  private isLoadingThemes: boolean = true;
+  private isLoadingQuizzes: boolean = true;
   private userAnswersIds: string[] = [];
 
   @HostListener('window:beforeunload')
@@ -61,7 +62,7 @@ export class QuizComponent implements OnInit {
     this.timeStart = new Date();
     this.quizId = parseInt(this.activatedRoute.snapshot.params['id']);
     this.setQuizById();
-    this.quizTheme = this.themeService.getThemeByText(this.currentQuiz.subtitle);
+    this.setTheme();
   }
 
   get questionCounter(): number {
@@ -111,9 +112,19 @@ export class QuizComponent implements OnInit {
     return false;
   }
 
+  get isLoading(): boolean {
+    return this.isLoadingQuizzes && this.isLoadingThemes;
+  }
+
+  private async setTheme(): Promise<void> {
+    const themes: IQuizTheme[] = await this.themeService.getThemes();
+    this.quizTheme = this.themeService.getThemeByText(themes, this.currentQuiz.subtitle);
+    this.isLoadingQuizzes = false;
+  }
+
   private async setQuizById(): Promise<void> {
     this.currentQuiz = await this.quizService.getQuizById(this.quizId);
-    this.isLoading = false;
+    this.isLoadingThemes = false;
   }
 
   public handleNextQuestion(): void {

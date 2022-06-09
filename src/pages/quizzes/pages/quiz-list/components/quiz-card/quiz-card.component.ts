@@ -8,13 +8,14 @@ import { IQuizTheme, ThemeService } from '../../../../providers/theme.service';
 })
 export class QuizCardComponent implements OnInit {
   @Input() quiz!: IQuiz;
+  @Input() themes!: IQuizTheme[];
   
   public theme!: IQuizTheme;
 
   constructor(private themeService: ThemeService) {}
 
   ngOnInit(): void {
-    this.theme = this.themeService.getThemeByText(this.quiz.subtitle);
+    this.theme = this.themeService.getThemeByText(this.themes, this.quiz.subtitle);
   }
 
 }

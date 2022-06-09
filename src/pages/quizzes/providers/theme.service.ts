@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { QUIZ_THEMES } from '../quiz-data';
+import { QuizzesApiService } from './api.service';
 
 export interface IQuizTheme {
   primaryTextClass: string;
@@ -18,24 +19,27 @@ export interface IQuizTheme {
 
 @Injectable()
 export class ThemeService {
-  public quizThemes: IQuizTheme[] = QUIZ_THEMES;
 
-  constructor() { }
+  constructor(private quizzesApiService: QuizzesApiService) { }
 
-  public calculateTheme(text: string): number {
+  private getThemeById(themes: IQuizTheme[], id: number): IQuizTheme {
+    return themes[id];
+  }
+
+  public getThemes(): Promise<IQuizTheme[]> {
+    return this.quizzesApiService.getAllQuizThemes();
+  }
+
+  public calculateTheme(themes: IQuizTheme[], text: string): number {
     let sum: number = 0;
     for (let i = 0; i < text.length; i++) {
       sum += text.charCodeAt(i);
     }
-    return sum % this.quizThemes.length;
+    return sum % themes.length;
   }
 
-  private getThemeById(id: number = 0): IQuizTheme {
-    return this.quizThemes[id];
-  }
-
-  public getThemeByText(text: string): IQuizTheme {
-    return this.getThemeById(this.calculateTheme(text));
+  public getThemeByText(themes: IQuizTheme[], text: string): IQuizTheme {
+    return this.getThemeById(themes, this.calculateTheme(themes, text));
   }
 
 }

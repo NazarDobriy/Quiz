@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { QuizService, IQuiz } from '../../providers/quiz.service';
-import { IQuizTheme } from '../../providers/theme.service';
+import { IQuizTheme, ThemeService } from '../../providers/theme.service';
 
 @Component({
   selector: 'app-quizzes',
@@ -13,7 +13,10 @@ export class QuizzesComponent implements OnInit {
   private isLoadingThemes: boolean = true;
   private isLoadingQuizzes: boolean = true;
 
-  constructor(private quizService: QuizService) { }
+  constructor(
+    private quizService: QuizService,
+    private themeService: ThemeService
+  ) { }
 
   ngOnInit(): void {
     this.setThemes();
@@ -30,7 +33,7 @@ export class QuizzesComponent implements OnInit {
   }
 
   private async setThemes(): Promise<void> {
-    this.quizThemes = await this.quizService.getThemes();
+    this.quizThemes = await this.themeService.getThemes();
     this.isLoadingThemes = false;
   }
 

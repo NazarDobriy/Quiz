@@ -42,10 +42,6 @@ export class QuizService {
     return this.quizzesApiService.getQuizById(id);
   }
 
-  public getThemes(): Promise<IQuizTheme[]> {
-    return this.quizzesApiService.getAllQuizThemes();
-  }
-
   public finishQuiz(quiz: IQuiz, answers: string[], duration: Duration): void {
     this.completed = true;
     this.duration = duration.toString();
