@@ -42,6 +42,13 @@ export class QuizService {
     return this.quizzesApiService.getAllQuizThemes();
   }
 
+  public finishQuiz(quiz: IQuiz, answers: string[], duration: Duration): void {
+    this.completed = true;
+    this.duration = duration.toString();
+    this.correctAnswersAmount = this.calcQuizResult(quiz, answers);
+    this.router.navigateByUrl(`/quizzes/active/${quiz.id + 1}/score`);
+  }
+
   private getCorrectAnswers(quiz: IQuiz): string[] {
     return quiz.questions.map((question: IQuestion) => question.correctAnswer);
   }
@@ -55,13 +62,6 @@ export class QuizService {
       }
     }
     return amountCorrectAnswers;
-  }
-
-  public finishQuiz(quiz: IQuiz, answers: string[], duration: Duration): void {
-    this.completed = true;
-    this.duration = duration.toString();
-    this.correctAnswersAmount = this.calcQuizResult(quiz, answers);
-    this.router.navigateByUrl(`/quizzes/active/${quiz.id + 1}/score`);
   }
 
 }
