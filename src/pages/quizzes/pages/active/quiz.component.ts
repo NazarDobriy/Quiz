@@ -59,7 +59,7 @@ export class QuizComponent implements OnInit {
 
   ngOnInit(): void {
     this.timeStart = new Date();
-    this.quizId = parseInt(this.activatedRoute.snapshot.params['id']) - 1;
+    this.quizId = parseInt(this.activatedRoute.snapshot.params['id']);
     this.setQuiz();
     this.quizTheme = this.themeService.getThemeByText(this.currentQuiz.subtitle);
   }
