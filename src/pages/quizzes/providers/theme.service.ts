@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { QuizzesApiService } from './api.service';
+import { QuizzesApiService } from './quizzes-api.service';
 
 export interface IQuizTheme {
   primaryTextClass: string;

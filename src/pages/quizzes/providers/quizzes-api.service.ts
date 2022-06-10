@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { firstValueFrom, map } from 'rxjs';
+import { Duration } from 'src/models/duration';
 import { IQuiz } from './quiz.service';
 import { IQuizTheme } from './theme.service';
 

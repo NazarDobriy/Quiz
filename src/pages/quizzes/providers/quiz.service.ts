@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Duration } from 'src/models/duration';
-import { QuizzesApiService } from './api.service';
+import { QuizzesApiService } from './quizzes-api.service';
 
 export interface IAnswer {
   id: string;
