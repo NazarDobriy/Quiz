@@ -117,8 +117,9 @@ export class QuizComponent implements OnInit {
   }
 
   private async setTheme(): Promise<void> {
-    const themes: IQuizTheme[] = await this.themeService.getThemes();
-    this.quizTheme = this.themeService.getThemeByText(themes, this.currentQuiz.subtitle);
+    //const themes: IQuizTheme[] = await this.themeService.getThemes();
+    this.themeService.themes = await this.themeService.getThemes();
+    this.quizTheme = this.themeService.getThemeByText(this.currentQuiz.subtitle);
     this.isLoadingQuizzes = false;
   }
 

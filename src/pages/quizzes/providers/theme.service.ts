@@ -18,27 +18,28 @@ export interface IQuizTheme {
 
 @Injectable()
 export class ThemeService {
+  public themes: IQuizTheme[] = [];
 
   constructor(private quizzesApiService: QuizzesApiService) { }
 
-  private getThemeById(themes: IQuizTheme[], id: number): IQuizTheme {
-    return themes[id];
+  private getThemeById(id: number): IQuizTheme {
+    return this.themes[id];
   }
 
   public getThemes(): Promise<IQuizTheme[]> {
     return this.quizzesApiService.getAllQuizThemes();
   }
 
-  private calculateTheme(themes: IQuizTheme[], text: string): number {
+  private calculateTheme(text: string): number {
     let sum: number = 0;
     for (let i = 0; i < text.length; i++) {
       sum += text.charCodeAt(i);
     }
-    return sum % themes.length;
+    return sum % this.themes.length;
   }
 
-  public getThemeByText(themes: IQuizTheme[], text: string): IQuizTheme {
-    return this.getThemeById(themes, this.calculateTheme(themes, text));
+  public getThemeByText(text: string): IQuizTheme {
+    return this.getThemeById(this.calculateTheme(text));
   }
 
 }
