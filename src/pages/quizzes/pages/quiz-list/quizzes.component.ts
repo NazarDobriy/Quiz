@@ -33,7 +33,8 @@ export class QuizzesComponent implements OnInit {
   }
 
   private async setThemes(): Promise<void> {
-    this.quizThemes = await this.themeService.getThemes();
+    await this.themeService.setThemes();
+    this.quizThemes = this.themeService.themes;
     this.themeService.themes = this.quizThemes;
     this.isLoadingThemes = false;
   }

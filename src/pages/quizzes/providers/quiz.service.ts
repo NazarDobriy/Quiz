@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Duration } from 'src/models/duration';
 import { QuizzesApiService } from './api.service';
-import { IQuizTheme } from './theme.service';
 
 export interface IAnswer {
   id: string;
@@ -46,7 +45,7 @@ export class QuizService {
     this.completed = true;
     this.duration = duration.toString();
     this.correctAnswersAmount = this.calcQuizResult(quiz, answers);
-    this.router.navigateByUrl(`/quizzes/active/${quiz.id + 1}/score`);
+    this.router.navigateByUrl(`/quizzes/active/${quiz.id}/score`);
   }
 
   private getCorrectAnswers(quiz: IQuiz): string[] {

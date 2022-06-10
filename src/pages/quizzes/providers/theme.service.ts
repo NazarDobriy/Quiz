@@ -26,8 +26,8 @@ export class ThemeService {
     return this.themes[id];
   }
 
-  public getThemes(): Promise<IQuizTheme[]> {
-    return this.quizzesApiService.getAllQuizThemes();
+  public async setThemes(): Promise<void> {
+    this.themes = await this.quizzesApiService.getAllQuizThemes();
   }
 
   private calculateTheme(text: string): number {
