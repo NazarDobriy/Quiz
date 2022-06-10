@@ -8,7 +8,6 @@ import { IQuizTheme, ThemeService } from '../../providers/theme.service';
 })
 export class QuizzesComponent implements OnInit {
   public quizzes: IQuiz[] = [];
-  public quizThemes: IQuizTheme[] = [];
 
   private isLoadingThemes: boolean = true;
   private isLoadingQuizzes: boolean = true;
@@ -34,8 +33,6 @@ export class QuizzesComponent implements OnInit {
 
   private async setThemes(): Promise<void> {
     await this.themeService.setThemes();
-    this.quizThemes = this.themeService.themes;
-    this.themeService.themes = this.quizThemes;
     this.isLoadingThemes = false;
   }
 
