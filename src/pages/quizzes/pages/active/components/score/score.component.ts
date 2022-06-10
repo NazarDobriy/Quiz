@@ -28,13 +28,12 @@ export class ScoreComponent implements OnInit {
   ngOnInit(): void {
     this.duration = this.quizService.duration;
     this.quizId = parseInt(this.activatedRoute.snapshot.params['id']);
-    this.setQuiz();
+    this.setQuizById();
     this.correctAnswersAmount = this.quizService.correctAnswersAmount;
   }
 
-  private async setQuiz(): Promise<void> {
-    const quizzes: IQuiz[] = await this.quizService.getQuizzes();
-    this.currentQuiz = quizzes[this.quizId];
+  private async setQuizById(): Promise<void> {
+    this.currentQuiz = await this.quizService.getQuizById(this.quizId);
     this.isLoading = false;
   }
 
