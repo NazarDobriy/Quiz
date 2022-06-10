@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { QUIZ_THEMES } from '../quiz-data';
 import { QuizzesApiService } from './api.service';
 
 export interface IQuizTheme {
@@ -30,7 +29,7 @@ export class ThemeService {
     return this.quizzesApiService.getAllQuizThemes();
   }
 
-  public calculateTheme(themes: IQuizTheme[], text: string): number {
+  private calculateTheme(themes: IQuizTheme[], text: string): number {
     let sum: number = 0;
     for (let i = 0; i < text.length; i++) {
       sum += text.charCodeAt(i);
