@@ -1,19 +1,25 @@
-<header class="text-center text-bright sm:mt-25 mt-20">
-  <span class="sm:mr-2 sm:text-[4rem] text-[34px] font-semibold">Choose your</span>
-  <br class="sm:hidden">
-  <span class="right-text text-[3.5rem] bg-warning text-primary relative sm:top-2 top-[1rem] p-3 font-light">Quiz</span>
-  <span class="bg-bright inline-block h-2 w-2 relative left-1 sm:top-2 top-[1rem] rounded-full"></span>
-</header>
+<ng-container *ngIf="!isLoading; else loading">
 
-<section class="flex flex-wrap justify-center items-center mt-[70px] gap-x-5 m-auto max-w-[88rem]">
-  <ng-container *ngFor="let quiz of quizzes; let i = index">
-    <app-quiz-card [quiz]="quiz"></app-quiz-card>
-  </ng-container>
-</section>
+  <header class="text-center text-bright sm:mt-25 mt-20">
+    <span class="sm:mr-2 sm:text-[4rem] text-[34px] font-semibold">Choose your</span>
+    <br class="sm:hidden">
+    <span class="right-text text-[3.5rem] bg-warning text-primary relative sm:top-2 top-[1rem] p-3 font-light">Quiz</span>
+    <span class="bg-bright inline-block h-2 w-2 relative left-1 sm:top-2 top-[1rem] rounded-full"></span>
+  </header>
+  
+  <section class="flex flex-wrap justify-center items-center mt-[70px] gap-x-5 m-auto max-w-[88rem]">
+    <ng-container *ngFor="let quiz of quizzes">
+      <app-quiz-card [quiz]="quiz"></app-quiz-card>
+    </ng-container>
+  </section>
+  
+  <button 
+    class="grid m-auto bg-accent text-bright cursor-pointer px-6 py-4 rounded sm:my-[1.875rem] my-[3.375rem]"
+    (click)="loadCards()"
+  >
+    Load more
+  </button>
 
-<button 
-  class="grid m-auto bg-accent text-bright cursor-pointer px-6 py-4 rounded sm:my-[1.875rem] my-[3.375rem]"
-  (click)="loadCards()"
->
-  <a routerLink="">Load more</a>
-</button>
+</ng-container>
+
+<ng-template #loading></ng-template>

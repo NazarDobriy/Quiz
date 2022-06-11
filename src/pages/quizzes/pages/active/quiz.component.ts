@@ -41,8 +41,9 @@ export class QuizComponent implements OnInit {
   public quizId: number = 0;
   public questionIndex: number = 0;
   public timeStart!: Date;
-  public isLoading: boolean = true;
 
+  private isLoadingThemes: boolean = true;
+  private isLoadingQuizzes: boolean = true;
   private userAnswersIds: string[] = [];
 
   @HostListener('window:beforeunload')
@@ -60,8 +61,8 @@ export class QuizComponent implements OnInit {
   ngOnInit(): void {
     this.timeStart = new Date();
     this.quizId = parseInt(this.activatedRoute.snapshot.params['id']);
-    this.getData();
-    this.quizTheme = this.themeService.getThemeByText(this.currentQuiz.subtitle);
+    this.setQuizById();
+    this.setTheme();
   }
 
   get questionCounter(): number {
@@ -95,11 +96,11 @@ export class QuizComponent implements OnInit {
   }
 
   get isLastQuestion(): boolean {
-    return this.questionIndex + 1 === this.currentQuiz.questions.length;
+    return this.questionIndex + 1 === this.currentQuiz?.questions.length;
   }
 
   get allQuestionsCompleted(): boolean {
-    return this.userAnswersIds.length === this.currentQuiz.questions.length && !this.isArrayHasEmptyElement;
+    return this.userAnswersIds.length === this.currentQuiz?.questions.length && !this.isArrayHasEmptyElement;
   }
 
   get isArrayHasEmptyElement(): boolean {
@@ -111,9 +112,19 @@ export class QuizComponent implements OnInit {
     return false;
   }
 
-  private async getData(): Promise<void> {
+  get isLoading(): boolean {
+    return this.isLoadingQuizzes && this.isLoadingThemes;
+  }
+
+  private async setTheme(): Promise<void> {
+    await this.themeService.setThemes();
+    this.quizTheme = this.themeService.getThemeByText(this.currentQuiz.subtitle);
+    this.isLoadingQuizzes = false;
+  }
+
+  private async setQuizById(): Promise<void> {
     this.currentQuiz = await this.quizService.getQuizById(this.quizId);
-    this.isLoading = false;
+    this.isLoadingThemes = false;
   }
 
   public handleNextQuestion(): void {
@@ -130,7 +141,7 @@ export class QuizComponent implements OnInit {
 
   public finishQuiz(): void {
     const duration: Duration = new Duration(this.timeStart, new Date());
-    this.quizService.finishQuiz(this.quizId, this.userAnswersIds, duration);
+    this.quizService.finishQuiz(this.currentQuiz, this.userAnswersIds, duration);
   }
 
   private getAnswerByIndex(id: number): IAnswer {

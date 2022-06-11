@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { IQuiz } from '../../../../providers/quiz.service';
 import { IQuizTheme, ThemeService } from '../../../../providers/theme.service';
 
@@ -6,15 +6,13 @@ import { IQuizTheme, ThemeService } from '../../../../providers/theme.service';
   selector: 'app-quiz-card',
   templateUrl: './quiz-card.component.html'
 })
-export class QuizCardComponent implements OnInit {
+export class QuizCardComponent {
   @Input() quiz!: IQuiz;
-  
-  public theme!: IQuizTheme;
 
   constructor(private themeService: ThemeService) {}
 
-  ngOnInit(): void {
-    this.theme = this.themeService.getThemeByText(this.quiz.subtitle);
+  get theme(): IQuizTheme {
+    return this.themeService.getThemeByText(this.quiz.subtitle);
   }
 
 }

@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Duration } from 'src/models/duration';
-import { QUIZ_CARDS, QUIZ_THEMES } from '../quiz-data';
-import { IQuizTheme } from './theme.service';
+import { QuizzesApiService } from './quizzes-api.service';
 
 export interface IAnswer {
   id: string;
@@ -26,32 +25,35 @@ export interface IQuiz extends ISimpleQuiz {
   questions: IQuestion[];
 }
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class QuizService {
-  public quizCards: IQuiz[] = QUIZ_CARDS;
-  public quizThemes: IQuizTheme[] = QUIZ_THEMES;
   public duration: string = '';
   public correctAnswersAmount: number = 0;
   public completed: boolean = false;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private quizzesApiService: QuizzesApiService) {}
 
-  public getQuizzes(): IQuiz[] {
-    return this.quizCards;
+  public getQuizzes(): Promise<IQuiz[]> {
+    return this.quizzesApiService.getAllQuizzes();
   }
 
   public getQuizById(id: number): Promise<IQuiz> {
-    return Promise.resolve(this.quizCards[id - 1]);
+    return this.quizzesApiService.getQuizById(id);
   }
 
-  private getCorrectAnswers(id: number): string[] {
-    return this.quizCards[id - 1].questions.map((question: IQuestion) => question.correctAnswer);
+  public finishQuiz(quiz: IQuiz, answers: string[], duration: Duration): void {
+    this.completed = true;
+    this.duration = duration.toString();
+    this.correctAnswersAmount = this.calcQuizResult(quiz, answers);
+    this.router.navigateByUrl(`/quizzes/active/${quiz.id}/score`);
   }
 
-  private calcQuizResult(id: number, userAnswers: string[]): number {
-    const correctAnswers: string[] = this.getCorrectAnswers(id);
+  private getCorrectAnswers(quiz: IQuiz): string[] {
+    return quiz.questions.map((question: IQuestion) => question.correctAnswer);
+  }
+
+  private calcQuizResult(quiz: IQuiz, userAnswers: string[]): number {
+    const correctAnswers: string[] = this.getCorrectAnswers(quiz);
     let amountCorrectAnswers: number = 0;
     for (let i = 0; i < correctAnswers.length; i++) {
       if (userAnswers[i] === correctAnswers[i]) {
@@ -59,13 +61,6 @@ export class QuizService {
       }
     }
     return amountCorrectAnswers;
-  }
-
-  public finishQuiz(id: number, answers: string[], duration: Duration): void {
-    this.completed = true;
-    this.duration = duration.toString();
-    this.correctAnswersAmount = this.calcQuizResult(id, answers);
-    this.router.navigateByUrl(`/quizzes/active/${id}/score`);
   }
 
 }
