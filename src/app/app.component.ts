@@ -11,7 +11,9 @@ export class AppComponent implements OnInit {
   constructor(private userService: UserService) {}
 
   ngOnInit(): void {
-    
+    if (!this.userService.hasId) {
+      this.userService.generateId();
+    }
   }
 
 }
