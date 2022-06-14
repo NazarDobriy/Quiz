@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { firstValueFrom, map } from 'rxjs';
-import { IQuiz } from './quiz.service';
+import { UserService } from 'src/core/providers/user.service';
+import { Duration } from 'src/models/duration';
+import { IQuiz, IQuizResult } from './quiz.service';
 import { IQuizTheme } from './theme.service';
 
 @Injectable()
@@ -14,7 +16,7 @@ export class QuizzesApiService {
     subtitle: ''
   };
 
-  constructor(private db: AngularFireDatabase) { }
+  constructor(private db: AngularFireDatabase, private userService: UserService) { }
 
   public getAllQuizzes(): Promise<IQuiz[]> {
     return firstValueFrom(this.db.list<IQuiz>('quizzes').valueChanges());
@@ -26,11 +28,25 @@ export class QuizzesApiService {
 
   public getQuizById(id: number): Promise<IQuiz> {
     return firstValueFrom(this.db.list<IQuiz>('quizzes').valueChanges().pipe(
-      map(quizzes => {
+      map((quizzes: IQuiz[]) => {
         const selectedQuiz: IQuiz | undefined = quizzes.find((quiz: IQuiz) => quiz.id === id);
         return selectedQuiz ? selectedQuiz : this.primaryQuiz;
       })
     ));
+  }
+
+  public setQuizAnswers(quizId: number, answers: string[], duration: Duration): void {
+    if (this.userService.id) {
+      const path: string = `quiz_answers/${this.userService.id}/${quizId}`;
+      this.db.object<IQuizResult>(path).set({
+        answers: answers,
+        duration: duration.toString()
+      });
+    }
+  }
+
+  public getQuizAnswersById(id: number): Promise<IQuizResult | null> {
+    return firstValueFrom(this.db.object<IQuizResult>(`quiz_answers/${this.userService.id}/${id}`).valueChanges());
   }
 
 }
