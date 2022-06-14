@@ -16,20 +16,8 @@ export class Duration {
     return this.end.getTime() - this.start.getTime();
   }
 
-  get days(): number {
-    return Math.floor(this.duration / 1000 / 60 / 60 / 24) % 365;
-  }
-
-  get hours(): number {
-    return Math.floor(this.duration / 1000 / 60 / 60) % 24;
-  }
-
-  get minutes(): number {
-    return Math.floor(this.duration / 1000 / 60) % 60;
-  }
-
   get seconds(): number {
-    return Math.floor(this.duration / 1000) % 60;
+    return Math.floor(this.duration / 1000);
   }
 
 }
