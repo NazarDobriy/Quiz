@@ -27,6 +27,7 @@ export interface IQuiz extends ISimpleQuiz {
 
 export interface IQuizResult {
   answers: string[];
+  seconds: number;
   duration: string;
 }
 

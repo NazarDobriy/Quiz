@@ -40,6 +40,7 @@ export class QuizzesApiService {
       const path: string = `quiz_answers/${this.userService.id}/${quizId}`;
       this.db.object<IQuizResult>(path).set({
         answers: answers,
+        seconds: duration.seconds,
         duration: duration.toString()
       });
     }
