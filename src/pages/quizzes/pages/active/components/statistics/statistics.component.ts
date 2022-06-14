@@ -1,4 +1,4 @@
-import { Component, DoCheck, Input } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 import { IQuiz, IQuizResult } from 'src/pages/quizzes/providers/quiz.service';
 import { StatisticsService } from '../../providers/statistics.service';
 
@@ -7,13 +7,13 @@ import { StatisticsService } from '../../providers/statistics.service';
   templateUrl: './statistics.component.html',
   providers: [StatisticsService]
 })
-export class StatisticsComponent implements DoCheck {
+export class StatisticsComponent implements OnChanges {
   @Input() quizzesResults: IQuizResult[] = [];
   @Input() quizzes: IQuiz[] = [];
 
   constructor(public statisticsService: StatisticsService) { }
 
-  ngDoCheck(): void {
+  ngOnChanges(): void {
     this.statisticsService.initialize(this.quizzes, this.quizzesResults);
   }
 
