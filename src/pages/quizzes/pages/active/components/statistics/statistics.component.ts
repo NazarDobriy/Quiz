@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { IQuizResult } from 'src/pages/quizzes/providers/quiz.service';
 
 @Component({
   selector: 'app-statistics',
@@ -6,10 +7,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./statistics.component.scss']
 })
 export class StatisticsComponent implements OnInit {
+  @Input() passedQuizzes: IQuizResult[] = [];
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  get amountPassedQuizzes(): number {
+    return this.passedQuizzes.length;
   }
 
 }

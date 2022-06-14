@@ -10,6 +10,8 @@ export class ScoreComponent implements OnInit {
   private quizId: number = 0;
   private isLoadingQuiz: boolean = true;
   private isLoadingQuizAnswers: boolean = true;
+  private isLoadingPassedQuizzes: boolean = true;
+  public passedQuizzes: IQuizResult[] = [];
 
   private currentQuiz: IQuiz = {
     group: '',
@@ -34,6 +36,7 @@ export class ScoreComponent implements OnInit {
     this.quizId = parseInt(this.activatedRoute.snapshot.params['id']);
     this.setQuizById();
     this.setQuizAnswersById();
+    this.setPassedQuizzes();
   }
 
   private async setQuizById(): Promise<void> {
@@ -49,12 +52,21 @@ export class ScoreComponent implements OnInit {
     this.isLoadingQuizAnswers = false;
   }
 
+  private async setPassedQuizzes(): Promise<void> {
+    this.passedQuizzes = await this.quizService.getPassedQuizzes();
+    this.isLoadingPassedQuizzes = false;
+  }
+
+  get amountPassedQuizzes(): number {
+    return this.passedQuizzes.length;
+  }
+
   get questionsLength(): number {
     return this.currentQuiz.questions.length;
   }
 
   get isLoading(): boolean {
-    return this.isLoadingQuiz && this.isLoadingQuizAnswers;
+    return this.isLoadingQuiz && this.isLoadingQuizAnswers && this.isLoadingPassedQuizzes;
   }
 
   get duration(): string {

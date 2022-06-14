@@ -50,4 +50,8 @@ export class QuizzesApiService {
     return firstValueFrom(this.db.object<IQuizResult>(`quiz_answers/${this.userService.id}/${id}`).valueChanges());
   }
 
+  public getAllPassedQuizzes(): Promise<IQuizResult[]> {
+    return firstValueFrom(this.db.list<IQuizResult>(`quiz_answers/${this.userService.id}`).valueChanges());
+  }
+
 }

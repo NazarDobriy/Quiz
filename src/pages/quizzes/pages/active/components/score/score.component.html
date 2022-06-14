@@ -17,7 +17,10 @@
         Good try! Why not have another go? You might get a bigger score!
       </div>
     </section>
-    <app-statistics></app-statistics>
+    <app-statistics
+      [passedQuizzes]="passedQuizzes"
+    >
+    </app-statistics>
     <section class="my-10">
       <a routerLink="/">
         <button class="bg-accent text-bright px-6 py-4 rounded">Back on main page</button>
