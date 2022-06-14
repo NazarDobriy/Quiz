@@ -27,6 +27,7 @@ export interface IQuiz extends ISimpleQuiz {
 
 export interface IQuizResult {
   answers: string[];
+  correct: number;
   seconds: number;
   duration: string;
 }
@@ -55,7 +56,12 @@ export class QuizService {
 
   public finishQuiz(quiz: IQuiz, answers: string[], duration: Duration): void {
     this.completed = true;
-    this.quizzesApiService.setQuizAnswers(quiz.id, answers, duration);
+    this.quizzesApiService.setQuizAnswers(
+      quiz.id, 
+      answers, 
+      this.calcQuizResult(quiz, answers), 
+      duration
+    );
     this.router.navigateByUrl(`/quizzes/active/${quiz.id}/score`);
   }
 

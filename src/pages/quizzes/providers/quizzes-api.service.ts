@@ -35,11 +35,12 @@ export class QuizzesApiService {
     ));
   }
 
-  public setQuizAnswers(quizId: number, answers: string[], duration: Duration): void {
+  public setQuizAnswers(quizId: number, answers: string[], correctAnswers: number, duration: Duration): void {
     if (this.userService.id) {
       const path: string = `quiz_answers/${this.userService.id}/${quizId}`;
       this.db.object<IQuizResult>(path).set({
         answers: answers,
+        correct: correctAnswers,
         seconds: duration.seconds,
         duration: duration.toString()
       });

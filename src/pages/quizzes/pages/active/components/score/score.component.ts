@@ -25,6 +25,7 @@ export class ScoreComponent implements OnInit {
 
   public currentQuizAnswers: IQuizResult = {
     answers: [],
+    correct: 0,
     seconds: 0,
     duration: ''
   };
@@ -82,7 +83,7 @@ export class ScoreComponent implements OnInit {
   }
 
   get score(): number {
-    return this.quizService.calcQuizResult(this.currentQuiz, this.currentQuizAnswers.answers);
+    return this.currentQuizAnswers.correct;
   }
 
   canActivate(): boolean {
