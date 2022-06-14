@@ -1,82 +1,60 @@
-import { Component, Input } from '@angular/core';
+import { Component, DoCheck, Input } from '@angular/core';
 import { IQuiz, IQuizResult } from 'src/pages/quizzes/providers/quiz.service';
+import { StatisticsService } from '../../providers/statistics.service';
 
 @Component({
   selector: 'app-statistics',
   templateUrl: './statistics.component.html'
 })
-export class StatisticsComponent {
+export class StatisticsComponent implements DoCheck {
   @Input() passedQuizzes: IQuizResult[] = [];
   @Input() quizzes: IQuiz[] = [];
 
-  constructor() { }
+  constructor(private statisticsService: StatisticsService) { }
+
+  ngDoCheck(): void {
+    this.statisticsService.quizzes = this.quizzes;
+    this.statisticsService.passedQuizzes = this.passedQuizzes;
+  }
 
   get amountPassedQuizzes(): number {
-    return this.passedQuizzes.length;
+    return this.statisticsService.amountPassedQuizzes();
   }
 
   get amountQuizzes(): number {
-    return this.quizzes.length;
+    return this.statisticsService.amountQuizzes();
   }
 
   get quizzesQuestionAmount(): number {
-    let questionCounter: number = 0;
-    this.quizzes.forEach((quiz: IQuiz) => {
-      questionCounter += quiz.questions.length;
-    });
-    return questionCounter;
+    return this.statisticsService.quizzesQuestionAmount();
   }
 
   get passedQuizzesQuestionAmount(): number {
-    let questionCounter: number = 0;
-    this.passedQuizzes.forEach((quiz: IQuizResult) => {
-      questionCounter += quiz.answers.length;
-    });
-    return questionCounter;
+    return this.statisticsService.passedQuizzesQuestionAmount();
   }
 
   get rightAnswersAmount(): number {
-    let correctCounter: number = 0;
-    this.passedQuizzes.forEach((quiz: IQuizResult) => {
-      correctCounter += quiz.correct;
-    });
-    return correctCounter;
+    return this.statisticsService.rightAnswersAmount();
   }
 
   get wrongAnswersAmount(): number {
-    return this.passedQuizzesQuestionAmount - this.rightAnswersAmount;
+    return this.statisticsService.wrongAnswersAmount();
   }
 
   get generalSecondsDuration(): number {
-    let durationCounter: number = 0;
-    this.passedQuizzes.forEach((quiz: IQuizResult) => {
-      durationCounter += quiz.seconds;
-    });
-    return durationCounter;
+    return this.statisticsService.generalSecondsDuration();
   }
 
   get generalMinutesDuration(): number {
-    let durationCounter: number = 0;
-    this.passedQuizzes.forEach((quiz: IQuizResult) => {
-      durationCounter += quiz.seconds;
-    });
-    return Math.floor(durationCounter / 60);
+    return this.statisticsService.generalMinutesDuration();
   }
 
   get averageSecondsDuration(): number {
-    let durationCounter: number = 0;
-    this.passedQuizzes.forEach((quiz: IQuizResult) => {
-      durationCounter += quiz.seconds;
-    });
-    return Math.floor(durationCounter / this.amountPassedQuizzes);
+    return this.statisticsService.averageSecondsDuration();
   }
 
   get averageMinutesDuration(): number {
-    let durationCounter: number = 0;
-    this.passedQuizzes.forEach((quiz: IQuizResult) => {
-      durationCounter += quiz.seconds;
-    });
-    return Math.floor(durationCounter / this.amountPassedQuizzes / 60);
+    return this.statisticsService.averageMinutesDuration();
   }
 
 }

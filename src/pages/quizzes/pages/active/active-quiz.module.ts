@@ -10,6 +10,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ScoreComponent } from './components/score/score.component';
 import { ScoreCounterComponent } from './components/score-counter/score-counter.component';
 import { StatisticsComponent } from './components/statistics/statistics.component';
+import { StatisticsService } from './providers/statistics.service';
 
 const routes: Routes = [
   { 
@@ -43,7 +44,8 @@ const routes: Routes = [
   providers: [
     QuizComponent,
     ScoreComponent,
-    DialogService
+    DialogService,
+    StatisticsService
   ]
 })
 export class ActiveQuizModule { }
