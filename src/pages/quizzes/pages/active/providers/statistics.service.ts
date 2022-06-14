@@ -3,18 +3,23 @@ import { IQuiz, IQuizResult } from 'src/pages/quizzes/providers/quiz.service';
 
 @Injectable()
 export class StatisticsService {
-  public quizzes: IQuiz[] = [];
-  public passedQuizzes: IQuizResult[] = [];
+  private quizzes: IQuiz[] = [];
+  private quizzesResults: IQuizResult[] = [];
 
-  public amountPassedQuizzes(): number {
-    return this.passedQuizzes.length;
+  public initialize(quizzes: IQuiz[], results: IQuizResult[]): void {
+    this.quizzes = quizzes;
+    this.quizzesResults = results;
   }
 
-  public amountQuizzes(): number {
+  get amountPassedQuizzes(): number {
+    return this.quizzesResults.length;
+  }
+
+  get amountQuizzes(): number {
     return this.quizzes.length;
   }
 
-  public quizzesQuestionAmount(): number {
+  get quizzesQuestionAmount(): number {
     let questionCounter: number = 0;
     this.quizzes.forEach((quiz: IQuiz) => {
       questionCounter += quiz.questions.length;
@@ -22,56 +27,56 @@ export class StatisticsService {
     return questionCounter;
   }
 
-  public passedQuizzesQuestionAmount(): number {
+  get passedQuizzesQuestionAmount(): number {
     let questionCounter: number = 0;
-    this.passedQuizzes.forEach((quiz: IQuizResult) => {
-      questionCounter += quiz.answers.length;
+    this.quizzesResults.forEach((quizResult: IQuizResult) => {
+      questionCounter += quizResult.answers.length;
     });
     return questionCounter;
   }
 
-  public rightAnswersAmount(): number {
+  get rightAnswersAmount(): number {
     let correctCounter: number = 0;
-    this.passedQuizzes.forEach((quiz: IQuizResult) => {
-      correctCounter += quiz.correct;
+    this.quizzesResults.forEach((quizResult: IQuizResult) => {
+      correctCounter += quizResult.correct;
     });
     return correctCounter;
   }
 
-  public wrongAnswersAmount(): number {
-    return this.passedQuizzesQuestionAmount() - this.rightAnswersAmount();
+  get wrongAnswersAmount(): number {
+    return this.passedQuizzesQuestionAmount - this.rightAnswersAmount;
   }
 
-  public generalSecondsDuration(): number {
+  get generalSecondsDuration(): number {
     let durationCounter: number = 0;
-    this.passedQuizzes.forEach((quiz: IQuizResult) => {
-      durationCounter += quiz.seconds;
+    this.quizzesResults.forEach((quizResult: IQuizResult) => {
+      durationCounter += quizResult.seconds;
     });
     return durationCounter;
   }
 
-  public generalMinutesDuration(): number {
+  get generalMinutesDuration(): number {
     let durationCounter: number = 0;
-    this.passedQuizzes.forEach((quiz: IQuizResult) => {
-      durationCounter += quiz.seconds;
+    this.quizzesResults.forEach((quizResult: IQuizResult) => {
+      durationCounter += quizResult.seconds;
     });
     return Math.floor(durationCounter / 60);
   }
 
-  public averageSecondsDuration(): number {
+  get averageSecondsDuration(): number {
     let durationCounter: number = 0;
-    this.passedQuizzes.forEach((quiz: IQuizResult) => {
-      durationCounter += quiz.seconds;
+    this.quizzesResults.forEach((quizResult: IQuizResult) => {
+      durationCounter += quizResult.seconds;
     });
-    return Math.floor(durationCounter / this.amountPassedQuizzes());
+    return Math.floor(durationCounter / this.amountPassedQuizzes);
   }
 
-  public averageMinutesDuration(): number {
+  get averageMinutesDuration(): number {
     let durationCounter: number = 0;
-    this.passedQuizzes.forEach((quiz: IQuizResult) => {
-      durationCounter += quiz.seconds;
+    this.quizzesResults.forEach((quizResult: IQuizResult) => {
+      durationCounter += quizResult.seconds;
     });
-    return Math.floor(durationCounter / this.amountPassedQuizzes() / 60);
+    return Math.floor(durationCounter / this.amountPassedQuizzes / 60);
   }
 
 }

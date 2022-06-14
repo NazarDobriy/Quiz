@@ -12,7 +12,7 @@ export class ScoreComponent implements OnInit {
   private isLoadingQuizAnswers: boolean = true;
   private isLoadingPassedQuizzes: boolean = true;
   private isLoadingQuizzes: boolean = true;
-  public passedQuizzes: IQuizResult[] = [];
+  public quizzesResults: IQuizResult[] = [];
   public quizzes: IQuiz[] = [];
 
   private currentQuiz: IQuiz = {
@@ -57,7 +57,7 @@ export class ScoreComponent implements OnInit {
   }
 
   private async setPassedQuizzes(): Promise<void> {
-    this.passedQuizzes = await this.quizService.getPassedQuizzes();
+    this.quizzesResults = await this.quizService.getPassedQuizzes();
     this.isLoadingPassedQuizzes = false;
   }
 
@@ -67,7 +67,7 @@ export class ScoreComponent implements OnInit {
   }
 
   get amountPassedQuizzes(): number {
-    return this.passedQuizzes.length;
+    return this.quizzesResults.length;
   }
 
   get questionsLength(): number {

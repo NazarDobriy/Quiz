@@ -6,20 +6,20 @@
             <div class="flex items-center">
                 <div class="h-10 w-10 bg-warning rounded-sm"></div>
                 <div class="flex flex-col items-start">
-                    <p class="text-primary text-base ml-2 font-medium">{{ amountQuizzes }}</p>
-                    <p class="text-secondary text-xs ml-2 font-normal">{{ amountPassedQuizzes }} Quizzes were played</p>
+                    <p class="text-primary text-base ml-2 font-medium">{{ statisticsService.amountQuizzes }}</p>
+                    <p class="text-secondary text-xs ml-2 font-normal">{{ statisticsService.amountPassedQuizzes }} Quizzes were played</p>
                 </div>
             </div>
             <div class="flex items-center py-6">
                 <div class="h-10 w-10 bg-success rounded-sm"></div>
                 <div class="flex flex-col items-start">
                     <p class="text-primary text-base ml-2 font-medium">
-                        {{ passedQuizzesQuestionAmount }}
-                        <span class="text-success ml-3">{{ rightAnswersAmount }} right</span>
-                        <span class="text-error ml-3">{{ wrongAnswersAmount }} wrong</span>
+                        {{ statisticsService.passedQuizzesQuestionAmount }}
+                        <span class="text-success ml-3">{{ statisticsService.rightAnswersAmount }} right</span>
+                        <span class="text-error ml-3">{{ statisticsService.wrongAnswersAmount }} wrong</span>
                     </p>
                     <p class="text-secondary text-xs ml-2 font-normal">
-                        {{ quizzesQuestionAmount }} Questions have been answered
+                        {{ statisticsService.quizzesQuestionAmount }} Questions have been answered
                     </p>
                 </div>
             </div>
@@ -27,12 +27,12 @@
                 <div class="h-10 w-10 bg-accent rounded-sm"></div>
                 <div class="flex flex-col items-start">
                     <p class="text-primary text-base ml-2 font-medium">
-                        {{ generalMinutesDuration > 0 ? generalMinutesDuration : generalSecondsDuration }} 
-                        {{ generalMinutesDuration > 0 ? 'min' : 'sec' }}
+                        {{ statisticsService.generalMinutesDuration > 0 ? statisticsService.generalMinutesDuration : statisticsService.generalSecondsDuration }} 
+                        {{ statisticsService.generalMinutesDuration > 0 ? 'min' : 'sec' }}
                     </p>
                     <p class="text-secondary text-xs ml-2 font-normal">
-                        {{ averageMinutesDuration > 0 ? averageMinutesDuration : averageSecondsDuration }} 
-                        {{ averageMinutesDuration > 0 ? 'min' : 'sec' }} 
+                        {{ statisticsService.averageMinutesDuration > 0 ? statisticsService.averageMinutesDuration : statisticsService.averageSecondsDuration }} 
+                        {{ statisticsService.averageMinutesDuration > 0 ? 'min' : 'sec' }} 
                         Average time of answering quizzes
                     </p>
                 </div>
