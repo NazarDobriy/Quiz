@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { IQuizResult } from 'src/pages/quizzes/providers/quiz.service';
+import { IQuiz, IQuizResult } from 'src/pages/quizzes/providers/quiz.service';
 
 @Component({
   selector: 'app-statistics',
@@ -8,6 +8,7 @@ import { IQuizResult } from 'src/pages/quizzes/providers/quiz.service';
 })
 export class StatisticsComponent implements OnInit {
   @Input() passedQuizzes: IQuizResult[] = [];
+  @Input() quizzes: IQuiz[] = [];
 
   constructor() { }
 
