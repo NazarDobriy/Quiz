@@ -77,4 +77,11 @@ export class ScoreComponent implements OnInit {
     return this.quizService.calcQuizResult(this.currentQuiz, this.currentQuizAnswers.answers);
   }
 
+  canActivate(): boolean {
+    if (this.quizService.completed) {
+      return true;
+    }
+    return false;
+  }
+
 }

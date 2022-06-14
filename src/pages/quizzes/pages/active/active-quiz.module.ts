@@ -19,6 +19,7 @@ const routes: Routes = [
   },
   {
     path: 'score',
+    canActivate: [ScoreComponent],
     component: ScoreComponent
   }
 ];
@@ -41,6 +42,7 @@ const routes: Routes = [
   ],
   providers: [
     QuizComponent,
+    ScoreComponent,
     DialogService
   ]
 })
