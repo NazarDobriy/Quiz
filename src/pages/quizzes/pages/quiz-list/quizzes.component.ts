@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { QuizService, IQuiz } from '../../providers/quiz.service';
-import { IQuizTheme, ThemeService } from '../../providers/theme.service';
+import { ThemeService } from '../../providers/theme.service';
 
 @Component({
   selector: 'app-quizzes',

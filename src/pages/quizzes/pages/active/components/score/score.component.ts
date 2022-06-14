@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { IQuiz, QuizService } from 'src/pages/quizzes/providers/quiz.service';
+import { IQuiz, IQuizResult, QuizService } from 'src/pages/quizzes/providers/quiz.service';
 
 @Component({
   selector: 'app-score',
@@ -8,9 +8,8 @@ import { IQuiz, QuizService } from 'src/pages/quizzes/providers/quiz.service';
 })
 export class ScoreComponent implements OnInit {
   private quizId: number = 0;
-  public duration: string = '';
-  public correctAnswersAmount: number = 0;
-  public isLoading: boolean = true;
+  private isLoadingQuiz: boolean = true;
+  private isLoadingQuizAnswers: boolean = true;
 
   private currentQuiz: IQuiz = {
     group: '',
@@ -20,25 +19,50 @@ export class ScoreComponent implements OnInit {
     subtitle: ''
   };
 
+  public currentQuizAnswers: IQuizResult = {
+    answers: [],
+    seconds: 0,
+    duration: ''
+  };
+
   constructor(
     private quizService: QuizService,
     private activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
-    this.duration = this.quizService.duration;
     this.quizId = parseInt(this.activatedRoute.snapshot.params['id']);
     this.setQuizById();
-    this.correctAnswersAmount = this.quizService.correctAnswersAmount;
+    this.setQuizAnswersById();
   }
 
   private async setQuizById(): Promise<void> {
     this.currentQuiz = await this.quizService.getQuizById(this.quizId);
-    this.isLoading = false;
+    this.isLoadingQuiz = false;
+  }
+
+  private async setQuizAnswersById(): Promise<void> {
+    const tempQuizAnswers: IQuizResult | null = await this.quizService.getQuizAnswersById(this.quizId);
+    if (tempQuizAnswers) {
+      this.currentQuizAnswers = tempQuizAnswers;
+    }
+    this.isLoadingQuizAnswers = false;
   }
 
   get questionsLength(): number {
     return this.currentQuiz.questions.length;
+  }
+
+  get isLoading(): boolean {
+    return this.isLoadingQuiz && this.isLoadingQuizAnswers;
+  }
+
+  get duration(): string {
+    return this.currentQuizAnswers.duration;
+  }
+
+  get score(): number {
+    return this.quizService.calcQuizResult(this.currentQuiz, this.currentQuizAnswers.answers);
   }
 
 }
