@@ -32,20 +32,4 @@ export class Duration {
     return Math.floor(this.duration / 1000) % 60;
   }
 
-  public toString(): string {
-    let durationString: string = "";
-    const durationCollection: Map<string, number> = new Map();
-
-    durationCollection.set('days', this.days);
-    durationCollection.set('hours', this.hours);
-    durationCollection.set('min', this.minutes);
-    durationCollection.set('sec', this.seconds);
-
-    for (const [key, value] of durationCollection.entries()) {
-      durationString += `${value ? `${value} ${key} ` : ''}`;
-    }
-
-    return durationString.trim();
-  }
-
 }

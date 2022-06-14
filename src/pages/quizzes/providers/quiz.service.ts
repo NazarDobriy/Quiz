@@ -29,7 +29,6 @@ export interface IQuizResult {
   answers: string[];
   correct: number;
   seconds: number;
-  duration: string;
 }
 
 @Injectable()

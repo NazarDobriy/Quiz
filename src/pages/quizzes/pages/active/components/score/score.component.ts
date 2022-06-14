@@ -26,8 +26,7 @@ export class ScoreComponent implements OnInit {
   public currentQuizAnswers: IQuizResult = {
     answers: [],
     correct: 0,
-    seconds: 0,
-    duration: ''
+    seconds: 0
   };
 
   constructor(
@@ -78,8 +77,12 @@ export class ScoreComponent implements OnInit {
     return this.isLoadingQuiz && this.isLoadingQuizAnswers && this.isLoadingPassedQuizzes && this.isLoadingQuizzes;
   }
 
-  get duration(): string {
-    return this.currentQuizAnswers.duration;
+  get durationSeconds(): number {
+    return this.currentQuizAnswers.seconds;
+  }
+
+  get durationMinutes(): number {
+    return Math.floor(this.currentQuizAnswers.seconds / 60);
   }
 
   get score(): number {

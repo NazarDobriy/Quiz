@@ -41,8 +41,7 @@ export class QuizzesApiService {
       this.db.object<IQuizResult>(path).set({
         answers: answers,
         correct: correctAnswers,
-        seconds: duration.seconds,
-        duration: duration.toString()
+        seconds: duration.seconds
       });
     }
   }
