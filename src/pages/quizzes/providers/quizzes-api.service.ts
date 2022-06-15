@@ -35,19 +35,23 @@ export class QuizzesApiService {
     ));
   }
 
-  public setQuizAnswers(quizId: number, answers: string[], duration: Duration): void {
+  public setQuizAnswers(quizId: number, answers: string[], correctAnswers: number, duration: Duration): void {
     if (this.userService.id) {
       const path: string = `quiz_answers/${this.userService.id}/${quizId}`;
       this.db.object<IQuizResult>(path).set({
         answers: answers,
-        seconds: duration.seconds,
-        duration: duration.toString()
+        correct: correctAnswers,
+        seconds: duration.seconds
       });
     }
   }
 
   public getQuizAnswersById(id: number): Promise<IQuizResult | null> {
     return firstValueFrom(this.db.object<IQuizResult>(`quiz_answers/${this.userService.id}/${id}`).valueChanges());
+  }
+
+  public getAllPassedQuizzes(): Promise<IQuizResult[]> {
+    return firstValueFrom(this.db.list<IQuizResult>(`quiz_answers/${this.userService.id}`).valueChanges());
   }
 
 }

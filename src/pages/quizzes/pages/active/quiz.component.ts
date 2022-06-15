@@ -43,7 +43,7 @@ export class QuizComponent implements OnInit {
   public timeStart!: Date;
 
   private isLoadingThemes: boolean = true;
-  private isLoadingQuizzes: boolean = true;
+  private isLoadingQuiz: boolean = true;
   private userAnswersIds: string[] = [];
 
   @HostListener('window:beforeunload')
@@ -113,18 +113,18 @@ export class QuizComponent implements OnInit {
   }
 
   get isLoading(): boolean {
-    return this.isLoadingQuizzes && this.isLoadingThemes;
+    return this.isLoadingQuiz && this.isLoadingThemes;
   }
 
   private async setTheme(): Promise<void> {
     await this.themeService.setThemes();
     this.quizTheme = this.themeService.getThemeByText(this.currentQuiz.subtitle);
-    this.isLoadingQuizzes = false;
+    this.isLoadingThemes = false;
   }
 
   private async setQuizById(): Promise<void> {
     this.currentQuiz = await this.quizService.getQuizById(this.quizId);
-    this.isLoadingThemes = false;
+    this.isLoadingQuiz = false;
   }
 
   public handleNextQuestion(): void {

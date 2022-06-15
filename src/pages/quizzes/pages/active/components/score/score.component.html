@@ -12,13 +12,18 @@
         >
         </app-score-counter>
       </div>
-      <p class="text-2xl mt-5 font-semibold">{{ duration }}</p>
+      <p class="text-2xl mt-5 font-semibold">
+        {{ durationMinutes > 0 ? durationMinutes + ' min' : durationSeconds + ' sec' }} 
+      </p>
       <div class="max-w-[26.875rem] m-auto mt-3">
         Good try! Why not have another go? You might get a bigger score!
       </div>
     </section>
-    <section class="bg-bright w-[40rem] h-[26rem] m-auto mt-20 rounded-3xl">
-    </section>
+    <app-statistics
+      [quizzes]="quizzes"
+      [quizzesResults]="quizzesResults"
+    >
+    </app-statistics>
     <section class="my-10">
       <a routerLink="/">
         <button class="bg-accent text-bright px-6 py-4 rounded">Back on main page</button>
