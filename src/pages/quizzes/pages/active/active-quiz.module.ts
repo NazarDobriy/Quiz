@@ -12,6 +12,7 @@ import { ScoreCounterComponent } from './components/score-counter/score-counter.
 import { StatisticsComponent } from './components/statistics/statistics.component';
 import { DoughnutChartComponent } from './components/doughnut-chart/doughnut-chart.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { SnackBarService } from './providers/snack-bar.service';
 
 const routes: Routes = [
   { 
@@ -47,7 +48,8 @@ const routes: Routes = [
   providers: [
     QuizComponent,
     ScoreComponent,
-    DialogService
+    DialogService,
+    SnackBarService
   ]
 })
 export class ActiveQuizModule { }
