@@ -143,11 +143,7 @@ export class QuizComponent implements OnInit {
 
     if (emptyQuestionIndex != null) {
       this.questionIndex = emptyQuestionIndex;
-      this.snackBarService.open('Select the answer', 'X', {
-        verticalPosition: 'top',
-        duration: 2000,
-        panelClass: ['text-primary', 'bg-shade']
-      });
+      this.snackBarService.open('Select the answer', 'X');
       return;
     }
 
