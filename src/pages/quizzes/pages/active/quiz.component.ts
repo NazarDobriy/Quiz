@@ -138,7 +138,6 @@ export class QuizComponent implements OnInit {
   }
 
   public finishQuiz(): void {
-    console.log(this.userAnswersIds);
     const emptyQuestionIndex = this.findUnansweredQuestionIndex();
 
     if (emptyQuestionIndex != null) {
