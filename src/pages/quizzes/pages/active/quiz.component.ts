@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { DialogService } from './providers/dialog.service';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-quiz',
@@ -55,7 +56,8 @@ export class QuizComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private quizService: QuizService,
     private themeService: ThemeService,
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -142,7 +144,12 @@ export class QuizComponent implements OnInit {
     );
 
     if (emptyQuestionIndex != null) {
-      this.questionIndex = emptyQuestionIndex; 
+      this.questionIndex = emptyQuestionIndex;
+      this.snackBar.open('Select the answer', 'X', {
+        verticalPosition: 'top',
+        duration: 2000,
+        panelClass: ['text-primary', 'bg-shade']
+      });
       return;
     }
 
