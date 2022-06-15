@@ -6,7 +6,7 @@
             <div class="flex items-center">
                 <div class="h-10 w-10 bg-warning rounded-sm"></div>
                 <div class="flex flex-col items-start">
-                    <p class="text-primary text-base ml-2 font-medium">{{ statisticsService.amountQuizzes }}</p>
+                    <p class="text-primary text-base ml-2 font-medium">{{ statisticsService.amountQuizzes }} Total quizzes</p>
                     <p class="text-secondary text-xs ml-2 font-normal">{{ statisticsService.amountPassedQuizzes }} Quizzes were played</p>
                 </div>
             </div>
@@ -14,9 +14,11 @@
                 <div class="h-10 w-10 bg-success rounded-sm"></div>
                 <div class="flex flex-col items-start">
                     <p class="text-primary text-base ml-2 font-medium">
-                        {{ statisticsService.passedQuizzesQuestionAmount }}
-                        <span class="text-success ml-3">{{ statisticsService.rightAnswersAmount }} right</span>
-                        <span class="text-error ml-3">{{ statisticsService.wrongAnswersAmount }} wrong</span>
+                        {{ statisticsService.passedQuizzesQuestionAmount }} Total questions
+                    </p>
+                    <p class="font-medium">
+                        <span class="text-success ml-2">{{ statisticsService.rightAnswersAmount }} right</span>
+                        <span class="text-error ml-2">{{ statisticsService.wrongAnswersAmount }} wrong</span>
                     </p>
                     <p class="text-secondary text-xs ml-2 font-normal">
                         {{ statisticsService.quizzesQuestionAmount }} Questions have been answered
@@ -27,7 +29,7 @@
                 <div class="h-10 w-10 bg-accent rounded-sm"></div>
                 <div class="flex flex-col items-start">
                     <p class="text-primary text-base ml-2 font-medium">
-                        {{ statisticsService.generalMinutesDuration > 0 ? statisticsService.generalMinutesDuration + ' min' : statisticsService.generalSecondsDuration + ' sec' }}
+                        {{ statisticsService.generalMinutesDuration > 0 ? statisticsService.generalMinutesDuration + ' min' : statisticsService.generalSecondsDuration + ' sec' }} Total time
                     </p>
                     <p class="text-secondary text-xs ml-2 font-normal">
                         {{ statisticsService.averageMinutesDuration > 0 ? statisticsService.averageMinutesDuration + ' min' : statisticsService.averageSecondsDuration + ' sec' }} 
