@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, ElementRef, Input, OnChanges, ViewChild } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
 
 Chart.register(...registerables);
@@ -9,6 +9,8 @@ Chart.register(...registerables);
 })
 export class DoughnutChartComponent implements OnChanges {
   @Input() statistics: [number, number, number] = [0, 0, 0];
+
+  @ViewChild('donut') donut!: ElementRef;
 
   private options = {
     animation: {
@@ -28,18 +30,19 @@ export class DoughnutChartComponent implements OnChanges {
     }]
   };
 
+  public chart: Chart | null = null;
+
   ngOnChanges(): void {
-    if (!this.statistics.includes(NaN)) {
-      const canvas: HTMLCanvasElement = document.getElementById('myChart') as HTMLCanvasElement;
-      const ctx: CanvasRenderingContext2D | null = canvas.getContext('2d');
-      this.data.datasets[0].data = this.statistics;
-      if (ctx != null) {
-        new Chart(ctx, {
-          type: 'doughnut',
-          data: this.data,
-          options: this.options
-        });
-      }
+    if (this.statistics.includes(NaN)) { return; }
+    const canvas: HTMLCanvasElement = this.donut.nativeElement;
+    const ctx: CanvasRenderingContext2D | null = canvas.getContext('2d');
+    this.data.datasets[0].data = this.statistics;
+    if (ctx != null) {
+      this.chart = new Chart(ctx, {
+        type: 'doughnut',
+        data: this.data,
+        options: this.options
+      });
     }
   }
 
