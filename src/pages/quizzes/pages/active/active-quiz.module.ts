@@ -22,7 +22,7 @@ const routes: Routes = [
   },
   {
     path: 'score',
-    canActivate: [ScoreComponent],
+    //canActivate: [ScoreComponent],
     component: ScoreComponent
   }
 ];

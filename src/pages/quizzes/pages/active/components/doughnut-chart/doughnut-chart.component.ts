@@ -13,6 +13,7 @@ export class DoughnutChartComponent implements OnChanges {
   @ViewChild('donut') donut!: ElementRef;
 
   private options = {
+    responsive: false,
     animation: {
       animateRotate: false
     }
