@@ -31,16 +31,14 @@ export class DoughnutChartComponent implements OnChanges {
   ngOnChanges(): void {
     if (!this.statistics.includes(NaN)) {
       const canvas: HTMLCanvasElement = document.getElementById('myChart') as HTMLCanvasElement;
-      if (canvas != null) {
-        const ctx: CanvasRenderingContext2D | null = canvas.getContext('2d');
-        this.data.datasets[0].data = this.statistics;
-        if (ctx != null) {
-          new Chart(ctx, {
-            type: 'doughnut',
-            data: this.data,
-            options: this.options
-          });
-        }
+      const ctx: CanvasRenderingContext2D | null = canvas.getContext('2d');
+      this.data.datasets[0].data = this.statistics;
+      if (ctx != null) {
+        new Chart(ctx, {
+          type: 'doughnut',
+          data: this.data,
+          options: this.options
+        });
       }
     }
   }
