@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
 
 Chart.register(...registerables);
@@ -7,7 +7,8 @@ Chart.register(...registerables);
   selector: 'app-doughnut-chart',
   templateUrl: './doughnut-chart.component.html'
 })
-export class DoughnutChartComponent implements OnInit {
+export class DoughnutChartComponent implements OnChanges {
+  @Input() statistics: [number, number, number] = [0, 0, 0];
 
   private options = {
     animation: {
@@ -17,7 +18,7 @@ export class DoughnutChartComponent implements OnInit {
 
   private data = {
     datasets: [{
-      data: [300, 50, 100],
+      data: this.statistics,
       backgroundColor: [
         '#FEFD54',
         '#63C995',
@@ -27,16 +28,19 @@ export class DoughnutChartComponent implements OnInit {
     }]
   };
 
-  ngOnInit(): void {
-    const canvas: HTMLCanvasElement = document.getElementById('myChart') as HTMLCanvasElement;
-    if (canvas != null) {
-      const ctx: CanvasRenderingContext2D | null = canvas.getContext('2d');
-      if (ctx != null) {
-        new Chart(ctx, {
-          type: 'doughnut',
-          data: this.data,
-          options: this.options
-        });
+  ngOnChanges(): void {
+    if (!this.statistics.includes(NaN)) {
+      const canvas: HTMLCanvasElement = document.getElementById('myChart') as HTMLCanvasElement;
+      if (canvas != null) {
+        const ctx: CanvasRenderingContext2D | null = canvas.getContext('2d');
+        this.data.datasets[0].data = this.statistics;
+        if (ctx != null) {
+          new Chart(ctx, {
+            type: 'doughnut',
+            data: this.data,
+            options: this.options
+          });
+        }
       }
     }
   }
