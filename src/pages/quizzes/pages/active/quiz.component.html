@@ -75,7 +75,6 @@
                   <button 
                       class="py-[0.625rem] px-6 rounded sm:w-[9.5rem]"
                       [ngClass]="[quizTheme.btnsBackgroundClass, quizTheme.btnsTextClass]"
-                      [disabled]="isNextQuestionAvailable || (!allQuestionsCompleted && isLastQuestion)"
                       (click)="isLastQuestion ? finishQuiz() : handleNextQuestion()"
                   >
                       <ng-container *ngIf="!isLastQuestion; else completeStep">

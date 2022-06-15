@@ -99,21 +99,17 @@ export class QuizComponent implements OnInit {
     return this.questionIndex + 1 === this.currentQuiz?.questions.length;
   }
 
-  get allQuestionsCompleted(): boolean {
-    return this.userAnswersIds.length === this.currentQuiz?.questions.length && !this.isArrayHasEmptyElement;
-  }
-
-  get isArrayHasEmptyElement(): boolean {
-    for (const id of this.userAnswersIds) {
-      if (id === undefined) {
-        return true;
-      }
-    }
-    return false;
-  }
-
   get isLoading(): boolean {
     return this.isLoadingQuiz && this.isLoadingThemes;
+  }
+
+  private getEmptyIndex(arr: string[], length: number): number | null {
+    for (let i = 0; i < length; i++) {
+      if (arr[i] === undefined) {
+        return i;
+      }
+    }
+    return null;
   }
 
   private async setTheme(): Promise<void> {
@@ -140,6 +136,16 @@ export class QuizComponent implements OnInit {
   }
 
   public finishQuiz(): void {
+    const emptyQuestionIndex: number | null = this.getEmptyIndex(
+      this.userAnswersIds, 
+      this.currentQuiz.questions.length
+    );
+
+    if (emptyQuestionIndex != null) {
+      this.questionIndex = emptyQuestionIndex; 
+      return;
+    }
+
     const duration: Duration = new Duration(this.timeStart, new Date());
     this.quizService.finishQuiz(this.currentQuiz, this.userAnswersIds, duration);
   }
