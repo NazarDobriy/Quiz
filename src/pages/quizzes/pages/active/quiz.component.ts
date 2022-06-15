@@ -105,9 +105,9 @@ export class QuizComponent implements OnInit {
     return this.isLoadingQuiz && this.isLoadingThemes;
   }
 
-  private getEmptyIndex(arr: string[], length: number): number | null {
-    for (let i = 0; i < length; i++) {
-      if (arr[i] === undefined) {
+  private findUnansweredQuestionIndex(): number | null {
+    for (let i = 0; i < this.currentQuiz.questions.length; i++) {
+      if (this.userAnswersIds[i] === undefined) {
         return i;
       }
     }
@@ -138,10 +138,8 @@ export class QuizComponent implements OnInit {
   }
 
   public finishQuiz(): void {
-    const emptyQuestionIndex: number | null = this.getEmptyIndex(
-      this.userAnswersIds, 
-      this.currentQuiz.questions.length
-    );
+    console.log(this.userAnswersIds);
+    const emptyQuestionIndex = this.findUnansweredQuestionIndex();
 
     if (emptyQuestionIndex != null) {
       this.questionIndex = emptyQuestionIndex;
