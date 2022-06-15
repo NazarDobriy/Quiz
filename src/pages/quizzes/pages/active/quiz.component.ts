@@ -7,6 +7,8 @@ import { Observable } from 'rxjs';
 import { DialogService } from './providers/dialog.service';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { SnackBarService } from './providers/snack-bar.service';
 
 @Component({
   selector: 'app-quiz',
@@ -55,7 +57,8 @@ export class QuizComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private quizService: QuizService,
     private themeService: ThemeService,
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    private snackBarService: SnackBarService
   ) { }
 
   ngOnInit(): void {
@@ -99,21 +102,17 @@ export class QuizComponent implements OnInit {
     return this.questionIndex + 1 === this.currentQuiz?.questions.length;
   }
 
-  get allQuestionsCompleted(): boolean {
-    return this.userAnswersIds.length === this.currentQuiz?.questions.length && !this.isArrayHasEmptyElement;
-  }
-
-  get isArrayHasEmptyElement(): boolean {
-    for (const id of this.userAnswersIds) {
-      if (id === undefined) {
-        return true;
-      }
-    }
-    return false;
-  }
-
   get isLoading(): boolean {
     return this.isLoadingQuiz && this.isLoadingThemes;
+  }
+
+  private findUnansweredQuestionIndex(): number | null {
+    for (let i = 0; i < this.currentQuiz.questions.length; i++) {
+      if (this.userAnswersIds[i] === undefined) {
+        return i;
+      }
+    }
+    return null;
   }
 
   private async setTheme(): Promise<void> {
@@ -140,6 +139,14 @@ export class QuizComponent implements OnInit {
   }
 
   public finishQuiz(): void {
+    const emptyQuestionIndex = this.findUnansweredQuestionIndex();
+
+    if (emptyQuestionIndex != null) {
+      this.questionIndex = emptyQuestionIndex;
+      this.snackBarService.open('Select the answer', 'X');
+      return;
+    }
+
     const duration: Duration = new Duration(this.timeStart, new Date());
     this.quizService.finishQuiz(this.currentQuiz, this.userAnswersIds, duration);
   }
