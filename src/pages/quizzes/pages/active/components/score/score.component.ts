@@ -40,9 +40,6 @@ export class ScoreComponent implements OnInit {
     this.setQuizById();
     this.setQuizAnswersById();
     this.setPassedQuizzes();
-
-    console.log("seconds", this.durationSeconds);
-    console.log("minutes", this.durationMinutes);
   }
 
   private async setQuizById(): Promise<void> {
