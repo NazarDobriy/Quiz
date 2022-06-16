@@ -7,7 +7,6 @@ import { Observable } from 'rxjs';
 import { DialogService } from './providers/dialog.service';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { SnackBarService } from './providers/snack-bar.service';
 
 @Component({

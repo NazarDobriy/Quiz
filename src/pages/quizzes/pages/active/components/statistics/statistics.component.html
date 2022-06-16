@@ -1,8 +1,8 @@
-<main class="bg-bright w-[42rem] h-[27rem] m-auto mt-20 rounded-3xl">
+<main class="bg-bright md:w-[42rem] w-[20rem] md:h-[27rem] h-[39rem] m-auto mt-20 rounded-3xl">
     <h1 class="text-primary text-4xl font-bold pt-10">My statistics</h1>
-    <section class="flex items-center ml-10 mt-10">
+    <section class="md:flex block items-center md:ml-10 ml-0 mt-10">
         <app-doughnut-chart [statistics]="statistics"></app-doughnut-chart>
-        <div class="ml-12">
+        <div class="md:ml-12 ml-5 md:mt-0 mt-8">
             <div class="flex items-center">
                 <div class="h-10 w-10 bg-warning rounded-sm"></div>
                 <div class="flex flex-col items-start">
@@ -14,14 +14,14 @@
                 <div class="h-10 w-10 bg-success rounded-sm"></div>
                 <div class="flex flex-col items-start">
                     <p class="text-primary text-base ml-2 font-medium">
-                        {{ statisticsService.passedQuizzesQuestionAmount }} Total questions
+                        {{ statisticsService.quizzesQuestionAmount }} Total questions
                     </p>
                     <p class="font-medium">
                         <span class="text-success ml-2">{{ statisticsService.rightAnswersAmount }} right</span>
                         <span class="text-error ml-2">{{ statisticsService.wrongAnswersAmount }} wrong</span>
                     </p>
                     <p class="text-secondary text-xs ml-2 font-normal">
-                        {{ statisticsService.quizzesQuestionAmount }} Questions have been answered
+                        {{ statisticsService.passedQuizzesQuestionAmount }} Questions have been answered
                     </p>
                 </div>
             </div>
