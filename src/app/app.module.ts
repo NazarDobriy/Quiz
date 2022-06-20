@@ -11,6 +11,9 @@ import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 
 import { environment } from 'src/environments/environment.prod';
 
+import { AngularSvgIconModule } from 'angular-svg-icon';
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -22,7 +25,9 @@ import { environment } from 'src/environments/environment.prod';
     CoreModule,
     BrowserAnimationsModule,
     AngularFireDatabaseModule,
-    AngularFireModule.initializeApp(environment.firebase)
+    AngularFireModule.initializeApp(environment.firebase),
+    HttpClientModule,
+    AngularSvgIconModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
