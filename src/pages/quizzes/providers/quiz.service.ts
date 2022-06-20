@@ -59,7 +59,7 @@ export class QuizService {
       quiz.id, 
       answers, 
       this.calcQuizResult(quiz, answers), 
-      duration
+      duration.seconds
     );
     this.router.navigateByUrl(`/quizzes/active/${quiz.id}/score`);
   }
