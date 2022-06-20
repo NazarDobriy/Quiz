@@ -4,14 +4,13 @@ import { QuizzesApiService } from './quizzes-api.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { IQuiz, IQuizResult } from './quiz.service';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
-import { AngularFireModule } from '@angular/fire/compat';
-import { environment } from 'src/environments/environment.prod';
 import { UserService } from 'src/core/providers/user.service';
 import { LocalStorageService } from 'src/core/providers/local-storage.service';
 import { IQuizTheme } from './theme.service';
 
 describe('ApiService', () => {
-  let service: QuizzesApiService;
+  let mockQuizzesApiService: jasmine.SpyObj<QuizzesApiService>;
+  let mockAngularFireDatabase: jasmine.SpyObj<AngularFireDatabase>;
 
   let dummyQuizzes: IQuiz[] = [
     {
@@ -94,28 +93,42 @@ describe('ApiService', () => {
   ];
 
   beforeEach(() => {
+    mockQuizzesApiService = jasmine.createSpyObj([
+      'getAllQuizzes',
+      'getAllQuizThemes',
+      'getQuizById',
+      'getQuizAnswersById',
+      'getAllPassedQuizzes'
+    ]);
+
+    mockAngularFireDatabase = jasmine.createSpyObj(['']);
+
     TestBed.configureTestingModule({
       imports: [
-        HttpClientTestingModule,
-        AngularFireModule.initializeApp(environment.firebase)
+        HttpClientTestingModule
       ],
       providers: [
-        QuizzesApiService,
-        AngularFireDatabase,
         UserService,
-        LocalStorageService
+        LocalStorageService,
+        {
+          provide: QuizzesApiService,
+          useValue: mockQuizzesApiService
+        },
+        {
+          provide: AngularFireDatabase,
+          useValue: mockAngularFireDatabase
+        }
       ]
     });
-    service = TestBed.inject(QuizzesApiService);
   });
 
   it('should be created', () => {
-    expect(service).toBeTruthy();
+    expect(mockQuizzesApiService).toBeTruthy();
   });
 
   it('should retrieve quizzes from db', (done: DoneFn) => {
-    spyOn(service, 'getAllQuizzes').and.returnValue(Promise.resolve(dummyQuizzes));
-    service.getAllQuizzes().then((quizzes: IQuiz[]) => {
+    mockQuizzesApiService.getAllQuizzes.and.returnValue(Promise.resolve(dummyQuizzes));
+    mockQuizzesApiService.getAllQuizzes().then((quizzes: IQuiz[]) => {
       expect(quizzes.length).toBe(2);
       expect(quizzes).toEqual(dummyQuizzes);
       done();
@@ -123,8 +136,8 @@ describe('ApiService', () => {
   });
 
   it('should retrieve quiz themes from db', (done: DoneFn) => {
-    spyOn(service, 'getAllQuizThemes').and.returnValue(Promise.resolve(dummyQuizThemes));
-    service.getAllQuizThemes().then((quizThemes: IQuizTheme[]) => {
+    mockQuizzesApiService.getAllQuizThemes.and.returnValue(Promise.resolve(dummyQuizThemes));
+    mockQuizzesApiService.getAllQuizThemes().then((quizThemes: IQuizTheme[]) => {
       expect(quizThemes.length).toBe(3);
       expect(quizThemes).toEqual(dummyQuizThemes);
       done();
@@ -132,16 +145,16 @@ describe('ApiService', () => {
   });
 
   it('should retrieve quiz by id from db', (done: DoneFn) => {
-    spyOn(service, 'getQuizById').and.returnValue(Promise.resolve(dummyQuizzes[0]));
-    service.getQuizById(1).then((quiz: IQuiz) => {
+    mockQuizzesApiService.getQuizById.and.returnValue(Promise.resolve(dummyQuizzes[0]));
+    mockQuizzesApiService.getQuizById(1).then((quiz: IQuiz) => {
       expect(quiz).toEqual(dummyQuizzes[0]);
       done();
     })
   });
 
   it('should retrieve quizzes results from db', (done: DoneFn) => {
-    spyOn(service, 'getAllPassedQuizzes').and.returnValue(Promise.resolve(dummyQuizResults));
-    service.getAllPassedQuizzes().then((quizResults: IQuizResult[]) => {
+    mockQuizzesApiService.getAllPassedQuizzes.and.returnValue(Promise.resolve(dummyQuizResults));
+    mockQuizzesApiService.getAllPassedQuizzes().then((quizResults: IQuizResult[]) => {
       expect(quizResults.length).toBe(3);
       expect(quizResults).toEqual(dummyQuizResults);
       done();
@@ -149,8 +162,8 @@ describe('ApiService', () => {
   });
 
   it('should retrieve quiz answers by id from db', (done: DoneFn) => {
-    spyOn(service, 'getQuizAnswersById').and.returnValue(Promise.resolve(dummyQuizResults[1]));
-    service.getQuizAnswersById(1).then((quizResult: IQuizResult | null) => {
+    mockQuizzesApiService.getQuizAnswersById.and.returnValue(Promise.resolve(dummyQuizResults[1]));
+    mockQuizzesApiService.getQuizAnswersById(1).then((quizResult: IQuizResult | null) => {
       if (quizResult) {
         expect(quizResult).toEqual(dummyQuizResults[1]);
       } else {
