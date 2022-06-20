@@ -12,7 +12,86 @@ import { IQuizTheme } from './theme.service';
 
 describe('ApiService', () => {
   let service: QuizzesApiService;
-  let userService: UserService;
+
+  let dummyQuizzes: IQuiz[] = [
+    {
+      id: 1,
+      title: 'Music is the best',
+      subtitle: 'Music questions',
+      group: 'bang',
+      questions: []
+    },
+    {
+      id: 2,
+      title: 'Nature is a part of life',
+      subtitle: 'Nature questions',
+      group: 'animals',
+      questions: []
+    }
+  ];
+
+  let dummyQuizThemes: IQuizTheme[] = [
+    {
+      titleTextClass: 'text-primary',
+      primaryTextClass: 'text-bright',
+      secondaryTextClass: 'text-primary',
+      secondaryActiveTextClass: 'text-bright',
+      numberTextClass: 'text-primary',
+      numberBackgroundClass: 'bg-warning',
+      backgroundClass: 'bg-success',
+      btnsBackgroundClass: 'bg-accent',
+      btnsTextClass: 'text-bright',
+      radioButtonColor: 'accent-error',
+      iconSrc: 'assets/img/Mili.svg',
+      personName: 'Mili'
+    },
+    {
+      titleTextClass: 'text-secondary',
+      primaryTextClass: 'text-bright',
+      secondaryTextClass: 'text-primary',
+      secondaryActiveTextClass: 'text-bright',
+      numberTextClass: 'text-primary',
+      numberBackgroundClass: 'bg-warning',
+      backgroundClass: 'bg-accent',
+      btnsBackgroundClass: 'bg-error',
+      btnsTextClass: 'text-bright',
+      radioButtonColor: 'accent-error',
+      iconSrc: 'assets/img/Steven.svg',
+      personName: 'Steven'
+    },
+    {
+      titleTextClass: 'text-primary',
+      primaryTextClass: 'text-bright',
+      secondaryTextClass: 'text-primary',
+      secondaryActiveTextClass: 'text-bright',
+      numberTextClass: 'text-primary',
+      numberBackgroundClass: 'bg-warning',
+      backgroundClass: 'bg-error',
+      btnsBackgroundClass: 'bg-accent',
+      btnsTextClass: 'text-bright',
+      radioButtonColor: 'accent-accent',
+      iconSrc: 'assets/img/Meg.svg',
+      personName: 'Meg'
+    }
+  ];
+
+  let dummyQuizResults: IQuizResult[] = [
+    {
+      answers: ['1', '3', '3', '0', '1', '2', '1', '0', '2', '3'],
+      correct: 2,
+      seconds: 12
+    },
+    {
+      answers: ['1', '2', '3', '1', '1', '3', '1', '0', '2', '1'],
+      correct: 4,
+      seconds: 48
+    },
+    {
+      answers: ['0', '0', '3', '1', '1', '0', '1', '0', '3', '2'],
+      correct: 7,
+      seconds: 248
+    }
+  ];
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -28,7 +107,6 @@ describe('ApiService', () => {
       ]
     });
     service = TestBed.inject(QuizzesApiService);
-    userService = TestBed.inject(UserService);
   });
 
   it('should be created', () => {
@@ -36,208 +114,50 @@ describe('ApiService', () => {
   });
 
   it('should retrieve quizzes from db', (done: DoneFn) => {
-    const dummyQuizzes: IQuiz[] = [
-      {
-        "id": 1,
-        "title": "10 Questions",
-        "subtitle": "Emoji Bands",
-        "group": "historical",
-        "questions": []
-      },
-      {
-        "id": 2,
-        "title": "10 Questions",
-        "subtitle": "Easter Emoji Quiz: Can You Get 100 Percent?",
-        "group": "mathematical",
-        "questions": []
-      },
-      {
-        "id": 3,
-        "title": "10 Questions",
-        "subtitle": "London Underground & Tube Station Emoji",
-        "group": "historical",
-        "questions": []
-      },
-      {
-        "id": 4,
-        "title": "10 Questions",
-        "subtitle": "Trivia Quiz: Guess The WWE Star From The Emoji!",
-        "group": "historical",
-        "questions": []
-      },
-      {
-        "id": 5,
-        "title": "10 Questions",
-        "subtitle": "What Emoji Am I?",
-        "group": "mathematical",
-        "questions": []
-      }
-    ];
-
+    spyOn(service, 'getAllQuizzes').and.returnValue(Promise.resolve(dummyQuizzes));
     service.getAllQuizzes().then((quizzes: IQuiz[]) => {
-
-      for (const quiz of quizzes) {
-        quiz.questions = [];
-      }
-
-      expect(quizzes.length).toBe(5);
+      expect(quizzes.length).toBe(2);
       expect(quizzes).toEqual(dummyQuizzes);
       done();
-    });
+    })
   });
 
   it('should retrieve quiz themes from db', (done: DoneFn) => {
-    const dummyQuizThemes: IQuizTheme[] = [
-      {
-        "titleTextClass": "text-primary",
-        "primaryTextClass": "text-bright",
-        "secondaryTextClass": "text-primary",
-        "secondaryActiveTextClass": "text-bright",
-        "numberTextClass": "text-primary",
-        "numberBackgroundClass": "bg-warning",
-        "backgroundClass": "bg-success",
-        "btnsBackgroundClass": "bg-accent",
-        "btnsTextClass": "text-bright",
-        "radioButtonColor": "accent-error",
-        "iconSrc": "assets/img/Mili.svg",
-        "personName": "Mili"
-      },
-      {
-        "titleTextClass": "text-primary",
-        "primaryTextClass": "text-bright",
-        "secondaryTextClass": "text-primary",
-        "secondaryActiveTextClass": "text-bright",
-        "numberTextClass": "text-primary",
-        "numberBackgroundClass": "bg-warning",
-        "backgroundClass": "bg-error",
-        "btnsBackgroundClass": "bg-accent",
-        "btnsTextClass": "text-bright",
-        "radioButtonColor": "accent-accent",
-        "iconSrc": "assets/img/Meg.svg",
-        "personName": "Meg"
-      },
-      {
-        "titleTextClass": "text-secondary",
-        "primaryTextClass": "text-bright",
-        "secondaryTextClass": "text-primary",
-        "secondaryActiveTextClass": "text-bright",
-        "numberTextClass": "text-primary",
-        "numberBackgroundClass": "bg-warning",
-        "backgroundClass": "bg-accent",
-        "btnsBackgroundClass": "bg-error",
-        "btnsTextClass": "text-bright",
-        "radioButtonColor": "accent-error",
-        "iconSrc": "assets/img/Steven.svg",
-        "personName": "Steven"
-      },
-      {
-        "titleTextClass": "text-secondary",
-        "primaryTextClass": "text-primary",
-        "secondaryTextClass": "text-primary",
-        "secondaryActiveTextClass": "text-bright",
-        "numberTextClass": "text-primary",
-        "numberBackgroundClass": "bg-warning",
-        "backgroundClass": "bg-bright",
-        "btnsBackgroundClass": "bg-error",
-        "btnsTextClass": "text-bright",
-        "radioButtonColor": "accent-error",
-        "iconSrc": "assets/img/Mili.svg",
-        "personName": "Mili"
-      },
-      {
-        "titleTextClass": "text-secondary",
-        "primaryTextClass": "text-primary",
-        "secondaryTextClass": "text-primary",
-        "secondaryActiveTextClass": "text-accent",
-        "numberTextClass": "text-bright",
-        "numberBackgroundClass": "bg-error",
-        "backgroundClass": "bg-warning",
-        "btnsBackgroundClass": "bg-accent",
-        "btnsTextClass": "text-primary",
-        "radioButtonColor": "accent-error",
-        "iconSrc": "assets/img/Steven.svg",
-        "personName": "Steven"
-      }
-    ];
-
+    spyOn(service, 'getAllQuizThemes').and.returnValue(Promise.resolve(dummyQuizThemes));
     service.getAllQuizThemes().then((quizThemes: IQuizTheme[]) => {
-      expect(quizThemes.length).toBe(5);
+      expect(quizThemes.length).toBe(3);
       expect(quizThemes).toEqual(dummyQuizThemes);
       done();
-    });
+    })
   });
 
   it('should retrieve quiz by id from db', (done: DoneFn) => {
-    const dummyQuiz: IQuiz = {
-      "id": 2,
-      "title": "10 Questions",
-      "subtitle": "Easter Emoji Quiz: Can You Get 100 Percent?",
-      "group": "mathematical",
-      "questions": []
-    };
-
-    service.getQuizById(2).then((quiz: IQuiz) => {
-      quiz.questions = [];
-      expect(quiz).toEqual(dummyQuiz);
+    spyOn(service, 'getQuizById').and.returnValue(Promise.resolve(dummyQuizzes[0]));
+    service.getQuizById(1).then((quiz: IQuiz) => {
+      expect(quiz).toEqual(dummyQuizzes[0]);
       done();
-    });
+    })
+  });
+
+  it('should retrieve quizzes results from db', (done: DoneFn) => {
+    spyOn(service, 'getAllPassedQuizzes').and.returnValue(Promise.resolve(dummyQuizResults));
+    service.getAllPassedQuizzes().then((quizResults: IQuizResult[]) => {
+      expect(quizResults.length).toBe(3);
+      expect(quizResults).toEqual(dummyQuizResults);
+      done();
+    })
   });
 
   it('should retrieve quiz answers by id from db', (done: DoneFn) => {
-    userService.generateId();
-
-    const dummyQuizResult: IQuizResult = {
-      answers: ['2', '1', '2', '1', '2', '1', '2', '3', '1', '2'],
-      correct: 3,
-      seconds: 12
-    };
-
-    service.setQuizAnswers(
-      4,
-      dummyQuizResult.answers,
-      dummyQuizResult.correct,
-      dummyQuizResult.seconds
-    );
-
-    service.getQuizAnswersById(4).then((quizResult: IQuizResult | null) => {
+    spyOn(service, 'getQuizAnswersById').and.returnValue(Promise.resolve(dummyQuizResults[1]));
+    service.getQuizAnswersById(1).then((quizResult: IQuizResult | null) => {
       if (quizResult) {
-        expect(quizResult).toEqual(dummyQuizResult);
+        expect(quizResult).toEqual(dummyQuizResults[1]);
       } else {
         expect(quizResult).toEqual(null);
       }
       done();
-    });
+    })
   });
 
-  it('should retrieve passed quizzes from db', (done: DoneFn) => {
-    userService.generateId();
-
-    const dummyPassedQuizzes: IQuizResult[] = [
-      {
-        answers: ['2', '1', '2', '3', '1', '2', '1', '0', '2', '2'],
-        correct: 3,
-        seconds: 11
-      },
-      {
-        answers: ['2', '1', '2', '1', '2', '1', '2', '3', '1', '2'],
-        correct: 3,
-        seconds: 12
-      }
-    ];
-
-    for (let i = 0; i < dummyPassedQuizzes.length; i++) {
-      service.setQuizAnswers(
-        i + 1,
-        dummyPassedQuizzes[i].answers,
-        dummyPassedQuizzes[i].correct,
-        dummyPassedQuizzes[i].seconds
-      );
-    }
-
-    service.getAllPassedQuizzes().then((passedQuizzes: IQuizResult[]) => {
-      expect(passedQuizzes.length).toBe(2);
-      expect(passedQuizzes).toEqual(dummyPassedQuizzes);
-      done();
-    });
-  });
 });
