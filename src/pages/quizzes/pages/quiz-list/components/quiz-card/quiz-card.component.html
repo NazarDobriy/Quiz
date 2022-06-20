@@ -3,7 +3,7 @@
         <section class="container w-52 m-auto pt-[14px]">
             <div class="flex justify-between items-end">
                 <p class="text-base font-semibold" [ngClass]="theme.titleTextClass">{{ quiz.title }}</p>
-                <svg-icon [src]="theme.iconSrc" svgClass="h-12 w-12 rounded-full"></svg-icon>
+                <app-icon [iconName]="theme.personName" [tailwindConfig]="'h-12 w-12 rounded-full'"></app-icon>
             </div>
             <p class="text-[28px] font-bold leading-[38px]" [ngClass]="theme.primaryTextClass">{{ quiz.subtitle }}</p>
         </section>
