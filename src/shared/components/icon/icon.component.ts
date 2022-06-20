@@ -1,14 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-icon',
   templateUrl: './icon.component.html'
 })
-export class IconComponent implements OnInit {
-  
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+export class IconComponent {
+  @Input() iconName: string = '';
+  @Input() tailwindConfig: string = '';
 }

@@ -43,6 +43,16 @@ export class QuizComponent implements OnInit {
   public questionIndex: number = 0;
   public timeStart!: Date;
 
+  public persons: {
+    Mili: string;
+    Jake: string;
+    Steven: string
+  } = {
+    Mili: 'Mili',
+    Jake: 'Jake',
+    Steven: 'Steven'
+  };
+
   private isLoadingThemes: boolean = true;
   private isLoadingQuiz: boolean = true;
   private userAnswersIds: string[] = [];
