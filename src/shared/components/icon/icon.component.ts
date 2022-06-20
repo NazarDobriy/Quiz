@@ -6,5 +6,5 @@ import { Component, Input } from '@angular/core';
 })
 export class IconComponent {
   @Input() iconName: string = '';
-  @Input() tailwindConfig: string = '';
+  @Input() styleClass: string = '';
 }
