@@ -1,9 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HeaderComponent } from './components/header/header.component';
+import { HeaderComponent } from './components/header/header/header.component';
 import { RouterModule, Routes } from '@angular/router';
 import { UserService } from './providers/user.service';
 import { LocalStorageService } from './providers/local-storage.service';
+import { AngularSvgIconModule } from 'angular-svg-icon';
+import { HttpClientModule } from '@angular/common/http';
+import { IconComponent } from './components/header/icon/icon.component';
 
 const routes: Routes = [
   { path: '', component: HeaderComponent }
@@ -11,14 +14,19 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    HeaderComponent
+    HeaderComponent,
+    IconComponent
   ],
   imports: [
     CommonModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    HttpClientModule,
+    AngularSvgIconModule.forRoot()
   ],
   exports: [
-    HeaderComponent
+    HeaderComponent,
+    IconComponent,
+    AngularSvgIconModule
   ],
   providers: [
     UserService,

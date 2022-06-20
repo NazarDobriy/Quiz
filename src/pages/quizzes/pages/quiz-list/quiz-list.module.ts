@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { QuizCardComponent } from './components/quiz-card/quiz-card.component';
 import { QuizzesComponent } from './quizzes.component';
 import { RouterModule, Routes } from '@angular/router';
-import { AngularSvgIconModule } from 'angular-svg-icon';
+import { CoreModule } from 'src/core/core.module';
 
 const routes: Routes = [
   { path: '', component: QuizzesComponent }
@@ -18,7 +18,7 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    AngularSvgIconModule
+    CoreModule
   ]
 })
 export class QuizListModule { }

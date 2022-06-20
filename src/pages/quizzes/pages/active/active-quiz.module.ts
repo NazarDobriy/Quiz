@@ -13,7 +13,7 @@ import { StatisticsComponent } from './components/statistics/statistics.componen
 import { DoughnutChartComponent } from './components/doughnut-chart/doughnut-chart.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { SnackBarService } from './providers/snack-bar.service';
-import { AngularSvgIconModule } from 'angular-svg-icon';
+import { CoreModule } from 'src/core/core.module';
 
 const routes: Routes = [
   { 
@@ -45,7 +45,7 @@ const routes: Routes = [
     MatDialogModule,
     MatSnackBarModule,
     RouterModule.forChild(routes),
-    AngularSvgIconModule
+    CoreModule
   ],
   providers: [
     QuizComponent,
