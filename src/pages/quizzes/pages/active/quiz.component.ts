@@ -35,7 +35,6 @@ export class QuizComponent implements OnInit {
     btnsTextClass: '',
     radioButtonColor: '',
     titleTextClass: '',
-    iconSrc: '',
     personName: ''
   };
 
