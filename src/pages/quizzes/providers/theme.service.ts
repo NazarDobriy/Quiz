@@ -12,7 +12,6 @@ export interface IQuizTheme {
   btnsTextClass: string;
   radioButtonColor: string;
   titleTextClass: string;
-  iconSrc: string;
   personName: string;
 }
 

@@ -35,13 +35,18 @@ export class QuizComponent implements OnInit {
     btnsTextClass: '',
     radioButtonColor: '',
     titleTextClass: '',
-    iconSrc: '',
     personName: ''
   };
 
   public quizId: number = 0;
   public questionIndex: number = 0;
   public timeStart!: Date;
+
+  public personsIcons = {
+    Mili: 'mili',
+    Jake: 'jake',
+    Steven: 'steven'
+  };
 
   private isLoadingThemes: boolean = true;
   private isLoadingQuiz: boolean = true;
