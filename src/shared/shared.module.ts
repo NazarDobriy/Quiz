@@ -11,11 +11,10 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
   ],
   imports: [
     CommonModule,
-    AngularSvgIconModule
+    AngularSvgIconModule.forRoot()
   ],
   exports: [
-    IconComponent,
-    AngularSvgIconModule
+    IconComponent
   ]
 })
 export class SharedModule { }
