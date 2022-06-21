@@ -73,40 +73,37 @@ describe('ApiService', () => {
       }
     } as AngularFireObject<IQuiz>);
 
-    mockAngularFireDatabase.object<IQuiz>(`quizzes/1`).valueChanges().subscribe((quiz: IQuiz | null) => {
+    mockAngularFireDatabase.object<IQuiz>('quizzes/1').valueChanges().subscribe((quiz: IQuiz | null) => {
       quiz ? expect(quiz).toEqual(mockQuizzes[1]) : expect(quiz).toEqual(null);
       done();
     });
   });
 
+  it('should retrieve quizzes results from db', (done: DoneFn) => {
+    mockAngularFireDatabase.list.and.returnValue({
+      valueChanges(): Observable<IQuizResult[]> {
+        return of(mockQuizResults);
+      }
+    } as AngularFireList<IQuizResult>);
 
-  // it('should retrieve quiz by id from db', (done: DoneFn) => {
-  //   mockQuizzesApiService.getQuizById.and.returnValue(Promise.resolve(dummyQuizzes[0]));
-  //   mockQuizzesApiService.getQuizById(1).then((quiz: IQuiz) => {
-  //     expect(quiz).toEqual(dummyQuizzes[0]);
-  //     done();
-  //   })
-  // });
+    mockAngularFireDatabase.list<IQuizResult>('quiz_answers').valueChanges().subscribe((quizResults: IQuizResult[]) => {
+      expect(quizResults).toEqual(mockQuizResults);
+      expect(quizResults.length).toBe(mockQuizResults.length);
+      done();
+    });
+  });
 
-  // it('should retrieve quizzes results from db', (done: DoneFn) => {
-  //   mockQuizzesApiService.getAllPassedQuizzes.and.returnValue(Promise.resolve(dummyQuizResults));
-  //   mockQuizzesApiService.getAllPassedQuizzes().then((quizResults: IQuizResult[]) => {
-  //     expect(quizResults.length).toBe(3);
-  //     expect(quizResults).toEqual(dummyQuizResults);
-  //     done();
-  //   })
-  // });
+  it('should retrieve quiz answers by id from db', (done: DoneFn) => {
+    mockAngularFireDatabase.object.and.returnValue({
+      valueChanges(): Observable<IQuizResult> {
+        return of(mockQuizResults[0]);
+      }
+    } as AngularFireObject<IQuizResult>);
 
-  // it('should retrieve quiz answers by id from db', (done: DoneFn) => {
-  //   mockQuizzesApiService.getQuizAnswersById.and.returnValue(Promise.resolve(dummyQuizResults[1]));
-  //   mockQuizzesApiService.getQuizAnswersById(1).then((quizResult: IQuizResult | null) => {
-  //     if (quizResult) {
-  //       expect(quizResult).toEqual(dummyQuizResults[1]);
-  //     } else {
-  //       expect(quizResult).toEqual(null);
-  //     }
-  //     done();
-  //   })
-  // });
+    mockAngularFireDatabase.object<IQuizResult>('quiz_answers/0').valueChanges().subscribe((quizResult: IQuizResult | null) => {
+      quizResult ? expect(quizResult).toEqual(mockQuizResults[0]) : expect(quizResult).toEqual(null);
+      done();
+    });
+  });
 
 });
