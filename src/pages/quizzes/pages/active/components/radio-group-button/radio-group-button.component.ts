@@ -11,13 +11,13 @@ export class RadioGroupButtonComponent {
   @Input() labelClass: string = '';
   @Input() activeLabelClass: string = '';
 
-  @Output() onSelect = new EventEmitter<number>();
+  @Output() radioSelect = new EventEmitter<number>();
 
   public inputName: string = 'question';
 
   public selectOption(index: number): void {
     this.selectedOption = this.options[index];
-    this.onSelect.emit(index);
+    this.radioSelect.emit(index);
   }
 
   public isOptionSelected(optionIndex: number): boolean {
