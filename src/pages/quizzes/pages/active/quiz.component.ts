@@ -126,7 +126,10 @@ export class QuizComponent implements OnInit {
   }
 
   private async setQuizById(): Promise<void> {
-    this.currentQuiz = await this.quizService.getQuizById(this.quizId);
+    const tempQuiz: IQuiz | null = await this.quizService.getQuizById(this.quizId);
+    if (tempQuiz) {
+      this.currentQuiz = tempQuiz;
+    }
     this.isLoadingQuiz = false;
   }
 

@@ -45,7 +45,7 @@ export class QuizService {
     return this.quizzesApiService.getAllPassedQuizzes();
   }
 
-  public getQuizById(id: number): Promise<IQuiz> {
+  public getQuizById(id: number): Promise<IQuiz | null> {
     return this.quizzesApiService.getQuizById(id);
   }
 
