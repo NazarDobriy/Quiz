@@ -3,46 +3,13 @@ import { TestBed } from '@angular/core/testing';
 import { IQuizTheme, ThemeService } from './theme.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { QuizzesApiService } from './quizzes-api.service';
+import { mockQuizThemes } from 'src/mock-data';
 
 describe('ThemeService', () => {
   let service: ThemeService;
-
-  let mockThemeService: jasmine.SpyObj<ThemeService>;
   let mockQuizzesApiService: jasmine.SpyObj<QuizzesApiService>;
 
-  let dummyQuizThemes: IQuizTheme[] = [
-    {
-      titleTextClass: 'text-primary',
-      primaryTextClass: 'text-bright',
-      secondaryTextClass: 'text-primary',
-      secondaryActiveTextClass: 'text-bright',
-      numberTextClass: 'text-primary',
-      numberBackgroundClass: 'bg-warning',
-      backgroundClass: 'bg-success',
-      btnsBackgroundClass: 'bg-accent',
-      btnsTextClass: 'text-bright',
-      radioButtonColor: 'accent-error',
-      iconSrc: 'assets/img/Mili.svg',
-      personName: 'Mili'
-    },
-    {
-      titleTextClass: 'text-secondary',
-      primaryTextClass: 'text-bright',
-      secondaryTextClass: 'text-primary',
-      secondaryActiveTextClass: 'text-bright',
-      numberTextClass: 'text-primary',
-      numberBackgroundClass: 'bg-warning',
-      backgroundClass: 'bg-accent',
-      btnsBackgroundClass: 'bg-error',
-      btnsTextClass: 'text-bright',
-      radioButtonColor: 'accent-error',
-      iconSrc: 'assets/img/Steven.svg',
-      personName: 'Steven'
-    }
-  ];
-
   beforeEach(() => {
-    mockThemeService = jasmine.createSpyObj(['getThemeById', 'setThemes']);
     mockQuizzesApiService = jasmine.createSpyObj(['getAllQuizThemes']);
 
     TestBed.configureTestingModule({
@@ -50,10 +17,6 @@ describe('ThemeService', () => {
         HttpClientTestingModule
       ],
       providers: [
-        {
-          provide: ThemeService,
-          useValue: mockThemeService
-        },
         {
           provide: QuizzesApiService,
           useValue: mockQuizzesApiService
@@ -65,26 +28,21 @@ describe('ThemeService', () => {
   });
 
   it('should be created', () => {
-    expect(mockThemeService).toBeTruthy();
+    expect(service).toBeTruthy();
   });
 
   it('should set themes', (done: DoneFn) => {
-    mockQuizzesApiService.getAllQuizThemes.and.returnValue(Promise.resolve(dummyQuizThemes));
-    mockThemeService.setThemes.and.returnValue(Promise.resolve());
-
-    mockThemeService.setThemes().then(() => {
-      mockQuizzesApiService.getAllQuizThemes().then((themes: IQuizTheme[]) => {
-        mockThemeService.themes = themes;
-        expect(mockThemeService.themes).toEqual(dummyQuizThemes);
-        expect(mockThemeService.themes.length).toBe(dummyQuizThemes.length);
-        done();
-      });
+    mockQuizzesApiService.getAllQuizThemes.and.returnValue(Promise.resolve(mockQuizThemes));
+    service.setThemes().then(() => {
+      expect(service.themes).toEqual(mockQuizThemes);
+      expect(service.themes.length).toBe(mockQuizThemes.length);
+      done();
     });
   });
 
   it('should get theme by text', () => {
-    service.themes = dummyQuizThemes;
+    service.themes = mockQuizThemes;
     const currentQuizTheme: IQuizTheme = service.getThemeByText('Emoji Bands');
-    expect(currentQuizTheme).toEqual(dummyQuizThemes[0]);
+    expect(currentQuizTheme).toEqual(mockQuizThemes[0]);
   });
 });
