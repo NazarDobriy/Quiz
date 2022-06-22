@@ -67,14 +67,16 @@ describe('ApiService', () => {
   });
 
   it('should retrieve quiz by id from db', (done: DoneFn) => {
-    mockAngularFireDatabase.object.and.returnValue({
-      valueChanges(): Observable<IQuiz> {
-        return of(mockQuizzes[1]);
-      }
-    } as AngularFireObject<IQuiz>);
+    const id: number = 1, index: number = 0;
 
-    mockAngularFireDatabase.object<IQuiz>('quizzes/1').valueChanges().subscribe((quiz: IQuiz | null) => {
-      quiz ? expect(quiz).toEqual(mockQuizzes[1]) : expect(quiz).toEqual(null);
+    mockAngularFireDatabase.list.and.returnValue({
+      valueChanges(): Observable<IQuiz[]> {
+        return of(mockQuizzes);
+      }
+    } as AngularFireList<IQuiz>);
+
+    service.getQuizById(id).then((quiz: IQuiz) => {
+      expect(quiz.id).toEqual(mockQuizzes[index].id);
       done();
     });
   });
@@ -86,7 +88,7 @@ describe('ApiService', () => {
       }
     } as AngularFireList<IQuizResult>);
 
-    mockAngularFireDatabase.list<IQuizResult>('quiz_answers').valueChanges().subscribe((quizResults: IQuizResult[]) => {
+    service.getAllPassedQuizzes().then((quizResults: IQuizResult[]) => {
       expect(quizResults).toEqual(mockQuizResults);
       expect(quizResults.length).toBe(mockQuizResults.length);
       done();
@@ -94,14 +96,16 @@ describe('ApiService', () => {
   });
 
   it('should retrieve quiz answers by id from db', (done: DoneFn) => {
+    const id: number = 0;
+
     mockAngularFireDatabase.object.and.returnValue({
       valueChanges(): Observable<IQuizResult> {
-        return of(mockQuizResults[0]);
+        return of(mockQuizResults[id]);
       }
     } as AngularFireObject<IQuizResult>);
 
-    mockAngularFireDatabase.object<IQuizResult>('quiz_answers/0').valueChanges().subscribe((quizResult: IQuizResult | null) => {
-      quizResult ? expect(quizResult).toEqual(mockQuizResults[0]) : expect(quizResult).toEqual(null);
+    service.getQuizAnswersById(id).then((quizResult: IQuizResult | null) => {
+      expect(quizResult).toEqual(mockQuizResults[id]);
       done();
     });
   });
