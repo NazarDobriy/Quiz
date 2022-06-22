@@ -138,7 +138,7 @@ export class QuizComponent implements OnInit {
     this.questionIndex--;
   }
 
-  public onSelect(optionIndex: number): void {
+  public radioSelect(optionIndex: number): void {
     this.userAnswersIds[this.questionIndex] = this.getAnswerByIndex(optionIndex).id;
   }
 
