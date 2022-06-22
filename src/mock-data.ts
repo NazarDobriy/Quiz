@@ -7,7 +7,228 @@ export const mockQuizzes: IQuiz[] = [
     title: 'Music is the best',
     subtitle: 'Music questions',
     group: 'bang',
-    questions: []
+    questions: [
+      {
+        "name": "When the city of Lviv received the Magdeburg Law?",
+        "answers": [
+          {
+            "id": '0',
+            "text": "1256"
+          },
+          {
+            "id": '1',
+            "text": "1356"
+          },
+          {
+            "id": '2',
+            "text": "1288"
+          },
+          {
+            "id": '3',
+            "text": "1367"
+          }
+        ],
+        "correctAnswer": '1'
+      },
+      {
+        "name": "When hetman Petro Sagaidachny made a military campaign to the city of Kafa?",
+        "answers": [
+          {
+            "id": '0',
+            "text": "1607"
+          },
+          {
+            "id": '1',
+            "text": "1588"
+          },
+          {
+            "id": '2',
+            "text": "1616"
+          },
+          {
+            "id": '3',
+            "text": "1618"
+          }
+        ],
+        "correctAnswer": '2'
+      },
+      {
+        "name": "Who led the national liberation war against the Commonwealth?",
+        "answers": [
+          {
+            "id": '0',
+            "text": "Bogdan Khmelnitsky"
+          },
+          {
+            "id": '1',
+            "text": "Petro Sagaidachny"
+          },
+          {
+            "id": '2',
+            "text": "Ivan Mazapa"
+          },
+          {
+            "id": '3',
+            "text": "Yurii Khmelnitsky"
+          }
+        ],
+        "correctAnswer": '0'
+      },
+      {
+        "name": "When the national liberation war against the Commonwealth began?",
+        "answers": [
+          {
+            "id": '0',
+            "text": "1635"
+          },
+          {
+            "id": '1',
+            "text": "1650"
+          },
+          {
+            "id": '2',
+            "text": "1648"
+          },
+          {
+            "id": '3',
+            "text": "1655"
+          }
+        ],
+        "correctAnswer": '2'
+      },
+      {
+        "name": "When World War I began?",
+        "answers": [
+          {
+            "id": '0',
+            "text": "1915"
+          },
+          {
+            "id": '1',
+            "text": "1938"
+          },
+          {
+            "id": '2',
+            "text": "1939"
+          },
+          {
+            "id": '3',
+            "text": "1914"
+          }
+        ],
+        "correctAnswer": '3'
+      },
+      {
+        "name": "Who headed Central Council of Ukraine?",
+        "answers": [
+          {
+            "id": '0',
+            "text": "Pavlo Skoropadsky"
+          },
+          {
+            "id": '1',
+            "text": "Mykola Hrushevsky"
+          },
+          {
+            "id": '2',
+            "text": "Ivan Franko"
+          },
+          {
+            "id": '3',
+            "text": "Taras Shevchenko"
+          }
+        ],
+        "correctAnswer": '1'
+      },
+      {
+        "name": "When the industrialization started?",
+        "answers": [
+          {
+            "id": '0',
+            "text": "1930"
+          },
+          {
+            "id": '1',
+            "text": "1925"
+          },
+          {
+            "id": '2',
+            "text": "1940"
+          },
+          {
+            "id": '3',
+            "text": "1927"
+          }
+        ],
+        "correctAnswer": '1'
+      },
+      {
+        "name": "When independence was proclaimed in Ukraine?",
+        "answers": [
+          {
+            "id": '0',
+            "text": "1991"
+          },
+          {
+            "id": '1',
+            "text": "1990"
+          },
+          {
+            "id": '2',
+            "text": "1940"
+          },
+          {
+            "id": '3',
+            "text": "1927"
+          }
+        ],
+        "correctAnswer": '0'
+      },
+      {
+        "name": "Who became the first president of Ukraine?",
+        "answers": [
+          {
+            "id": '0',
+            "text": "Leonid Kravchuk"
+          },
+          {
+            "id": '1',
+            "text": "Leonid Kuchma"
+          },
+          {
+            "id": '2',
+            "text": "Petro Poroshenko"
+          },
+          {
+            "id": '3',
+            "text": "Volodymyr Zelenskyy"
+          }
+        ],
+        "correctAnswer": '0'
+      },
+      {
+        "name": "When the Budapest Memorandum was signed?",
+        "answers": [
+          {
+            "id": '0',
+            "text": "1990"
+          },
+          {
+            "id": '1',
+            "text": "2000"
+          },
+          {
+            "id": '2',
+            "text": "1994"
+          },
+          {
+            "id": '3',
+            "text": "1995"
+          }
+        ],
+        "correctAnswer": '2'
+      }
+    ]
   },
   {
     id: 2,
