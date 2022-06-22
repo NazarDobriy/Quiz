@@ -5,8 +5,11 @@ import { LocalStorageService } from './local-storage.service';
 describe('LocalStorageService', () => {
   let service: LocalStorageService;
 
+  let itemKey: string = 'name';
+  let itemValue: string = 'John';
+
   beforeEach(() => {
-    localStorage.setItem('name', 'John');
+    localStorage.setItem(itemKey, itemValue);
     TestBed.configureTestingModule({
       providers: [LocalStorageService]
     });
@@ -18,22 +21,26 @@ describe('LocalStorageService', () => {
   });
 
   it('should get value by key', () => {
-    const value: string | null = service.get('name');
-    value ? expect(value).toEqual('John') : expect(value).toEqual(null);
+    expect(service.get(itemKey)).toEqual(itemValue);
+  });
+
+  it('should check get key after delete', () => {
+    localStorage.removeItem(itemKey);
+    expect(service.get(itemKey)).toEqual(null);
   });
 
   it('should check value by key', () => {
-    expect(service.has('name')).toBeTruthy();
+    expect(service.has(itemKey)).toBeTruthy();
   });
 
   it('should set value by key', () => {
-    service.set('name', 'Nazar');
-    expect(localStorage.getItem('name')).toEqual('Nazar');
+    service.set(itemKey, 'Nazar');
+    expect(localStorage.getItem(itemKey)).toEqual('Nazar');
   });
 
   it('should remove value by key', () => {
-    service.remove('name');
-    expect(localStorage.getItem('name')).toEqual(null);
+    service.remove(itemKey);
+    expect(localStorage.getItem(itemKey)).toEqual(null);
   });
 
   it('should clear storage', () => {
