@@ -43,10 +43,7 @@ export class ScoreComponent implements OnInit {
   }
 
   private async setQuizById(): Promise<void> {
-    const tempQuiz: IQuiz | null = await this.quizService.getQuizById(this.quizId);
-    if (tempQuiz) {
-      this.currentQuiz = tempQuiz;
-    }
+    this.currentQuiz = await this.quizService.getQuizById(this.quizId);
     this.isLoadingQuiz = false;
   }
 

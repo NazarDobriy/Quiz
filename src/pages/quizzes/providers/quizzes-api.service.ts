@@ -26,8 +26,13 @@ export class QuizzesApiService {
     return firstValueFrom(this.db.list<IQuizTheme>('quiz_themes').valueChanges());
   }
 
-  public getQuizById(id: number): Promise<IQuiz | null> {
-    return firstValueFrom(this.db.object<IQuiz>(`quizzes/${id - 1}`).valueChanges());
+  public getQuizById(id: number): Promise<IQuiz> {
+    return firstValueFrom(this.db.list<IQuiz>('quizzes').valueChanges().pipe(
+      map((quizzes: IQuiz[]) => {
+        const selectedQuiz: IQuiz | undefined = quizzes.find((quiz: IQuiz) => quiz.id === id);
+        return selectedQuiz ? selectedQuiz : this.primaryQuiz;
+      })
+    ));
   }
 
   public setQuizAnswers(quizId: number, answers: string[], correctAnswers: number, duration: Duration): void {

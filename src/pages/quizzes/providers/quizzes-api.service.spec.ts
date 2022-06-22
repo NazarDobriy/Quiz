@@ -45,7 +45,7 @@ describe('ApiService', () => {
       }
     } as AngularFireList<IQuiz>);
 
-    mockAngularFireDatabase.list<IQuiz>('quizzes').valueChanges().subscribe((quizzes: IQuiz[]) => {
+    service.getAllQuizzes().then((quizzes: IQuiz[]) => {
       expect(quizzes).toEqual(mockQuizzes);
       expect(quizzes.length).toBe(mockQuizzes.length);
       done();
@@ -59,7 +59,7 @@ describe('ApiService', () => {
       }
     } as AngularFireList<IQuizTheme>);
 
-    mockAngularFireDatabase.list<IQuizTheme>('quiz_themes').valueChanges().subscribe((quizThemes: IQuizTheme[]) => {
+    service.getAllQuizThemes().then((quizThemes: IQuizTheme[]) => {
       expect(quizThemes).toEqual(mockQuizThemes);
       expect(quizThemes.length).toBe(mockQuizThemes.length);
       done();
