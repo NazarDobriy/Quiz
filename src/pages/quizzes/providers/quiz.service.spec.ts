@@ -87,6 +87,6 @@ describe('QuizService', () => {
 
   it('should calculate quiz result', () => {
     const correctAnswers = service.calcQuizResult(mockQuizzes[0], mockQuizResults[0].answers);
-    expect(correctAnswers).toBe(0);
+    expect(correctAnswers).toBe(3);
   });
 });
