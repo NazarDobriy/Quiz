@@ -1,7 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
 import { QuizzesApiService } from './quizzes-api.service';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { IQuiz, IQuizResult } from './quiz.service';
 import { AngularFireDatabase, AngularFireList, AngularFireObject } from '@angular/fire/compat/database';
 import { UserService } from 'src/core/providers/user.service';
@@ -18,9 +17,6 @@ describe('ApiService', () => {
     mockAngularFireDatabase = jasmine.createSpyObj(['list', 'object']);
 
     TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule
-      ],
       providers: [
         UserService,
         QuizzesApiService,
@@ -76,7 +72,8 @@ describe('ApiService', () => {
     } as AngularFireList<IQuiz>);
 
     service.getQuizById(id).then((quiz: IQuiz) => {
-      expect(quiz.id).toEqual(mockQuizzes[index].id);
+      expect(quiz.id).toBe(id);
+      expect(quiz).toEqual(mockQuizzes[index]);
       done();
     });
   });
@@ -109,5 +106,4 @@ describe('ApiService', () => {
       done();
     });
   });
-
 });

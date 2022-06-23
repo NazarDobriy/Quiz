@@ -1,7 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
 import { IQuizTheme, ThemeService } from './theme.service';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { QuizzesApiService } from './quizzes-api.service';
 import { mockQuizThemes } from 'src/mock-data';
 
@@ -13,9 +12,6 @@ describe('ThemeService', () => {
     mockQuizzesApiService = jasmine.createSpyObj(['getAllQuizThemes']);
 
     TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule
-      ],
       providers: [
         {
           provide: QuizzesApiService,
