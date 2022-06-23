@@ -19,7 +19,12 @@ describe('UserService', () => {
         }
       ]
     });
+
     service = TestBed.inject(UserService);
+
+    mockLocalStorageService.get.calls.reset();
+    mockLocalStorageService.has.calls.reset();
+    mockLocalStorageService.set.calls.reset();
   });
 
   it('should be created', () => {
