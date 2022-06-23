@@ -1,4 +1,5 @@
 import { TestBed } from '@angular/core/testing';
+import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { mockQuizResults, mockQuizzes } from 'src/mock-data';
 import { Duration } from 'src/models/duration';
@@ -13,6 +14,7 @@ describe('QuizService', () => {
   const start: Date = new Date(), end: Date = new Date();
 
   let service: QuizService;
+  let mockRouter: jasmine.SpyObj<Router>;
   let mockQuizzesApiService: jasmine.SpyObj<QuizzesApiService>;
 
   beforeEach(() => {
@@ -23,6 +25,7 @@ describe('QuizService', () => {
       'getQuizAnswersById',
       'setQuizAnswers',
     ]);
+    mockRouter = jasmine.createSpyObj(['navigateByUrl']);
 
     end.setMinutes(start.getMinutes() + 45);
     duration = new Duration(start, end);
@@ -38,6 +41,10 @@ describe('QuizService', () => {
         {
           provide: QuizzesApiService,
           useValue: mockQuizzesApiService
+        },
+        {
+          provide: Router,
+          useValue: mockRouter
         }
       ]
     });
@@ -103,6 +110,12 @@ describe('QuizService', () => {
       correctAnswers,
       duration
     );
+  });
+
+  it('should check router redirection after finish quiz', () => {
+    service.finishQuiz(mockQuizzes[0], mockQuizResults[0].answers, duration);
+    expect(mockRouter.navigateByUrl).toHaveBeenCalled();
+    expect(mockRouter.navigateByUrl).toHaveBeenCalledWith(`/quizzes/active/${mockQuizzes[0].id}/score`);
   });
 
   it('should calculate quiz result', () => {
