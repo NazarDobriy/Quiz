@@ -8,7 +8,9 @@ import { IQuiz, IQuizResult, QuizService } from './quiz.service';
 import { QuizzesApiService } from './quizzes-api.service';
 
 describe('QuizService', () => {
+  let duration: Duration;
   const id: number = 1, index: number = 0;
+  const start: Date = new Date(), end: Date = new Date();
 
   let service: QuizService;
   let mockQuizzesApiService: jasmine.SpyObj<QuizzesApiService>;
@@ -21,6 +23,10 @@ describe('QuizService', () => {
       'getQuizAnswersById',
       'setQuizAnswers',
     ]);
+
+    end.setMinutes(start.getMinutes() + 45);
+    duration = new Duration(start, end);
+
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule.withRoutes(
@@ -77,16 +83,33 @@ describe('QuizService', () => {
     });
   });
 
-  it('should finish quiz', () => {
-    const start: Date = new Date(), end: Date = new Date();
-    end.setMinutes(start.getMinutes() + 45);
-    const duration: Duration = new Duration(start, end);
+  it('should finish quiz check completed', () => {
     service.finishQuiz(mockQuizzes[0], mockQuizResults[0].answers, duration);
     expect(service.completed).toBeTruthy();
   });
 
+  it('should call setQuizAnswers with correct params after quiz finish', () => {
+    const correctAnswers: number = service.calcQuizResult(
+      mockQuizzes[0],
+      mockQuizResults[0].answers
+    );
+
+    service.finishQuiz(mockQuizzes[0], mockQuizResults[0].answers, duration);
+
+    expect(mockQuizzesApiService.setQuizAnswers).toHaveBeenCalled();
+    expect(mockQuizzesApiService.setQuizAnswers).toHaveBeenCalledWith(
+      mockQuizzes[0].id,
+      mockQuizResults[0].answers,
+      correctAnswers,
+      duration
+    );
+  });
+
   it('should calculate quiz result', () => {
-    const correctAnswers = service.calcQuizResult(mockQuizzes[0], mockQuizResults[0].answers);
-    expect(correctAnswers).toBe(3);
+    const correctAnswers: number = service.calcQuizResult(
+      mockQuizzes[0],
+      mockQuizResults[0].answers
+    );
+    expect(correctAnswers).toBe(1);
   });
 });
