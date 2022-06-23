@@ -48,7 +48,16 @@ describe('QuizService', () => {
         }
       ]
     });
+
     service = TestBed.inject(QuizService);
+
+    mockQuizzesApiService.getAllQuizzes.calls.reset();
+    mockQuizzesApiService.getAllPassedQuizzes.calls.reset();
+    mockQuizzesApiService.getQuizById.calls.reset();
+    mockQuizzesApiService.getQuizAnswersById.calls.reset();
+    mockQuizzesApiService.setQuizAnswers.calls.reset();
+
+    mockRouter.navigateByUrl.calls.reset();
   });
 
   it('should be created', () => {
@@ -90,11 +99,6 @@ describe('QuizService', () => {
     });
   });
 
-  it('should finish quiz check completed', () => {
-    service.finishQuiz(mockQuizzes[0], mockQuizResults[0].answers, duration);
-    expect(service.completed).toBeTruthy();
-  });
-
   it('should call setQuizAnswers with correct params after quiz finish', () => {
     const correctAnswers: number = service.calcQuizResult(
       mockQuizzes[0],
@@ -116,6 +120,11 @@ describe('QuizService', () => {
     service.finishQuiz(mockQuizzes[0], mockQuizResults[0].answers, duration);
     expect(mockRouter.navigateByUrl).toHaveBeenCalled();
     expect(mockRouter.navigateByUrl).toHaveBeenCalledWith(`/quizzes/active/${mockQuizzes[0].id}/score`);
+  });
+
+  it('should finish quiz check completed', () => {
+    service.finishQuiz(mockQuizzes[0], mockQuizResults[0].answers, duration);
+    expect(service.completed).toBeTruthy();
   });
 
   it('should calculate quiz result', () => {
