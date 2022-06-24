@@ -92,10 +92,7 @@ export class ScoreComponent implements OnInit {
   async canActivate(route: ActivatedRouteSnapshot): Promise<boolean> {
     const quizId: number = parseInt(route.params['id']);
     const quizResult: IQuizResult | null = await this.quizService.getQuizAnswersById(quizId);
-    if (quizResult) {
-      return Promise.resolve(true);
-    }
-    return Promise.resolve(false);
+    return !!quizResult;
   }
 
 }
