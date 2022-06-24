@@ -42,7 +42,7 @@ export class StatisticsService {
   get passedQuizzesQuestionAmount(): number {
     let questionCounter: number = 0;
     this.quizzesResults.forEach((quizResult: IQuizResult) => {
-      questionCounter += quizResult.answers.length;
+      questionCounter += quizResult.answersLength;
     });
     return questionCounter;
   }
