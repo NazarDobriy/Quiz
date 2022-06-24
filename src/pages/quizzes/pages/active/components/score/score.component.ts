@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
 import { IQuiz, IQuizResult, QuizService } from 'src/pages/quizzes/providers/quiz.service';
 
 @Component({
@@ -89,12 +89,13 @@ export class ScoreComponent implements OnInit {
     return this.currentQuizAnswers.correct;
   }
 
-  async canActivate(): Promise<boolean> {
-    const quizResult = await this.quizService.getQuizAnswersById(this.quizId);
+  async canActivate(route: ActivatedRouteSnapshot): Promise<boolean> {
+    const quizId: number = parseInt(route.params['id']);
+    const quizResult: IQuizResult | null = await this.quizService.getQuizAnswersById(quizId);
     if (quizResult) {
-      return false;
+      return Promise.resolve(true);
     }
-    return true;
+    return Promise.resolve(false);
   }
 
 }
