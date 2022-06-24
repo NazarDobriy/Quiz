@@ -89,11 +89,12 @@ export class ScoreComponent implements OnInit {
     return this.currentQuizAnswers.correct;
   }
 
-  canActivate(): boolean {
-    if (this.quizService.completed) {
-      return true;
+  async canActivate(): Promise<boolean> {
+    const quizResult = await this.quizService.getQuizAnswersById(this.quizId);
+    if (quizResult) {
+      return false;
     }
-    return false;
+    return true;
   }
 
 }
