@@ -11,16 +11,15 @@ export class StatisticsComponent implements OnChanges {
   @Input() quizzesResults: IQuizResult[] = [];
   @Input() quizzes: IQuiz[] = [];
 
-  public statistics: [number, number, number] = [0, 0, 0];
+  public questionStatistics: [number, number] = [0, 0];
 
   constructor(public statisticsService: StatisticsService) { }
 
   ngOnChanges(): void {
     this.statisticsService.initialize(this.quizzes, this.quizzesResults);
-    this.statistics = [
-      this.statisticsService.dataQuizzesRelation,
-      this.statisticsService.dataQuestionRelation,
-      this.statisticsService.dataDurationRelation
+    this.questionStatistics = [
+      this.statisticsService.rightAnswersAmount,
+      this.statisticsService.wrongAnswersAmount
     ];
   }
 

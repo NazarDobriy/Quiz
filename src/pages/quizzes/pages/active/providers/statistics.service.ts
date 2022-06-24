@@ -11,18 +11,6 @@ export class StatisticsService {
     this.quizzesResults = results;
   }
 
-  get dataQuizzesRelation(): number {
-    return this.amountPassedQuizzes / this.amountQuizzes;
-  }
-
-  get dataQuestionRelation(): number {
-    return this.passedQuizzesQuestionAmount / this.quizzesQuestionAmount;
-  }
-
-  get dataDurationRelation(): number {
-    return this.averageSecondsDuration / this.generalSecondsDuration;
-  }
-
   get amountPassedQuizzes(): number {
     return this.quizzesResults.length;
   }
