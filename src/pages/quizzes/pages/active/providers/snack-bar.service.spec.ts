@@ -21,6 +21,7 @@ describe('SnackBarService', () => {
       ]
     });
     service = TestBed.inject(SnackBarService);
+    mockMatSnackBar.open.calls.reset();
   });
 
   it('should be created', () => {
