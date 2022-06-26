@@ -1,4 +1,3 @@
-import { IDialogConfig } from "./pages/quizzes/pages/active/providers/dialog.service";
 import { IQuiz, IQuizResult } from "./pages/quizzes/providers/quiz.service";
 import { IQuizTheme } from "./pages/quizzes/providers/theme.service";
 
@@ -132,10 +131,3 @@ export const mockQuizResults: IQuizResult[] = [
     seconds: 248
   }
 ];
-
-export const mockDialogConfig: IDialogConfig = {
-  title: "Cancel",
-  message: "Are you sure you want to exit?",
-  dismissText: "No",
-  confirmText: "Yes"
-};
