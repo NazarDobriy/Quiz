@@ -24,7 +24,7 @@ export class ScoreComponent implements OnInit {
   };
 
   public currentQuizAnswers: IQuizResult = {
-    answers: [],
+    answersLength: 0,
     correct: 0,
     seconds: 0
   };
