@@ -17,6 +17,7 @@ describe('QuizCardComponent', () => {
     mockThemeService = jasmine.createSpyObj(['getThemeByText']);
 
     await TestBed.configureTestingModule({
+      declarations: [QuizCardComponent],
       imports: [
         RouterTestingModule
       ],
@@ -25,9 +26,6 @@ describe('QuizCardComponent', () => {
           provide: ThemeService,
           useValue: mockThemeService
         }
-      ],
-      declarations: [
-        QuizCardComponent
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })
@@ -60,43 +58,34 @@ describe('QuizCardComponent', () => {
     let subTitleDebugElem: DebugElement;
     let subTitleElem: HTMLElement;
 
-    let routeDebugElem: DebugElement;
-    let routeElem: HTMLAnchorElement;
-
     let articleDebugElem: DebugElement;
     let articleElem: HTMLElement;
 
     beforeEach(() => {
-      routeDebugElem = fixture.debugElement.query(By.css("a"));
-      routeElem = routeDebugElem.nativeElement;
       articleDebugElem = fixture.debugElement.query(By.css("article"));
       articleElem = articleDebugElem.nativeElement;
-      titleDebugElem = fixture.debugElement.query(By.css(".title"));
+      titleDebugElem = fixture.debugElement.query(By.css("#quiz-card-title"));
       titleElem = titleDebugElem.nativeElement;
       appIconDebugElem = fixture.debugElement.query(By.css("app-icon"));
       appIconNode = appIconDebugElem.nativeNode;
-      subTitleDebugElem = fixture.debugElement.query(By.css(".subtitle"));
+      subTitleDebugElem = fixture.debugElement.query(By.css("#quiz-card-subtitle"));
       subTitleElem = subTitleDebugElem.nativeElement;
     });
 
-    it('should check routerLink', () => {
-      expect(routeElem.href).toBe(window.location.origin + "/quizzes/active/1");
-    });
-
     it('should article has new class', () => {
-      expect(articleElem.classList).toContain('bg-success');
+      expect(articleElem.classList).toContain(component.theme.backgroundClass);
     });
 
     it('should title elem has new class', () => {
-      expect(titleElem.classList).toContain('text-primary');
+      expect(titleElem.classList).toContain(component.theme.titleTextClass);
     });
 
     it('should check title elem text', () => {
-      expect(titleElem.textContent).toBe('Music is the best');
+      expect(titleElem.textContent).toBe(component.quiz.title);
     });
 
     it('should check app icon name', () => {
-      expect(appIconNode.iconName).toBe('mili');
+      expect(appIconNode.iconName).toBe(component.theme.personName);
     });
 
     it('should check app icon classes', () => {
@@ -104,11 +93,11 @@ describe('QuizCardComponent', () => {
     });
 
     it('should subtitle elem has new class', () => {
-      expect(subTitleElem.classList).toContain('text-bright');
+      expect(subTitleElem.classList).toContain(component.theme.primaryTextClass);
     });
 
     it('should check subtitle elem text', () => {
-      expect(subTitleElem.textContent).toBe('Music questions');
+      expect(subTitleElem.textContent).toBe(component.quiz.subtitle);
     });
   });
 });
