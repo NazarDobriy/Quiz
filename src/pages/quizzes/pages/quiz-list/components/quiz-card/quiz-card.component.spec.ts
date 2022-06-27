@@ -1,4 +1,4 @@
-import { CUSTOM_ELEMENTS_SCHEMA, DebugElement } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, DebugElement, DebugNode } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -65,6 +65,24 @@ describe('QuizCardComponent', () => {
 
     it('should check text', () => {
       expect(titleElem.textContent).toBe('Music is the best');
+    });
+  });
+  
+  describe('template app-icon', () => {
+    let appIconDebugElem: DebugElement;
+    let appIconNode: DebugNode["nativeNode"];
+
+    beforeEach(() => {
+      appIconDebugElem = fixture.debugElement.query(By.css("app-icon"));
+      appIconNode = appIconDebugElem.nativeNode;
+    });
+
+    it('should check icon name', () => {
+      expect(appIconNode.iconName).toBe('mili');
+    });
+
+    it('should check classes', () => {
+      expect(appIconNode.styleClass).toBe('h-12 w-12 rounded-full');
     });
   });
 });
