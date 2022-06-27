@@ -36,7 +36,7 @@ export class QuizzesComponent implements OnInit {
   }
 
   get isLimitReached(): boolean {
-    return this.quizzes.length === this.paginationQuiz.total;
+    return this.quizzes.length >= this.paginationQuiz.total;
   }
 
   private async setQuizzes(): Promise<void> {
