@@ -116,18 +116,20 @@ export const mockQuizThemes: IQuizTheme[] = [
 
 export const mockQuizResults: IQuizResult[] = [
   {
-    answers: ['1', '3', '3', '0', '1', '2', '1', '0', '2', '3'],
+    answersLength: 3,
     correct: 2,
     seconds: 12
   },
   {
-    answers: ['1', '2', '3', '1', '1', '3', '1', '0', '2', '1'],
+    answersLength: 1,
     correct: 4,
     seconds: 48
   },
   {
-    answers: ['0', '0', '3', '1', '1', '0', '1', '0', '3', '2'],
+    answersLength: 8,
     correct: 7,
     seconds: 248
   }
 ];
+
+export const mockQuizAnswers: string[] = ['1', '3', '3', '0', '1', '2', '1', '0', '2', '3'];

@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { mockQuizResults, mockQuizzes } from 'src/mock-data';
+import { mockQuizAnswers, mockQuizResults, mockQuizzes } from 'src/mock-data';
 import { Duration } from 'src/models/duration';
 import { ScoreComponent } from '../pages/active/components/score/score.component';
 
@@ -100,29 +100,29 @@ describe('QuizService', () => {
   });
 
   it('should finish quiz check completed', () => {
-    service.finishQuiz(mockQuizzes[0], mockQuizResults[0].answers, duration);
+    service.finishQuiz(mockQuizzes[0], mockQuizAnswers, duration);
     expect(service.completed).toBeTruthy();
   });
 
   it('should call setQuizAnswers with correct params after quiz finish', () => {
     const correctAnswers: number = service.calcQuizResult(
       mockQuizzes[0],
-      mockQuizResults[0].answers
+      mockQuizAnswers
     );
 
-    service.finishQuiz(mockQuizzes[0], mockQuizResults[0].answers, duration);
+    service.finishQuiz(mockQuizzes[0], mockQuizAnswers, duration);
 
     expect(mockQuizzesApiService.setQuizAnswers).toHaveBeenCalled();
     expect(mockQuizzesApiService.setQuizAnswers).toHaveBeenCalledWith(
       mockQuizzes[0].id,
-      mockQuizResults[0].answers,
+      mockQuizAnswers,
       correctAnswers,
       duration
     );
   });
 
   it('should check router redirection after finish quiz', () => {
-    service.finishQuiz(mockQuizzes[0], mockQuizResults[0].answers, duration);
+    service.finishQuiz(mockQuizzes[0], mockQuizAnswers, duration);
     expect(mockRouter.navigateByUrl).toHaveBeenCalled();
     expect(mockRouter.navigateByUrl).toHaveBeenCalledWith(`/quizzes/active/${mockQuizzes[0].id}/score`);
   });
@@ -130,7 +130,7 @@ describe('QuizService', () => {
   it('should calculate quiz result', () => {
     const correctAnswers: number = service.calcQuizResult(
       mockQuizzes[0],
-      mockQuizResults[0].answers
+      mockQuizAnswers
     );
     expect(correctAnswers).toBe(1);
   });
