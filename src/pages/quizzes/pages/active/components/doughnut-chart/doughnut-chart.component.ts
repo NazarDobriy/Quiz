@@ -8,7 +8,7 @@ Chart.register(...registerables);
   templateUrl: './doughnut-chart.component.html'
 })
 export class DoughnutChartComponent implements OnChanges {
-  @Input() statistics: [number, number, number] = [0, 0, 0];
+  @Input() statistics: [number, number] = [0, 0];
 
   @ViewChild('donut') donut!: ElementRef;
 
@@ -23,10 +23,10 @@ export class DoughnutChartComponent implements OnChanges {
     datasets: [{
       data: this.statistics,
       backgroundColor: [
-        '#FEFD54',
         '#63C995',
-        '#3545E9'
+        '#E23D69'
       ],
+      borderWidth: 2,
       hoverOffset: 4
     }]
   };
@@ -34,10 +34,13 @@ export class DoughnutChartComponent implements OnChanges {
   public chart: Chart | null = null;
 
   ngOnChanges(): void {
-    if (this.statistics.includes(NaN)) { return; }
+    if (this.isEmpty()) { return; }
     const canvas: HTMLCanvasElement = this.donut.nativeElement;
     const ctx: CanvasRenderingContext2D | null = canvas.getContext('2d');
     this.data.datasets[0].data = this.statistics;
+    if (this.statistics.includes(0)) {
+      this.data.datasets[0].borderWidth = 0;
+    }
     if (ctx != null) {
       this.chart = new Chart(ctx, {
         type: 'doughnut',
@@ -45,6 +48,10 @@ export class DoughnutChartComponent implements OnChanges {
         options: this.options
       });
     }
+  }
+
+  private isEmpty(): boolean {
+    return this.statistics.includes(NaN) || this.statistics.every(value => !value);
   }
 
 }
