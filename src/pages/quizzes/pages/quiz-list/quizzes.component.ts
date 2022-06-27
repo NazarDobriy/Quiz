@@ -36,4 +36,9 @@ export class QuizzesComponent implements OnInit {
     this.isLoadingThemes = false;
   }
 
+  public async loadCards(): Promise<void> {
+    const newQuizzes: IQuiz[] = await this.quizService.getQuizzes();
+    this.quizzes = [...this.quizzes, ...newQuizzes];
+  }
+
 }
