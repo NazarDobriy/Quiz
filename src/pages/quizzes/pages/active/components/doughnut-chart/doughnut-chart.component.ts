@@ -34,7 +34,7 @@ export class DoughnutChartComponent implements OnChanges {
   public chart: Chart | null = null;
 
   ngOnChanges(): void {
-    if (this.statistics.includes(NaN) || this.isEachZero()) { return; }
+    if (this.isEmpty()) { return; }
     const canvas: HTMLCanvasElement = this.donut.nativeElement;
     const ctx: CanvasRenderingContext2D | null = canvas.getContext('2d');
     this.data.datasets[0].data = this.statistics;
@@ -50,9 +50,8 @@ export class DoughnutChartComponent implements OnChanges {
     }
   }
 
-  private isEachZero(): boolean {
-    const isZero: (value: number) => boolean = (currentValue: number) => !currentValue;
-    return this.statistics.every(isZero);
+  private isEmpty(): boolean {
+    return this.statistics.includes(NaN) || this.statistics.every(value => !value);
   }
 
 }
