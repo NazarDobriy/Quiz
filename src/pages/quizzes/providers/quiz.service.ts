@@ -31,6 +31,13 @@ export interface IQuizResult {
   seconds: number;
 }
 
+export interface IPaginationScheme {
+  count: number;
+  offset: number;
+  total: number;
+  data: IQuiz[];
+}
+
 @Injectable()
 export class QuizService {
   public completed: boolean = false;
