@@ -1,0 +1,106 @@
+<header class="text-center text-bright sm:mt-25 mt-20">
+    <ngx-skeleton-loader 
+        count="1"
+        appearance="line"
+        animation="progress-dark"
+        class="w-3/4"
+        [theme]="{
+            'height': '50px',
+            'width': '70%'
+        }"
+    >
+    </ngx-skeleton-loader>
+    <div class="sm:text-4xl md:text-[3.5rem] sm:text-bright text-error right-text text-[2.125rem] font-light">
+        Quiz<span class="bg-error inline-block h-2 w-2 relative left-2.5 sm:top-2 top-1 rounded-full"></span>
+    </div>
+    <div class="max-w-[26.875rem] m-auto mt-3">
+        Can you decipher these emoji clues to answer these related questions?
+    </div>
+</header>
+
+<main class="
+        sm:h-[35.5rem] sm:w-[30rem]
+        md:h-[36.75rem] md:w-[39.75rem]
+        lg:h-[39.75rem] lg:w-[43.125rem]
+        h-[35rem] w-[20rem]
+        mt-5 m-auto rounded-3xl
+        bg-success
+    "
+>
+    <section class="md:mx-10 mx-5">
+        <section class="flex justify-between items-center sm:pt-10 pt-6 mt-8">
+            <ngx-skeleton-loader 
+                    count="1"
+                    appearance="line"
+                    animation="progress-dark"
+                    [theme]="{
+                        'height': '45px',
+                        'width': '70px'
+                    }"
+                >
+                </ngx-skeleton-loader>
+            <div class="flex">
+                <ngx-skeleton-loader
+                    count="3"
+                    appearance="circle"
+                    animation="progress-dark"
+                    [theme]="{
+                        'height': '96px',
+                        'width': '96px'
+                    }"
+                >
+                </ngx-skeleton-loader>
+            </div>
+        </section>
+
+        <section class="ms:h-72 h-[19rem]">
+            <ngx-skeleton-loader
+                count="1"
+                appearance="line"
+                animation="progress-dark"
+                [theme]="{
+                    'height': '50px',
+                    'margin-top': '40px'
+                }"
+            >
+            </ngx-skeleton-loader>
+            <ngx-skeleton-loader 
+                count="1"
+                appearance="line"
+                animation="progress-dark"
+                [theme]="{
+                    'width': '60%',
+                    'display': 'grid',
+                    'margin': 'auto',
+                    'margin-top': '40px',
+                    'margin-bottom': '20px'
+                }"
+            >
+            </ngx-skeleton-loader>
+            <ngx-skeleton-loader
+                count="3"
+                appearance="line"
+                animation="progress-dark"
+                [theme]="{
+                    'width': '60%',
+                    'display': 'grid',
+                    'margin': 'auto',
+                    'margin-bottom': '20px'
+                }"
+            >
+            </ngx-skeleton-loader>
+        </section>
+
+        <section class="flex justify-between md:mt-[4rem] lg:mt-[5.5rem] mt-12">
+            <button></button>
+            <button class="py-[0.625rem] px-6 rounded sm:w-[9.5rem] bg-accent text-bright">
+                Next <span class="sm:inline hidden">question</span>
+                <span class="text-2xl leading-[0] relative left-2.5 top-0.5">></span>
+            </button>
+        </section>
+    </section>
+</main>
+
+<button class="grid m-auto bg-accent text-bright px-6 py-4 rounded sm:my-[30px] my-[54px]">
+    Back to all Quizzes
+</button>
