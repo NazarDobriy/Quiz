@@ -20,6 +20,7 @@ describe('QuizService', () => {
   beforeEach(() => {
     mockQuizzesApiService = jasmine.createSpyObj([
       'getAllQuizzes',
+      'getPaginatedQuizzes',
       'getAllPassedQuizzes',
       'getQuizById',
       'getQuizAnswersById',
@@ -52,6 +53,7 @@ describe('QuizService', () => {
     service = TestBed.inject(QuizService);
 
     mockQuizzesApiService.getAllQuizzes.calls.reset();
+    mockQuizzesApiService.getPaginatedQuizzes.calls.reset();
     mockQuizzesApiService.getAllPassedQuizzes.calls.reset();
     mockQuizzesApiService.getQuizById.calls.reset();
     mockQuizzesApiService.getQuizAnswersById.calls.reset();
@@ -67,6 +69,16 @@ describe('QuizService', () => {
   it('should get quizzes', (done: DoneFn) => {
     mockQuizzesApiService.getAllQuizzes.and.returnValue(Promise.resolve(mockQuizzes));
     service.getQuizzes().then((quizzes: IQuiz[]) => {
+      expect(quizzes).toEqual(mockQuizzes);
+      expect(quizzes.length).toBe(mockQuizzes.length);
+      done();
+    });
+  });
+
+  it('should get paginated quizzes', (done: DoneFn) => {
+    const offset: number = 5, limit: number = 10;
+    mockQuizzesApiService.getPaginatedQuizzes.and.returnValue(Promise.resolve(mockQuizzes));
+    service.getPaginatedQuizzes(offset, limit).then((quizzes: IQuiz[]) => {
       expect(quizzes).toEqual(mockQuizzes);
       expect(quizzes.length).toBe(mockQuizzes.length);
       done();

@@ -48,6 +48,22 @@ describe('ApiService', () => {
     });
   });
 
+  it('should retrieve paginated quizzes from db', (done: DoneFn) => {
+    const offset: number = 2, limit: number = 7;
+
+    mockAngularFireDatabase.list.and.returnValue({
+      valueChanges(): Observable<IQuiz[]> {
+        return of(mockQuizzes);
+      }
+    } as AngularFireList<IQuiz>);
+
+    service.getPaginatedQuizzes(offset, limit).then((quizzes: IQuiz[]) => {
+      expect(quizzes).toEqual(mockQuizzes);
+      expect(quizzes.length).toBe(mockQuizzes.length);
+      done();
+    });
+  });
+
   it('should retrieve quiz themes from db', (done: DoneFn) => {
     mockAngularFireDatabase.list.and.returnValue({
       valueChanges(): Observable<IQuizTheme[]> {
