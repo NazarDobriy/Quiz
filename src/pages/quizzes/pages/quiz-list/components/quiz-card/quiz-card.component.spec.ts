@@ -88,10 +88,6 @@ describe('QuizCardComponent', () => {
       expect(appIconNode.iconName).toBe(component.theme.personName);
     });
 
-    it('should check app icon classes', () => {
-      expect(appIconNode.styleClass).toBe('h-12 w-12 rounded-full');
-    });
-
     it('should subtitle elem has new class', () => {
       expect(subTitleElem.classList).toContain(component.theme.primaryTextClass);
     });
