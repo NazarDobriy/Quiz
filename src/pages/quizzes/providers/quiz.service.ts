@@ -48,8 +48,8 @@ export class QuizService {
     return this.quizzesApiService.getAllQuizzes();
   }
 
-  public getPaginatedQuizzes(offset: number, limit: number): Promise<IQuiz[]> {
-    return this.quizzesApiService.getPaginatedQuizzes(offset, limit);
+  public getPaginatedQuizzes(offset: number): Promise<IPaginationScheme<IQuiz> | null> {
+    return this.quizzesApiService.getPaginatedQuizzes(offset);
   }
 
   public getPassedQuizzes(): Promise<IQuizResult[]> {

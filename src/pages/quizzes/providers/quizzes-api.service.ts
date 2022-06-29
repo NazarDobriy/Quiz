@@ -4,7 +4,7 @@ import { QueryReference } from '@angular/fire/compat/database/interfaces';
 import { firstValueFrom, map } from 'rxjs';
 import { UserService } from 'src/core/providers/user.service';
 import { Duration } from 'src/models/duration';
-import { IQuiz, IQuizResult } from './quiz.service';
+import { IPaginationScheme, IQuiz, IQuizResult } from './quiz.service';
 import { IQuizTheme } from './theme.service';
 
 @Injectable()
@@ -23,10 +23,13 @@ export class QuizzesApiService {
     return firstValueFrom(this.db.list<IQuiz>('quizzes').valueChanges());
   }
 
-  public getPaginatedQuizzes(offset: number, limit: number): Promise<IQuiz[]> {
-    return firstValueFrom(this.db.list<IQuiz>('quizzes', (ref: QueryReference) => {
-      return ref.startAt(`${offset}`).endAt(`${limit}`).orderByKey();
-    }).valueChanges());
+  public getPaginatedQuizzes(offset: number): Promise<IPaginationScheme<IQuiz> | null> {
+    return firstValueFrom(this.db.list<IPaginationScheme<IQuiz>>('quizzes_scheme').valueChanges().pipe(
+      map((schemes: IPaginationScheme<IQuiz>[] | null) => {
+        const selectedScheme = schemes?.find((scheme: IPaginationScheme<IQuiz>) => scheme.offset === offset);
+        return selectedScheme ? selectedScheme : null;
+      })
+    ));
   }
 
   public getAllQuizThemes(): Promise<IQuizTheme[]> {
