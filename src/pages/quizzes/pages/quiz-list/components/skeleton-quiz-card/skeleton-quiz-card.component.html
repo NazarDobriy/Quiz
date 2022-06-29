@@ -1,0 +1,21 @@
+<article class="h-60 w-64 mb-9 rounded-[20px] cursor-pointer bg-error">
+    <section class="container w-52 m-auto pt-[14px]">
+        <div class="flex justify-between items-end">
+            <ngx-skeleton-loader count="1" appearance="line" animation="progress-dark" class="w-24">
+            </ngx-skeleton-loader>
+            <ngx-skeleton-loader count="1" appearance="circle" animation="progress-dark">
+            </ngx-skeleton-loader>
+        </div>
+        <ngx-skeleton-loader 
+            count="4"
+            appearance="line"
+            animation="progress-dark"
+            class="w-full"
+            [theme]="{
+                'height': '28px',
+                'margin-bottom': '8px'
+            }"
+        >
+        </ngx-skeleton-loader>
+    </section>
+</article>
