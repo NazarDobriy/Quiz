@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 
 import { QuizzesApiService } from './quizzes-api.service';
-import { IQuiz, IQuizResult } from './quiz.service';
+import { IPaginationScheme, IQuiz, IQuizResult } from './quiz.service';
 import { AngularFireDatabase, AngularFireList, AngularFireObject } from '@angular/fire/compat/database';
 import { UserService } from 'src/core/providers/user.service';
 import { LocalStorageService } from 'src/core/providers/local-storage.service';
@@ -49,7 +49,13 @@ describe('ApiService', () => {
   });
 
   it('should retrieve paginated quizzes from db', (done: DoneFn) => {
-    const offset: number = 2, limit: number = 7;
+    const offset: number = 2, count = 5;
+    const mockQuizScheme: IPaginationScheme<IQuiz> = {
+      count: 5,
+      offset: 2,
+      total: 15,
+      data: mockQuizzes
+    };
 
     mockAngularFireDatabase.list.and.returnValue({
       valueChanges(): Observable<IQuiz[]> {
@@ -57,9 +63,9 @@ describe('ApiService', () => {
       }
     } as AngularFireList<IQuiz>);
 
-    service.getPaginatedQuizzes(offset, limit).then((quizzes: IQuiz[]) => {
-      expect(quizzes).toEqual(mockQuizzes);
-      expect(quizzes.length).toBe(mockQuizzes.length);
+    service.getPaginatedQuizzes(offset, count).then((scheme: IPaginationScheme<IQuiz>) => {
+      expect(scheme).toEqual(mockQuizScheme);
+      expect(scheme.data.length).toBe(mockQuizzes.length);
       done();
     });
   });

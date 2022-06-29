@@ -23,11 +23,23 @@ export class QuizzesApiService {
     return firstValueFrom(this.db.list<IQuiz>('quizzes').valueChanges());
   }
 
-  public getPaginatedQuizzes(offset: number): Promise<IPaginationScheme<IQuiz> | null> {
-    return firstValueFrom(this.db.list<IPaginationScheme<IQuiz>>('quizzes_scheme').valueChanges().pipe(
-      map((schemes: IPaginationScheme<IQuiz>[] | null) => {
-        const selectedScheme = schemes?.find((scheme: IPaginationScheme<IQuiz>) => scheme.offset === offset);
-        return selectedScheme ? selectedScheme : null;
+  public getPaginatedQuizzes(offset: number, count: number): Promise<IPaginationScheme<IQuiz>> {
+    const quizScheme: IPaginationScheme<IQuiz> = {
+      count: 0,
+      offset: 0,
+      total: 0,
+      data: []
+    };
+
+    return firstValueFrom(this.db.list<IQuiz>('quizzes', (ref: QueryReference) => {
+      return ref.startAt(`${offset}`).endAt(`${offset + count - 1}`).orderByKey();
+    }).valueChanges().pipe(
+      map((paginatedQuizzes: IQuiz[]) => {
+        quizScheme.count = count;
+        quizScheme.offset = offset;
+        quizScheme.total = 15;
+        quizScheme.data = paginatedQuizzes;
+        return quizScheme;
       })
     ));
   }

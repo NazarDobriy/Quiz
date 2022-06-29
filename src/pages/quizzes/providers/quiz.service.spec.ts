@@ -5,7 +5,7 @@ import { mockQuizAnswers, mockQuizResults, mockQuizzes } from 'src/mock-data';
 import { Duration } from 'src/models/duration';
 import { ScoreComponent } from '../pages/active/components/score/score.component';
 
-import { IQuiz, IQuizResult, QuizService } from './quiz.service';
+import { IPaginationScheme, IQuiz, IQuizResult, QuizService } from './quiz.service';
 import { QuizzesApiService } from './quizzes-api.service';
 
 describe('QuizService', () => {
@@ -76,11 +76,17 @@ describe('QuizService', () => {
   });
 
   it('should get paginated quizzes', (done: DoneFn) => {
-    const offset: number = 5, limit: number = 10;
-    mockQuizzesApiService.getPaginatedQuizzes.and.returnValue(Promise.resolve(mockQuizzes));
-    service.getPaginatedQuizzes(offset, limit).then((quizzes: IQuiz[]) => {
-      expect(quizzes).toEqual(mockQuizzes);
-      expect(quizzes.length).toBe(mockQuizzes.length);
+    const offset: number = 5, count: number = 10;
+    const mockQuizScheme: IPaginationScheme<IQuiz> = {
+      count: 10,
+      offset: 5,
+      total: 25,
+      data: mockQuizzes
+    };
+    mockQuizzesApiService.getPaginatedQuizzes.and.returnValue(Promise.resolve(mockQuizScheme));
+    service.getPaginatedQuizzes(offset, count).then((scheme: IPaginationScheme<IQuiz>) => {
+      expect(scheme).toEqual(mockQuizScheme);
+      expect(scheme.data.length).toBe(mockQuizzes.length);
       done();
     });
   });

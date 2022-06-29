@@ -8,7 +8,6 @@ import { ThemeService } from '../../providers/theme.service';
 })
 export class QuizzesComponent implements OnInit {
   readonly INITIAL_AMOUNT_QUIZ_CARDS: number = 5;
-  readonly TOTAL_AMOUNT_QUIZ_CARDS: number = 15;
 
   public quizzes: IQuiz[] = [];
 
@@ -16,7 +15,7 @@ export class QuizzesComponent implements OnInit {
   private isLoadingQuizzes: boolean = true;
 
   private paginationQuiz: IPaginationScheme<IQuiz> = {
-    count: 0,
+    count: this.INITIAL_AMOUNT_QUIZ_CARDS,
     offset: 0,
     total: 0,
     data: []
@@ -41,9 +40,11 @@ export class QuizzesComponent implements OnInit {
   }
 
   private async setQuizzes(): Promise<void> {
-    const tempPaginationQuiz = await this.quizService.getPaginatedQuizzes(0);
+    const tempPaginationQuiz = await this.quizService.getPaginatedQuizzes(
+      this.paginationQuiz.offset,
+      this.paginationQuiz.count
+    );
     if (tempPaginationQuiz) {
-      console.log(tempPaginationQuiz);
       this.paginationQuiz = tempPaginationQuiz;
       const newQuizzes: IQuiz[] = this.paginationQuiz.data;
       this.quizzes = [...this.quizzes, ...newQuizzes];
@@ -57,8 +58,7 @@ export class QuizzesComponent implements OnInit {
   }
 
   public async loadCards(): Promise<void> {
-    this.paginationQuiz.offset = this.paginationQuiz.count;
-    this.paginationQuiz.count += this.INITIAL_AMOUNT_QUIZ_CARDS;
+    this.paginationQuiz.offset += this.paginationQuiz.count;
     await this.setQuizzes();
   }
 
