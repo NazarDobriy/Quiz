@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 
 import { QuizzesApiService } from './quizzes-api.service';
-import { IQuiz, IQuizResult } from './quiz.service';
+import { IPaginationScheme, IQuiz, IQuizResult } from './quiz.service';
 import { AngularFireDatabase, AngularFireList, AngularFireObject } from '@angular/fire/compat/database';
 import { UserService } from 'src/core/providers/user.service';
 import { LocalStorageService } from 'src/core/providers/local-storage.service';
@@ -44,6 +44,32 @@ describe('ApiService', () => {
     service.getAllQuizzes().then((quizzes: IQuiz[]) => {
       expect(quizzes).toEqual(mockQuizzes);
       expect(quizzes.length).toBe(mockQuizzes.length);
+      done();
+    });
+  });
+
+  it('should retrieve paginated quizzes from db', (done: DoneFn) => {
+    const offset: number = 2, count = 5;
+    const mockQuizScheme: IPaginationScheme<IQuiz> = {
+      count: 5,
+      offset: 2,
+      total: 15,
+      data: mockQuizzes
+    };
+
+    mockAngularFireDatabase.list.and.returnValue({
+      valueChanges(): Observable<IQuiz[]> {
+        return of(mockQuizzes);
+      }
+    } as AngularFireList<IQuiz>);
+
+    service.getPaginatedQuizzes(offset, count).then((scheme: IPaginationScheme<IQuiz>) => {
+      expect(scheme).toEqual(mockQuizScheme);
+      expect(scheme.count).toEqual(mockQuizScheme.count);
+      expect(scheme.offset).toEqual(mockQuizScheme.offset);
+      expect(scheme.total).toEqual(mockQuizScheme.total);
+      expect(scheme.data.length).toBe(mockQuizzes.length);
+      expect(scheme.data).toBe(mockQuizzes);
       done();
     });
   });

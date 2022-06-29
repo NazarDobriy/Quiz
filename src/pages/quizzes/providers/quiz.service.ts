@@ -31,6 +31,13 @@ export interface IQuizResult {
   seconds: number;
 }
 
+export interface IPaginationScheme<T> {
+  count: number;
+  offset: number;
+  total: number;
+  data: T[];
+}
+
 @Injectable()
 export class QuizService {
   public completed: boolean = false;
@@ -39,6 +46,10 @@ export class QuizService {
 
   public getQuizzes(): Promise<IQuiz[]> {
     return this.quizzesApiService.getAllQuizzes();
+  }
+
+  public getPaginatedQuizzes(offset: number, count: number): Promise<IPaginationScheme<IQuiz>> {
+    return this.quizzesApiService.getPaginatedQuizzes(offset, count);
   }
 
   public getPassedQuizzes(): Promise<IQuizResult[]> {

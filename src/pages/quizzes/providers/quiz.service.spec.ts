@@ -5,7 +5,7 @@ import { mockQuizAnswers, mockQuizResults, mockQuizzes } from 'src/mock-data';
 import { Duration } from 'src/models/duration';
 import { ScoreComponent } from '../pages/active/components/score/score.component';
 
-import { IQuiz, IQuizResult, QuizService } from './quiz.service';
+import { IPaginationScheme, IQuiz, IQuizResult, QuizService } from './quiz.service';
 import { QuizzesApiService } from './quizzes-api.service';
 
 describe('QuizService', () => {
@@ -20,6 +20,7 @@ describe('QuizService', () => {
   beforeEach(() => {
     mockQuizzesApiService = jasmine.createSpyObj([
       'getAllQuizzes',
+      'getPaginatedQuizzes',
       'getAllPassedQuizzes',
       'getQuizById',
       'getQuizAnswersById',
@@ -52,6 +53,7 @@ describe('QuizService', () => {
     service = TestBed.inject(QuizService);
 
     mockQuizzesApiService.getAllQuizzes.calls.reset();
+    mockQuizzesApiService.getPaginatedQuizzes.calls.reset();
     mockQuizzesApiService.getAllPassedQuizzes.calls.reset();
     mockQuizzesApiService.getQuizById.calls.reset();
     mockQuizzesApiService.getQuizAnswersById.calls.reset();
@@ -69,6 +71,26 @@ describe('QuizService', () => {
     service.getQuizzes().then((quizzes: IQuiz[]) => {
       expect(quizzes).toEqual(mockQuizzes);
       expect(quizzes.length).toBe(mockQuizzes.length);
+      done();
+    });
+  });
+
+  it('should get paginated quizzes', (done: DoneFn) => {
+    const offset: number = 5, count: number = 10;
+    const mockQuizScheme: IPaginationScheme<IQuiz> = {
+      count: 10,
+      offset: 5,
+      total: 25,
+      data: mockQuizzes
+    };
+    mockQuizzesApiService.getPaginatedQuizzes.and.returnValue(Promise.resolve(mockQuizScheme));
+    service.getPaginatedQuizzes(offset, count).then((scheme: IPaginationScheme<IQuiz>) => {
+      expect(scheme).toEqual(mockQuizScheme);
+      expect(scheme.count).toEqual(mockQuizScheme.count);
+      expect(scheme.offset).toEqual(mockQuizScheme.offset);
+      expect(scheme.total).toEqual(mockQuizScheme.total);
+      expect(scheme.data.length).toBe(mockQuizzes.length);
+      expect(scheme.data).toBe(mockQuizzes);
       done();
     });
   });
