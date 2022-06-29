@@ -86,7 +86,11 @@ describe('QuizService', () => {
     mockQuizzesApiService.getPaginatedQuizzes.and.returnValue(Promise.resolve(mockQuizScheme));
     service.getPaginatedQuizzes(offset, count).then((scheme: IPaginationScheme<IQuiz>) => {
       expect(scheme).toEqual(mockQuizScheme);
+      expect(scheme.count).toEqual(mockQuizScheme.count);
+      expect(scheme.offset).toEqual(mockQuizScheme.offset);
+      expect(scheme.total).toEqual(mockQuizScheme.total);
       expect(scheme.data.length).toBe(mockQuizzes.length);
+      expect(scheme.data).toBe(mockQuizzes);
       done();
     });
   });

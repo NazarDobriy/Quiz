@@ -40,16 +40,13 @@ export class QuizzesComponent implements OnInit {
   }
 
   private async setQuizzes(): Promise<void> {
-    const tempPaginationQuiz = await this.quizService.getPaginatedQuizzes(
+    this.paginationQuiz = await this.quizService.getPaginatedQuizzes(
       this.paginationQuiz.offset,
       this.paginationQuiz.count
     );
-    if (tempPaginationQuiz) {
-      this.paginationQuiz = tempPaginationQuiz;
-      const newQuizzes: IQuiz[] = this.paginationQuiz.data;
-      this.quizzes = [...this.quizzes, ...newQuizzes];
-      this.isLoadingQuizzes = false;
-    }
+    const newQuizzes: IQuiz[] = this.paginationQuiz.data;
+    this.quizzes = [...this.quizzes, ...newQuizzes];
+    this.isLoadingQuizzes = false;
   }
 
   private async setThemes(): Promise<void> {
