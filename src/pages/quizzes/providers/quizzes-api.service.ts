@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase } from '@angular/fire/compat/database';
+import { AngularFireDatabase, QueryFn } from '@angular/fire/compat/database';
+import { QueryReference } from '@angular/fire/compat/database/interfaces';
 import { firstValueFrom, map } from 'rxjs';
 import { UserService } from 'src/core/providers/user.service';
 import { Duration } from 'src/models/duration';
@@ -20,6 +21,12 @@ export class QuizzesApiService {
 
   public getAllQuizzes(): Promise<IQuiz[]> {
     return firstValueFrom(this.db.list<IQuiz>('quizzes').valueChanges());
+  }
+
+  public getPaginatedQuizzes(offset: number, limit: number): Promise<IQuiz[]> {
+    return firstValueFrom(this.db.list<IQuiz>('quizzes', (ref: QueryReference) => {
+      return ref.startAt(`${offset}`).endAt(`${limit}`).orderByKey();
+    }).valueChanges());
   }
 
   public getAllQuizThemes(): Promise<IQuizTheme[]> {
