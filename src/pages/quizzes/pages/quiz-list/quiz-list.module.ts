@@ -4,6 +4,8 @@ import { QuizCardComponent } from './components/quiz-card/quiz-card.component';
 import { QuizzesComponent } from './quizzes.component';
 import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from 'src/shared/shared.module';
+import { SkeletonQuizzesComponent } from './components/skeleton-quizzes/skeleton-quizzes.component';
+import { SkeletonQuizCardComponent } from './components/skeleton-quiz-card/skeleton-quiz-card.component';
 
 const routes: Routes = [
   { path: '', component: QuizzesComponent }
@@ -13,7 +15,9 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     QuizzesComponent,
-    QuizCardComponent
+    QuizCardComponent,
+    SkeletonQuizzesComponent,
+    SkeletonQuizCardComponent
   ],
   imports: [
     CommonModule,

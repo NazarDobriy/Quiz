@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IconComponent } from './components/icon/icon.component';
 import { AngularSvgIconModule } from 'angular-svg-icon';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 
 
@@ -14,7 +15,8 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
     AngularSvgIconModule.forRoot()
   ],
   exports: [
-    IconComponent
+    IconComponent,
+    NgxSkeletonLoaderModule
   ]
 })
 export class SharedModule { }
