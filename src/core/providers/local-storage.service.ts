@@ -8,7 +8,7 @@ export class LocalStorageService {
   }
 
   public has(key: string): boolean {
-    return !!localStorage.getItem(key); 
+    return !!localStorage.getItem(key);
   }
 
   public set(key: string, value: string): void {
@@ -21,6 +21,10 @@ export class LocalStorageService {
 
   public clear(): void {
     localStorage.clear();
+  }
+
+  public move(): number {
+    return 100;
   }
 
 }
