@@ -23,8 +23,4 @@ export class LocalStorageService {
     localStorage.clear();
   }
 
-  public move(): number {
-    return 100;
-  }
-
 }
