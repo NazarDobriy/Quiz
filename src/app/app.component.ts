@@ -10,7 +10,7 @@ import { UserService } from 'src/core/providers/user.service';
 export class AppComponent implements OnInit {
   title = 'Quiz';
 
-  static isBrowser = new BehaviorSubject<boolean | null>(null);
+  static isBrowser = new BehaviorSubject<boolean>(false);
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: any,
