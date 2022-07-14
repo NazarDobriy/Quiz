@@ -14,7 +14,7 @@ class LocalStorage implements Storage {
 @Injectable()
 export class LocalStorageService {
 
-  private storage: Storage = localStorage;
+  private storage: Storage = new LocalStorage();
 
   constructor() {
     AppComponent.isBrowser.subscribe(isBrowser => {
@@ -25,23 +25,23 @@ export class LocalStorageService {
   }
 
   public get(key: string): string | null {
-    return localStorage.getItem(key);
+    return this.storage.getItem(key);
   }
 
   public has(key: string): boolean {
-    return !!localStorage.getItem(key);
+    return !!this.storage.getItem(key);
   }
 
   public set(key: string, value: string): void {
-    localStorage.setItem(key, value);
+    this.storage.setItem(key, value);
   }
 
   public remove(key: string): void {
-    localStorage.removeItem(key);
+    this.storage.removeItem(key);
   }
 
   public clear(): void {
-    localStorage.clear();
+    this.storage.clear();
   }
 
 }
