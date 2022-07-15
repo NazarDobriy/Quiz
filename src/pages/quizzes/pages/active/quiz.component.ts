@@ -8,6 +8,7 @@ import { DialogService } from './providers/dialog.service';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { SnackBarService } from './providers/snack-bar.service';
+import { AppComponent } from 'src/app/app.component';
 
 @Component({
   selector: 'app-quiz',
@@ -68,8 +69,12 @@ export class QuizComponent implements OnInit {
   ngOnInit(): void {
     this.timeStart = new Date();
     this.quizId = parseInt(this.activatedRoute.snapshot.params['id']);
-    this.setQuizById();
-    this.setTheme();
+    AppComponent.isBrowser.subscribe(isBrowser => {
+      if (isBrowser) {
+        this.setQuizById();
+        this.setTheme();
+      }
+    });
   }
 
   get questionCounter(): number {

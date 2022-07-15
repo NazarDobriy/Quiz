@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { AppComponent } from 'src/app/app.component';
 import { IQuiz, IQuizResult, QuizService } from 'src/pages/quizzes/providers/quiz.service';
 
 @Component({
@@ -36,10 +37,14 @@ export class ScoreComponent implements OnInit {
 
   ngOnInit(): void {
     this.quizId = parseInt(this.activatedRoute.snapshot.params['id']);
-    this.setQuizzes();
-    this.setQuizById();
-    this.setQuizAnswersById();
-    this.setPassedQuizzes();
+    AppComponent.isBrowser.subscribe(isBrowser => {
+      if (isBrowser) {
+        this.setQuizzes();
+        this.setQuizById();
+        this.setQuizAnswersById();
+        this.setPassedQuizzes();
+      }
+    });
   }
 
   private async setQuizById(): Promise<void> {

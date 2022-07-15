@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AppComponent } from 'src/app/app.component';
 import { QuizService, IQuiz } from '../../providers/quiz.service';
 import { ThemeService } from '../../providers/theme.service';
 
@@ -18,8 +19,12 @@ export class QuizzesComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.setThemes();
-    this.setQuizzes();
+    AppComponent.isBrowser.subscribe(isBrowser => {
+      if (isBrowser) {
+        this.setThemes();
+        this.setQuizzes();
+      }
+    });
   }
 
   get isLoading(): boolean {
