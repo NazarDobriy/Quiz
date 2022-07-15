@@ -1,6 +1,4 @@
-import { isPlatformBrowser } from '@angular/common';
-import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/core/providers/user.service';
 
 @Component({
@@ -10,14 +8,7 @@ import { UserService } from 'src/core/providers/user.service';
 export class AppComponent implements OnInit {
   title = 'Quiz';
 
-  static isBrowser = new BehaviorSubject<boolean>(false);
-
-  constructor(
-    @Inject(PLATFORM_ID) private platformId: any,
-    private userService: UserService
-  ) {
-    AppComponent.isBrowser.next(isPlatformBrowser(this.platformId));
-  }
+  constructor(private userService: UserService) { }
 
   ngOnInit(): void {
     if (!this.userService.hasId) {

@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { AppComponent } from 'src/app/app.component';
 import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
 import { IQuiz, IQuizResult, QuizService } from 'src/pages/quizzes/providers/quiz.service';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-score',
@@ -13,6 +14,8 @@ export class ScoreComponent implements OnInit {
   private isLoadingQuizAnswers: boolean = true;
   private isLoadingPassedQuizzes: boolean = true;
   private isLoadingQuizzes: boolean = true;
+  private isBrowser: boolean = false;
+
   public quizzesResults: IQuizResult[] = [];
   public quizzes: IQuiz[] = [];
 
@@ -31,20 +34,20 @@ export class ScoreComponent implements OnInit {
   };
 
   constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
     private quizService: QuizService,
     private activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
+    this.isBrowser = isPlatformBrowser(this.platformId);
     this.quizId = parseInt(this.activatedRoute.snapshot.params['id']);
-    AppComponent.isBrowser.subscribe(isBrowser => {
-      if (isBrowser) {
-        this.setQuizzes();
-        this.setQuizById();
-        this.setQuizAnswersById();
-        this.setPassedQuizzes();
-      }
-    });
+    if (this.isBrowser) {
+      this.setQuizzes();
+      this.setQuizById();
+      this.setQuizAnswersById();
+      this.setPassedQuizzes();
+    }
   }
 
   private async setQuizById(): Promise<void> {

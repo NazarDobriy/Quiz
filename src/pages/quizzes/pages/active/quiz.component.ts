@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ThemeService, IQuizTheme } from '../../providers/theme.service';
 import { IAnswer, IQuiz, QuizService } from '../../providers/quiz.service';
@@ -9,6 +9,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { SnackBarService } from './providers/snack-bar.service';
 import { AppComponent } from 'src/app/app.component';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-quiz',
@@ -49,6 +50,7 @@ export class QuizComponent implements OnInit {
     Steven: 'steven'
   };
 
+  private isBrowser: boolean = false;
   private isLoadingThemes: boolean = true;
   private isLoadingQuiz: boolean = true;
   private userAnswersIds: string[] = [];
@@ -59,6 +61,7 @@ export class QuizComponent implements OnInit {
   }
 
   constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
     private activatedRoute: ActivatedRoute,
     private quizService: QuizService,
     private themeService: ThemeService,
@@ -67,14 +70,13 @@ export class QuizComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.isBrowser = isPlatformBrowser(this.platformId);
     this.timeStart = new Date();
     this.quizId = parseInt(this.activatedRoute.snapshot.params['id']);
-    AppComponent.isBrowser.subscribe(isBrowser => {
-      if (isBrowser) {
-        this.setQuizById();
-        this.setTheme();
-      }
-    });
+    if (this.isBrowser) {
+      this.setQuizById();
+      this.setTheme();
+    }
   }
 
   get questionCounter(): number {

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { AppComponent } from 'src/app/app.component';
 import { QuizService, IQuiz, IPaginationScheme } from '../../providers/quiz.service';
 import { ThemeService } from '../../providers/theme.service';
@@ -12,6 +13,7 @@ export class QuizzesComponent implements OnInit {
 
   public quizzes: IQuiz[] = [];
 
+  private isBrowser: boolean = false;
   private isLoadingThemes: boolean = true;
   private isLoadingQuizzes: boolean = true;
 
@@ -23,17 +25,17 @@ export class QuizzesComponent implements OnInit {
   };
 
   constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
     private quizService: QuizService,
     private themeService: ThemeService
   ) { }
 
   ngOnInit(): void {
-    AppComponent.isBrowser.subscribe(isBrowser => {
-      if (isBrowser) {
-        this.setThemes();
-        this.setQuizzes();
-      }
-    });
+    this.isBrowser = isPlatformBrowser(this.platformId);
+    if (this.isBrowser) {
+      this.setThemes();
+      this.setQuizzes();
+    }
   }
 
   get isLoading(): boolean {
