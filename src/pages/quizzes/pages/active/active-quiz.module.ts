@@ -14,6 +14,7 @@ import { DoughnutChartComponent } from './components/doughnut-chart/doughnut-cha
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { SnackBarService } from './providers/snack-bar.service';
 import { SharedModule } from 'src/shared/shared.module';
+import { SkeletonQuizComponent } from './components/skeleton-quiz/skeleton-quiz.component';
 
 const routes: Routes = [
   { 
@@ -38,7 +39,8 @@ const routes: Routes = [
     ScoreCounterComponent,
     ScoreComponent,
     StatisticsComponent,
-    DoughnutChartComponent
+    DoughnutChartComponent,
+    SkeletonQuizComponent
   ],
   imports: [
     CommonModule,

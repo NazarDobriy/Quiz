@@ -11,18 +11,6 @@ export class StatisticsService {
     this.quizzesResults = results;
   }
 
-  get dataQuizzesRelation(): number {
-    return this.amountPassedQuizzes / this.amountQuizzes;
-  }
-
-  get dataQuestionRelation(): number {
-    return this.passedQuizzesQuestionAmount / this.quizzesQuestionAmount;
-  }
-
-  get dataDurationRelation(): number {
-    return this.averageSecondsDuration / this.generalSecondsDuration;
-  }
-
   get amountPassedQuizzes(): number {
     return this.quizzesResults.length;
   }
@@ -42,7 +30,7 @@ export class StatisticsService {
   get passedQuizzesQuestionAmount(): number {
     let questionCounter: number = 0;
     this.quizzesResults.forEach((quizResult: IQuizResult) => {
-      questionCounter += quizResult.answers.length;
+      questionCounter += quizResult.answersLength;
     });
     return questionCounter;
   }

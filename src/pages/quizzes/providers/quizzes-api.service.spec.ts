@@ -1,8 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 
 import { QuizzesApiService } from './quizzes-api.service';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { IQuiz, IQuizResult } from './quiz.service';
+import { IPaginationScheme, IQuiz, IQuizResult } from './quiz.service';
 import { AngularFireDatabase, AngularFireList, AngularFireObject } from '@angular/fire/compat/database';
 import { UserService } from 'src/core/providers/user.service';
 import { LocalStorageService } from 'src/core/providers/local-storage.service';
@@ -18,9 +17,6 @@ describe('ApiService', () => {
     mockAngularFireDatabase = jasmine.createSpyObj(['list', 'object']);
 
     TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule
-      ],
       providers: [
         UserService,
         QuizzesApiService,
@@ -52,6 +48,32 @@ describe('ApiService', () => {
     });
   });
 
+  it('should retrieve paginated quizzes from db', (done: DoneFn) => {
+    const offset: number = 2, count = 5;
+    const mockQuizScheme: IPaginationScheme<IQuiz> = {
+      count: 5,
+      offset: 2,
+      total: 15,
+      data: mockQuizzes
+    };
+
+    mockAngularFireDatabase.list.and.returnValue({
+      valueChanges(): Observable<IQuiz[]> {
+        return of(mockQuizzes);
+      }
+    } as AngularFireList<IQuiz>);
+
+    service.getPaginatedQuizzes(offset, count).then((scheme: IPaginationScheme<IQuiz>) => {
+      expect(scheme).toEqual(mockQuizScheme);
+      expect(scheme.count).toEqual(mockQuizScheme.count);
+      expect(scheme.offset).toEqual(mockQuizScheme.offset);
+      expect(scheme.total).toEqual(mockQuizScheme.total);
+      expect(scheme.data.length).toBe(mockQuizzes.length);
+      expect(scheme.data).toBe(mockQuizzes);
+      done();
+    });
+  });
+
   it('should retrieve quiz themes from db', (done: DoneFn) => {
     mockAngularFireDatabase.list.and.returnValue({
       valueChanges(): Observable<IQuizTheme[]> {
@@ -76,7 +98,8 @@ describe('ApiService', () => {
     } as AngularFireList<IQuiz>);
 
     service.getQuizById(id).then((quiz: IQuiz) => {
-      expect(quiz.id).toEqual(mockQuizzes[index].id);
+      expect(quiz.id).toBe(id);
+      expect(quiz).toEqual(mockQuizzes[index]);
       done();
     });
   });
@@ -109,5 +132,4 @@ describe('ApiService', () => {
       done();
     });
   });
-
 });

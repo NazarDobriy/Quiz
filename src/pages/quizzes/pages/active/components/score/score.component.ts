@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { AppComponent } from 'src/app/app.component';
+import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
 import { IQuiz, IQuizResult, QuizService } from 'src/pages/quizzes/providers/quiz.service';
 
 @Component({
@@ -25,7 +25,7 @@ export class ScoreComponent implements OnInit {
   };
 
   public currentQuizAnswers: IQuizResult = {
-    answers: [],
+    answersLength: 0,
     correct: 0,
     seconds: 0
   };
@@ -94,11 +94,10 @@ export class ScoreComponent implements OnInit {
     return this.currentQuizAnswers.correct;
   }
 
-  canActivate(): boolean {
-    if (this.quizService.completed) {
-      return true;
-    }
-    return false;
+  async canActivate(route: ActivatedRouteSnapshot): Promise<boolean> {
+    const quizId: number = parseInt(route.params['id']);
+    const quizResult: IQuizResult | null = await this.quizService.getQuizAnswersById(quizId);
+    return !!quizResult;
   }
 
 }
