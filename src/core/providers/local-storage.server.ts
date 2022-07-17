@@ -12,7 +12,7 @@ class LocalStorage implements Storage {
 }
 
 @Injectable()
-export class LocalStorageServerService {
+export class LocalStorageServer {
 
   private isBrowser: boolean = false;
   private readonly storage: Storage = new LocalStorage();

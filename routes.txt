@@ -1,0 +1,3 @@
+/
+/quizzes
+/quizzes/active/1

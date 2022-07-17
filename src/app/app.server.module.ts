@@ -4,7 +4,7 @@ import { ServerModule } from '@angular/platform-server';
 import { AppModule } from './app.module';
 import { AppComponent } from './app.component';
 import { LocalStorageService } from 'src/core/providers/local-storage.service';
-import { LocalStorageServerService } from 'src/core/providers/local-storage-server.service copy';
+import { LocalStorageServer } from 'src/core/providers/local-storage.server';
 
 @NgModule({
   imports: [
@@ -15,7 +15,7 @@ import { LocalStorageServerService } from 'src/core/providers/local-storage-serv
   providers: [
     {
       provide: LocalStorageService,
-      useClass: LocalStorageServerService
+      useClass: LocalStorageServer
     }
   ]
 })
