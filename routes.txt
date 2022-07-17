@@ -1,3 +1,4 @@
 /
 /quizzes
 /quizzes/active/1
+/quizzes/active/1/score
