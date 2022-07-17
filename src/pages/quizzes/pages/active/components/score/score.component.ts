@@ -1,8 +1,7 @@
 import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
-import { AppComponent } from 'src/app/app.component';
-import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
+import { ActivatedRouteSnapshot } from '@angular/router';
 import { IQuiz, IQuizResult, QuizService } from 'src/pages/quizzes/providers/quiz.service';
-import { isPlatformBrowser } from '@angular/common';
+import { Environment } from 'src/utils';
 
 @Component({
   selector: 'app-score',
@@ -14,7 +13,6 @@ export class ScoreComponent implements OnInit {
   private isLoadingQuizAnswers: boolean = true;
   private isLoadingPassedQuizzes: boolean = true;
   private isLoadingQuizzes: boolean = true;
-  private isBrowser: boolean = false;
 
   public quizzesResults: IQuizResult[] = [];
   public quizzes: IQuiz[] = [];
@@ -35,14 +33,12 @@ export class ScoreComponent implements OnInit {
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
-    private quizService: QuizService,
-    private activatedRoute: ActivatedRoute
+    private quizService: QuizService
   ) { }
 
   ngOnInit(): void {
-    this.isBrowser = isPlatformBrowser(this.platformId);
-    this.quizId = parseInt(this.activatedRoute.snapshot.params['id']);
-    if (this.isBrowser) {
+    const env = new Environment(this.platformId);
+    if (env.isBrowser) {
       this.setQuizzes();
       this.setQuizById();
       this.setQuizAnswersById();

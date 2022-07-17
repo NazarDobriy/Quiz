@@ -8,8 +8,7 @@ import { DialogService } from './providers/dialog.service';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { SnackBarService } from './providers/snack-bar.service';
-import { AppComponent } from 'src/app/app.component';
-import { isPlatformBrowser } from '@angular/common';
+import { Environment } from 'src/utils';
 
 @Component({
   selector: 'app-quiz',
@@ -50,7 +49,6 @@ export class QuizComponent implements OnInit {
     Steven: 'steven'
   };
 
-  private isBrowser: boolean = false;
   private isLoadingThemes: boolean = true;
   private isLoadingQuiz: boolean = true;
   private userAnswersIds: string[] = [];
@@ -70,10 +68,10 @@ export class QuizComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.isBrowser = isPlatformBrowser(this.platformId);
+    const env = new Environment(this.platformId);
     this.timeStart = new Date();
     this.quizId = parseInt(this.activatedRoute.snapshot.params['id']);
-    if (this.isBrowser) {
+    if (env.isBrowser) {
       this.setQuizById();
       this.setTheme();
     }

@@ -1,6 +1,5 @@
-import { isPlatformBrowser } from '@angular/common';
 import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
-import { AppComponent } from 'src/app/app.component';
+import { Environment } from 'src/utils';
 import { QuizService, IQuiz, IPaginationScheme } from '../../providers/quiz.service';
 import { ThemeService } from '../../providers/theme.service';
 
@@ -13,7 +12,6 @@ export class QuizzesComponent implements OnInit {
 
   public quizzes: IQuiz[] = [];
 
-  private isBrowser: boolean = false;
   private isLoadingThemes: boolean = true;
   private isLoadingQuizzes: boolean = true;
 
@@ -31,8 +29,8 @@ export class QuizzesComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.isBrowser = isPlatformBrowser(this.platformId);
-    if (this.isBrowser) {
+    const env = new Environment(this.platformId);
+    if (env.isBrowser) {
       this.setThemes();
       this.setQuizzes();
     }

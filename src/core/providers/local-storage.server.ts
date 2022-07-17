@@ -1,25 +1,14 @@
-import { isPlatformBrowser } from '@angular/common';
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
-
-class LocalStorage implements Storage {
-  [name: string]: any;
-  readonly length: number = 0;
-  public clear(): void {}
-  public getItem(key: string): string | null { return null; }
-  public key(index: number): string | null { return null; }
-  public removeItem(key: string): void {}
-  public setItem(key: string, value: string): void {}
-}
+import { Environment, LocalStorage } from 'src/utils';
 
 @Injectable()
 export class LocalStorageServer {
 
-  private isBrowser: boolean = false;
   private readonly storage: Storage = new LocalStorage();
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {
-    this.isBrowser = isPlatformBrowser(this.platformId);
-    if (this.isBrowser) {
+    const env = new Environment(this.platformId);
+    if (env.isBrowser) {
       this.storage = localStorage;
     }
   }
