@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
-import { ActivatedRouteSnapshot } from '@angular/router';
+import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
 import { IQuiz, IQuizResult, QuizService } from 'src/pages/quizzes/providers/quiz.service';
 import { Environment } from 'src/utils';
 
@@ -33,11 +33,13 @@ export class ScoreComponent implements OnInit {
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
-    private quizService: QuizService
+    private quizService: QuizService,
+    private activatedRoute: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
     const env = new Environment(this.platformId);
+    this.quizId = parseInt(this.activatedRoute.snapshot.params['id']);
     if (env.isBrowser) {
       this.setQuizzes();
       this.setQuizById();
@@ -94,9 +96,13 @@ export class ScoreComponent implements OnInit {
   }
 
   async canActivate(route: ActivatedRouteSnapshot): Promise<boolean> {
-    const quizId: number = parseInt(route.params['id']);
-    const quizResult: IQuizResult | null = await this.quizService.getQuizAnswersById(quizId);
-    return !!quizResult;
+    const env = new Environment(this.platformId);
+    if (env.isBrowser) {
+      const quizId: number = parseInt(route.params['id']);
+      const quizResult: IQuizResult | null = await this.quizService.getQuizAnswersById(quizId);
+      return !!quizResult;
+    }
+    return true;
   }
 
 }
