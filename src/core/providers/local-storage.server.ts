@@ -29,7 +29,7 @@ export class LocalStorageServer {
     this.storage.removeItem(key);
   }
 
-  public clear(): void {
+  public clear() {
     this.storage.clear();
   }
 
