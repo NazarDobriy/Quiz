@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
+import { ActivatedRoute, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { PlatformService } from 'src/core/providers/platform.service';
 import { IQuiz, IQuizResult, QuizService } from 'src/pages/quizzes/providers/quiz.service';
 
@@ -32,6 +32,7 @@ export class ScoreComponent implements OnInit {
   };
 
   constructor(
+    private router: Router,
     private quizService: QuizService,
     private activatedRoute: ActivatedRoute,
     private platformService: PlatformService
@@ -70,6 +71,12 @@ export class ScoreComponent implements OnInit {
     this.isLoadingQuizzes = false;
   }
 
+  private async isQuizAnswersData(route: ActivatedRouteSnapshot): Promise<boolean> {
+    const quizId: number = parseInt(route.params['id']);
+    const quizResult: IQuizResult | null = await this.quizService.getQuizAnswersById(quizId);
+    return !!quizResult;
+  }
+
   get amountPassedQuizzes(): number {
     return this.quizzesResults.length;
   }
@@ -95,10 +102,9 @@ export class ScoreComponent implements OnInit {
   }
 
   async canActivate(route: ActivatedRouteSnapshot): Promise<boolean> {
-    if (this.platformService.isBrowser) {
-      const quizId: number = parseInt(route.params['id']);
-      const quizResult: IQuizResult | null = await this.quizService.getQuizAnswersById(quizId);
-      return !!quizResult;
+    if (this.platformService.isBrowser && !await this.isQuizAnswersData(route)) {
+      this.router.navigate(['/']);
+      return false;
     }
     return true;
   }
