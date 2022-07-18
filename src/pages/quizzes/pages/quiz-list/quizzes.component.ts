@@ -29,11 +29,9 @@ export class QuizzesComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    const env = new Environment(this.platformId);
-    if (env.isBrowser) {
-      this.setThemes();
-      this.setQuizzes();
-    }
+    //const env = new Environment(this.platformId);
+    this.setThemes();
+    this.setQuizzes();
   }
 
   get isLoading(): boolean {

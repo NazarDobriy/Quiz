@@ -9,7 +9,7 @@ import { LocalStorageServer } from 'src/core/providers/local-storage.server';
 @NgModule({
   imports: [
     AppModule,
-    ServerModule,
+    ServerModule
   ],
   bootstrap: [AppComponent],
   providers: [
