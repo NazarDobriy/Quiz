@@ -1,14 +1,14 @@
-import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
-import { Environment, LocalStorage } from 'src/utils';
+import { Injectable } from '@angular/core';
+import { LocalStorage } from 'src/utils';
+import { PlatformService } from './platform.service';
 
 @Injectable()
 export class LocalStorageServer {
 
   private readonly storage: Storage = new LocalStorage();
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
-    const env = new Environment(this.platformId);
-    if (env.isBrowser) {
+  constructor(private platformService: PlatformService) {
+    if (this.platformService.isBrowser) {
       this.storage = localStorage;
     }
   }

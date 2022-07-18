@@ -1,4 +1,4 @@
-import { Component, HostListener, Inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ThemeService, IQuizTheme } from '../../providers/theme.service';
 import { IAnswer, IQuiz, QuizService } from '../../providers/quiz.service';
@@ -8,7 +8,7 @@ import { DialogService } from './providers/dialog.service';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { SnackBarService } from './providers/snack-bar.service';
-import { Environment } from 'src/utils';
+import { PlatformService } from 'src/core/providers/platform.service';
 
 @Component({
   selector: 'app-quiz',
@@ -59,19 +59,18 @@ export class QuizComponent implements OnInit {
   }
 
   constructor(
-    @Inject(PLATFORM_ID) private platformId: Object,
     private activatedRoute: ActivatedRoute,
     private quizService: QuizService,
     private themeService: ThemeService,
     private dialogService: DialogService,
-    private snackBarService: SnackBarService
+    private snackBarService: SnackBarService,
+    private platformService: PlatformService
   ) { }
 
   ngOnInit(): void {
-    const env = new Environment(this.platformId);
     this.timeStart = new Date();
     this.quizId = parseInt(this.activatedRoute.snapshot.params['id']);
-    if (env.isBrowser) {
+    if (this.platformService.isBrowser) {
       this.setQuizById();
       this.setTheme();
     }

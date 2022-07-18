@@ -1,5 +1,5 @@
-import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
-import { Environment } from 'src/utils';
+import { Component, OnInit } from '@angular/core';
+import { PlatformService } from 'src/core/providers/platform.service';
 import { QuizService, IQuiz, IPaginationScheme } from '../../providers/quiz.service';
 import { ThemeService } from '../../providers/theme.service';
 
@@ -23,15 +23,16 @@ export class QuizzesComponent implements OnInit {
   };
 
   constructor(
-    @Inject(PLATFORM_ID) private platformId: Object,
     private quizService: QuizService,
-    private themeService: ThemeService
+    private themeService: ThemeService,
+    private platformService: PlatformService
   ) { }
 
   ngOnInit(): void {
-    //const env = new Environment(this.platformId);
-    this.setThemes();
-    this.setQuizzes();
+    if (this.platformService.isBrowser) {
+      this.setThemes();
+      this.setQuizzes();
+    }
   }
 
   get isLoading(): boolean {

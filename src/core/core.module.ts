@@ -3,6 +3,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { UserService } from './providers/user.service';
 import { LocalStorageService } from './providers/local-storage.service';
 import { CommonModule } from '@angular/common';
+import { PlatformService } from './providers/platform.service';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { CommonModule } from '@angular/common';
   ],
   providers: [
     UserService,
-    LocalStorageService
+    LocalStorageService,
+    PlatformService
   ]
 })
 export class CoreModule { }
