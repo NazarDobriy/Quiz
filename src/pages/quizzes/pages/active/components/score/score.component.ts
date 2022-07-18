@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ActivatedRouteSnapshot, Router } from '@angular/router';
+import { ActivatedRoute, ActivatedRouteSnapshot, Router, UrlTree } from '@angular/router';
 import { PlatformService } from 'src/core/providers/platform.service';
 import { IQuiz, IQuizResult, QuizService } from 'src/pages/quizzes/providers/quiz.service';
 
@@ -71,7 +71,7 @@ export class ScoreComponent implements OnInit {
     this.isLoadingQuizzes = false;
   }
 
-  private async isQuizAnswersData(route: ActivatedRouteSnapshot): Promise<boolean> {
+  private async hasQuizAnswers(route: ActivatedRouteSnapshot): Promise<boolean> {
     const quizId: number = parseInt(route.params['id']);
     const quizResult: IQuizResult | null = await this.quizService.getQuizAnswersById(quizId);
     return !!quizResult;
@@ -101,9 +101,9 @@ export class ScoreComponent implements OnInit {
     return this.currentQuizAnswers.correct;
   }
 
-  async canActivate(route: ActivatedRouteSnapshot): Promise<boolean> {
+  async canActivate(route: ActivatedRouteSnapshot): Promise<boolean | UrlTree> {
     if (this.platformService.isBrowser) {
-      return await this.isQuizAnswersData(route) ? true : this.router.navigate(['/']);
+      return (await this.hasQuizAnswers(route)) || this.router.createUrlTree(['/']);
     }
 
     if (this.platformService.isServer) {
