@@ -105,7 +105,12 @@ export class ScoreComponent implements OnInit {
     if (this.platformService.isBrowser) {
       return await this.isQuizAnswersData(route) ? true : this.router.navigate(['/']);
     }
-    return true;
+
+    if (this.platformService.isServer) {
+      return true;
+    }
+
+    return false;
   }
 
 }
