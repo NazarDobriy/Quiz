@@ -1,4 +1,3 @@
-import { PLATFORM_ID } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 
 import { LocalStorageServer } from './local-storage.server';
@@ -10,7 +9,7 @@ describe('LocalStorageServer', () => {
 
   const mockPlatformService = {
     get isBrowser(): boolean {
-      return true;
+      return false;
     }
   };
 
@@ -19,6 +18,8 @@ describe('LocalStorageServer', () => {
 
   beforeEach(() => {
     localStorage.setItem(itemKey, itemValue);
+    spyOnProperty(mockPlatformService, 'isBrowser', 'get').and.returnValue(true);
+
     TestBed.configureTestingModule({
       providers: [
         LocalStorageServer,
