@@ -34,7 +34,7 @@ export class ScoreComponent implements OnInit {
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
     private quizService: QuizService,
-    private activatedRoute: ActivatedRoute,
+    private activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
