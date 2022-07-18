@@ -102,9 +102,8 @@ export class ScoreComponent implements OnInit {
   }
 
   async canActivate(route: ActivatedRouteSnapshot): Promise<boolean> {
-    if (this.platformService.isBrowser && !await this.isQuizAnswersData(route)) {
-      this.router.navigate(['/']);
-      return false;
+    if (this.platformService.isBrowser) {
+      return await this.isQuizAnswersData(route) ? true : this.router.navigate(['/']);
     }
     return true;
   }
