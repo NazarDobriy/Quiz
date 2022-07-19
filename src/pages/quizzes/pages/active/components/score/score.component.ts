@@ -105,12 +105,7 @@ export class ScoreComponent implements OnInit {
     if (this.platformService.isBrowser) {
       return (await this.hasQuizAnswers(route)) || this.router.createUrlTree(['/']);
     }
-
-    if (this.platformService.isServer) {
-      return true;
-    }
-
-    return false;
+    return true;
   }
 
 }

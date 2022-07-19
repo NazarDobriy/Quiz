@@ -181,8 +181,5 @@
       }
     }
   },
-  "defaultProject": "Quiz",
-  "cli": {
-    "schematicCollections": ["@angular-eslint/schematics"]
-  }
+  "defaultProject": "Quiz"
 }
