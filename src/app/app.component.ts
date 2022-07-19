@@ -8,7 +8,7 @@ import { UserService } from 'src/core/providers/user.service';
 export class AppComponent implements OnInit {
   title = 'Quiz';
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService) { }
 
   ngOnInit(): void {
     if (!this.userService.hasId) {

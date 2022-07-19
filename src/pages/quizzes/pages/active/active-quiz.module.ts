@@ -17,7 +17,7 @@ import { SharedModule } from 'src/shared/shared.module';
 import { SkeletonQuizComponent } from './components/skeleton-quiz/skeleton-quiz.component';
 
 const routes: Routes = [
-  { 
+  {
     path: '',
     canDeactivate: [QuizComponent],
     component: QuizComponent

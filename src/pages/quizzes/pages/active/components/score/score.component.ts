@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
+import { ActivatedRoute, ActivatedRouteSnapshot, Router, UrlTree } from '@angular/router';
+import { PlatformService } from 'src/core/providers/platform.service';
 import { IQuiz, IQuizResult, QuizService } from 'src/pages/quizzes/providers/quiz.service';
 
 @Component({
@@ -12,6 +13,7 @@ export class ScoreComponent implements OnInit {
   private isLoadingQuizAnswers: boolean = true;
   private isLoadingPassedQuizzes: boolean = true;
   private isLoadingQuizzes: boolean = true;
+
   public quizzesResults: IQuizResult[] = [];
   public quizzes: IQuiz[] = [];
 
@@ -30,16 +32,20 @@ export class ScoreComponent implements OnInit {
   };
 
   constructor(
+    private router: Router,
     private quizService: QuizService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private platformService: PlatformService
   ) { }
 
   ngOnInit(): void {
     this.quizId = parseInt(this.activatedRoute.snapshot.params['id']);
-    this.setQuizzes();
-    this.setQuizById();
-    this.setQuizAnswersById();
-    this.setPassedQuizzes();
+    if (this.platformService.isBrowser) {
+      this.setQuizzes();
+      this.setQuizById();
+      this.setQuizAnswersById();
+      this.setPassedQuizzes();
+    }
   }
 
   private async setQuizById(): Promise<void> {
@@ -63,6 +69,12 @@ export class ScoreComponent implements OnInit {
   private async setQuizzes(): Promise<void> {
     this.quizzes = await this.quizService.getQuizzes();
     this.isLoadingQuizzes = false;
+  }
+
+  private async hasQuizAnswers(route: ActivatedRouteSnapshot): Promise<boolean> {
+    const quizId: number = parseInt(route.params['id']);
+    const quizResult: IQuizResult | null = await this.quizService.getQuizAnswersById(quizId);
+    return !!quizResult;
   }
 
   get amountPassedQuizzes(): number {
@@ -89,10 +101,11 @@ export class ScoreComponent implements OnInit {
     return this.currentQuizAnswers.correct;
   }
 
-  async canActivate(route: ActivatedRouteSnapshot): Promise<boolean> {
-    const quizId: number = parseInt(route.params['id']);
-    const quizResult: IQuizResult | null = await this.quizService.getQuizAnswersById(quizId);
-    return !!quizResult;
+  async canActivate(route: ActivatedRouteSnapshot): Promise<boolean | UrlTree> {
+    if (this.platformService.isBrowser) {
+      return (await this.hasQuizAnswers(route)) || this.router.createUrlTree(['/']);
+    }
+    return true;
   }
 
 }
