@@ -29,13 +29,13 @@ import { AppEffects } from './store/effects';
     AngularFireDatabaseModule,
     AngularFireModule.initializeApp(environment.firebase),
     HttpClientModule,
+    StoreModule.forRoot(reducers, { metaReducers }),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,
     }),
     EffectsModule.forRoot([AppEffects]),
-    StoreRouterConnectingModule.forRoot(),
-    StoreModule.forRoot(reducers, { metaReducers }),
+    StoreRouterConnectingModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent],
