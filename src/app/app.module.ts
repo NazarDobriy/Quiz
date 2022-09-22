@@ -13,6 +13,7 @@ import { environment } from 'src/environments/environment.prod';
 
 import { HttpClientModule } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { StoreModule } from '@ngrx/store';
     AngularFireDatabaseModule,
     AngularFireModule.initializeApp(environment.firebase),
     HttpClientModule,
-    StoreModule.forRoot({}, {})
+    StoreModule.forRoot({}, {}),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
   ],
   providers: [],
   bootstrap: [AppComponent]
