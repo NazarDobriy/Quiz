@@ -1,5 +1,5 @@
 import { QuizState } from "./quiz/state";
 
-export interface State {
-  quiz: QuizState
+export interface AppState {
+  quiz: QuizState;
 }
