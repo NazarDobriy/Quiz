@@ -27,6 +27,7 @@ describe('DialogService', () => {
       ]
     });
     service = TestBed.inject(DialogService);
+    mockMatDialog.open.calls.reset();
   });
 
   it('should be created', () => {

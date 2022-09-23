@@ -28,6 +28,9 @@ describe('ApiService', () => {
       ]
     });
     service = TestBed.inject(QuizzesApiService);
+
+    mockAngularFireDatabase.list.calls.reset();
+    mockAngularFireDatabase.object.calls.reset();
   });
 
   it('should be created', () => {
