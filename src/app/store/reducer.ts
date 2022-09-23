@@ -7,11 +7,11 @@ import {
 } from '@ngrx/store';
 import { environment } from '../../environments/environment';
 import { quizReducer } from './quiz/reducer';
-import { State } from './state';
+import { AppState } from './state';
 
-export const reducers: ActionReducerMap<State> = {
+export const reducers: ActionReducerMap<AppState> = {
   quiz: quizReducer
 };
 
 
-export const metaReducers: MetaReducer<State>[] = !environment.production ? [] : [];
+export const metaReducers: MetaReducer<AppState>[] = !environment.production ? [] : [];

@@ -1,6 +1,5 @@
-import { quizInitialState, QuizState } from "./state";
+import { quizInitialState } from "./state";
 
-export function quizReducer(state = quizInitialState, action: any): QuizState {
-  console.log(action);
+export function quizReducer(state = quizInitialState, action: any) {
   return state;
 };
