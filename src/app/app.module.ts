@@ -17,7 +17,6 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { metaReducers, reducers } from './store/reducer';
-import { AppEffects } from './store/effects';
 
 @NgModule({
   declarations: [AppComponent],
@@ -34,7 +33,7 @@ import { AppEffects } from './store/effects';
       maxAge: 25,
       logOnly: environment.production,
     }),
-    EffectsModule.forRoot([AppEffects]),
+    EffectsModule.forRoot(),
     StoreRouterConnectingModule.forRoot()
   ],
   providers: [],
