@@ -6,14 +6,14 @@
     <span class="right-text text-[3.5rem] bg-warning text-primary relative sm:top-2 top-[1rem] p-3 font-light">Quiz</span>
     <span class="bg-bright inline-block h-2 w-2 relative left-1 sm:top-2 top-[1rem] rounded-full"></span>
   </header>
-  
+
   <section class="flex flex-wrap justify-center items-center mt-[70px] gap-x-5 m-auto max-w-[88rem]">
     <ng-container *ngFor="let quiz of quizzes">
       <app-quiz-card [quiz]="quiz"></app-quiz-card>
     </ng-container>
   </section>
 
-  <button 
+  <button
     class="grid m-auto bg-accent text-bright cursor-pointer px-6 py-4 rounded sm:my-[30px] my-[54px]"
     [ngClass]="isLimitReached ? 'hidden' : 'block'"
     (click)="loadCards()"
