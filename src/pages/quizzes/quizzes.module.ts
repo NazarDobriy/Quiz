@@ -6,6 +6,8 @@ import { ActiveQuizModule } from './pages/active/active-quiz.module';
 import { ThemeService } from './providers/theme.service';
 import { RouterModule, Routes } from '@angular/router';
 import { QuizzesApiService } from './providers/quizzes-api.service';
+import { EffectsModule } from '@ngrx/effects';
+import { QuizzesEffects } from 'src/app/store/quizzes/effects';
 
 const routes: Routes = [
   {
@@ -22,7 +24,8 @@ const routes: Routes = [
     CommonModule,
     QuizListModule,
     ActiveQuizModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    EffectsModule.forFeature([QuizzesEffects])
   ],
   providers: [
     QuizService,
