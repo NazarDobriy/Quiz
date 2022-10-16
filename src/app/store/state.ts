@@ -1,5 +1,5 @@
-import { QuizState } from "./quiz/state";
+import { IQuizzesState } from "./quizzes/state";
 
-export interface AppState {
-  quiz: QuizState;
+export interface IAppState {
+  quizzes: IQuizzesState;
 }
