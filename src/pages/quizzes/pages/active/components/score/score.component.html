@@ -1,6 +1,9 @@
-<ng-container *ngIf="!isLoading; else loading">
+<ng-container *ngIf="isLoading || (isLoadingQuizzes$ | async); else content"></ng-container>
+
+<ng-template #content>
 
   <header class="text-center text-bright sm:mt-25 mt-20">
+
     <section>
       <span class="sm:text-4xl md:text-[3rem] text-[2.125rem] font-semibold">
         Your Score<span class="text-error ml-1">:</span>
@@ -20,7 +23,7 @@
       </div>
     </section>
     <app-statistics
-      [quizzes]="quizzes"
+      [quizzes]="(quizzes$ | async) || []"
       [quizzesResults]="quizzesResults"
     >
     </app-statistics>
@@ -31,6 +34,4 @@
     </section>
   </header>
 
-</ng-container>
-
-<ng-template #loading></ng-template>
+</ng-template>
