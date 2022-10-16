@@ -13,7 +13,7 @@ export class QuizzesEffects {
       mergeMap(() => {
         return from(this.quizService.getQuizzes()).pipe(
           map((quizzes: IQuiz[]) =>
-            QuizzesActions.getQuizzesSuccess({ quizzes })
+            QuizzesActions.getQuizzesSuccess({ quizzes: quizzes })
           ),
           catchError((error: Error) =>
             of(QuizzesActions.getQuizzesFailure({ error: error.message }))
