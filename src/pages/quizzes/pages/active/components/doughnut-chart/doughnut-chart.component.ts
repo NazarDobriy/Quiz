@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnChanges, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
 
 Chart.register(...registerables);
@@ -7,7 +7,7 @@ Chart.register(...registerables);
   selector: 'app-doughnut-chart',
   templateUrl: './doughnut-chart.component.html'
 })
-export class DoughnutChartComponent implements OnChanges {
+export class DoughnutChartComponent implements AfterViewInit {
   @Input() statistics: [number, number] = [0, 0];
 
   @ViewChild('donut') donut!: ElementRef;
@@ -33,7 +33,7 @@ export class DoughnutChartComponent implements OnChanges {
 
   public chart: Chart | null = null;
 
-  ngOnChanges(): void {
+  ngAfterViewInit(): void {
     if (this.isEmpty()) { return; }
     const canvas: HTMLCanvasElement = this.donut.nativeElement;
     const ctx: CanvasRenderingContext2D | null = canvas.getContext('2d');
