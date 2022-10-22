@@ -1,4 +1,4 @@
-<ng-container *ngIf="isLoading || (isLoadingQuizzes$ | async); else content"></ng-container>
+<ng-container *ngIf="isLoading || (isLoadingQuizzes$ | async) || (isLoadingResults$ | async); else content"></ng-container>
 
 <ng-template #content>
 
@@ -24,7 +24,7 @@
     </section>
     <app-statistics
       [quizzes]="(quizzes$ | async) || []"
-      [quizzesResults]="quizzesResults"
+      [quizzesResults]="(results$ | async) || []"
     >
     </app-statistics>
     <section class="my-10">

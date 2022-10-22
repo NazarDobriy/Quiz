@@ -13,7 +13,6 @@ export class ScoreComponent implements OnInit {
   private quizId: number = 0;
   private isLoadingQuiz: boolean = true;
   private isLoadingQuizAnswers: boolean = true;
-  private isLoadingPassedQuizzes: boolean = true;
 
   private currentQuiz: IQuiz = {
     group: '',
@@ -23,10 +22,13 @@ export class ScoreComponent implements OnInit {
     subtitle: ''
   };
 
+  public quizzes$: Observable<IQuiz[]> = of([]);
   public isLoadingQuizzes$: Observable<boolean> = of(true);
   public quizzesError$: Observable<string | null> = of(null);
-  public quizzes$: Observable<IQuiz[]> = of([]);
-  public quizzesResults: IQuizResult[] = [];
+
+  public results$: Observable<IQuizResult[]> = of([]);
+  public isLoadingResults$: Observable<boolean> = of(true);
+  public resultsError$: Observable<string | null> = of(null);
 
   public currentQuizAnswers: IQuizResult = {
     answersLength: 0,
@@ -47,9 +49,9 @@ export class ScoreComponent implements OnInit {
 
     if (this.platformService.isBrowser) {
       this.handleQuizzes();
+      this.handlePassedQuizzes();
       this.setQuizById();
       this.setQuizAnswersById();
-      this.setPassedQuizzes();
     }
   }
 
@@ -66,16 +68,18 @@ export class ScoreComponent implements OnInit {
     this.isLoadingQuizAnswers = false;
   }
 
-  private async setPassedQuizzes(): Promise<void> {
-    this.quizzesResults = await this.quizService.getPassedQuizzes();
-    this.isLoadingPassedQuizzes = false;
-  }
-
   private handleQuizzes(): void {
     this.isLoadingQuizzes$ = this.storeService.isLoadingQuizzes$;
     this.quizzesError$ = this.storeService.quizzesError$;
     this.quizzes$ = this.storeService.quizzes$;
     this.storeService.dispatchQuizzes();
+  }
+
+  private handlePassedQuizzes(): void {
+    this.isLoadingResults$ = this.storeService.isLoadingResults$;
+    this.resultsError$ = this.storeService.resultsError$;
+    this.results$ = this.storeService.results$;
+    this.storeService.dispatchResults();
   }
 
   private async hasQuizAnswers(route: ActivatedRouteSnapshot): Promise<boolean> {
@@ -84,16 +88,12 @@ export class ScoreComponent implements OnInit {
     return !!quizResult;
   }
 
-  get amountPassedQuizzes(): number {
-    return this.quizzesResults.length;
-  }
-
   get questionsLength(): number {
     return this.currentQuiz.questions.length;
   }
 
   get isLoading(): boolean {
-    return this.isLoadingQuiz || this.isLoadingQuizAnswers || this.isLoadingPassedQuizzes;
+    return this.isLoadingQuiz || this.isLoadingQuizAnswers;
   }
 
   get durationSeconds(): number {
