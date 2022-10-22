@@ -15,6 +15,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { SnackBarService } from './providers/snack-bar.service';
 import { SharedModule } from 'src/shared/shared.module';
 import { SkeletonQuizComponent } from './components/skeleton-quiz/skeleton-quiz.component';
+import { EffectsModule } from '@ngrx/effects';
+import { QuizzesEffects } from 'src/app/store/quizzes/effects';
+import { ResultsEffects } from 'src/app/store/results/effects';
 
 const routes: Routes = [
   {
@@ -44,10 +47,14 @@ const routes: Routes = [
   ],
   imports: [
     CommonModule,
+    SharedModule,
     MatDialogModule,
     MatSnackBarModule,
     RouterModule.forChild(routes),
-    SharedModule
+    EffectsModule.forFeature([
+      QuizzesEffects,
+      ResultsEffects
+    ]),
   ],
   providers: [
     QuizComponent,
