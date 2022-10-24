@@ -15,7 +15,7 @@ export class QuizzesComponent implements OnInit {
   private isLoadingThemes: boolean = true;
   private isLoadingQuizzes: boolean = true;
 
-  private paginationQuiz: IPaginationScheme<IQuiz> = {
+  private paginationQuizzes: IPaginationScheme<IQuiz> = {
     count: this.INITIAL_AMOUNT_QUIZ_CARDS,
     offset: 0,
     total: 0,
@@ -40,15 +40,15 @@ export class QuizzesComponent implements OnInit {
   }
 
   get isLimitReached(): boolean {
-    return this.quizzes.length >= this.paginationQuiz.total;
+    return this.quizzes.length >= this.paginationQuizzes.total;
   }
 
   private async setQuizzes(): Promise<void> {
-    this.paginationQuiz = await this.quizService.getPaginatedQuizzes(
-      this.paginationQuiz.offset,
-      this.paginationQuiz.count
+    this.paginationQuizzes = await this.quizService.getPaginatedQuizzes(
+      this.paginationQuizzes.offset,
+      this.paginationQuizzes.count
     );
-    const newQuizzes: IQuiz[] = this.paginationQuiz.data;
+    const newQuizzes: IQuiz[] = this.paginationQuizzes.data;
     this.quizzes = [...this.quizzes, ...newQuizzes];
     this.isLoadingQuizzes = false;
   }
@@ -59,7 +59,7 @@ export class QuizzesComponent implements OnInit {
   }
 
   public async loadCards(): Promise<void> {
-    this.paginationQuiz.offset += this.paginationQuiz.count;
+    this.paginationQuizzes.offset += this.paginationQuizzes.count;
     await this.setQuizzes();
   }
 
