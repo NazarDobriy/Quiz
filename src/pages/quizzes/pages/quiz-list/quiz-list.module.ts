@@ -6,6 +6,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from 'src/shared/shared.module';
 import { SkeletonQuizzesComponent } from './components/skeleton-quizzes/skeleton-quizzes.component';
 import { SkeletonQuizCardComponent } from './components/skeleton-quiz-card/skeleton-quiz-card.component';
+import { EffectsModule } from '@ngrx/effects';
+import { PaginationEffects } from 'src/app/store/pagination/effects';
 
 const routes: Routes = [
   { path: '', component: QuizzesComponent }
@@ -21,8 +23,9 @@ const routes: Routes = [
   ],
   imports: [
     CommonModule,
+    SharedModule,
     RouterModule.forChild(routes),
-    SharedModule
+    EffectsModule.forFeature([PaginationEffects])
   ]
 })
 export class QuizListModule { }
