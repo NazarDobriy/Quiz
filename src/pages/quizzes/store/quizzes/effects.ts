@@ -13,7 +13,7 @@ export class QuizzesEffects {
       switchMap(() => {
         return from(this.quizService.getQuizzes()).pipe(
           map((quizzes: IQuiz[]) =>
-            QuizzesActions.getQuizzesSuccess({ quizzes: quizzes })
+            QuizzesActions.getQuizzesSuccess({ quizzes })
           ),
           catchError((error: Error) =>
             of(QuizzesActions.getQuizzesFailure({ error: error.message }))
@@ -29,7 +29,7 @@ export class QuizzesEffects {
       switchMap((action: { offset: number; count: number; }) => {
         return from(this.quizService.getPaginatedQuizzes(action.offset, action.count)).pipe(
           map((paginationQuizzes: IPaginationScheme<IQuiz>) =>
-            QuizzesActions.getPaginationQuizzesSuccess({ paginationQuizzes: paginationQuizzes })
+            QuizzesActions.getPaginationQuizzesSuccess({ paginationQuizzes })
           ),
           catchError((error: Error) =>
             of(QuizzesActions.getPaginationQuizzesFailure({ error: error.message }))
@@ -45,7 +45,7 @@ export class QuizzesEffects {
       switchMap(() => {
         return from(this.quizService.getQuizzesResults()).pipe(
           map((results: IQuizResult[]) =>
-            QuizzesActions.getQuizzesResultsSuccess({ results: results })
+            QuizzesActions.getQuizzesResultsSuccess({ results })
           ),
           catchError((error: Error) =>
             of(QuizzesActions.getQuizzesResultsFailure({ error: error.message }))
