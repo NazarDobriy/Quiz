@@ -52,8 +52,8 @@ export class QuizService {
     return this.quizzesApiService.getPaginatedQuizzes(offset, count);
   }
 
-  public getPassedQuizzes(): Promise<IQuizResult[]> {
-    return this.quizzesApiService.getAllPassedQuizzes();
+  public getQuizzesResults(): Promise<IQuizResult[]> {
+    return this.quizzesApiService.getQuizzesResults();
   }
 
   public getQuizById(id: number): Promise<IQuiz> {

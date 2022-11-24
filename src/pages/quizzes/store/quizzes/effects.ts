@@ -43,7 +43,7 @@ export class QuizzesEffects {
     return this.actions$.pipe(
       ofType(QuizzesActions.getQuizzesResults),
       switchMap(() => {
-        return from(this.quizService.getPassedQuizzes()).pipe(
+        return from(this.quizService.getQuizzesResults()).pipe(
           map((results: IQuizResult[]) =>
             QuizzesActions.getQuizzesResultsSuccess({ results: results })
           ),
