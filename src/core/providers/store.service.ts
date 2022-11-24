@@ -22,15 +22,15 @@ export class StoreService {
 
   constructor(private store: Store) { }
 
-  public dispatchQuizzes(): void {
+  public getQuizzes(): void {
     this.store.dispatch(QuizzesActions.getQuizzes());
   }
 
-  public dispatchResults(): void {
+  public getQuizzesResults(): void {
     this.store.dispatch(QuizzesActions.getQuizzesResults());
   }
 
-  public dispatchPaginationQuizzes(offset: number, count: number): void {
+  public getPaginationQuizzes(offset: number, count: number): void {
     this.store.dispatch(QuizzesActions.getPaginationQuizzes({ offset: offset, count: count}));
   }
 }

@@ -72,14 +72,14 @@ export class ScoreComponent implements OnInit {
     this.isLoadingQuizzes$ = this.storeService.isLoadingQuizzes$;
     this.quizzesError$ = this.storeService.quizzesError$;
     this.quizzes$ = this.storeService.quizzes$;
-    this.storeService.dispatchQuizzes();
+    this.storeService.getQuizzesResults();
   }
 
   private handlePassedQuizzes(): void {
     this.isLoadingQuizzesResults$ = this.storeService.isLoadingQuizzesResults$;
     this.quizzesResultsError$ = this.storeService.quizzesResultsError$;
     this.quizzesResults$ = this.storeService.quizzesResults$;
-    this.storeService.dispatchResults();
+    this.storeService.getQuizzesResults();
   }
 
   private async hasQuizAnswers(route: ActivatedRouteSnapshot): Promise<boolean> {
