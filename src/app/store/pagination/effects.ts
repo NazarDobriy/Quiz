@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { mergeMap, from, map, catchError, of, switchMap } from 'rxjs';
+import { from, map, catchError, of, switchMap } from 'rxjs';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 
 import * as PaginationActions from './actions';

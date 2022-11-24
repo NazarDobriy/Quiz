@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { mergeMap, from, map, catchError, of } from 'rxjs';
+import { switchMap, from, map, catchError, of } from 'rxjs';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 
 import * as QuizzesActions from './actions';
@@ -10,7 +10,7 @@ export class QuizzesEffects {
   public getQuizzes$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(QuizzesActions.getQuizzes),
-      mergeMap(() => {
+      switchMap(() => {
         return from(this.quizService.getQuizzes()).pipe(
           map((quizzes: IQuiz[]) =>
             QuizzesActions.getQuizzesSuccess({ quizzes: quizzes })
