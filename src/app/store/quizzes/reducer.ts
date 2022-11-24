@@ -61,5 +61,33 @@ export const quizzesReducer = createReducer(
         error: action.error
       }
     }
+  }),
+  on(QuizzesActions.getQuizzesResults, (state): IQuizzesState<IQuiz> => {
+    return {
+      ...state,
+      results: {
+        ...state.results,
+        isLoading: true
+      }
+    }
+  }),
+  on(QuizzesActions.getQuizzesResultsSuccess, (state, action): IQuizzesState<IQuiz> => {
+    return {
+      ...state,
+      results: {
+        ...state.results,
+        date: action.results,
+        isLoading: false
+      }
+    }
+  }),
+  on(QuizzesActions.getQuizzesResultsFailure, (state, action): IQuizzesState<IQuiz> => {
+    return  {
+      ...state,
+      results: {
+        ...state.results,
+        error: action.error
+      }
+    }
   })
 );

@@ -26,9 +26,9 @@ export class ScoreComponent implements OnInit {
   public isLoadingQuizzes$: Observable<boolean> = of(true);
   public quizzesError$: Observable<string | null> = of(null);
 
-  public results$: Observable<IQuizResult[]> = of([]);
-  public isLoadingResults$: Observable<boolean> = of(true);
-  public resultsError$: Observable<string | null> = of(null);
+  public quizzesResults$: Observable<IQuizResult[]> = of([]);
+  public isLoadingQuizzesResults$: Observable<boolean> = of(true);
+  public quizzesResultsError$: Observable<string | null> = of(null);
 
   public currentQuizAnswers: IQuizResult = {
     answersLength: 0,
@@ -76,9 +76,9 @@ export class ScoreComponent implements OnInit {
   }
 
   private handlePassedQuizzes(): void {
-    this.isLoadingResults$ = this.storeService.isLoadingResults$;
-    this.resultsError$ = this.storeService.resultsError$;
-    this.results$ = this.storeService.results$;
+    this.isLoadingQuizzesResults$ = this.storeService.isLoadingQuizzesResults$;
+    this.quizzesResultsError$ = this.storeService.quizzesResultsError$;
+    this.quizzesResults$ = this.storeService.quizzesResults$;
     this.storeService.dispatchResults();
   }
 

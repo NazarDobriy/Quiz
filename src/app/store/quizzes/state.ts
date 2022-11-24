@@ -1,4 +1,4 @@
-import { IPaginationScheme, IQuiz } from "src/pages/quizzes/providers/quiz.service";
+import { IPaginationScheme, IQuiz, IQuizResult } from "src/pages/quizzes/providers/quiz.service";
 
 export interface IQuizzesState<T> {
   quizzes: {
@@ -9,6 +9,11 @@ export interface IQuizzesState<T> {
   pagination: {
     isLoading: boolean;
     data: IPaginationScheme<T>;
+    error: string | null;
+  },
+  results: {
+    isLoading: boolean;
+    date: IQuizResult[],
     error: string | null;
   }
 }
@@ -27,6 +32,11 @@ export const quizzesInitialState: IQuizzesState<IQuiz> = {
       data: []
     },
     isLoading: false,
+    error: null
+  },
+  results: {
+    isLoading: false,
+    date: [],
     error: null
   }
 }

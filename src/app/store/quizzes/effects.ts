@@ -3,7 +3,7 @@ import { switchMap, from, map, catchError, of } from 'rxjs';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 
 import * as QuizzesActions from './actions';
-import { IPaginationScheme, IQuiz, QuizService } from 'src/pages/quizzes/providers/quiz.service';
+import { IPaginationScheme, IQuiz, IQuizResult, QuizService } from 'src/pages/quizzes/providers/quiz.service';
 
 @Injectable()
 export class QuizzesEffects {
@@ -33,6 +33,22 @@ export class QuizzesEffects {
           ),
           catchError((error: Error) =>
             of(QuizzesActions.getPaginationQuizzesFailure({ error: error.message }))
+          )
+        );
+      })
+    );
+  });
+
+  public getQuizzesResults$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(QuizzesActions.getQuizzesResults),
+      switchMap(() => {
+        return from(this.quizService.getPassedQuizzes()).pipe(
+          map((results: IQuizResult[]) =>
+            QuizzesActions.getQuizzesResultsSuccess({ results: results })
+          ),
+          catchError((error: Error) =>
+            of(QuizzesActions.getQuizzesResultsFailure({ error: error.message }))
           )
         );
       })

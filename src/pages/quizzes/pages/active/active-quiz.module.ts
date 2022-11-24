@@ -17,7 +17,6 @@ import { SharedModule } from 'src/shared/shared.module';
 import { SkeletonQuizComponent } from './components/skeleton-quiz/skeleton-quiz.component';
 import { EffectsModule } from '@ngrx/effects';
 import { QuizzesEffects } from 'src/app/store/quizzes/effects';
-import { ResultsEffects } from 'src/app/store/results/effects';
 
 const routes: Routes = [
   {
@@ -51,10 +50,7 @@ const routes: Routes = [
     MatDialogModule,
     MatSnackBarModule,
     RouterModule.forChild(routes),
-    EffectsModule.forFeature([
-      QuizzesEffects,
-      ResultsEffects
-    ]),
+    EffectsModule.forFeature([QuizzesEffects])
   ],
   providers: [
     QuizComponent,
