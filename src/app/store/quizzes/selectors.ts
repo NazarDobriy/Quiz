@@ -1,10 +1,14 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
 
-import { IQuiz } from "src/pages/quizzes/providers/quiz.service";
 import { IQuizzesState } from "./state";
+import { IPaginationScheme, IQuiz } from "src/pages/quizzes/providers/quiz.service";
 
-export const selectFeature = createFeatureSelector<IQuizzesState>('quizzes');
+export const selectFeature = createFeatureSelector<IQuizzesState<IQuiz>>('quizzes');
 
-export const selectQuizzes = createSelector(selectFeature, (state: IQuizzesState): IQuiz[] => state.quizzes);
-export const selectIsLoading = createSelector(selectFeature, (state: IQuizzesState): boolean => state.isLoading);
-export const selectError = createSelector(selectFeature, (state: IQuizzesState): string | null => state.error);
+export const selectQuizzes = createSelector(selectFeature, ({ quizzes }: IQuizzesState<IQuiz>): IQuiz[] => quizzes.data);
+export const selectIsLoadingQuizzes = createSelector(selectFeature, ({ quizzes }: IQuizzesState<IQuiz>): boolean => quizzes.isLoading);
+export const selectErrorQuizzes = createSelector(selectFeature, ({ quizzes }: IQuizzesState<IQuiz>): string | null => quizzes.error);
+
+export const selectPaginationQuizzes = createSelector(selectFeature, ({ pagination }: IQuizzesState<IQuiz>): IPaginationScheme<IQuiz> => pagination.data);
+export const selectIsLoadingPaginationQuizzes = createSelector(selectFeature, ({ pagination }: IQuizzesState<IQuiz>): boolean => pagination.isLoading);
+export const selectErrorPaginationQuizzes = createSelector(selectFeature, ({ pagination }: IQuizzesState<IQuiz>): string | null => pagination.error);
