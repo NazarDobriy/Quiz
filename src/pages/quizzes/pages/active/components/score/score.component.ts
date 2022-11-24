@@ -22,13 +22,13 @@ export class ScoreComponent implements OnInit {
     subtitle: ''
   };
 
-  public quizzes$: Observable<IQuiz[]> = of([]);
-  public isLoadingQuizzes$: Observable<boolean> = of(true);
-  public quizzesError$: Observable<string | null> = of(null);
+  public quizzes$: Observable<IQuiz[]> = this.storeService.quizzes$;
+  public isLoadingQuizzes$: Observable<boolean> = this.storeService.isLoadingQuizzes$;
+  public quizzesError$: Observable<string | null> = this.storeService.quizzesError$;
 
-  public quizzesResults$: Observable<IQuizResult[]> = of([]);
-  public isLoadingQuizzesResults$: Observable<boolean> = of(true);
-  public quizzesResultsError$: Observable<string | null> = of(null);
+  public quizzesResults$: Observable<IQuizResult[]> = this.storeService.quizzesResults$;
+  public isLoadingQuizzesResults$: Observable<boolean> = this.storeService.isLoadingQuizzesResults$;
+  public quizzesResultsError$: Observable<string | null> = this.storeService.quizzesResultsError$;
 
   public currentQuizAnswers: IQuizResult = {
     answersLength: 0,
@@ -48,8 +48,8 @@ export class ScoreComponent implements OnInit {
     this.quizId = parseInt(this.activatedRoute.snapshot.params['id']);
 
     if (this.platformService.isBrowser) {
-      this.handleQuizzes();
-      this.handlePassedQuizzes();
+      this.storeService.getQuizzes();
+      this.storeService.getQuizzesResults();
       this.setQuizById();
       this.setQuizAnswersById();
     }
@@ -66,20 +66,6 @@ export class ScoreComponent implements OnInit {
       this.currentQuizAnswers = tempQuizAnswers;
     }
     this.isLoadingQuizAnswers = false;
-  }
-
-  private handleQuizzes(): void {
-    this.isLoadingQuizzes$ = this.storeService.isLoadingQuizzes$;
-    this.quizzesError$ = this.storeService.quizzesError$;
-    this.quizzes$ = this.storeService.quizzes$;
-    this.storeService.getQuizzes();
-  }
-
-  private handlePassedQuizzes(): void {
-    this.isLoadingQuizzesResults$ = this.storeService.isLoadingQuizzesResults$;
-    this.quizzesResultsError$ = this.storeService.quizzesResultsError$;
-    this.quizzesResults$ = this.storeService.quizzesResults$;
-    this.storeService.getQuizzesResults();
   }
 
   private async hasQuizAnswers(route: ActivatedRouteSnapshot): Promise<boolean> {
