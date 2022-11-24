@@ -76,7 +76,7 @@ export const quizzesReducer = createReducer(
       ...state,
       results: {
         ...state.results,
-        date: action.results,
+        data: action.results,
         isLoading: false
       }
     }

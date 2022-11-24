@@ -13,6 +13,6 @@ export const selectPaginationQuizzes = createSelector(selectFeature, ({ paginati
 export const selectIsLoadingPaginationQuizzes = createSelector(selectFeature, ({ pagination }: IQuizzesState<IQuiz>): boolean => pagination.isLoading);
 export const selectErrorPaginationQuizzes = createSelector(selectFeature, ({ pagination }: IQuizzesState<IQuiz>): string | null => pagination.error);
 
-export const selectQuizzesResults = createSelector(selectFeature, ({ results }: IQuizzesState<IQuiz>): IQuizResult[] => results.date);
+export const selectQuizzesResults = createSelector(selectFeature, ({ results }: IQuizzesState<IQuiz>): IQuizResult[] => results.data);
 export const selectIsLoadingQuizzesResults = createSelector(selectFeature, ({ results }: IQuizzesState<IQuiz>): boolean => results.isLoading);
 export const selectErrorQuizzesResults = createSelector(selectFeature, ({ results }: IQuizzesState<IQuiz>): string | null => results.error);

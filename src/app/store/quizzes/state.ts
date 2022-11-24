@@ -13,7 +13,7 @@ export interface IQuizzesState<T> {
   },
   results: {
     isLoading: boolean;
-    date: IQuizResult[],
+    data: IQuizResult[],
     error: string | null;
   }
 }
@@ -36,7 +36,7 @@ export const quizzesInitialState: IQuizzesState<IQuiz> = {
   },
   results: {
     isLoading: false,
-    date: [],
+    data: [],
     error: null
   }
 }
