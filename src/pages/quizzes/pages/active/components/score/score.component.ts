@@ -72,7 +72,7 @@ export class ScoreComponent implements OnInit {
     this.isLoadingQuizzes$ = this.storeService.isLoadingQuizzes$;
     this.quizzesError$ = this.storeService.quizzesError$;
     this.quizzes$ = this.storeService.quizzes$;
-    this.storeService.getQuizzesResults();
+    this.storeService.getQuizzes();
   }
 
   private handlePassedQuizzes(): void {
