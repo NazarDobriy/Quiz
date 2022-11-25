@@ -97,7 +97,7 @@ describe('QuizService', () => {
 
   it('should get only passed quizzes', (done: DoneFn) => {
     mockQuizzesApiService.getQuizzesResults.and.returnValue(Promise.resolve(mockQuizResults));
-    service.getPassedQuizzes().then((quizResults: IQuizResult[]) => {
+    service.getQuizzesResults().then((quizResults: IQuizResult[]) => {
       expect(quizResults).toEqual(mockQuizResults);
       expect(quizResults.length).toBe(mockQuizResults.length);
       done();
