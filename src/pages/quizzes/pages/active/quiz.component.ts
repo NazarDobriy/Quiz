@@ -9,6 +9,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { SnackBarService } from './providers/snack-bar.service';
 import { PlatformService } from 'src/core/providers/platform.service';
+import { QuizStoreService } from 'src/core/providers/quiz-store.service';
 
 @Component({
   selector: 'app-quiz',
@@ -42,6 +43,7 @@ export class QuizComponent implements OnInit {
   public quizId: number = 0;
   public questionIndex: number = 0;
   public timeStart!: Date;
+  public isLoadingThemes: boolean = true;
 
   public personsIcons = {
     Mili: 'mili',
@@ -49,9 +51,11 @@ export class QuizComponent implements OnInit {
     Steven: 'steven'
   };
 
-  private isLoadingThemes: boolean = true;
-  private isLoadingQuiz: boolean = true;
   private userAnswersIds: string[] = [];
+
+  public quiz$: Observable<IQuiz> = this.quizStoreService.quiz$;
+  public isLoadingQuiz$: Observable<boolean> = this.quizStoreService.isLoadingQuiz$;
+  public quizError$: Observable<string | null> = this.quizStoreService.quizError$;
 
   @HostListener('window:beforeunload')
   public beforeunloadHandler(): boolean {
@@ -64,14 +68,16 @@ export class QuizComponent implements OnInit {
     private themeService: ThemeService,
     private dialogService: DialogService,
     private snackBarService: SnackBarService,
-    private platformService: PlatformService
+    private platformService: PlatformService,
+    private quizStoreService: QuizStoreService
   ) { }
 
   ngOnInit(): void {
     this.timeStart = new Date();
     this.quizId = parseInt(this.activatedRoute.snapshot.params['id']);
     if (this.platformService.isBrowser) {
-      this.setQuizById();
+      this.quizStoreService.getQuiz(this.quizId);
+      this.quiz$.subscribe(quiz => this.currentQuiz = quiz);
       this.setTheme();
     }
   }
@@ -110,10 +116,6 @@ export class QuizComponent implements OnInit {
     return this.questionIndex + 1 === this.currentQuiz?.questions.length;
   }
 
-  get isLoading(): boolean {
-    return this.isLoadingQuiz && this.isLoadingThemes;
-  }
-
   private findUnansweredQuestionIndex(): number | null {
     for (let i = 0; i < this.currentQuiz.questions.length; i++) {
       if (this.userAnswersIds[i] === undefined) {
@@ -127,11 +129,6 @@ export class QuizComponent implements OnInit {
     await this.themeService.setThemes();
     this.quizTheme = this.themeService.getThemeByText(this.currentQuiz.subtitle);
     this.isLoadingThemes = false;
-  }
-
-  private async setQuizById(): Promise<void> {
-    this.currentQuiz = await this.quizService.getQuizById(this.quizId);
-    this.isLoadingQuiz = false;
   }
 
   public handleNextQuestion(): void {
