@@ -7,7 +7,7 @@ import * as QuizzesSelectors from '../../pages/quizzes/store/quizzes/selectors';
 import { IPaginationScheme, IQuiz, IQuizResult } from 'src/pages/quizzes/providers/quiz.service';
 
 @Injectable()
-export class StoreService {
+export class QuizzesStoreService {
   public quizzes$: Observable<IQuiz[]> = this.store.select(QuizzesSelectors.selectQuizzes);
   public quizzesError$: Observable<string | null> = this.store.select(QuizzesSelectors.selectErrorQuizzes);
   public isLoadingQuizzes$: Observable<boolean> = this.store.select(QuizzesSelectors.selectIsLoadingQuizzes);

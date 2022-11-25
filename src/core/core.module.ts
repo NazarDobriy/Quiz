@@ -4,7 +4,7 @@ import { UserService } from './providers/user.service';
 import { LocalStorageService } from './providers/local-storage.service';
 import { CommonModule } from '@angular/common';
 import { PlatformService } from './providers/platform.service';
-import { StoreService } from './providers/store.service';
+import { QuizzesStoreService } from './providers/quizzes-store.service';
 
 
 @NgModule({
@@ -21,7 +21,7 @@ import { StoreService } from './providers/store.service';
     UserService,
     LocalStorageService,
     PlatformService,
-    StoreService
+    QuizzesStoreService
   ]
 })
 export class CoreModule { }

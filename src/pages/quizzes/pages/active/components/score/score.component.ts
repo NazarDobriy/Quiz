@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ActivatedRouteSnapshot, Router, UrlTree } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { PlatformService } from 'src/core/providers/platform.service';
-import { StoreService } from 'src/core/providers/store.service';
+import { QuizzesStoreService } from 'src/core/providers/quizzes-store.service';
 import { IQuiz, IQuizResult, QuizService } from 'src/pages/quizzes/providers/quiz.service';
 
 @Component({
@@ -22,13 +22,13 @@ export class ScoreComponent implements OnInit {
     subtitle: ''
   };
 
-  public quizzes$: Observable<IQuiz[]> = this.storeService.quizzes$;
-  public isLoadingQuizzes$: Observable<boolean> = this.storeService.isLoadingQuizzes$;
-  public quizzesError$: Observable<string | null> = this.storeService.quizzesError$;
+  public quizzes$: Observable<IQuiz[]> = this.quizzesStoreService.quizzes$;
+  public isLoadingQuizzes$: Observable<boolean> = this.quizzesStoreService.isLoadingQuizzes$;
+  public quizzesError$: Observable<string | null> = this.quizzesStoreService.quizzesError$;
 
-  public quizzesResults$: Observable<IQuizResult[]> = this.storeService.quizzesResults$;
-  public isLoadingQuizzesResults$: Observable<boolean> = this.storeService.isLoadingQuizzesResults$;
-  public quizzesResultsError$: Observable<string | null> = this.storeService.quizzesResultsError$;
+  public quizzesResults$: Observable<IQuizResult[]> = this.quizzesStoreService.quizzesResults$;
+  public isLoadingQuizzesResults$: Observable<boolean> = this.quizzesStoreService.isLoadingQuizzesResults$;
+  public quizzesResultsError$: Observable<string | null> = this.quizzesStoreService.quizzesResultsError$;
 
   public currentQuizAnswers: IQuizResult = {
     answersLength: 0,
@@ -39,7 +39,7 @@ export class ScoreComponent implements OnInit {
   constructor(
     private router: Router,
     private quizService: QuizService,
-    private storeService: StoreService,
+    private quizzesStoreService: QuizzesStoreService,
     private activatedRoute: ActivatedRoute,
     private platformService: PlatformService
   ) { }
@@ -48,8 +48,8 @@ export class ScoreComponent implements OnInit {
     this.quizId = parseInt(this.activatedRoute.snapshot.params['id']);
 
     if (this.platformService.isBrowser) {
-      this.storeService.getQuizzes();
-      this.storeService.getQuizzesResults();
+      this.quizzesStoreService.getQuizzes();
+      this.quizzesStoreService.getQuizzesResults();
       this.setQuizById();
       this.setQuizAnswersById();
     }
