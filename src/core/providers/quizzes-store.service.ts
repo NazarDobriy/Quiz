@@ -31,6 +31,6 @@ export class QuizzesStoreService {
   }
 
   public getPaginationQuizzes(offset: number, count: number): void {
-    this.store.dispatch(QuizzesActions.getPaginationQuizzes({ offset: offset, count: count}));
+    this.store.dispatch(QuizzesActions.getPaginationQuizzes({ offset, count}));
   }
 }
