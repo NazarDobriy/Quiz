@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ActivatedRouteSnapshot, Router, UrlTree } from '@angular/router';
-import { Observable } from 'rxjs';
+import { merge, Observable, of } from 'rxjs';
 import { PlatformService } from 'src/core/providers/platform.service';
 import { QuizStoreService } from 'src/core/providers/quiz-store.service';
 import { QuizzesStoreService } from 'src/core/providers/quizzes-store.service';
@@ -14,6 +14,7 @@ export class ScoreComponent implements OnInit {
   private quizId: number = 0;
 
   public isLoadingQuizAnswers: boolean = true;
+  public isLoadingQuizResult$: Observable<boolean> = this.quizStoreService.isLoadingQuizResult$;
 
   public quizQuestionsLength$: Observable<number> = this.quizStoreService.quizQuestionsLength$;
   public isLoadingQuiz$: Observable<boolean> = this.quizStoreService.isLoadingQuiz$;
@@ -54,17 +55,11 @@ export class ScoreComponent implements OnInit {
   }
 
   private async setQuizAnswersById(): Promise<void> {
-    const tempQuizAnswers: IQuizResult | null = await this.quizService.getQuizAnswersById(this.quizId);
+    const tempQuizAnswers: IQuizResult | null = await this.quizService.getQuizResultById(this.quizId);
     if (tempQuizAnswers) {
       this.currentQuizAnswers = tempQuizAnswers;
     }
     this.isLoadingQuizAnswers = false;
-  }
-
-  private async hasQuizAnswers(route: ActivatedRouteSnapshot): Promise<boolean> {
-    const quizId: number = parseInt(route.params['id']);
-    const quizResult: IQuizResult | null = await this.quizService.getQuizAnswersById(quizId);
-    return !!quizResult;
   }
 
   get durationSeconds(): number {
@@ -79,11 +74,16 @@ export class ScoreComponent implements OnInit {
     return this.currentQuizAnswers.correct;
   }
 
-  async canActivate(route: ActivatedRouteSnapshot): Promise<boolean | UrlTree> {
+  canActivate(route: ActivatedRouteSnapshot): Observable<boolean | UrlTree> {
+    const quizId: number = parseInt(route.params['id']);
     if (this.platformService.isBrowser) {
-      return (await this.hasQuizAnswers(route)) || this.router.createUrlTree(['/']);
+      this.quizStoreService.getQuizResult(quizId);
+      return merge(
+        this.isLoadingQuizResult$,
+        of(this.router.createUrlTree(['/']))
+      );
     }
-    return true;
+    return of(true);
   }
 
 }
