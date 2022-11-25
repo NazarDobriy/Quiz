@@ -4,7 +4,7 @@ import { merge, Observable, of } from 'rxjs';
 import { PlatformService } from 'src/core/providers/platform.service';
 import { QuizStoreService } from 'src/core/providers/quiz-store.service';
 import { QuizzesStoreService } from 'src/core/providers/quizzes-store.service';
-import { IQuiz, IQuizResult, QuizService } from 'src/pages/quizzes/providers/quiz.service';
+import { IQuiz, IQuizResult } from 'src/pages/quizzes/providers/quiz.service';
 
 @Component({
   selector: 'app-score',
@@ -13,12 +13,13 @@ import { IQuiz, IQuizResult, QuizService } from 'src/pages/quizzes/providers/qui
 export class ScoreComponent implements OnInit {
   private quizId: number = 0;
 
-  public isLoadingQuizAnswers: boolean = true;
-  public isLoadingQuizResult$: Observable<boolean> = this.quizStoreService.isLoadingQuizResult$;
-
   public quizQuestionsLength$: Observable<number> = this.quizStoreService.quizQuestionsLength$;
   public isLoadingQuiz$: Observable<boolean> = this.quizStoreService.isLoadingQuiz$;
   public quizError$: Observable<string | null> = this.quizStoreService.quizError$;
+
+  public quizResult$: Observable<IQuizResult | null> = this.quizStoreService.quizResult$;
+  public isLoadingQuizResult$: Observable<boolean> = this.quizStoreService.isLoadingQuizResult$;
+  public quizResultError$: Observable<string | null> = this.quizStoreService.quizResultError$;
 
   public quizzes$: Observable<IQuiz[]> = this.quizzesStoreService.quizzes$;
   public isLoadingQuizzes$: Observable<boolean> = this.quizzesStoreService.isLoadingQuizzes$;
@@ -28,7 +29,7 @@ export class ScoreComponent implements OnInit {
   public isLoadingQuizzesResults$: Observable<boolean> = this.quizzesStoreService.isLoadingQuizzesResults$;
   public quizzesResultsError$: Observable<string | null> = this.quizzesStoreService.quizzesResultsError$;
 
-  public currentQuizAnswers: IQuizResult = {
+  public currentQuizResult: IQuizResult = {
     answersLength: 0,
     correct: 0,
     seconds: 0
@@ -36,7 +37,6 @@ export class ScoreComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private quizService: QuizService,
     private quizStoreService: QuizStoreService,
     private quizzesStoreService: QuizzesStoreService,
     private activatedRoute: ActivatedRoute,
@@ -48,30 +48,31 @@ export class ScoreComponent implements OnInit {
 
     if (this.platformService.isBrowser) {
       this.quizStoreService.getQuiz(this.quizId);
+      this.quizStoreService.getQuizResult(this.quizId);
       this.quizzesStoreService.getQuizzes();
       this.quizzesStoreService.getQuizzesResults();
-      this.setQuizAnswersById();
+      this.listenQuizResult();
     }
   }
 
-  private async setQuizAnswersById(): Promise<void> {
-    const tempQuizAnswers: IQuizResult | null = await this.quizService.getQuizResultById(this.quizId);
-    if (tempQuizAnswers) {
-      this.currentQuizAnswers = tempQuizAnswers;
-    }
-    this.isLoadingQuizAnswers = false;
+  private listenQuizResult(): void {
+    this.quizResult$.subscribe(quizResult => {
+      if (quizResult) {
+        this.currentQuizResult = quizResult;
+      }
+    });
   }
 
   get durationSeconds(): number {
-    return this.currentQuizAnswers.seconds;
+    return this.currentQuizResult.seconds;
   }
 
   get durationMinutes(): number {
-    return Math.floor(this.currentQuizAnswers.seconds / 60);
+    return Math.floor(this.currentQuizResult.seconds / 60);
   }
 
   get score(): number {
-    return this.currentQuizAnswers.correct;
+    return this.currentQuizResult.correct;
   }
 
   canActivate(route: ActivatedRouteSnapshot): Observable<boolean | UrlTree> {
