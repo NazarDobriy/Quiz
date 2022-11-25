@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { map, Observable } from 'rxjs';
 
-import { IQuiz } from 'src/pages/quizzes/providers/quiz.service';
+import { IQuiz, IQuizResult } from 'src/pages/quizzes/providers/quiz.service';
 import * as QuizActions from '../../pages/quizzes/store/quiz/actions';
 import * as QuizSelectors from '../../pages/quizzes/store/quiz/selectors';
 
@@ -13,9 +13,17 @@ export class QuizStoreService {
   public isLoadingQuiz$: Observable<boolean> = this.store.select(QuizSelectors.selectIsLoadingQuiz);
   public quizQuestionsLength$: Observable<number> = this.store.select(QuizSelectors.selectQuizQuestionsLength);
 
+  public quizResult$: Observable<IQuizResult | null> = this.store.select(QuizSelectors.selectQuizResult);
+  public quizResultError$: Observable<string | null> = this.store.select(QuizSelectors.selectErrorQuizResult);
+  public isLoadingQuizResult$: Observable<boolean> = this.store.select(QuizSelectors.selectIsLoadingQuizResult);
+
   constructor(private store: Store) { }
 
   public getQuiz(id: number): void {
     this.store.dispatch(QuizActions.getQuiz({ id }));
+  }
+
+  public getQuizResult(id: number): void {
+    this.store.dispatch(QuizActions.getQuizResult({ id }));
   }
 }

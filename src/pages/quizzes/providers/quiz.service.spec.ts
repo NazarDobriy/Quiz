@@ -23,7 +23,7 @@ describe('QuizService', () => {
       'getPaginatedQuizzes',
       'getQuizzesResults',
       'getQuizById',
-      'getQuizAnswersById',
+      'getQuizResultById',
       'setQuizAnswers',
     ]);
     mockRouter = jasmine.createSpyObj(['navigateByUrl']);
@@ -56,7 +56,7 @@ describe('QuizService', () => {
     mockQuizzesApiService.getPaginatedQuizzes.calls.reset();
     mockQuizzesApiService.getQuizzesResults.calls.reset();
     mockQuizzesApiService.getQuizById.calls.reset();
-    mockQuizzesApiService.getQuizAnswersById.calls.reset();
+    mockQuizzesApiService.getQuizResultById.calls.reset();
     mockQuizzesApiService.setQuizAnswers.calls.reset();
 
     mockRouter.navigateByUrl.calls.reset();
@@ -114,8 +114,8 @@ describe('QuizService', () => {
   });
 
   it('should get quiz answers by id', (done: DoneFn) => {
-    mockQuizzesApiService.getQuizAnswersById.and.returnValue(Promise.resolve(mockQuizResults[id]));
-    service.getQuizAnswersById(id).then((quizResult: IQuizResult | null) => {
+    mockQuizzesApiService.getQuizResultById.and.returnValue(Promise.resolve(mockQuizResults[id]));
+    service.getQuizResultById(id).then((quizResult: IQuizResult | null) => {
       expect(quizResult).toEqual(mockQuizResults[id]);
       done();
     });

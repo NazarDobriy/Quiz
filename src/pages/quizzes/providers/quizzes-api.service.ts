@@ -62,7 +62,7 @@ export class QuizzesApiService {
     }
   }
 
-  public getQuizAnswersById(id: number): Promise<IQuizResult | null> {
+  public getQuizResultById(id: number): Promise<IQuizResult | null> {
     return firstValueFrom(this.db.object<IQuizResult>(`quiz_answers/${this.userService.id}/${id}`).valueChanges());
   }
 

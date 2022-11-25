@@ -32,5 +32,33 @@ export const quizReducer = createReducer(
         error: action.error
       }
     };
+  }),
+  on(QuizActions.getQuizResult, (state): IQuizState => {
+    return {
+      ...state,
+      result: {
+        ...state.result,
+        isLoading: true
+      }
+    };
+  }),
+  on(QuizActions.getQuizResultSuccess, (state, action): IQuizState => {
+    return {
+      ...state,
+      result: {
+        ...state.result,
+        isLoading: false,
+        data: action.result
+      }
+    };
+  }),
+  on(QuizActions.getQuizResultFailure, (state, action): IQuizState => {
+    return {
+      ...state,
+      result: {
+        ...state.result,
+        error: action.error
+      }
+    };
   })
 );

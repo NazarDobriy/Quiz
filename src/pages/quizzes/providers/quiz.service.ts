@@ -60,8 +60,8 @@ export class QuizService {
     return this.quizzesApiService.getQuizById(id);
   }
 
-  public getQuizAnswersById(id: number): Promise<IQuizResult | null> {
-    return this.quizzesApiService.getQuizAnswersById(id);
+  public getQuizResultById(id: number): Promise<IQuizResult | null> {
+    return this.quizzesApiService.getQuizResultById(id);
   }
 
   public finishQuiz(quiz: IQuiz, answers: string[], duration: Duration): void {

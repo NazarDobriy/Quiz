@@ -127,7 +127,7 @@ describe('ApiService', () => {
       }
     } as AngularFireObject<IQuizResult>);
 
-    service.getQuizAnswersById(id).then((quizResult: IQuizResult | null) => {
+    service.getQuizResultById(id).then((quizResult: IQuizResult | null) => {
       expect(quizResult).toEqual(mockQuizResults[id]);
       done();
     });

@@ -1,9 +1,14 @@
-import { IQuiz } from "src/pages/quizzes/providers/quiz.service";
+import { IQuiz, IQuizResult } from "src/pages/quizzes/providers/quiz.service";
 
 export interface IQuizState {
   quiz: {
     isLoading: boolean;
     data: IQuiz;
+    error: string | null;
+  },
+  result: {
+    isLoading: boolean;
+    data: IQuizResult | null;
     error: string | null;
   }
 }
@@ -18,6 +23,11 @@ export const quizInitialState: IQuizState = {
       group: '',
       questions: []
     },
+    error: null
+  },
+  result: {
+    isLoading: false,
+    data: null,
     error: null
   }
 }
