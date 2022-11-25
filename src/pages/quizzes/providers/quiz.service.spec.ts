@@ -21,7 +21,7 @@ describe('QuizService', () => {
     mockQuizzesApiService = jasmine.createSpyObj([
       'getAllQuizzes',
       'getPaginatedQuizzes',
-      'getAllPassedQuizzes',
+      'getQuizzesResults',
       'getQuizById',
       'getQuizAnswersById',
       'setQuizAnswers',
@@ -54,7 +54,7 @@ describe('QuizService', () => {
 
     mockQuizzesApiService.getAllQuizzes.calls.reset();
     mockQuizzesApiService.getPaginatedQuizzes.calls.reset();
-    mockQuizzesApiService.getAllPassedQuizzes.calls.reset();
+    mockQuizzesApiService.getQuizzesResults.calls.reset();
     mockQuizzesApiService.getQuizById.calls.reset();
     mockQuizzesApiService.getQuizAnswersById.calls.reset();
     mockQuizzesApiService.setQuizAnswers.calls.reset();
@@ -96,7 +96,7 @@ describe('QuizService', () => {
   });
 
   it('should get only passed quizzes', (done: DoneFn) => {
-    mockQuizzesApiService.getAllPassedQuizzes.and.returnValue(Promise.resolve(mockQuizResults));
+    mockQuizzesApiService.getQuizzesResults.and.returnValue(Promise.resolve(mockQuizResults));
     service.getPassedQuizzes().then((quizResults: IQuizResult[]) => {
       expect(quizResults).toEqual(mockQuizResults);
       expect(quizResults.length).toBe(mockQuizResults.length);

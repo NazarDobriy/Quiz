@@ -111,7 +111,7 @@ describe('ApiService', () => {
       }
     } as AngularFireList<IQuizResult>);
 
-    service.getAllPassedQuizzes().then((quizResults: IQuizResult[]) => {
+    service.getQuizzesResults().then((quizResults: IQuizResult[]) => {
       expect(quizResults).toEqual(mockQuizResults);
       expect(quizResults.length).toBe(mockQuizResults.length);
       done();
