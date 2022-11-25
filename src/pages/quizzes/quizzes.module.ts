@@ -8,6 +8,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { QuizzesApiService } from './providers/quizzes-api.service';
 import { EffectsModule } from '@ngrx/effects';
 import { QuizzesEffects } from './store/quizzes/effects';
+import { QuizEffects } from './store/quiz/effects';
 
 const routes: Routes = [
   {
@@ -25,7 +26,7 @@ const routes: Routes = [
     QuizListModule,
     ActiveQuizModule,
     RouterModule.forChild(routes),
-    EffectsModule.forFeature([QuizzesEffects])
+    EffectsModule.forFeature([QuizzesEffects, QuizEffects])
   ],
   providers: [
     QuizService,

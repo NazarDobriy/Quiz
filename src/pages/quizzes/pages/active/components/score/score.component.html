@@ -1,4 +1,4 @@
-<ng-container *ngIf="isLoading || (isLoadingQuizzes$ | async) || (isLoadingQuizzesResults$ | async); else content"></ng-container>
+<ng-container *ngIf="isLoadingQuizAnswers || (isLoadingQuiz$ | async) || (isLoadingQuizzes$ | async) || (isLoadingQuizzesResults$ | async); else content"></ng-container>
 
 <ng-template #content>
 
@@ -11,7 +11,7 @@
       <div class="mt-9">
         <app-score-counter
           [counter]="score"
-          [limit]="questionsLength"
+          [limit]="(quizQuestionsLength$ | async) || 0"
         >
         </app-score-counter>
       </div>

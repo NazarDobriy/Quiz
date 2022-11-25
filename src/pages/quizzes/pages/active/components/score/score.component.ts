@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ActivatedRouteSnapshot, Router, UrlTree } from '@angular/router';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { PlatformService } from 'src/core/providers/platform.service';
+import { QuizStoreService } from 'src/core/providers/quiz-store.service';
 import { QuizzesStoreService } from 'src/core/providers/quizzes-store.service';
 import { IQuiz, IQuizResult, QuizService } from 'src/pages/quizzes/providers/quiz.service';
 
@@ -11,16 +12,12 @@ import { IQuiz, IQuizResult, QuizService } from 'src/pages/quizzes/providers/qui
 })
 export class ScoreComponent implements OnInit {
   private quizId: number = 0;
-  private isLoadingQuiz: boolean = true;
-  private isLoadingQuizAnswers: boolean = true;
 
-  private currentQuiz: IQuiz = {
-    group: '',
-    questions: [],
-    id: 0,
-    title: '',
-    subtitle: ''
-  };
+  public isLoadingQuizAnswers: boolean = true;
+
+  public quizQuestionsLength$: Observable<number> = this.quizStoreService.quizQuestionsLength$;
+  public isLoadingQuiz$: Observable<boolean> = this.quizStoreService.isLoadingQuiz$;
+  public quizError$: Observable<string | null> = this.quizStoreService.quizError$;
 
   public quizzes$: Observable<IQuiz[]> = this.quizzesStoreService.quizzes$;
   public isLoadingQuizzes$: Observable<boolean> = this.quizzesStoreService.isLoadingQuizzes$;
@@ -39,6 +36,7 @@ export class ScoreComponent implements OnInit {
   constructor(
     private router: Router,
     private quizService: QuizService,
+    private quizStoreService: QuizStoreService,
     private quizzesStoreService: QuizzesStoreService,
     private activatedRoute: ActivatedRoute,
     private platformService: PlatformService
@@ -48,16 +46,11 @@ export class ScoreComponent implements OnInit {
     this.quizId = parseInt(this.activatedRoute.snapshot.params['id']);
 
     if (this.platformService.isBrowser) {
+      this.quizStoreService.getQuiz(this.quizId);
       this.quizzesStoreService.getQuizzes();
       this.quizzesStoreService.getQuizzesResults();
-      this.setQuizById();
       this.setQuizAnswersById();
     }
-  }
-
-  private async setQuizById(): Promise<void> {
-    this.currentQuiz = await this.quizService.getQuizById(this.quizId);
-    this.isLoadingQuiz = false;
   }
 
   private async setQuizAnswersById(): Promise<void> {
@@ -72,14 +65,6 @@ export class ScoreComponent implements OnInit {
     const quizId: number = parseInt(route.params['id']);
     const quizResult: IQuizResult | null = await this.quizService.getQuizAnswersById(quizId);
     return !!quizResult;
-  }
-
-  get questionsLength(): number {
-    return this.currentQuiz.questions.length;
-  }
-
-  get isLoading(): boolean {
-    return this.isLoadingQuiz || this.isLoadingQuizAnswers;
   }
 
   get durationSeconds(): number {

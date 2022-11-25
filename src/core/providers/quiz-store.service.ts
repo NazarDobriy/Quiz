@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 import { IQuiz } from 'src/pages/quizzes/providers/quiz.service';
 import * as QuizActions from '../../pages/quizzes/store/quiz/actions';
@@ -11,6 +11,7 @@ export class QuizStoreService {
   public quiz$: Observable<IQuiz> = this.store.select(QuizSelectors.selectQuiz);
   public quizError$: Observable<string | null> = this.store.select(QuizSelectors.selectErrorQuiz);
   public isLoadingQuiz$: Observable<boolean> = this.store.select(QuizSelectors.selectIsLoadingQuiz);
+  public quizQuestionsLength$: Observable<number> = this.store.select(QuizSelectors.selectQuizQuestionsLength);
 
   constructor(private store: Store) { }
 
