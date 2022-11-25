@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ActivatedRouteSnapshot, Router, UrlTree } from '@angular/router';
-import { merge, Observable, of } from 'rxjs';
+import { combineLatest, map, merge, Observable, of } from 'rxjs';
 import { PlatformService } from 'src/core/providers/platform.service';
 import { QuizStoreService } from 'src/core/providers/quiz-store.service';
 import { QuizzesStoreService } from 'src/core/providers/quizzes-store.service';
@@ -28,6 +28,13 @@ export class ScoreComponent implements OnInit {
   public quizzesResults$: Observable<IQuizResult[]> = this.quizzesStoreService.quizzesResults$;
   public isLoadingQuizzesResults$: Observable<boolean> = this.quizzesStoreService.isLoadingQuizzesResults$;
   public quizzesResultsError$: Observable<string | null> = this.quizzesStoreService.quizzesResultsError$;
+
+  public isLoading$: Observable<boolean> = combineLatest([
+    this.isLoadingQuiz$,
+    this.isLoadingQuizResult$,
+    this.isLoadingQuizzes$,
+    this.isLoadingQuizzesResults$
+  ]).pipe(map(item => item[0] || item[1] || item[2] || item[3]));
 
   public currentQuizResult: IQuizResult = {
     answersLength: 0,

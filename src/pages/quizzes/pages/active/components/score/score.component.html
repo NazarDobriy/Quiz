@@ -1,4 +1,4 @@
-<ng-container *ngIf="(isLoadingQuizResult$ | async) || (isLoadingQuiz$ | async) || (isLoadingQuizzes$ | async) || (isLoadingQuizzesResults$ | async); else content"></ng-container>
+<ng-container *ngIf="isLoading$ | async; else content"></ng-container>
 
 <ng-template #content>
 
