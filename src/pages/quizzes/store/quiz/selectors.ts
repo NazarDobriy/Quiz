@@ -5,6 +5,6 @@ import { IQuiz } from "src/pages/quizzes/providers/quiz.service";
 
 export const selectFeature = createFeatureSelector<IQuizState>('quiz');
 
-export const selectQuizzes = createSelector(selectFeature, ({ quiz }: IQuizState): IQuiz => quiz.data);
-export const selectIsLoadingQuizzes = createSelector(selectFeature, ({ quiz }: IQuizState): boolean => quiz.isLoading);
-export const selectErrorQuizzes = createSelector(selectFeature, ({ quiz }: IQuizState): string | null => quiz.error);
+export const selectQuiz = createSelector(selectFeature, ({ quiz }: IQuizState): IQuiz => quiz.data);
+export const selectIsLoadingQuiz = createSelector(selectFeature, ({ quiz }: IQuizState): boolean => quiz.isLoading);
+export const selectErrorQuiz = createSelector(selectFeature, ({ quiz }: IQuizState): string | null => quiz.error);
