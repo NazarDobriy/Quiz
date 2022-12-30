@@ -11,10 +11,7 @@ export class QuizzesStoreService {
   public quizzes$: Observable<IQuiz[]> = this.store.select(QuizzesSelectors.selectQuizzes);
   public quizzesError$: Observable<string | null> = this.store.select(QuizzesSelectors.selectErrorQuizzes);
   public isLoadingQuizzes$: Observable<boolean> = this.store.select(QuizzesSelectors.selectIsLoadingQuizzes);
-
-  public paginationQuizzes$: Observable<IPaginationScheme<IQuiz>> = this.store.select(QuizzesSelectors.selectPaginationQuizzes);
-  public paginationQuizzesError$: Observable<string | null> = this.store.select(QuizzesSelectors.selectErrorPaginationQuizzes);
-  public isLoadingPaginationQuizzes$: Observable<boolean> = this.store.select(QuizzesSelectors.selectIsLoadingPaginationQuizzes);
+  public quizzesScheme$: Observable<IPaginationScheme<IQuiz>> = this.store.select(QuizzesSelectors.selectQuizzesScheme);
 
   public quizzesResults$: Observable<IQuizResult[]> = this.store.select(QuizzesSelectors.selectQuizzesResults);
   public quizzesResultsError$: Observable<string | null> = this.store.select(QuizzesSelectors.selectErrorQuizzesResults);
@@ -30,7 +27,7 @@ export class QuizzesStoreService {
     this.store.dispatch(QuizzesActions.getQuizzesResults());
   }
 
-  public getPaginationQuizzes(offset: number, count: number): void {
-    this.store.dispatch(QuizzesActions.getPaginationQuizzes({ offset, count}));
+  public getQuizzesScheme(offset: number, count: number): void {
+    this.store.dispatch(QuizzesActions.getQuizzesScheme({ offset, count}));
   }
 }
