@@ -5,11 +5,7 @@ export interface IQuizzesState<T> {
     isLoading: boolean;
     data: IQuiz[];
     error: string | null;
-  },
-  pagination: {
-    isLoading: boolean;
-    data: IPaginationScheme<T>;
-    error: string | null;
+    scheme: IPaginationScheme<T>;
   },
   results: {
     isLoading: boolean;
@@ -22,17 +18,13 @@ export const quizzesInitialState: IQuizzesState<IQuiz> = {
   quizzes: {
     data: [],
     isLoading: false,
-    error: null
-  },
-  pagination: {
-    data: {
+    error: null,
+    scheme: {
       count: 0,
       offset: 0,
       total: 0,
       data: []
-    },
-    isLoading: false,
-    error: null
+    }
   },
   results: {
     isLoading: false,

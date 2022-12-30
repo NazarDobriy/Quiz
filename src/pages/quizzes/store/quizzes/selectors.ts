@@ -8,10 +8,7 @@ export const selectFeature = createFeatureSelector<IQuizzesState<IQuiz>>('quizze
 export const selectQuizzes = createSelector(selectFeature, ({ quizzes }: IQuizzesState<IQuiz>): IQuiz[] => quizzes.data);
 export const selectIsLoadingQuizzes = createSelector(selectFeature, ({ quizzes }: IQuizzesState<IQuiz>): boolean => quizzes.isLoading);
 export const selectErrorQuizzes = createSelector(selectFeature, ({ quizzes }: IQuizzesState<IQuiz>): string | null => quizzes.error);
-
-export const selectPaginationQuizzes = createSelector(selectFeature, ({ pagination }: IQuizzesState<IQuiz>): IPaginationScheme<IQuiz> => pagination.data);
-export const selectIsLoadingPaginationQuizzes = createSelector(selectFeature, ({ pagination }: IQuizzesState<IQuiz>): boolean => pagination.isLoading);
-export const selectErrorPaginationQuizzes = createSelector(selectFeature, ({ pagination }: IQuizzesState<IQuiz>): string | null => pagination.error);
+export const selectQuizzesScheme = createSelector(selectFeature, ({ quizzes }: IQuizzesState<IQuiz>): IPaginationScheme<IQuiz> => quizzes.scheme);
 
 export const selectQuizzesResults = createSelector(selectFeature, ({ results }: IQuizzesState<IQuiz>): IQuizResult[] => results.data);
 export const selectIsLoadingQuizzesResults = createSelector(selectFeature, ({ results }: IQuizzesState<IQuiz>): boolean => results.isLoading);

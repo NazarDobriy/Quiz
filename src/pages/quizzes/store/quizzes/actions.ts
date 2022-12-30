@@ -16,16 +16,16 @@ export const getQuizzesFailure = createAction(
   props<{ error: string }>()
 );
 
-export const getPaginationQuizzes = createAction(
-  '[Pagination Quizzes] Get Pagination Quizzes',
+export const getQuizzesScheme = createAction(
+  '[Quizzes] Get Quizzes Scheme',
   props<{ offset: number; count: number }>()
 );
-export const getPaginationQuizzesSuccess = createAction(
-  '[Pagination Quizzes] Get Pagination Quizzes success',
-  props<{ paginationQuizzes: IPaginationScheme<IQuiz> }>()
+export const getQuizzesSchemeSuccess = createAction(
+  '[Quizzes] Get Quizzes Scheme success',
+  props<{ scheme: IPaginationScheme<IQuiz> }>()
 );
-export const getPaginationQuizzesFailure = createAction(
-  '[Pagination Quizzes] Get Pagination Quizzes failure',
+export const getQuizzesSchemeFailure = createAction(
+  '[Pagination Quizzes] Get Quizzes Scheme failure',
   props<{ error: string }>()
 );
 

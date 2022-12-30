@@ -23,16 +23,15 @@ export class QuizzesEffects {
     );
   });
 
-  public getPaginationQuizzes$ = createEffect(() => {
+  public getQuizzesScheme$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(QuizzesActions.getPaginationQuizzes),
+      ofType(QuizzesActions.getQuizzesScheme),
       switchMap((action: { offset: number; count: number; }) => {
         return from(this.quizService.getPaginatedQuizzes(action.offset, action.count)).pipe(
-          map((paginationQuizzes: IPaginationScheme<IQuiz>) =>
-            QuizzesActions.getPaginationQuizzesSuccess({ paginationQuizzes })
+          map((scheme: IPaginationScheme<IQuiz>) => QuizzesActions.getQuizzesSchemeSuccess({ scheme })
           ),
           catchError((error: Error) =>
-            of(QuizzesActions.getPaginationQuizzesFailure({ error: error.message }))
+            of(QuizzesActions.getQuizzesSchemeFailure({ error: error.message }))
           )
         );
       })

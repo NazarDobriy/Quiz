@@ -34,30 +34,30 @@ export const quizzesReducer = createReducer(
       }
     };
   }),
-  on(QuizzesActions.getPaginationQuizzes, (state): IQuizzesState<IQuiz> => {
+  on(QuizzesActions.getQuizzesScheme, (state): IQuizzesState<IQuiz> => {
     return {
       ...state,
-      pagination: {
-        ...state.pagination,
+      quizzes: {
+        ...state.quizzes,
         isLoading: true
       }
     }
   }),
-  on(QuizzesActions.getPaginationQuizzesSuccess, (state, action): IQuizzesState<IQuiz> => {
+  on(QuizzesActions.getQuizzesSchemeSuccess, (state, action): IQuizzesState<IQuiz> => {
     return {
       ...state,
-      pagination: {
-        ...state.pagination,
+      quizzes: {
+        ...state.quizzes,
         isLoading: false,
-        data: action.paginationQuizzes
+        scheme: action.scheme
       }
     }
   }),
-  on(QuizzesActions.getPaginationQuizzesFailure, (state, action): IQuizzesState<IQuiz> => {
+  on(QuizzesActions.getQuizzesSchemeFailure, (state, action): IQuizzesState<IQuiz> => {
     return {
       ...state,
-      pagination: {
-        ...state.pagination,
+      quizzes: {
+        ...state.quizzes,
         error: action.error
       }
     }
