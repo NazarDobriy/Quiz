@@ -1,8 +1,9 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-score-counter',
-  templateUrl: './score-counter.component.html'
+  templateUrl: './score-counter.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ScoreCounterComponent {
   @Input() backgroundClass = 'bg-warning';

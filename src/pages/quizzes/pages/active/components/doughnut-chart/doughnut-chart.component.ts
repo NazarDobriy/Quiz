@@ -1,11 +1,12 @@
-import { AfterViewInit, Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
 
 Chart.register(...registerables);
 
 @Component({
   selector: 'app-doughnut-chart',
-  templateUrl: './doughnut-chart.component.html'
+  templateUrl: './doughnut-chart.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DoughnutChartComponent implements AfterViewInit {
   @Input() statistics: [number, number] = [0, 0];

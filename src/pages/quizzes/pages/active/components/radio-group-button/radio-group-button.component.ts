@@ -1,8 +1,9 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-radio-group-button',
-  templateUrl: './radio-group-button.component.html'
+  templateUrl: './radio-group-button.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RadioGroupButtonComponent {
   @Input() selectedOption: string | null = null;
