@@ -13,3 +13,5 @@ export const selectQuizQuestionsLength = createSelector(selectFeature, ({ quiz }
 export const selectQuizResult = createSelector(selectFeature, ({ result }: IQuizState): IQuizResult | null => result.data);
 export const selectIsLoadingQuizResult = createSelector(selectFeature, ({ result }: IQuizState): boolean => result.isLoading);
 export const selectErrorQuizResult = createSelector(selectFeature, ({ result }: IQuizState): string | null => result.error);
+export const selectQuizResultScore = createSelector(selectFeature, ({ result }: IQuizState): number => result.data?.correct || 0);
+export const selectQuizResultSeconds = createSelector(selectFeature, ({ result }: IQuizState): number => result.data?.seconds || 0);

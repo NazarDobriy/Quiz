@@ -1,6 +1,6 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ActivatedRouteSnapshot, Router, UrlTree } from '@angular/router';
-import { combineLatest, map, merge, Observable, of, Subscription } from 'rxjs';
+import { combineLatest, map, merge, Observable, of } from 'rxjs';
 import { PlatformService } from 'src/core/providers/platform.service';
 import { QuizStoreService } from 'src/core/providers/quiz-store.service';
 import { QuizzesStoreService } from 'src/core/providers/quizzes-store.service';
@@ -10,9 +10,8 @@ import { IQuiz, IQuizResult } from 'src/pages/quizzes/providers/quiz.service';
   selector: 'app-score',
   templateUrl: './score.component.html'
 })
-export class ScoreComponent implements OnInit, OnDestroy {
+export class ScoreComponent implements OnInit {
   private quizId: number = 0;
-  private sub = new Subscription();
 
   public quizQuestionsLength$: Observable<number> = this.quizStoreService.quizQuestionsLength$;
   public isLoadingQuiz$: Observable<boolean> = this.quizStoreService.isLoadingQuiz$;
@@ -21,6 +20,8 @@ export class ScoreComponent implements OnInit, OnDestroy {
   public quizResult$: Observable<IQuizResult | null> = this.quizStoreService.quizResult$;
   public isLoadingQuizResult$: Observable<boolean> = this.quizStoreService.isLoadingQuizResult$;
   public quizResultError$: Observable<string | null> = this.quizStoreService.quizResultError$;
+  public quizResultSeconds$: Observable<number> = this.quizStoreService.selectQuizResultSeconds$;
+  public quizResultScore$: Observable<number> = this.quizStoreService.selectQuizResultScore$;
 
   public quizzes$: Observable<IQuiz[]> = this.quizzesStoreService.quizzes$;
   public isLoadingQuizzes$: Observable<boolean> = this.quizzesStoreService.isLoadingQuizzes$;
@@ -36,12 +37,6 @@ export class ScoreComponent implements OnInit, OnDestroy {
     this.isLoadingQuizzes$,
     this.isLoadingQuizzesResults$
   ]).pipe(map(item => item[0] || item[1] || item[2] || item[3]));
-
-  public currentQuizResult: IQuizResult = {
-    answersLength: 0,
-    correct: 0,
-    seconds: 0
-  };
 
   constructor(
     private router: Router,
@@ -59,28 +54,11 @@ export class ScoreComponent implements OnInit, OnDestroy {
       this.quizStoreService.getQuizResult(this.quizId);
       this.quizzesStoreService.getQuizzes();
       this.quizzesStoreService.getQuizzesResults();
-      this.listenQuizResult();
     }
   }
 
-  private listenQuizResult(): void {
-    this.sub = this.quizResult$.subscribe(quizResult => {
-      if (quizResult) {
-        this.currentQuizResult = quizResult;
-      }
-    });
-  }
-
-  get durationSeconds(): number {
-    return this.currentQuizResult.seconds;
-  }
-
-  get durationMinutes(): number {
-    return Math.floor(this.currentQuizResult.seconds / 60);
-  }
-
-  get score(): number {
-    return this.currentQuizResult.correct;
+  public getDuration(seconds: number): number {
+    return Math.floor(seconds / 60);
   }
 
   canActivate(route: ActivatedRouteSnapshot): Observable<boolean | UrlTree> {
@@ -93,10 +71,6 @@ export class ScoreComponent implements OnInit, OnDestroy {
       );
     }
     return of(true);
-  }
-
-  ngOnDestroy(): void {
-    this.sub.unsubscribe();
   }
 
 }

@@ -10,13 +10,13 @@
       </span>
       <div class="mt-9">
         <app-score-counter
-          [counter]="score"
+          [counter]="(quizResultScore$ | async) || 0"
           [limit]="(quizQuestionsLength$ | async) || 0"
         >
         </app-score-counter>
       </div>
       <p class="text-2xl mt-5 font-semibold">
-        {{ durationMinutes > 0 ? durationMinutes + ' min' : durationSeconds + ' sec' }}
+        {{ getDuration((quizResultSeconds$ | async) || 0) > 0 ? (quizResultSeconds$ | async) + ' min' : (quizResultSeconds$ | async) + ' sec' }}
       </p>
       <div class="md:max-w-[26.875rem] sm:max-w-[22.875rem] max-w-[18.875rem] m-auto mt-3">
         Good try! Why not have another go? You might get a bigger score!
