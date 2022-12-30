@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable, skip } from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Observable, skip, Subscription } from 'rxjs';
 import { PlatformService } from 'src/core/providers/platform.service';
 import { QuizzesStoreService } from 'src/core/providers/quizzes-store.service';
 import { IQuiz, IPaginationScheme } from '../../providers/quiz.service';
@@ -9,9 +9,10 @@ import { ThemeService } from '../../providers/theme.service';
   selector: 'app-quizzes',
   templateUrl: './quizzes.component.html',
 })
-export class QuizzesComponent implements OnInit {
+export class QuizzesComponent implements OnInit, OnDestroy {
   readonly INITIAL_AMOUNT_QUIZ_CARDS: number = 5;
 
+  private sub = new Subscription();
   private paginationQuizzes: IPaginationScheme<IQuiz> = {
     count: this.INITIAL_AMOUNT_QUIZ_CARDS,
     offset: 0,
@@ -48,7 +49,7 @@ export class QuizzesComponent implements OnInit {
   }
 
   private listenQuizzesScheme(): void {
-    this.quizzesScheme$.pipe(skip(1)).subscribe((scheme: IPaginationScheme<IQuiz>) => {
+    this.sub = this.quizzesScheme$.pipe(skip(1)).subscribe((scheme: IPaginationScheme<IQuiz>) => {
       this.paginationQuizzes = scheme;
       const newQuizzes: IQuiz[] = this.paginationQuizzes.data;
       this.quizzes = [...this.quizzes, ...newQuizzes];
@@ -69,6 +70,10 @@ export class QuizzesComponent implements OnInit {
       this.paginationQuizzes.offset,
       this.paginationQuizzes.count
     );
+  }
+
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 
 }

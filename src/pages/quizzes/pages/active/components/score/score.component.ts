@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, ActivatedRouteSnapshot, Router, UrlTree } from '@angular/router';
-import { combineLatest, map, merge, Observable, of } from 'rxjs';
+import { combineLatest, map, merge, Observable, of, Subscription } from 'rxjs';
 import { PlatformService } from 'src/core/providers/platform.service';
 import { QuizStoreService } from 'src/core/providers/quiz-store.service';
 import { QuizzesStoreService } from 'src/core/providers/quizzes-store.service';
@@ -10,8 +10,9 @@ import { IQuiz, IQuizResult } from 'src/pages/quizzes/providers/quiz.service';
   selector: 'app-score',
   templateUrl: './score.component.html'
 })
-export class ScoreComponent implements OnInit {
+export class ScoreComponent implements OnInit, OnDestroy {
   private quizId: number = 0;
+  private sub = new Subscription();
 
   public quizQuestionsLength$: Observable<number> = this.quizStoreService.quizQuestionsLength$;
   public isLoadingQuiz$: Observable<boolean> = this.quizStoreService.isLoadingQuiz$;
@@ -63,7 +64,7 @@ export class ScoreComponent implements OnInit {
   }
 
   private listenQuizResult(): void {
-    this.quizResult$.subscribe(quizResult => {
+    this.sub = this.quizResult$.subscribe(quizResult => {
       if (quizResult) {
         this.currentQuizResult = quizResult;
       }
@@ -92,6 +93,10 @@ export class ScoreComponent implements OnInit {
       );
     }
     return of(true);
+  }
+
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 
 }
