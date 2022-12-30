@@ -1,4 +1,8 @@
-<ng-container *ngIf="!isLoading; else loading">
+<ng-container *ngIf="isLoadingThemes || (isLoadingQuizzes$ | async); else loading">
+  <app-skeleton-quizzes [limit]="INITIAL_AMOUNT_QUIZ_CARDS"></app-skeleton-quizzes>
+</ng-container>
+
+<ng-template #loading>
 
   <header class="text-center text-bright sm:mt-25 mt-20">
     <span class="sm:mr-2 sm:text-[4rem] text-[34px] font-semibold">Choose your</span>
@@ -21,8 +25,4 @@
     Load more
   </button>
 
-</ng-container>
-
-<ng-template #loading>
-  <app-skeleton-quizzes [limit]="INITIAL_AMOUNT_QUIZ_CARDS"></app-skeleton-quizzes>
 </ng-template>
