@@ -31,6 +31,8 @@ export class ScoreComponent implements OnInit {
   public isLoadingQuizzesResults$: Observable<boolean> = this.quizzesStoreService.isLoadingQuizzesResults$;
   public quizzesResultsError$: Observable<string | null> = this.quizzesStoreService.quizzesResultsError$;
 
+  public durationText$ = this.quizResultSeconds$.pipe(map(value => Math.floor(value / 60) > 0 ? `${value} min` : `${value} sec`));
+
   public isLoading$: Observable<boolean> = combineLatest([
     this.isLoadingQuiz$,
     this.isLoadingQuizResult$,
@@ -55,10 +57,6 @@ export class ScoreComponent implements OnInit {
       this.quizzesStoreService.getQuizzes();
       this.quizzesStoreService.getQuizzesResults();
     }
-  }
-
-  public getDuration(seconds: number): number {
-    return Math.floor(seconds / 60);
   }
 
   canActivate(route: ActivatedRouteSnapshot): Observable<boolean | UrlTree> {

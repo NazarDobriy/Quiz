@@ -15,9 +15,7 @@
         >
         </app-score-counter>
       </div>
-      <p class="text-2xl mt-5 font-semibold">
-        {{ getDuration((quizResultSeconds$ | async) || 0) > 0 ? (quizResultSeconds$ | async) + ' min' : (quizResultSeconds$ | async) + ' sec' }}
-      </p>
+      <p class="text-2xl mt-5 font-semibold">{{ durationText$ | async }}</p>
       <div class="md:max-w-[26.875rem] sm:max-w-[22.875rem] max-w-[18.875rem] m-auto mt-3">
         Good try! Why not have another go? You might get a bigger score!
       </div>
