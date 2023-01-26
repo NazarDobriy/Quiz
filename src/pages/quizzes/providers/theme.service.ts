@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import { QuizzesApiService } from './quizzes-api.service';
 
 export interface IQuizTheme {
@@ -18,6 +19,7 @@ export interface IQuizTheme {
 @Injectable()
 export class ThemeService {
   public themes: IQuizTheme[] = [];
+  public isLoadingThemes$ = new BehaviorSubject<boolean>(true);
 
   constructor(private quizzesApiService: QuizzesApiService) { }
 
@@ -27,6 +29,7 @@ export class ThemeService {
 
   public async setThemes(): Promise<void> {
     this.themes = await this.quizzesApiService.getAllQuizThemes();
+    this.isLoadingThemes$.next(false);
   }
 
   private calculateTheme(text: string): number {
