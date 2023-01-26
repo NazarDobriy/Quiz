@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
-import { combineLatest, map, Observable, skip, Subscription } from 'rxjs';
+import { combineLatest, map, Observable, Subscription } from 'rxjs';
 import { PlatformService } from 'src/core/providers/platform.service';
 import { QuizzesStoreService } from 'src/core/providers/quizzes-store.service';
 import { IQuiz, IPaginationScheme } from '../../providers/quiz.service';
@@ -54,7 +54,7 @@ export class QuizzesComponent implements OnInit, OnDestroy {
   }
 
   private listenQuizzesScheme(): void {
-    this.sub = this.quizzesScheme$.pipe(skip(1)).subscribe((scheme: IPaginationScheme<IQuiz>) => {
+    this.sub = this.quizzesScheme$.subscribe((scheme: IPaginationScheme<IQuiz>) => {
       this.paginationQuizzes = scheme;
       const newQuizzes: IQuiz[] = this.paginationQuizzes.data;
       this.quizzes = [...this.quizzes, ...newQuizzes];
