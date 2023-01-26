@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Observable, skip, Subscription } from 'rxjs';
+import { combineLatest, map, Observable, skip, Subscription } from 'rxjs';
 import { PlatformService } from 'src/core/providers/platform.service';
 import { QuizzesStoreService } from 'src/core/providers/quizzes-store.service';
 import { IQuiz, IPaginationScheme } from '../../providers/quiz.service';
@@ -21,11 +21,15 @@ export class QuizzesComponent implements OnInit, OnDestroy {
   };
 
   public quizzes: IQuiz[] = [];
-  public isLoadingThemes: boolean = true;
 
   public quizzesScheme$: Observable<IPaginationScheme<IQuiz>> = this.quizzesStoreService.quizzesScheme$;
   public isLoadingQuizzes$: Observable<boolean> = this.quizzesStoreService.isLoadingQuizzes$;
   public quizzesError$: Observable<string | null> = this.quizzesStoreService.quizzesError$;
+
+  public isLoading$: Observable<boolean> = combineLatest([
+    this.isLoadingQuizzes$,
+    this.themeService.isLoadingThemes$
+  ]).pipe(map(item => item[0] || item[1]));
 
   constructor(
     private themeService: ThemeService,
@@ -58,7 +62,6 @@ export class QuizzesComponent implements OnInit, OnDestroy {
 
   private async setThemes(): Promise<void> {
     await this.themeService.setThemes();
-    this.isLoadingThemes = false;
   }
 
   public loadCards(): void {
