@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ThemeService, IQuizTheme } from '../../providers/theme.service';
 import { IAnswer, IQuiz, QuizService } from '../../providers/quiz.service';
 import { Duration } from 'src/models/duration';
-import { Observable } from 'rxjs';
+import { map, Observable, combineLatest } from 'rxjs';
 import { DialogService } from './providers/dialog.service';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
@@ -43,7 +43,6 @@ export class QuizComponent implements OnInit {
   public quizId: number = 0;
   public questionIndex: number = 0;
   public timeStart!: Date;
-  public isLoadingThemes: boolean = true;
 
   public personsIcons = {
     Mili: 'mili',
@@ -56,6 +55,11 @@ export class QuizComponent implements OnInit {
   public quiz$: Observable<IQuiz> = this.quizStoreService.quiz$;
   public isLoadingQuiz$: Observable<boolean> = this.quizStoreService.isLoadingQuiz$;
   public quizError$: Observable<string | null> = this.quizStoreService.quizError$;
+
+  public isLoading$: Observable<boolean> = combineLatest([
+    this.isLoadingQuiz$,
+    this.themeService.isLoadingThemes$
+  ]).pipe(map(item => item[0] || item[1]));
 
   @HostListener('window:beforeunload')
   public beforeunloadHandler(): boolean {
@@ -128,7 +132,6 @@ export class QuizComponent implements OnInit {
   private async setTheme(): Promise<void> {
     await this.themeService.setThemes();
     this.quizTheme = this.themeService.getThemeByText(this.currentQuiz.subtitle);
-    this.isLoadingThemes = false;
   }
 
   public handleNextQuestion(): void {
