@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ActivatedRouteSnapshot, Router, UrlTree } from '@angular/router';
 import { combineLatest, map, merge, Observable, of } from 'rxjs';
 import { PlatformService } from 'src/core/providers/platform.service';
@@ -8,7 +8,8 @@ import { IQuiz, IQuizResult } from 'src/pages/quizzes/providers/quiz.service';
 
 @Component({
   selector: 'app-score',
-  templateUrl: './score.component.html'
+  templateUrl: './score.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ScoreComponent implements OnInit {
   private quizId: number = 0;

@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { combineLatest, map, Observable, skip, Subscription } from 'rxjs';
 import { PlatformService } from 'src/core/providers/platform.service';
 import { QuizzesStoreService } from 'src/core/providers/quizzes-store.service';
@@ -8,6 +8,7 @@ import { ThemeService } from '../../providers/theme.service';
 @Component({
   selector: 'app-quizzes',
   templateUrl: './quizzes.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class QuizzesComponent implements OnInit, OnDestroy {
   readonly INITIAL_AMOUNT_QUIZ_CARDS: number = 5;

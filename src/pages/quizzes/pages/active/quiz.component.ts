@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ThemeService, IQuizTheme } from '../../providers/theme.service';
 import { IAnswer, IQuiz, QuizService } from '../../providers/quiz.service';
@@ -13,7 +13,8 @@ import { QuizStoreService } from 'src/core/providers/quiz-store.service';
 
 @Component({
   selector: 'app-quiz',
-  templateUrl: './quiz.component.html'
+  templateUrl: './quiz.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class QuizComponent implements OnInit {
   readonly MIN_AMOUNT_QUESTIONS: number = 1;
