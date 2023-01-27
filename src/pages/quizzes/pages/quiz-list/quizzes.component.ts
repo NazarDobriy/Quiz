@@ -23,13 +23,9 @@ export class QuizzesComponent implements OnInit, OnDestroy {
 
   public quizzes: IQuiz[] = [];
 
-  public quizzesScheme$: Observable<IPaginationScheme<IQuiz>> = this.quizzesStoreService.quizzesScheme$;
-  public isLoadingQuizzes$: Observable<boolean> = this.quizzesStoreService.isLoadingQuizzes$;
-  public quizzesError$: Observable<string | null> = this.quizzesStoreService.quizzesError$;
-
   public isLoading$: Observable<boolean> = combineLatest([
-    this.isLoadingQuizzes$,
-    this.themeService.isLoadingThemes$
+    this.themeService.isLoadingThemes$,
+    this.quizzesStoreService.isLoadingQuizzes$
   ]).pipe(map(item => item[0] || item[1]));
 
   constructor(
@@ -54,7 +50,7 @@ export class QuizzesComponent implements OnInit, OnDestroy {
   }
 
   private listenQuizzesScheme(): void {
-    this.sub = this.quizzesScheme$.subscribe((scheme: IPaginationScheme<IQuiz>) => {
+    this.sub = this.quizzesStoreService.quizzesScheme$.subscribe((scheme: IPaginationScheme<IQuiz>) => {
       this.paginationQuizzes = scheme;
       const newQuizzes: IQuiz[] = this.paginationQuizzes.data;
       this.quizzes = [...this.quizzes, ...newQuizzes];

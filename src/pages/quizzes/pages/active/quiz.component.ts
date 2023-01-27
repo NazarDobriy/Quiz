@@ -53,13 +53,9 @@ export class QuizComponent implements OnInit {
 
   private userAnswersIds: string[] = [];
 
-  public quiz$: Observable<IQuiz> = this.quizStoreService.quiz$;
-  public isLoadingQuiz$: Observable<boolean> = this.quizStoreService.isLoadingQuiz$;
-  public quizError$: Observable<string | null> = this.quizStoreService.quizError$;
-
   public isLoading$: Observable<boolean> = combineLatest([
-    this.isLoadingQuiz$,
-    this.themeService.isLoadingThemes$
+    this.themeService.isLoadingThemes$,
+    this.quizStoreService.isLoadingQuiz$,
   ]).pipe(map(item => item[0] || item[1]));
 
   @HostListener('window:beforeunload')
@@ -82,7 +78,7 @@ export class QuizComponent implements OnInit {
     this.quizId = parseInt(this.activatedRoute.snapshot.params['id']);
     if (this.platformService.isBrowser) {
       this.quizStoreService.getQuiz(this.quizId);
-      this.quiz$.subscribe(quiz => this.currentQuiz = quiz);
+      this.quizStoreService.quiz$.subscribe(quiz => this.currentQuiz = quiz);
       this.setTheme();
     }
   }
