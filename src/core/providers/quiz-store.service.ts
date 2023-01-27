@@ -16,8 +16,8 @@ export class QuizStoreService {
   public quizResult$: Observable<IQuizResult | null> = this.store.select(QuizSelectors.selectQuizResult);
   public quizResultError$: Observable<string | null> = this.store.select(QuizSelectors.selectErrorQuizResult);
   public isLoadingQuizResult$: Observable<boolean> = this.store.select(QuizSelectors.selectIsLoadingQuizResult);
-  public selectQuizResultScore$: Observable<number> = this.store.select(QuizSelectors.selectQuizResultScore);
-  public selectQuizResultSeconds$: Observable<number> = this.store.select(QuizSelectors.selectQuizResultSeconds);
+  public quizResultScore$: Observable<number> = this.store.select(QuizSelectors.selectQuizResultScore);
+  public quizResultSeconds$: Observable<number> = this.store.select(QuizSelectors.selectQuizResultSeconds);
 
   constructor(private store: Store) { }
 
