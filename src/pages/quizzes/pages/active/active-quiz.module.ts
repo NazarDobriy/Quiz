@@ -44,10 +44,10 @@ const routes: Routes = [
   ],
   imports: [
     CommonModule,
+    SharedModule,
     MatDialogModule,
     MatSnackBarModule,
-    RouterModule.forChild(routes),
-    SharedModule
+    RouterModule.forChild(routes)
   ],
   providers: [
     QuizComponent,

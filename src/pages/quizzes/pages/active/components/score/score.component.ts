@@ -1,111 +1,70 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ActivatedRouteSnapshot, Router, UrlTree } from '@angular/router';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {
+  ActivatedRoute,
+  ActivatedRouteSnapshot,
+  Router,
+  UrlTree
+} from '@angular/router';
+import { combineLatest, map, merge, Observable, of } from 'rxjs';
 import { PlatformService } from 'src/core/providers/platform.service';
-import { IQuiz, IQuizResult, QuizService } from 'src/pages/quizzes/providers/quiz.service';
+import { QuizStoreService } from 'src/core/providers/quiz-store.service';
+import { QuizzesStoreService } from 'src/core/providers/quizzes-store.service';
+import { IQuiz, IQuizResult } from 'src/pages/quizzes/providers/quiz.service';
 
 @Component({
   selector: 'app-score',
-  templateUrl: './score.component.html'
+  templateUrl: './score.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ScoreComponent implements OnInit {
   private quizId: number = 0;
-  private isLoadingQuiz: boolean = true;
-  private isLoadingQuizAnswers: boolean = true;
-  private isLoadingPassedQuizzes: boolean = true;
-  private isLoadingQuizzes: boolean = true;
 
-  public quizzesResults: IQuizResult[] = [];
-  public quizzes: IQuiz[] = [];
+  public quizzes$: Observable<IQuiz[]> = this.quizzesStoreService.quizzes$;
+  public quizResultScore$: Observable<number> = this.quizStoreService.quizResultScore$;
+  public quizQuestionsLength$: Observable<number> = this.quizStoreService.quizQuestionsLength$;
+  public quizzesResults$: Observable<IQuizResult[]> = this.quizzesStoreService.quizzesResults$;
 
-  private currentQuiz: IQuiz = {
-    group: '',
-    questions: [],
-    id: 0,
-    title: '',
-    subtitle: ''
-  };
+  public durationText$ = this.quizStoreService.quizResultSeconds$.pipe(
+    map((value) =>
+      Math.floor(value / 60) > 0 ? `${value} min` : `${value} sec`
+    )
+  );
 
-  public currentQuizAnswers: IQuizResult = {
-    answersLength: 0,
-    correct: 0,
-    seconds: 0
-  };
+  public isLoading$: Observable<boolean> = combineLatest([
+    this.quizStoreService.isLoadingQuiz$,
+    this.quizStoreService.isLoadingQuizResult$,
+    this.quizzesStoreService.isLoadingQuizzes$,
+    this.quizzesStoreService.isLoadingQuizzesResults$,
+  ]).pipe(map((item) => item[0] || item[1] || item[2] || item[3]));
 
   constructor(
     private router: Router,
-    private quizService: QuizService,
+    private quizStoreService: QuizStoreService,
+    private quizzesStoreService: QuizzesStoreService,
     private activatedRoute: ActivatedRoute,
     private platformService: PlatformService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.quizId = parseInt(this.activatedRoute.snapshot.params['id']);
+
     if (this.platformService.isBrowser) {
-      this.setQuizzes();
-      this.setQuizById();
-      this.setQuizAnswersById();
-      this.setPassedQuizzes();
+      this.quizStoreService.getQuiz(this.quizId);
+      this.quizStoreService.getQuizResult(this.quizId);
+      this.quizzesStoreService.getQuizzes();
+      this.quizzesStoreService.getQuizzesResults();
     }
   }
 
-  private async setQuizById(): Promise<void> {
-    this.currentQuiz = await this.quizService.getQuizById(this.quizId);
-    this.isLoadingQuiz = false;
-  }
-
-  private async setQuizAnswersById(): Promise<void> {
-    const tempQuizAnswers: IQuizResult | null = await this.quizService.getQuizAnswersById(this.quizId);
-    if (tempQuizAnswers) {
-      this.currentQuizAnswers = tempQuizAnswers;
-    }
-    this.isLoadingQuizAnswers = false;
-  }
-
-  private async setPassedQuizzes(): Promise<void> {
-    this.quizzesResults = await this.quizService.getPassedQuizzes();
-    this.isLoadingPassedQuizzes = false;
-  }
-
-  private async setQuizzes(): Promise<void> {
-    this.quizzes = await this.quizService.getQuizzes();
-    this.isLoadingQuizzes = false;
-  }
-
-  private async hasQuizAnswers(route: ActivatedRouteSnapshot): Promise<boolean> {
+  canActivate(route: ActivatedRouteSnapshot): Observable<boolean | UrlTree> {
     const quizId: number = parseInt(route.params['id']);
-    const quizResult: IQuizResult | null = await this.quizService.getQuizAnswersById(quizId);
-    return !!quizResult;
-  }
-
-  get amountPassedQuizzes(): number {
-    return this.quizzesResults.length;
-  }
-
-  get questionsLength(): number {
-    return this.currentQuiz.questions.length;
-  }
-
-  get isLoading(): boolean {
-    return this.isLoadingQuiz && this.isLoadingQuizAnswers && this.isLoadingPassedQuizzes && this.isLoadingQuizzes;
-  }
-
-  get durationSeconds(): number {
-    return this.currentQuizAnswers.seconds;
-  }
-
-  get durationMinutes(): number {
-    return Math.floor(this.currentQuizAnswers.seconds / 60);
-  }
-
-  get score(): number {
-    return this.currentQuizAnswers.correct;
-  }
-
-  async canActivate(route: ActivatedRouteSnapshot): Promise<boolean | UrlTree> {
     if (this.platformService.isBrowser) {
-      return (await this.hasQuizAnswers(route)) || this.router.createUrlTree(['/']);
+      this.quizStoreService.getQuizResult(quizId);
+      return merge(
+        this.quizStoreService.isLoadingQuizResult$,
+        of(this.router.createUrlTree(['/']))
+      );
     }
-    return true;
+    return of(true);
   }
-
 }

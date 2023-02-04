@@ -28,6 +28,9 @@ describe('ApiService', () => {
       ]
     });
     service = TestBed.inject(QuizzesApiService);
+
+    mockAngularFireDatabase.list.calls.reset();
+    mockAngularFireDatabase.object.calls.reset();
   });
 
   it('should be created', () => {
@@ -111,7 +114,7 @@ describe('ApiService', () => {
       }
     } as AngularFireList<IQuizResult>);
 
-    service.getAllPassedQuizzes().then((quizResults: IQuizResult[]) => {
+    service.getQuizzesResults().then((quizResults: IQuizResult[]) => {
       expect(quizResults).toEqual(mockQuizResults);
       expect(quizResults.length).toBe(mockQuizResults.length);
       done();
@@ -127,7 +130,7 @@ describe('ApiService', () => {
       }
     } as AngularFireObject<IQuizResult>);
 
-    service.getQuizAnswersById(id).then((quizResult: IQuizResult | null) => {
+    service.getQuizResultById(id).then((quizResult: IQuizResult | null) => {
       expect(quizResult).toEqual(mockQuizResults[id]);
       done();
     });

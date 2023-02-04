@@ -1,18 +1,20 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ThemeService, IQuizTheme } from '../../providers/theme.service';
 import { IAnswer, IQuiz, QuizService } from '../../providers/quiz.service';
 import { Duration } from 'src/models/duration';
-import { Observable } from 'rxjs';
+import { map, Observable, combineLatest } from 'rxjs';
 import { DialogService } from './providers/dialog.service';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { SnackBarService } from './providers/snack-bar.service';
 import { PlatformService } from 'src/core/providers/platform.service';
+import { QuizStoreService } from 'src/core/providers/quiz-store.service';
 
 @Component({
   selector: 'app-quiz',
-  templateUrl: './quiz.component.html'
+  templateUrl: './quiz.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class QuizComponent implements OnInit {
   readonly MIN_AMOUNT_QUESTIONS: number = 1;
@@ -49,9 +51,12 @@ export class QuizComponent implements OnInit {
     Steven: 'steven'
   };
 
-  private isLoadingThemes: boolean = true;
-  private isLoadingQuiz: boolean = true;
   private userAnswersIds: string[] = [];
+
+  public isLoading$: Observable<boolean> = combineLatest([
+    this.themeService.isLoadingThemes$,
+    this.quizStoreService.isLoadingQuiz$,
+  ]).pipe(map(item => item[0] || item[1]));
 
   @HostListener('window:beforeunload')
   public beforeunloadHandler(): boolean {
@@ -64,14 +69,16 @@ export class QuizComponent implements OnInit {
     private themeService: ThemeService,
     private dialogService: DialogService,
     private snackBarService: SnackBarService,
-    private platformService: PlatformService
+    private platformService: PlatformService,
+    private quizStoreService: QuizStoreService
   ) { }
 
   ngOnInit(): void {
     this.timeStart = new Date();
     this.quizId = parseInt(this.activatedRoute.snapshot.params['id']);
     if (this.platformService.isBrowser) {
-      this.setQuizById();
+      this.quizStoreService.getQuiz(this.quizId);
+      this.quizStoreService.quiz$.subscribe(quiz => this.currentQuiz = quiz);
       this.setTheme();
     }
   }
@@ -110,10 +117,6 @@ export class QuizComponent implements OnInit {
     return this.questionIndex + 1 === this.currentQuiz?.questions.length;
   }
 
-  get isLoading(): boolean {
-    return this.isLoadingQuiz && this.isLoadingThemes;
-  }
-
   private findUnansweredQuestionIndex(): number | null {
     for (let i = 0; i < this.currentQuiz.questions.length; i++) {
       if (this.userAnswersIds[i] === undefined) {
@@ -126,12 +129,6 @@ export class QuizComponent implements OnInit {
   private async setTheme(): Promise<void> {
     await this.themeService.setThemes();
     this.quizTheme = this.themeService.getThemeByText(this.currentQuiz.subtitle);
-    this.isLoadingThemes = false;
-  }
-
-  private async setQuizById(): Promise<void> {
-    this.currentQuiz = await this.quizService.getQuizById(this.quizId);
-    this.isLoadingQuiz = false;
   }
 
   public handleNextQuestion(): void {

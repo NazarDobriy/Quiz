@@ -21,8 +21,8 @@ const routes: Routes = [
   ],
   imports: [
     CommonModule,
-    RouterModule.forChild(routes),
-    SharedModule
+    SharedModule,
+    RouterModule.forChild(routes)
   ]
 })
 export class QuizListModule { }

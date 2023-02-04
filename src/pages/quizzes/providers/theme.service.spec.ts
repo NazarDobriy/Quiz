@@ -21,6 +21,7 @@ describe('ThemeService', () => {
       ]
     });
     service = TestBed.inject(ThemeService);
+    mockQuizzesApiService.getAllQuizThemes.calls.reset();
   });
 
   it('should be created', () => {

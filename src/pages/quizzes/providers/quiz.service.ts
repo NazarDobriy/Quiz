@@ -52,16 +52,16 @@ export class QuizService {
     return this.quizzesApiService.getPaginatedQuizzes(offset, count);
   }
 
-  public getPassedQuizzes(): Promise<IQuizResult[]> {
-    return this.quizzesApiService.getAllPassedQuizzes();
+  public getQuizzesResults(): Promise<IQuizResult[]> {
+    return this.quizzesApiService.getQuizzesResults();
   }
 
   public getQuizById(id: number): Promise<IQuiz> {
     return this.quizzesApiService.getQuizById(id);
   }
 
-  public getQuizAnswersById(id: number): Promise<IQuizResult | null> {
-    return this.quizzesApiService.getQuizAnswersById(id);
+  public getQuizResultById(id: number): Promise<IQuizResult | null> {
+    return this.quizzesApiService.getQuizResultById(id);
   }
 
   public finishQuiz(quiz: IQuiz, answers: string[], duration: Duration): void {
