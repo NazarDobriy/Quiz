@@ -1,13 +1,14 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { IQuiz, IQuizResult } from 'src/pages/quizzes/providers/quiz.service';
 import { StatisticsService } from '../../providers/statistics.service';
 
 @Component({
   selector: 'app-statistics',
   templateUrl: './statistics.component.html',
-  providers: [StatisticsService]
+  providers: [StatisticsService],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class StatisticsComponent implements OnChanges {
+export class StatisticsComponent implements OnInit {
   @Input() quizzesResults: IQuizResult[] = [];
   @Input() quizzes: IQuiz[] = [];
 
@@ -15,7 +16,7 @@ export class StatisticsComponent implements OnChanges {
 
   constructor(public statisticsService: StatisticsService) { }
 
-  ngOnChanges(): void {
+  ngOnInit(): void {
     this.statisticsService.initialize(this.quizzes, this.quizzesResults);
     this.questionStatistics = [
       this.statisticsService.rightAnswersAmount,

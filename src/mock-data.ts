@@ -1,6 +1,8 @@
 import { IQuiz, IQuizResult } from "./pages/quizzes/providers/quiz.service";
 import { IQuizTheme } from "./pages/quizzes/providers/theme.service";
 
+export const mockQuizAnswers: string[] = ['1', '3', '3', '0', '1', '2', '1', '0', '2', '3'];
+
 export const mockQuizzes: IQuiz[] = [
   {
     id: 1,
@@ -131,5 +133,3 @@ export const mockQuizResults: IQuizResult[] = [
     seconds: 248
   }
 ];
-
-export const mockQuizAnswers: string[] = ['1', '3', '3', '0', '1', '2', '1', '0', '2', '3'];
