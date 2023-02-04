@@ -1,5 +1,10 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
-import { combineLatest, map, Observable, Subscription } from 'rxjs';
+import {
+  OnInit,
+  Component,
+  OnDestroy,
+  ChangeDetectionStrategy
+} from '@angular/core';
+import { combineLatest, map, Observable, skip, Subscription } from 'rxjs';
 import { PlatformService } from 'src/core/providers/platform.service';
 import { QuizzesStoreService } from 'src/core/providers/quizzes-store.service';
 import { IQuiz, IPaginationScheme } from '../../providers/quiz.service';
@@ -50,11 +55,13 @@ export class QuizzesComponent implements OnInit, OnDestroy {
   }
 
   private listenQuizzesScheme(): void {
-    this.sub = this.quizzesStoreService.quizzesScheme$.subscribe((scheme: IPaginationScheme<IQuiz>) => {
-      this.paginationQuizzes = scheme;
-      const newQuizzes: IQuiz[] = this.paginationQuizzes.data;
-      this.quizzes = [...this.quizzes, ...newQuizzes];
-    });
+    this.sub = this.quizzesStoreService.quizzesScheme$
+      .pipe(skip(1))
+      .subscribe((scheme: IPaginationScheme<IQuiz>) => {
+        this.paginationQuizzes = scheme;
+        const newQuizzes: IQuiz[] = this.paginationQuizzes.data;
+        this.quizzes = [...this.quizzes, ...newQuizzes];
+      });
   }
 
   private async setThemes(): Promise<void> {
@@ -75,5 +82,4 @@ export class QuizzesComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }
-
 }
