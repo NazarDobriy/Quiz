@@ -2,7 +2,8 @@ import { TestBed } from '@angular/core/testing';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../components/confirm-dialog/confirm-dialog.component';
 
-import { DialogService, IDialogConfig } from './dialog.service';
+import { DialogService } from './dialog.service';
+import { IDialogConfig } from '../types/dialog.type';
 
 describe('DialogService', () => {
   let service: DialogService;
