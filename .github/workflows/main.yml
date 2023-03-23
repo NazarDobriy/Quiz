@@ -24,7 +24,9 @@ jobs:
       - name: Unit tests
         run: npm run test -- --watch=false --browsers=ChromeHeadless
       - name: Build app
-        run: npm run build:ssr
+        run: npm run build
+      - name: prerender
+        run: npm run prerender
 
   deploy:
     needs: build
