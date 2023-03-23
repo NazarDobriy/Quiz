@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
-import { IQuiz, IQuizResult } from 'src/pages/quizzes/providers/quiz.service';
+import { IQuiz, IQuizResult } from 'src/pages/quizzes/types/quiz.type';
 import { StatisticsService } from '../../providers/statistics.service';
 
 @Component({

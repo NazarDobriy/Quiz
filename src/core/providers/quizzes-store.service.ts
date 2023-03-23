@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 import * as QuizzesActions from '../../pages/quizzes/store/quizzes/actions';
 import * as QuizzesSelectors from '../../pages/quizzes/store/quizzes/selectors';
-import { IPaginationScheme, IQuiz, IQuizResult } from 'src/pages/quizzes/providers/quiz.service';
+import { IPaginationScheme, IQuiz, IQuizResult } from 'src/pages/quizzes/types/quiz.type';
 
 @Injectable()
 export class QuizzesStoreService {

@@ -1,4 +1,4 @@
-import { IQuiz } from "src/pages/quizzes/providers/quiz.service";
+import { IQuiz } from "src/pages/quizzes/types/quiz.type";
 import { IQuizState } from "src/pages/quizzes/store/quiz/state";
 import { IQuizzesState } from "../../pages/quizzes/store/quizzes/state";
 

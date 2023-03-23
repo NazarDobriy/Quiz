@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { map, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 
-import { IQuiz, IQuizResult } from 'src/pages/quizzes/providers/quiz.service';
 import * as QuizActions from '../../pages/quizzes/store/quiz/actions';
 import * as QuizSelectors from '../../pages/quizzes/store/quiz/selectors';
+import { IQuiz, IQuizResult } from 'src/pages/quizzes/types/quiz.type';
 
 @Injectable()
 export class QuizStoreService {

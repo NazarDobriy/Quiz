@@ -1,4 +1,4 @@
-import { IQuiz, IQuizResult } from "src/pages/quizzes/providers/quiz.service";
+import { IQuiz, IQuizResult } from "../../types/quiz.type";
 
 export interface IQuizState {
   quiz: {
