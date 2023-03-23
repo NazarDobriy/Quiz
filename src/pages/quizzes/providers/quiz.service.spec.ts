@@ -5,8 +5,9 @@ import { mockQuizAnswers, mockQuizResults, mockQuizzes } from 'src/mock-data';
 import { Duration } from 'src/models/duration';
 import { ScoreComponent } from '../pages/active/components/score/score.component';
 
-import { IPaginationScheme, IQuiz, IQuizResult, QuizService } from './quiz.service';
+import { QuizService } from './quiz.service';
 import { QuizzesApiService } from './quizzes-api.service';
+import { IPaginationScheme, IQuiz, IQuizResult } from '../types/quiz.type';
 
 describe('QuizService', () => {
   let duration: Duration;
