@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ThemeService, IQuizTheme } from '../../providers/theme.service';
+import { ThemeService } from '../../providers/theme.service';
 import { IAnswer, IQuiz, QuizService } from '../../providers/quiz.service';
 import { Duration } from 'src/models/duration';
 import { map, Observable, combineLatest } from 'rxjs';
@@ -10,6 +10,7 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
 import { SnackBarService } from './providers/snack-bar.service';
 import { PlatformService } from 'src/core/providers/platform.service';
 import { QuizStoreService } from 'src/core/providers/quiz-store.service';
+import { IQuizTheme } from '../../types/theme.type';
 
 @Component({
   selector: 'app-quiz',

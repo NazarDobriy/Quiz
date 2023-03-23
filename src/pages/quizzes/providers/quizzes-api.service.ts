@@ -4,8 +4,8 @@ import { QueryReference } from '@angular/fire/compat/database/interfaces';
 import { firstValueFrom, map } from 'rxjs';
 import { UserService } from 'src/core/providers/user.service';
 import { Duration } from 'src/models/duration';
+import { IQuizTheme } from '../types/theme.type';
 import { IPaginationScheme, IQuiz, IQuizResult } from './quiz.service';
-import { IQuizTheme } from './theme.service';
 
 @Injectable()
 export class QuizzesApiService {

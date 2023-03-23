@@ -1,20 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { IQuizTheme } from '../types/theme.type';
 import { QuizzesApiService } from './quizzes-api.service';
-
-export interface IQuizTheme {
-  primaryTextClass: string;
-  secondaryTextClass: string;
-  secondaryActiveTextClass: string;
-  numberTextClass: string;
-  numberBackgroundClass: string;
-  backgroundClass: string;
-  btnsBackgroundClass: string;
-  btnsTextClass: string;
-  radioButtonColor: string;
-  titleTextClass: string;
-  personName: string;
-}
 
 @Injectable()
 export class ThemeService {

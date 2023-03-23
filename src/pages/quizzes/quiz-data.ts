@@ -1,4 +1,4 @@
-import { IQuizTheme } from "./providers/theme.service";
+import { IQuizTheme } from "./types/theme.type";
 
 export const QUIZ_THEMES: IQuizTheme[] = [
   {
