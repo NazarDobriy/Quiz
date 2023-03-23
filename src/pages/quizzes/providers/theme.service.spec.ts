@@ -1,8 +1,9 @@
 import { TestBed } from '@angular/core/testing';
 
-import { IQuizTheme, ThemeService } from './theme.service';
+import { ThemeService } from './theme.service';
 import { QuizzesApiService } from './quizzes-api.service';
 import { mockQuizThemes } from 'src/mock-data';
+import { IQuizTheme } from '../types/theme.type';
 
 describe('ThemeService', () => {
   let service: ThemeService;
