@@ -38,7 +38,7 @@ jobs:
 
     steps:
        # Deploy to Netlify using production secrets
-      - name: Netlify Actions
+      - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v2.0.0
         with:
           publish-dir: './dist'
