@@ -9,7 +9,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout source code
         uses: actions/checkout@v2
@@ -25,12 +25,6 @@ jobs:
         run: npm run test -- --watch=false --browsers=ChromeHeadless
       - name: Build app
         run: npm run build
-        
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    
-    steps:
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v1.2
         with:
@@ -44,3 +38,4 @@ jobs:
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        timeout-minutes: 1
