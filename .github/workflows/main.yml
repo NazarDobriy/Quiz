@@ -32,7 +32,7 @@ jobs:
 
     steps:
       - name: Deploy to Netlify
-        uses: nwtgck/actions-netlify@v1.2
+        uses: actions/netlify@v1.2
         with:
           publish-dir: './dist'
           production-branch: master
