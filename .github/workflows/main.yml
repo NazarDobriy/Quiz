@@ -11,18 +11,24 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Get code from repo
       - name: Checkout source code
         uses: actions/checkout@v2
+      # Install NodeJS
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
-            node-version: '16.x'
+          node-version: '16.x'
+      # Run npm install
       - name: Install dependencies
         run: npm install
+      # Run JS linter
       - name: Lint
         run: npm run lint
+      # Run unit tests
       - name: Unit tests
         run: npm run test -- --watch=false --browsers=ChromeHeadless
+      # Build app
       - name: Build app
         run: npm run build
 
@@ -31,6 +37,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+       # Deploy to Netlify using production secrets
       - name: Deploy to netlify
         uses: netlify/actions/cli@master
         env:
