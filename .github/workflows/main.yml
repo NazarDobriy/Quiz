@@ -25,10 +25,8 @@ jobs:
         run: npm run test -- --watch=false --browsers=ChromeHeadless
       - name: Build app
         run: npm run build
-      - name: Copy routes.txt for prerender
-        run: cp ./routes.txt
       - name: Prerender app
-        run: npm run prerender
+        run: npm run prerender -- --routes-file routes.txt
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v2.0.0
         with:
