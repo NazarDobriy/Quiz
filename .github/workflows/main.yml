@@ -26,7 +26,7 @@ jobs:
       - name: Build app
         run: npm run build
       - name: Prerender app
-        run: npm run prerender -- --routes-file routes.txt
+        run: npm run prerender -- --no-guess-routes --routes-file routes.txt
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v2.0.0
         with:
