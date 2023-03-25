@@ -21,8 +21,8 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Prerender app
-        run: npm run prerender
+      - name: Build SSR app
+        run: npm run build:ssr
 
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v1.2
