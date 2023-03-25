@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
 import { QuizzesApiService } from './quizzes-api.service';
-import { IPaginationScheme, IQuiz, IQuizResult } from './quiz.service';
 import { AngularFireDatabase, AngularFireList, AngularFireObject } from '@angular/fire/compat/database';
 import { UserService } from 'src/core/providers/user.service';
 import { LocalStorageService } from 'src/core/providers/local-storage.service';
 import { Observable, of } from 'rxjs';
 import { mockQuizResults, mockQuizThemes, mockQuizzes } from 'src/mock-data';
 import { IQuizTheme } from '../types/theme.type';
+import { IPaginationScheme, IQuiz, IQuizResult } from '../types/quiz.type';
 
 describe('ApiService', () => {
   let service: QuizzesApiService;

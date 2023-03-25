@@ -1,10 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 
-import {
-  IPaginationScheme,
-  IQuiz,
-  IQuizResult,
-} from 'src/pages/quizzes/providers/quiz.service';
+import { IPaginationScheme, IQuiz, IQuizResult } from '../../types/quiz.type';
 
 export const getQuizzes = createAction('[Quizzes] Get Quizzes');
 export const getQuizzesSuccess = createAction(

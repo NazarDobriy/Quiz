@@ -9,7 +9,7 @@ import { combineLatest, map, merge, Observable, of } from 'rxjs';
 import { PlatformService } from 'src/core/providers/platform.service';
 import { QuizStoreService } from 'src/core/providers/quiz-store.service';
 import { QuizzesStoreService } from 'src/core/providers/quizzes-store.service';
-import { IQuiz, IQuizResult } from 'src/pages/quizzes/providers/quiz.service';
+import { IQuiz, IQuizResult } from 'src/pages/quizzes/types/quiz.type';
 
 @Component({
   selector: 'app-score',

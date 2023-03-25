@@ -7,8 +7,8 @@ import {
 import { combineLatest, map, Observable, skip, Subscription } from 'rxjs';
 import { PlatformService } from 'src/core/providers/platform.service';
 import { QuizzesStoreService } from 'src/core/providers/quizzes-store.service';
-import { IQuiz, IPaginationScheme } from '../../providers/quiz.service';
 import { ThemeService } from '../../providers/theme.service';
+import { IPaginationScheme, IQuiz } from '../../types/quiz.type';
 
 @Component({
   selector: 'app-quizzes',

@@ -3,7 +3,8 @@ import { switchMap, from, map, catchError, of } from 'rxjs';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 
 import * as QuizzesActions from './actions';
-import { IPaginationScheme, IQuiz, IQuizResult, QuizService } from 'src/pages/quizzes/providers/quiz.service';
+import { QuizService } from 'src/pages/quizzes/providers/quiz.service';
+import { IPaginationScheme, IQuiz, IQuizResult } from '../../types/quiz.type';
 
 @Injectable()
 export class QuizzesEffects {

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { IQuiz } from 'src/pages/quizzes/types/quiz.type';
 import { IQuizTheme } from 'src/pages/quizzes/types/theme.type';
-import { IQuiz } from '../../../../providers/quiz.service';
 import { ThemeService } from '../../../../providers/theme.service';
 
 @Component({

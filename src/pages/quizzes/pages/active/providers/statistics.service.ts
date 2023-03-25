@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IQuiz, IQuizResult } from 'src/pages/quizzes/providers/quiz.service';
+import { IQuiz, IQuizResult } from 'src/pages/quizzes/types/quiz.type';
 
 @Injectable()
 export class StatisticsService {

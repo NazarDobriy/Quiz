@@ -2,7 +2,7 @@ import { createReducer, on } from '@ngrx/store';
 
 import * as QuizzesActions from './actions';
 import { IQuizzesState, quizzesInitialState } from './state';
-import { IQuiz } from 'src/pages/quizzes/providers/quiz.service';
+import { IQuiz } from '../../types/quiz.type';
 
 export const quizzesReducer = createReducer(
   quizzesInitialState,

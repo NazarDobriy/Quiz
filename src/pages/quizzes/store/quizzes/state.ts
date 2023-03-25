@@ -1,4 +1,4 @@
-import { IPaginationScheme, IQuiz, IQuizResult } from "src/pages/quizzes/providers/quiz.service";
+import { IPaginationScheme, IQuiz, IQuizResult } from "../../types/quiz.type";
 
 export interface IQuizzesState<T> {
   quizzes: {

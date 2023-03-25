@@ -1,7 +1,7 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
 
 import { IQuizzesState } from "./state";
-import { IPaginationScheme, IQuiz, IQuizResult } from "src/pages/quizzes/providers/quiz.service";
+import { IPaginationScheme, IQuiz, IQuizResult } from "../../types/quiz.type";
 
 export const selectFeature = createFeatureSelector<IQuizzesState<IQuiz>>('quizzes');
 

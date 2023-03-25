@@ -1,5 +1,5 @@
-import { IQuiz, IQuizResult } from "./pages/quizzes/providers/quiz.service";
 import { IQuizTheme } from "./pages/quizzes/types/theme.type";
+import { IQuiz, IQuizResult } from "./pages/quizzes/types/quiz.type";
 
 export const mockQuizAnswers: string[] = ['1', '3', '3', '0', '1', '2', '1', '0', '2', '3'];
 
