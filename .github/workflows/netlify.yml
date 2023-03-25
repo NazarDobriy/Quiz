@@ -22,7 +22,7 @@ jobs:
         run: npm install
 
       - name: Prerender app
-        run: npm run prerender -- --no-guess-routes --routes-file routes.txt
+        run: npm run prerender -- --guess-routes --routes-file routes.txt
 
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v1.2
