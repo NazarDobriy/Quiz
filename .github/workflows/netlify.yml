@@ -21,8 +21,14 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build app
-        run: npm run build
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: routes-artifact
+          path: routes.txt
+
+      - name: Prerender app
+        run: npm run prerender
 
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v1.2
