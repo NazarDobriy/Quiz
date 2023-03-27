@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { mockQuizAnswers, mockQuizResults, mockQuizzes } from 'src/mock-data';
-import { Duration } from 'src/models/duration';
-import { ScoreComponent } from '../pages/active/components/score/score.component';
-
 import { QuizService } from './quiz.service';
 import { QuizzesApiService } from './quizzes-api.service';
-import { IPaginationScheme, IQuiz, IQuizResult } from '../types/quiz.type';
+
+import { Duration } from '@a-models/duration';
+import { mockQuizzes, mockQuizResults, mockQuizAnswers } from 'mock-data';
+import { ScoreComponent } from '@a-pages/quizzes/pages/active/components/score/score.component';
+import { IQuiz, IPaginationScheme, IQuizResult } from '@a-pages/quizzes/types/quiz.type';
 
 describe('QuizService', () => {
   let duration: Duration;

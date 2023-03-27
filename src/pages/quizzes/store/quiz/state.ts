@@ -1,4 +1,4 @@
-import { IQuiz, IQuizResult } from "../../types/quiz.type";
+import { IQuiz, IQuizResult } from "@a-pages/quizzes/types/quiz.type";
 
 export interface IQuizState {
   quiz: {

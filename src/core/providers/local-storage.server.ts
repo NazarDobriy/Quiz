@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { LocalStorage } from 'src/utils';
+import { LocalStorage } from '@a-utils/index';
 import { PlatformService } from './platform.service';
 
 @Injectable()

@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 
-import { IQuiz, IQuizResult } from '../../types/quiz.type';
+import { IQuiz, IQuizResult } from '@a-pages/quizzes/types/quiz.type';
 
 export const getQuiz = createAction('[Quiz] Get Quiz', props<{ id: number }>());
 export const getQuizSuccess = createAction(

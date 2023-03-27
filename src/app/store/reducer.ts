@@ -1,9 +1,9 @@
 import { ActionReducerMap, MetaReducer } from '@ngrx/store';
 
 import { IAppState } from './state';
-import { environment } from '../../environments/environment';
-import { quizReducer } from 'src/pages/quizzes/store/quiz/reducer';
-import { quizzesReducer } from '../../pages/quizzes/store/quizzes/reducer';
+import { environment } from '@a-environments/environment';
+import { quizReducer } from '@a-pages/quizzes/store/quiz/reducer';
+import { quizzesReducer } from '@a-pages/quizzes/store/quizzes/reducer';
 
 export const reducers: ActionReducerMap<IAppState> = {
   quiz: quizReducer,

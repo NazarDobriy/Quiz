@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
-import * as QuizzesActions from '../../pages/quizzes/store/quizzes/actions';
-import * as QuizzesSelectors from '../../pages/quizzes/store/quizzes/selectors';
-import { IPaginationScheme, IQuiz, IQuizResult } from 'src/pages/quizzes/types/quiz.type';
+import * as QuizzesActions from '@a-pages/quizzes/store/quizzes/actions';
+import * as QuizzesSelectors from '@a-pages/quizzes/store/quizzes/selectors';
+import { IPaginationScheme, IQuiz, IQuizResult } from '@a-pages/quizzes/types/quiz.type';
 
 @Injectable()
 export class QuizzesStoreService {
