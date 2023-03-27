@@ -6,10 +6,10 @@ import {
   UrlTree
 } from '@angular/router';
 import { combineLatest, map, merge, Observable, of } from 'rxjs';
-import { PlatformService } from 'src/core/providers/platform.service';
-import { QuizStoreService } from 'src/core/providers/quiz-store.service';
-import { QuizzesStoreService } from 'src/core/providers/quizzes-store.service';
-import { IQuiz, IQuizResult } from 'src/pages/quizzes/types/quiz.type';
+import { PlatformService } from '@a-core/providers/platform.service';
+import { QuizStoreService } from '@a-core/providers/quiz-store.service';
+import { QuizzesStoreService } from '@a-core/providers/quizzes-store.service';
+import { IQuiz, IQuizResult } from '@a-pages/quizzes/types/quiz.type';
 
 @Component({
   selector: 'app-score',

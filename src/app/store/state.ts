@@ -1,6 +1,6 @@
-import { IQuiz } from "src/pages/quizzes/types/quiz.type";
-import { IQuizState } from "src/pages/quizzes/store/quiz/state";
-import { IQuizzesState } from "../../pages/quizzes/store/quizzes/state";
+import { IQuiz } from "@a-pages/quizzes/types/quiz.type";
+import { IQuizState } from "@a-pages/quizzes/store/quiz/state";
+import { IQuizzesState } from "@a-pages/quizzes/store/quizzes/state";
 
 export interface IAppState {
   quiz: IQuizState;

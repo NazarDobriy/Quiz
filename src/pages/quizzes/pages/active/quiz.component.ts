@@ -1,17 +1,17 @@
 import { ChangeDetectionStrategy, Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ThemeService } from '../../providers/theme.service';
-import { QuizService } from '../../providers/quiz.service';
-import { Duration } from 'src/models/duration';
 import { map, Observable, combineLatest } from 'rxjs';
 import { DialogService } from './providers/dialog.service';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { SnackBarService } from './providers/snack-bar.service';
-import { PlatformService } from 'src/core/providers/platform.service';
-import { QuizStoreService } from 'src/core/providers/quiz-store.service';
-import { IQuizTheme } from '../../types/theme.type';
-import { IAnswer, IQuiz } from '../../types/quiz.type';
+import { PlatformService } from '@a-core/providers/platform.service';
+import { QuizStoreService } from '@a-core/providers/quiz-store.service';
+import { Duration } from '@a-models/duration';
+import { IAnswer, IQuiz } from '@a-pages/quizzes/types/quiz.type';
+import { QuizService } from '@a-pages/quizzes/providers/quiz.service';
+import { ThemeService } from '@a-pages/quizzes/providers/theme.service';
+import { IQuizTheme } from '@a-pages/quizzes/types/theme.type';
 
 @Component({
   selector: 'app-quiz',

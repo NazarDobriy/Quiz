@@ -2,9 +2,9 @@ name: Deploy
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [master, development]
   pull_request:
-    branches: [ "master" ]
+    branches: [master, development]
 
 jobs:
   deploy:
@@ -17,7 +17,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16.15.0'
+          node-version: "16.15.0"
 
       - name: Install dependencies
         run: npm install
@@ -28,7 +28,7 @@ jobs:
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v2
         with:
-          publish-dir: './dist/Quiz/browser'
+          publish-dir: "./dist/Quiz/browser"
           production-branch: master
           github-token: ${{ secrets.GITHUB_TOKEN }}
           deploy-message: "Deploy from GitHub Actions"

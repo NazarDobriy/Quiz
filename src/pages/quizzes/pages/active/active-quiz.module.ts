@@ -13,8 +13,8 @@ import { StatisticsComponent } from './components/statistics/statistics.componen
 import { DoughnutChartComponent } from './components/doughnut-chart/doughnut-chart.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { SnackBarService } from './providers/snack-bar.service';
-import { SharedModule } from 'src/shared/shared.module';
 import { SkeletonQuizComponent } from './components/skeleton-quiz/skeleton-quiz.component';
+import { SharedModule } from '@a-shared/shared.module';
 
 const routes: Routes = [
   {

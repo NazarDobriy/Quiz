@@ -1,7 +1,7 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
 
 import { IQuizState } from "./state";
-import { IQuiz, IQuizResult } from "../../types/quiz.type";
+import { IQuiz, IQuizResult } from "@a-pages/quizzes/types/quiz.type";
 
 export const selectFeature = createFeatureSelector<IQuizState>('quiz');
 
