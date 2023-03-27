@@ -7,7 +7,7 @@ import { IQuizTheme } from '@a-pages/quizzes/types/theme.type';
 import { IPaginationScheme, IQuiz, IQuizResult } from '@a-pages/quizzes/types/quiz.type';
 import { LocalStorageService } from '@a-core/providers/local-storage.service';
 import { UserService } from '@a-core/providers/user.service';
-import { mockQuizzes, mockQuizThemes, mockQuizResults } from 'test-helpers/consts/test-consts';
+import { mockQuizzes, mockQuizThemes, mockQuizResults } from '@a-tests/consts/test-consts';
 
 describe('ApiService', () => {
   let service: QuizzesApiService;
