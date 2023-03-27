@@ -3,7 +3,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, DebugElement, DebugNode } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
-import { mockQuizzes, mockQuizThemes } from 'mock-data';
+import { mockQuizzes, mockQuizThemes } from 'test-helpers/consts/test-consts';
 
 import { QuizCardComponent } from './quiz-card.component';
 
