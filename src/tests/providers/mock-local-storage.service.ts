@@ -4,6 +4,8 @@ import { mockId } from '@a-tests/consts/test-consts';
 
 @Injectable()
 export class MockLocalStorageService {
+  public clear(): void {}
+
   public get(_key: string): string | null {
     return mockId;
   }
@@ -12,9 +14,7 @@ export class MockLocalStorageService {
     return false;
   }
 
-  public set(_key: string, _value: string): void {}
-
   public remove(_key: string): void {}
 
-  public clear(): void {}
+  public set(_key: string, _value: string): void {}
 }
