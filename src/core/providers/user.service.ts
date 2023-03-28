@@ -4,19 +4,17 @@ import { LocalStorageService } from './local-storage.service';
 
 @Injectable()
 export class UserService {
-
-  constructor(private localStorageService: LocalStorageService) { }
-
   get id(): string | null {
-    return this.localStorageService.get("uuid");
+    return this.localStorageService.get('uuid');
   }
 
   get hasId(): boolean {
-    return this.localStorageService.has("uuid");
+    return this.localStorageService.has('uuid');
   }
+
+  constructor(private localStorageService: LocalStorageService) {}
 
   public generateId(): void {
-    this.localStorageService.set("uuid", uuidv4());
+    this.localStorageService.set('uuid', uuidv4());
   }
-
 }
