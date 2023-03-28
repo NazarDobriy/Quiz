@@ -3,8 +3,8 @@ import { ServerModule } from '@angular/platform-server';
 
 import { AppModule } from './app.module';
 import { AppComponent } from './app.component';
-import { LocalStorageService } from 'src/core/providers/local-storage.service';
-import { LocalStorageServer } from 'src/core/providers/local-storage.server';
+import { LocalStorageServer } from '@a-core/providers/local-storage.server';
+import { LocalStorageService } from '@a-core/providers/local-storage.service';
 
 @NgModule({
   imports: [

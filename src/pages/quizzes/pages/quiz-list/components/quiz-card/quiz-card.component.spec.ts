@@ -1,9 +1,9 @@
+import { ThemeService } from '@a-pages/quizzes/providers/theme.service';
 import { CUSTOM_ELEMENTS_SCHEMA, DebugElement, DebugNode } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
-import { mockQuizThemes, mockQuizzes } from 'src/mock-data';
-import { ThemeService } from 'src/pages/quizzes/providers/theme.service';
+import { mockQuizzes, mockQuizThemes } from 'mock-data';
 
 import { QuizCardComponent } from './quiz-card.component';
 

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
-import { IQuiz, IQuizResult } from 'src/pages/quizzes/types/quiz.type';
-import { StatisticsService } from '../../providers/statistics.service';
+import { IQuizResult, IQuiz } from '@a-pages/quizzes/types/quiz.type';
+import { StatisticsService } from '@a-pages/quizzes/pages/active/providers/statistics.service';
 
 @Component({
   selector: 'app-statistics',

@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [master, development]
   pull_request:
-    branches: [ "master" ]
+    branches: [master, development]
 
 jobs:
   build:
@@ -17,7 +17,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16.15.0'
+          node-version: "16.15.0"
 
       - name: Install dependencies
         run: npm install

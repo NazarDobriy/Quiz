@@ -1,11 +1,11 @@
+import { UserService } from '@a-core/providers/user.service';
+import { Duration } from '@a-models/duration';
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { QueryReference } from '@angular/fire/compat/database/interfaces';
 import { firstValueFrom, map } from 'rxjs';
-import { UserService } from 'src/core/providers/user.service';
-import { Duration } from 'src/models/duration';
-import { IPaginationScheme, IQuiz, IQuizResult } from '../types/quiz.type';
-import { IQuizTheme } from '../types/theme.type';
+import { IPaginationScheme, IQuiz, IQuizResult } from '@a-pages/quizzes/types/quiz.type';
+import { IQuizTheme } from '@a-pages/quizzes/types/theme.type';
 
 @Injectable()
 export class QuizzesApiService {

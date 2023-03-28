@@ -5,10 +5,10 @@ import {
   ChangeDetectionStrategy
 } from '@angular/core';
 import { combineLatest, map, Observable, skip, Subscription } from 'rxjs';
-import { PlatformService } from 'src/core/providers/platform.service';
-import { QuizzesStoreService } from 'src/core/providers/quizzes-store.service';
-import { ThemeService } from '../../providers/theme.service';
-import { IPaginationScheme, IQuiz } from '../../types/quiz.type';
+import { PlatformService } from '@a-core/providers/platform.service';
+import { QuizzesStoreService } from '@a-core/providers/quizzes-store.service';
+import { ThemeService } from '@a-pages/quizzes/providers/theme.service';
+import { IPaginationScheme, IQuiz } from '@a-pages/quizzes/types/quiz.type';
 
 @Component({
   selector: 'app-quizzes',
