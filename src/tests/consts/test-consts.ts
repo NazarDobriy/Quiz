@@ -1,5 +1,7 @@
-import { IQuizTheme } from "./pages/quizzes/types/theme.type";
-import { IQuiz, IQuizResult } from "./pages/quizzes/types/quiz.type";
+import { IQuizTheme } from "@a-pages/quizzes/types/theme.type";
+import { IQuiz, IQuizResult } from "@a-pages/quizzes/types/quiz.type";
+
+export const mockId = '45e20868-34b9-4254-bcdf-0dc90704455d';
 
 export const mockQuizAnswers: string[] = ['1', '3', '3', '0', '1', '2', '1', '0', '2', '3'];
 

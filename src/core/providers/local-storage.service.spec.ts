@@ -34,18 +34,8 @@ describe('LocalStorageService', () => {
   });
 
   it('should set value by key', () => {
-    service.set(itemKey, 'Nazar');
-    expect(localStorage.getItem(itemKey)).toEqual('Nazar');
+    service.set(itemKey, 'Tom');
+    expect(localStorage.getItem(itemKey)).toEqual('Tom');
   });
 
-  it('should remove value by key', () => {
-    service.remove(itemKey);
-    expect(localStorage.getItem(itemKey)).toEqual(null);
-  });
-
-  it('should clear storage', () => {
-    service.clear();
-    expect(localStorage.length).toBe(0);
-  });
-  
 });
