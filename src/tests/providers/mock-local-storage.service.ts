@@ -13,8 +13,4 @@ export class MockLocalStorageService {
   }
 
   public set(_key: string, _value: string): void {}
-
-  public remove(_key: string): void {}
-
-  public clear(): void {}
 }
