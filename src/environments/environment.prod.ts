@@ -1,13 +1,13 @@
 export const environment = {
   production: true,
   firebase: {
-    apiKey: "AIzaSyCMSrQSUfE7p-WldyyFsd8V3abk595foKc",
-    authDomain: "quiz-854cb.firebaseapp.com",
-    databaseURL: "https://quiz-854cb-default-rtdb.europe-west1.firebasedatabase.app",
-    projectId: "quiz-854cb",
-    storageBucket: "quiz-854cb.appspot.com",
-    messagingSenderId: "347219611443",
-    appId: "1:347219611443:web:44fe40a1f3b8ed86f97846",
-    measurementId: "G-6HQ3Q6GNRC"
+    apiKey: 'AIzaSyCILWTRobMU-4-0hKmLvGYr-8uj83m4CTU',
+    authDomain: 'quiz-55d82.firebaseapp.com',
+    databaseURL: 'https://quiz-55d82-default-rtdb.firebaseio.com/',
+    projectId: 'quiz-55d82',
+    storageBucket: 'quiz-55d82.appspot.com',
+    messagingSenderId: '899787092514',
+    appId: '1:899787092514:web:fef832451d81b5198a907b',
+    measurementId: 'G-HM7JW50KLV',
   }
 };
