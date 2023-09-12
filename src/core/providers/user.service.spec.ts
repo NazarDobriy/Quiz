@@ -2,29 +2,26 @@ import { TestBed } from '@angular/core/testing';
 import { LocalStorageService } from './local-storage.service';
 
 import { UserService } from './user.service';
+import { mockId } from '@a-tests/consts/test-consts';
+import { MockLocalStorageService } from '@a-tests/providers/mock-local-storage.service';
 
 describe('UserService', () => {
   let service: UserService;
-  let mockLocalStorageService: jasmine.SpyObj<LocalStorageService>;
+  let localStorageService: LocalStorageService;
 
   beforeEach(() => {
-    mockLocalStorageService = jasmine.createSpyObj(['get', 'has', 'set']);
-
     TestBed.configureTestingModule({
       providers: [
         UserService,
         {
           provide: LocalStorageService,
-          useValue: mockLocalStorageService
-        }
-      ]
+          useClass: MockLocalStorageService
+        },
+      ],
     });
 
     service = TestBed.inject(UserService);
-
-    mockLocalStorageService.get.calls.reset();
-    mockLocalStorageService.has.calls.reset();
-    mockLocalStorageService.set.calls.reset();
+    localStorageService = TestBed.inject(LocalStorageService);
   });
 
   it('should be created', () => {
@@ -32,18 +29,16 @@ describe('UserService', () => {
   });
 
   it('should get id', () => {
-    const id: string = "f252a827174d";
-    mockLocalStorageService.get.and.returnValue(id);
-    expect(service.id).toEqual(id);
+    expect(service.id).toEqual(mockId);
   });
 
   it('should check id', () => {
-    mockLocalStorageService.has.and.returnValue(true);
-    expect(service.hasId).toBeTruthy();
+    expect(service.hasId).toBeFalsy();
   });
 
   it('should set id', () => {
+    spyOn(localStorageService, 'set');
     service.generateId();
-    expect(mockLocalStorageService.set).toHaveBeenCalled();
+    expect(localStorageService.set).toHaveBeenCalled();
   });
 });

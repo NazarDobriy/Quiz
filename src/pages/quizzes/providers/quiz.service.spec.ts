@@ -5,7 +5,7 @@ import { QuizService } from './quiz.service';
 import { QuizzesApiService } from './quizzes-api.service';
 
 import { Duration } from '@a-models/duration';
-import { mockQuizzes, mockQuizResults, mockQuizAnswers } from 'mock-data';
+import { mockQuizzes, mockQuizResults, mockQuizAnswers } from '@a-tests/consts/test-consts';
 import { ScoreComponent } from '@a-pages/quizzes/pages/active/components/score/score.component';
 import { IQuiz, IPaginationScheme, IQuizResult } from '@a-pages/quizzes/types/quiz.type';
 
