@@ -5,9 +5,9 @@ import { AngularFireDatabase, AngularFireList, AngularFireObject } from '@angula
 import { Observable, of } from 'rxjs';
 import { IQuizTheme } from '@a-pages/quizzes/types/theme.type';
 import { IPaginationScheme, IQuiz, IQuizResult } from '@a-pages/quizzes/types/quiz.type';
-import { LocalStorageService } from '@a-core/providers/local-storage.service';
 import { UserService } from '@a-core/providers/user.service';
 import { mockQuizzes, mockQuizThemes, mockQuizResults } from '@a-tests/consts/test-consts';
+import { MockUserService } from '@a-tests/providers/mock-user.service';
 
 describe('ApiService', () => {
   let service: QuizzesApiService;
@@ -18,13 +18,9 @@ describe('ApiService', () => {
 
     TestBed.configureTestingModule({
       providers: [
-        UserService,
         QuizzesApiService,
-        LocalStorageService,
-        {
-          provide: AngularFireDatabase,
-          useValue: mockAngularFireDatabase
-        }
+        { provide: UserService, useClass: MockUserService },
+        { provide: AngularFireDatabase, useValue: mockAngularFireDatabase }
       ]
     });
     service = TestBed.inject(QuizzesApiService);
