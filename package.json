@@ -31,7 +31,7 @@
     "@ngrx/router-store": "^14.3.3",
     "@ngrx/store": "^14.3.3",
     "@ngrx/store-devtools": "^14.3.3",
-    "@nguniversal/express-engine": "^13.1.1",
+    "@nguniversal/express-engine": "^14.2.3",
     "@types/ws": "^8.5.4",
     "angular-svg-icon": "^13.0.0",
     "chart.js": "^3.8.0",
