@@ -5,13 +5,15 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:stats": "ng build --stats-json",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint",
     "dev:ssr": "ng run Quiz:serve-ssr",
     "serve:ssr": "node dist/Quiz/server/main.js",
     "build:ssr": "ng build && ng run Quiz:server",
-    "prerender": "ng run Quiz:prerender"
+    "prerender": "ng run Quiz:prerender",
+    "analyze": "webpack-bundle-analyzer dist/Quiz/browser/stats.json"
   },
   "private": true,
   "dependencies": {
