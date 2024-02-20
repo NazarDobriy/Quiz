@@ -1,5 +1,5 @@
 import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, Input, ViewChild } from '@angular/core';
-import { Chart, registerables } from 'chart.js';
+import { Chart, ChartDataset, ChartOptions, registerables } from 'chart.js';
 
 Chart.register(...registerables);
 
@@ -13,14 +13,12 @@ export class DoughnutChartComponent implements AfterViewInit {
 
   @ViewChild('donut') donut!: ElementRef;
 
-  private options = {
+  private options: ChartOptions = {
     responsive: false,
-    animation: {
-      animateRotate: false
-    }
+    animation: false
   };
 
-  private data = {
+  private data: { datasets: ChartDataset[]; } = {
     datasets: [{
       data: this.statistics,
       backgroundColor: [
