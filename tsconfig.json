@@ -3,15 +3,33 @@
   "compilerOptions": {
     "baseUrl": "src",
     "paths": {
-      "@a-app/*": ["app/*"],
-      "@a-core/*": ["core/*"],
-      "@a-utils/*": ["utils/*"],
-      "@a-pages/*": ["pages/*"],
-      "@a-tests/*": ["tests/*"],
-      "@a-shared/*": ["shared/*"],
-      "@a-models/*": ["models/*"],
-      "@a-asserts/*": ["asserts/*"],
-      "@a-environments/*": ["environments/*"]
+      "@a-app/*": [
+        "app/*"
+      ],
+      "@a-core/*": [
+        "core/*"
+      ],
+      "@a-utils/*": [
+        "utils/*"
+      ],
+      "@a-pages/*": [
+        "pages/*"
+      ],
+      "@a-tests/*": [
+        "tests/*"
+      ],
+      "@a-shared/*": [
+        "shared/*"
+      ],
+      "@a-models/*": [
+        "models/*"
+      ],
+      "@a-asserts/*": [
+        "asserts/*"
+      ],
+      "@a-environments/*": [
+        "environments/*"
+      ]
     },
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
@@ -26,12 +44,13 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
-    "target": "es2017",
+    "target": "ES2022",
     "module": "es2020",
     "lib": [
       "es2020",
       "dom"
-    ]
+    ],
+    "useDefineForClassFields": false
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

@@ -10,10 +10,10 @@ describe('DialogService', () => {
   let mockMatDialog: jasmine.SpyObj<MatDialog>;
 
   const mockDialogConfig: IDialogConfig = {
-    title: "Cancel",
-    message: "Are you sure you want to exit?",
-    dismissText: "No",
-    confirmText: "Yes"
+    title: 'Cancel',
+    message: 'Are you sure you want to exit?',
+    dismissText: 'No',
+    confirmText: 'Yes',
   };
 
   beforeEach(() => {
@@ -23,9 +23,9 @@ describe('DialogService', () => {
         DialogService,
         {
           provide: MatDialog,
-          useValue: mockMatDialog
-        }
-      ]
+          useValue: mockMatDialog,
+        },
+      ],
     });
     service = TestBed.inject(DialogService);
     mockMatDialog.open.calls.reset();
@@ -36,10 +36,9 @@ describe('DialogService', () => {
   });
 
   it('should call open', () => {
-    const ref: MatDialogRef<ConfirmDialogComponent> = mockMatDialog.open(
-      ConfirmDialogComponent,
-      { data: mockDialogConfig }
-    );
+    const ref = mockMatDialog.open(ConfirmDialogComponent, {
+      data: mockDialogConfig,
+    }) as MatDialogRef<ConfirmDialogComponent>;
     expect(service.open(mockDialogConfig)).toEqual(ref);
   });
 });
