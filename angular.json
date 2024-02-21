@@ -182,7 +182,6 @@
       }
     }
   },
-  "defaultProject": "Quiz",
   "schematics": {
     "@angular-eslint/schematics:application": {
       "setParserOptionsProject": true
