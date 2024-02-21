@@ -6,12 +6,7 @@ import { LocalStorageService } from './providers/local-storage.service';
 import { PlatformService } from './providers/platform.service';
 import { QuizzesStoreService } from './providers/quizzes-store.service';
 import { QuizStoreService } from './providers/quiz-store.service';
-import { Routes, RouterModule } from '@angular/router';
-import { HomeComponent } from '@a-pages/home/home.component';
-
-const routes: Routes = [
-  { path: '', component: HomeComponent }
-];
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -19,7 +14,7 @@ const routes: Routes = [
   ],
   imports: [
     CommonModule,
-    RouterModule.forChild(routes)
+    RouterModule
   ],
   exports: [
     HeaderComponent
