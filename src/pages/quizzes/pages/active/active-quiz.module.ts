@@ -15,11 +15,12 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { SnackBarService } from './providers/snack-bar.service';
 import { SkeletonQuizComponent } from './components/skeleton-quiz/skeleton-quiz.component';
 import { SharedModule } from '@a-shared/shared.module';
+import { QuizGuardService } from './providers/quiz-guard.service';
 
 const routes: Routes = [
   {
     path: '',
-    canDeactivate: [QuizComponent],
+    canDeactivate: [QuizGuardService],
     component: QuizComponent
   },
   {
@@ -53,7 +54,8 @@ const routes: Routes = [
     QuizComponent,
     ScoreComponent,
     DialogService,
-    SnackBarService
+    SnackBarService,
+    QuizGuardService
   ]
 })
 export class ActiveQuizModule { }
