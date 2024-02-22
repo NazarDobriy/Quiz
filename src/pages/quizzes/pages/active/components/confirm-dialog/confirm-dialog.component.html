@@ -5,13 +5,13 @@
     <div>
         <button
             class="sm:inline-block block border-2 py-3 md:w-36 w-32 sm:mr-2 m-auto text-accent bg-bright rounded"
-            mat-dialog-close
+            (click)="stay()"
         >
             {{ data.dismissText }}
         </button>
         <button
             class="sm:inline-block block py-[14px] md:w-36 w-32 sm:ml-2 m-auto mt-4 text-bright bg-accent rounded"
-            [mat-dialog-close]="true"
+            (click)="exit()"
         >
             {{ data.confirmText }}
         </button>
