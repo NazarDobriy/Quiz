@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { map, Observable, combineLatest } from 'rxjs';
+
 import { SnackBarService } from './providers/snack-bar.service';
 import { PlatformService } from '@a-core/providers/platform.service';
 import { QuizStoreService } from '@a-core/providers/quiz-store.service';
