@@ -1,9 +1,6 @@
 import { ChangeDetectionStrategy, Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { map, Observable, combineLatest } from 'rxjs';
-import { DialogService } from './providers/dialog.service';
-import { MatDialogRef } from '@angular/material/dialog';
-import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { SnackBarService } from './providers/snack-bar.service';
 import { PlatformService } from '@a-core/providers/platform.service';
 import { QuizStoreService } from '@a-core/providers/quiz-store.service';
@@ -69,7 +66,6 @@ export class QuizComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private quizService: QuizService,
     private themeService: ThemeService,
-    private dialogService: DialogService,
     private snackBarService: SnackBarService,
     private platformService: PlatformService,
     private quizStoreService: QuizStoreService
@@ -160,22 +156,6 @@ export class QuizComponent implements OnInit {
 
   private getAnswerByIndex(id: number): IAnswer {
     return this.currentQuiz?.questions[this.questionIndex]?.answers[id];
-  }
-
-  private openExitDialog(): MatDialogRef<ConfirmDialogComponent> {
-    return this.dialogService.open({
-      title: "Leave",
-      message: "Are you sure you want to exit and cancel the quiz? Your answers will not be saved.",
-      dismissText: "Back to quiz",
-      confirmText: "Go on main page"
-    });
-  }
-
-  canDeactivate(): Observable<boolean> | boolean {
-    if (this.quizService.completed) {
-      return true;
-    }
-    return this.openExitDialog().afterClosed();
   }
 
 }
