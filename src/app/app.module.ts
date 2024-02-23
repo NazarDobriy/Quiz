@@ -17,7 +17,7 @@ import { environment } from '@a-environments/environment.prod';
 @NgModule({
   declarations: [AppComponent],
   imports: [
-    BrowserModule.withServerTransition({ appId: 'serverApp' }),
+    BrowserModule,
     AppRoutingModule,
     CoreModule,
     BrowserAnimationsModule,
