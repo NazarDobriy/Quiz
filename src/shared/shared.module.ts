@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IconComponent } from './components/icon/icon.component';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
+import { IconComponent } from './components/icon/icon.component';
 
 
 @NgModule({

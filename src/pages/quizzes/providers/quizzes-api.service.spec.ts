@@ -1,8 +1,8 @@
 import { TestBed } from '@angular/core/testing';
-
-import { QuizzesApiService } from './quizzes-api.service';
 import { AngularFireDatabase, AngularFireList, AngularFireObject } from '@angular/fire/compat/database';
 import { Observable, of } from 'rxjs';
+
+import { QuizzesApiService } from './quizzes-api.service';
 import { IQuizTheme } from '@a-pages/quizzes/types/theme.type';
 import { IPaginationScheme, IQuiz, IQuizResult } from '@a-pages/quizzes/types/quiz.type';
 import { UserService } from '@a-core/providers/user.service';

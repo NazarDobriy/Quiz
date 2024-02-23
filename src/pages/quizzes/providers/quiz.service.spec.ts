@@ -1,9 +1,9 @@
 import { TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
+
 import { QuizService } from './quiz.service';
 import { QuizzesApiService } from './quizzes-api.service';
-
 import { Duration } from '@a-models/duration';
 import { mockQuizzes, mockQuizResults, mockQuizAnswers } from '@a-tests/consts/test-consts';
 import { ScoreComponent } from '@a-pages/quizzes/pages/active/components/score/score.component';

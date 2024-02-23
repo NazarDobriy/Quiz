@@ -5,6 +5,7 @@ import {
   ChangeDetectionStrategy
 } from '@angular/core';
 import { combineLatest, map, Observable, skip, Subscription } from 'rxjs';
+
 import { PlatformService } from '@a-core/providers/platform.service';
 import { QuizzesStoreService } from '@a-core/providers/quizzes-store.service';
 import { ThemeService } from '@a-pages/quizzes/providers/theme.service';
