@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
-import { LocalStorageService } from './local-storage.service';
 
+import { LocalStorageService } from './local-storage.service';
 import { UserService } from './user.service';
 import { mockId } from '@a-tests/consts/test-consts';
 import { MockLocalStorageService } from '@a-tests/providers/mock-local-storage.service';

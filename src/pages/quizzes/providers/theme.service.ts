@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { IQuizTheme } from '@a-pages/quizzes/types/theme.type';
+
 import { QuizzesApiService } from './quizzes-api.service';
+import { IQuizTheme } from '@a-pages/quizzes/types/theme.type';
 
 @Injectable()
 export class ThemeService {

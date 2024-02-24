@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Duration } from '@a-models/duration';
+
 import { QuizzesApiService } from './quizzes-api.service';
 import { IPaginationScheme, IQuestion, IQuiz, IQuizResult } from '@a-pages/quizzes/types/quiz.type';
 

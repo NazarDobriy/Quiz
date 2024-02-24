@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule, Routes } from '@angular/router';
+import { EffectsModule } from '@ngrx/effects';
+
 import { QuizService } from './providers/quiz.service';
 import { QuizListModule } from './pages/quiz-list/quiz-list.module';
 import { ActiveQuizModule } from './pages/active/active-quiz.module';
 import { ThemeService } from './providers/theme.service';
-import { RouterModule, Routes } from '@angular/router';
 import { QuizzesApiService } from './providers/quizzes-api.service';
-import { EffectsModule } from '@ngrx/effects';
 import { QuizzesEffects } from './store/quizzes/effects';
 import { QuizEffects } from './store/quiz/effects';
 

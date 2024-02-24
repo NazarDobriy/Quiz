@@ -6,6 +6,7 @@ import {
   UrlTree
 } from '@angular/router';
 import { combineLatest, map, merge, Observable, of } from 'rxjs';
+
 import { PlatformService } from '@a-core/providers/platform.service';
 import { QuizStoreService } from '@a-core/providers/quiz-store.service';
 import { QuizzesStoreService } from '@a-core/providers/quizzes-store.service';

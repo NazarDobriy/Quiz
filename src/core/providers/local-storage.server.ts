@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { LocalStorage } from '@a-utils/index';
+
 import { PlatformService } from './platform.service';
+import { LocalStorage } from '@a-utils/index';
 
 @Injectable()
 export class LocalStorageServer {

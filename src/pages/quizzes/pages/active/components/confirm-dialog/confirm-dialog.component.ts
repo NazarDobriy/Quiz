@@ -1,5 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+
 import { IDialogConfig } from '@a-pages/quizzes/pages/active/types/dialog.type';
 
 @Component({
