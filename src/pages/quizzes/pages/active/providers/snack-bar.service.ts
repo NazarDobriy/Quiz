@@ -10,7 +10,7 @@ export class SnackBarService {
     this.snackBar.open(message, action, {
       verticalPosition: 'top',
       duration: 2000,
-      panelClass: ['text-primary', 'bg-shade']
+      panelClass: ['text-primary', 'bg-transparent']
     });
   }
 
