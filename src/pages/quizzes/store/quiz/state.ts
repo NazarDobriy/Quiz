@@ -1,3 +1,4 @@
+import { initialQuiz } from "@a-pages/quizzes/consts/quizzes.const";
 import { IQuiz, IQuizResult } from "@a-pages/quizzes/types/quiz.type";
 
 export interface IQuizState {
@@ -16,13 +17,7 @@ export interface IQuizState {
 export const quizInitialState: IQuizState = {
   quiz: {
     isLoading: false,
-    data: {
-      id: 0,
-      title: '',
-      subtitle: '',
-      group: '',
-      questions: []
-    },
+    data: initialQuiz,
     error: null
   },
   result: {

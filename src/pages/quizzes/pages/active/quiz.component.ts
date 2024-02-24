@@ -10,6 +10,8 @@ import { IAnswer, IQuiz } from '@a-pages/quizzes/types/quiz.type';
 import { QuizService } from '@a-pages/quizzes/providers/quiz.service';
 import { ThemeService } from '@a-pages/quizzes/providers/theme.service';
 import { IQuizTheme } from '@a-pages/quizzes/types/theme.type';
+import { initialQuizTheme } from './consts/active-quiz.const';
+import { initialQuiz } from '@a-pages/quizzes/consts/quizzes.const';
 
 @Component({
   selector: 'app-quiz',
@@ -19,37 +21,16 @@ import { IQuizTheme } from '@a-pages/quizzes/types/theme.type';
 export class QuizComponent implements OnInit {
   readonly MIN_AMOUNT_QUESTIONS: number = 1;
 
-  public currentQuiz: IQuiz = {
-    group: '',
-    questions: [],
-    id: 0,
-    title: '',
-    subtitle: ''
-  };
-
-  public quizTheme: IQuizTheme = {
-    primaryTextClass: '',
-    secondaryTextClass: '',
-    secondaryActiveTextClass: '',
-    numberTextClass: '',
-    numberBackgroundClass: '',
-    backgroundClass: '',
-    btnsBackgroundClass: '',
-    btnsTextClass: '',
-    radioButtonColor: '',
-    titleTextClass: '',
-    personName: ''
-  };
-
+  public currentQuiz: IQuiz = initialQuiz;
+  public quizTheme: IQuizTheme = initialQuizTheme;
   public quizId: number = 0;
   public questionIndex: number = 0;
   public timeStart!: Date;
-
   public personsIcons = {
     Mili: 'mili',
     Jake: 'jake',
     Steven: 'steven'
-  };
+  };;
 
   private userAnswersIds: string[] = [];
 
