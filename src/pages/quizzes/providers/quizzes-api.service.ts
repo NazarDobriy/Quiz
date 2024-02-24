@@ -7,16 +7,11 @@ import { UserService } from '@a-core/providers/user.service';
 import { Duration } from '@a-models/duration';
 import { IPaginationScheme, IQuiz, IQuizResult } from '@a-pages/quizzes/types/quiz.type';
 import { IQuizTheme } from '@a-pages/quizzes/types/theme.type';
+import { initialQuiz } from '@a-pages/quizzes/consts/quizzes.const';
 
 @Injectable()
 export class QuizzesApiService {
-  private primaryQuiz: IQuiz = {
-    group: '',
-    questions: [],
-    id: 0,
-    title: '',
-    subtitle: ''
-  };
+  private primaryQuiz: IQuiz = initialQuiz;
 
   constructor(private db: AngularFireDatabase, private userService: UserService) { }
 
