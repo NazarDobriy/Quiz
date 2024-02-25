@@ -5,11 +5,12 @@ import {
   Router,
   UrlTree
 } from '@angular/router';
-import { combineLatest, map, merge, Observable, of } from 'rxjs';
+import { map, merge, Observable, of } from 'rxjs';
 
 import { PlatformService } from '@a-core/providers/platform.service';
 import { QuizStoreService } from '@a-core/providers/quiz-store.service';
 import { QuizzesStoreService } from '@a-core/providers/quizzes-store.service';
+import { combineLoadings } from '@a-pages/quizzes/utils';
 
 @Component({
   selector: 'app-score',
@@ -23,12 +24,12 @@ export class ScoreComponent implements OnInit {
     )
   );
 
-  isLoading$ = combineLatest([
+  isLoading$ = combineLoadings(
     this.quizStoreService.isLoadingQuiz$,
     this.quizStoreService.isLoadingQuizResult$,
     this.quizzesStoreService.isLoadingQuizzes$,
-    this.quizzesStoreService.isLoadingQuizzesResults$,
-  ]).pipe(map((item) => item[0] || item[1] || item[2] || item[3]));
+    this.quizzesStoreService.isLoadingQuizzesResults$
+  );
 
   quizzes$ = this.quizzesStoreService.quizzes$;
   quizResultScore$ = this.quizStoreService.quizResultScore$;
