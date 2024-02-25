@@ -11,17 +11,6 @@ export class QuizService {
 
   constructor(private router: Router, private quizzesApiService: QuizzesApiService) {}
 
-  calcQuizResult(quiz: IQuiz, userAnswers: string[]): number {
-    const correctAnswers = this.getCorrectAnswers(quiz);
-    let amountCorrectAnswers = 0;
-    for (let i = 0; i < correctAnswers.length; i++) {
-      if (userAnswers[i] === correctAnswers[i]) {
-        amountCorrectAnswers++;
-      }
-    }
-    return amountCorrectAnswers;
-  }
-
   finishQuiz(quiz: IQuiz, answers: string[], duration: Duration): void {
     this.completed = true;
     this.quizzesApiService.setQuizAnswers(
@@ -55,6 +44,17 @@ export class QuizService {
 
   getQuizzesResults(): Promise<IQuizResult[]> {
     return this.quizzesApiService.getQuizzesResults();
+  }
+
+  private calcQuizResult(quiz: IQuiz, userAnswers: string[]): number {
+    const correctAnswers = this.getCorrectAnswers(quiz);
+    let amountCorrectAnswers = 0;
+    for (let i = 0; i < correctAnswers.length; i++) {
+      if (userAnswers[i] === correctAnswers[i]) {
+        amountCorrectAnswers++;
+      }
+    }
+    return amountCorrectAnswers;
   }
 
 }
