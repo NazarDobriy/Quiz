@@ -6,16 +6,16 @@ import { IQuizTheme } from '@a-pages/quizzes/types/theme.type';
 
 @Injectable()
 export class ThemeService {
-  public themes: IQuizTheme[] = [];
-  public isLoadingThemes$ = new BehaviorSubject<boolean>(true);
+  isLoadingThemes$ = new BehaviorSubject<boolean>(true);
+  themes: IQuizTheme[] = [];
 
   constructor(private quizzesApiService: QuizzesApiService) { }
 
-  private getThemeById(id: number): IQuizTheme {
-    return this.themes[id];
+  getThemeByText(text: string): IQuizTheme {
+    return this.getThemeById(this.calculateTheme(text));
   }
 
-  public async setThemes(): Promise<void> {
+  async setThemes(): Promise<void> {
     this.themes = await this.quizzesApiService.getAllQuizThemes();
     this.isLoadingThemes$.next(false);
   }
@@ -28,8 +28,8 @@ export class ThemeService {
     return sum % this.themes.length;
   }
 
-  public getThemeByText(text: string): IQuizTheme {
-    return this.getThemeById(this.calculateTheme(text));
+  private getThemeById(id: number): IQuizTheme {
+    return this.themes[id];
   }
 
 }

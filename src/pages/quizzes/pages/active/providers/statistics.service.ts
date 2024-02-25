@@ -7,11 +7,6 @@ export class StatisticsService {
   private quizzes: IQuiz[] = [];
   private quizzesResults: IQuizResult[] = [];
 
-  public initialize(quizzes: IQuiz[], results: IQuizResult[]): void {
-    this.quizzes = quizzes;
-    this.quizzesResults = results;
-  }
-
   get amountPassedQuizzes(): number {
     return this.quizzesResults.length;
   }
@@ -20,18 +15,50 @@ export class StatisticsService {
     return this.quizzes.length;
   }
 
-  get quizzesQuestionAmount(): number {
-    let questionCounter: number = 0;
-    this.quizzes.forEach((quiz: IQuiz) => {
-      questionCounter += quiz.questions.length;
+  get averageMinutesDuration(): number {
+    let durationCounter: number = 0;
+    this.quizzesResults.forEach((quizResult: IQuizResult) => {
+      durationCounter += quizResult.seconds;
     });
-    return questionCounter;
+    return Math.floor(durationCounter / this.amountPassedQuizzes / 60);
+  }
+
+  get averageSecondsDuration(): number {
+    let durationCounter: number = 0;
+    this.quizzesResults.forEach((quizResult: IQuizResult) => {
+      durationCounter += quizResult.seconds;
+    });
+    return Math.floor(durationCounter / this.amountPassedQuizzes);
+  }
+
+  get generalMinutesDuration(): number {
+    let durationCounter: number = 0;
+    this.quizzesResults.forEach((quizResult: IQuizResult) => {
+      durationCounter += quizResult.seconds;
+    });
+    return Math.floor(durationCounter / 60);
+  }
+
+  get generalSecondsDuration(): number {
+    let durationCounter: number = 0;
+    this.quizzesResults.forEach((quizResult: IQuizResult) => {
+      durationCounter += quizResult.seconds;
+    });
+    return durationCounter;
   }
 
   get passedQuizzesQuestionAmount(): number {
     let questionCounter: number = 0;
     this.quizzesResults.forEach((quizResult: IQuizResult) => {
       questionCounter += quizResult.answersLength;
+    });
+    return questionCounter;
+  }
+
+  get quizzesQuestionAmount(): number {
+    let questionCounter: number = 0;
+    this.quizzes.forEach((quiz: IQuiz) => {
+      questionCounter += quiz.questions.length;
     });
     return questionCounter;
   }
@@ -48,36 +75,9 @@ export class StatisticsService {
     return this.passedQuizzesQuestionAmount - this.rightAnswersAmount;
   }
 
-  get generalSecondsDuration(): number {
-    let durationCounter: number = 0;
-    this.quizzesResults.forEach((quizResult: IQuizResult) => {
-      durationCounter += quizResult.seconds;
-    });
-    return durationCounter;
-  }
-
-  get generalMinutesDuration(): number {
-    let durationCounter: number = 0;
-    this.quizzesResults.forEach((quizResult: IQuizResult) => {
-      durationCounter += quizResult.seconds;
-    });
-    return Math.floor(durationCounter / 60);
-  }
-
-  get averageSecondsDuration(): number {
-    let durationCounter: number = 0;
-    this.quizzesResults.forEach((quizResult: IQuizResult) => {
-      durationCounter += quizResult.seconds;
-    });
-    return Math.floor(durationCounter / this.amountPassedQuizzes);
-  }
-
-  get averageMinutesDuration(): number {
-    let durationCounter: number = 0;
-    this.quizzesResults.forEach((quizResult: IQuizResult) => {
-      durationCounter += quizResult.seconds;
-    });
-    return Math.floor(durationCounter / this.amountPassedQuizzes / 60);
+  initialize(quizzes: IQuiz[], results: IQuizResult[]): void {
+    this.quizzes = quizzes;
+    this.quizzesResults = results;
   }
 
 }

@@ -8,7 +8,7 @@ import { IQuiz, IQuizResult } from '@a-pages/quizzes/types/quiz.type';
 
 @Injectable()
 export class QuizEffects {
-  public getQuiz$ = createEffect(() => {
+  getQuiz$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(QuizActions.getQuiz),
       switchMap((action: { id: number }) => {
@@ -22,7 +22,7 @@ export class QuizEffects {
     );
   });
 
-  public getQuizResult$ = createEffect(() => {
+  getQuizResult$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(QuizActions.getQuizResult),
       switchMap((action: { id: number }) => {

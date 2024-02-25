@@ -13,11 +13,11 @@ export class ConfirmDialogComponent {
     private dialogRef: MatDialogRef<ConfirmDialogComponent>
   ) {}
 
-  stay(): void {
-    this.dialogRef.close(false);
-  }
-
   exit(): void {
     this.dialogRef.close(true);
+  }
+
+  stay(): void {
+    this.dialogRef.close(false);
   }
 }

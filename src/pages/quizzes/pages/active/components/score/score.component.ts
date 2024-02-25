@@ -10,7 +10,6 @@ import { combineLatest, map, merge, Observable, of } from 'rxjs';
 import { PlatformService } from '@a-core/providers/platform.service';
 import { QuizStoreService } from '@a-core/providers/quiz-store.service';
 import { QuizzesStoreService } from '@a-core/providers/quizzes-store.service';
-import { IQuiz, IQuizResult } from '@a-pages/quizzes/types/quiz.type';
 
 @Component({
   selector: 'app-score',
@@ -18,25 +17,25 @@ import { IQuiz, IQuizResult } from '@a-pages/quizzes/types/quiz.type';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ScoreComponent implements OnInit {
-  private quizId: number = 0;
-
-  public quizzes$: Observable<IQuiz[]> = this.quizzesStoreService.quizzes$;
-  public quizResultScore$: Observable<number> = this.quizStoreService.quizResultScore$;
-  public quizQuestionsLength$: Observable<number> = this.quizStoreService.quizQuestionsLength$;
-  public quizzesResults$: Observable<IQuizResult[]> = this.quizzesStoreService.quizzesResults$;
-
-  public durationText$ = this.quizStoreService.quizResultSeconds$.pipe(
+  durationText$ = this.quizStoreService.quizResultSeconds$.pipe(
     map((value) =>
       Math.floor(value / 60) > 0 ? `${value} min` : `${value} sec`
     )
   );
 
-  public isLoading$: Observable<boolean> = combineLatest([
+  isLoading$ = combineLatest([
     this.quizStoreService.isLoadingQuiz$,
     this.quizStoreService.isLoadingQuizResult$,
     this.quizzesStoreService.isLoadingQuizzes$,
     this.quizzesStoreService.isLoadingQuizzesResults$,
   ]).pipe(map((item) => item[0] || item[1] || item[2] || item[3]));
+
+  quizzes$ = this.quizzesStoreService.quizzes$;
+  quizResultScore$ = this.quizStoreService.quizResultScore$;
+  quizQuestionsLength$ = this.quizStoreService.quizQuestionsLength$;
+  quizzesResults$ = this.quizzesStoreService.quizzesResults$;
+
+  private quizId = 0;
 
   constructor(
     private router: Router,

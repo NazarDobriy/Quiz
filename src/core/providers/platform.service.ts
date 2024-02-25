@@ -3,9 +3,6 @@ import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 
 @Injectable()
 export class PlatformService {
-
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) { }
-
   get isBrowser(): boolean {
     return isPlatformBrowser(this.platformId);
   }
@@ -13,4 +10,6 @@ export class PlatformService {
   get isServer(): boolean {
     return isPlatformServer(this.platformId);
   }
+
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
 }

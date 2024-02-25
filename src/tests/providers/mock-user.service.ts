@@ -12,5 +12,5 @@ export class MockUserService {
     return false;
   }
 
-  public generateId(): void {}
+  generateId(): void {}
 }
