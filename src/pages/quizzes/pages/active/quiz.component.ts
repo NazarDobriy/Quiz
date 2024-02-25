@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { map, combineLatest } from 'rxjs';
 
 import { SnackBarService } from './providers/snack-bar.service';
 import { PlatformService } from '@a-core/providers/platform.service';
@@ -11,6 +10,7 @@ import { QuizService } from '@a-pages/quizzes/providers/quiz.service';
 import { ThemeService } from '@a-pages/quizzes/providers/theme.service';
 import { initialQuizTheme } from './consts/active-quiz.const';
 import { initialQuiz } from '@a-pages/quizzes/consts/quizzes.const';
+import { combineLoadings } from '@a-pages/quizzes/utils';
 
 @Component({
   selector: 'app-quiz',
@@ -24,10 +24,10 @@ export class QuizComponent implements OnInit {
   }
 
   currentQuiz = initialQuiz;
-  isLoading$ = combineLatest([
+  isLoading$ = combineLoadings(
     this.themeService.isLoadingThemes$,
-    this.quizStoreService.isLoadingQuiz$,
-  ]).pipe(map(item => item[0] || item[1]));
+    this.quizStoreService.isLoadingQuiz$
+  );
   personsIcons = {
     Mili: 'mili',
     Jake: 'jake',

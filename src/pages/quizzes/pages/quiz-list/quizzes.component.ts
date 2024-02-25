@@ -4,12 +4,13 @@ import {
   OnDestroy,
   ChangeDetectionStrategy
 } from '@angular/core';
-import { combineLatest, map, Observable, skip, Subscription } from 'rxjs';
+import { skip, Subscription } from 'rxjs';
 
 import { PlatformService } from '@a-core/providers/platform.service';
 import { QuizzesStoreService } from '@a-core/providers/quizzes-store.service';
 import { ThemeService } from '@a-pages/quizzes/providers/theme.service';
 import { IPaginationScheme, IQuiz } from '@a-pages/quizzes/types/quiz.type';
+import { combineLoadings } from '@a-pages/quizzes/utils';
 
 @Component({
   selector: 'app-quizzes',
@@ -18,10 +19,10 @@ import { IPaginationScheme, IQuiz } from '@a-pages/quizzes/types/quiz.type';
 })
 export class QuizzesComponent implements OnInit, OnDestroy {
   quizzes: IQuiz[] = [];
-  isLoading$ = combineLatest([
+  isLoading$ = combineLoadings(
     this.themeService.isLoadingThemes$,
     this.quizzesStoreService.isLoadingQuizzes$
-  ]).pipe(map(item => item[0] || item[1]));
+  );
 
   readonly INITIAL_AMOUNT_QUIZ_CARDS = 5;
 
