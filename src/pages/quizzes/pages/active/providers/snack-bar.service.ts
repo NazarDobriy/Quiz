@@ -6,7 +6,7 @@ export class SnackBarService {
 
   constructor(private snackBar: MatSnackBar) { }
 
-  public open(message: string, action: string): void {
+  open(message: string, action: string): void {
     this.snackBar.open(message, action, {
       verticalPosition: 'top',
       duration: 2000,

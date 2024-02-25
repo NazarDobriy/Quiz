@@ -6,9 +6,9 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RadioButtonComponent {
-  @Input() option: string = '';
-  @Input() name: string = '';
-  @Input() buttonStyle: string = '';
-  @Input() isChecked: boolean = false;
-  @Input() labelClass: string = '';
+  @Input() buttonStyle = '';
+  @Input() isChecked = false;
+  @Input() labelClass = '';
+  @Input() name = '';
+  @Input() option = '';
 }

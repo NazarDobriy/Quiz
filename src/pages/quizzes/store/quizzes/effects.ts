@@ -8,7 +8,7 @@ import { IQuiz, IPaginationScheme, IQuizResult } from '@a-pages/quizzes/types/qu
 
 @Injectable()
 export class QuizzesEffects {
-  public getQuizzes$ = createEffect(() => {
+  getQuizzes$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(QuizzesActions.getQuizzes),
       switchMap(() => {
@@ -24,7 +24,7 @@ export class QuizzesEffects {
     );
   });
 
-  public getQuizzesScheme$ = createEffect(() => {
+  getQuizzesScheme$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(QuizzesActions.getQuizzesScheme),
       switchMap((action: { offset: number; count: number; }) => {
@@ -39,7 +39,7 @@ export class QuizzesEffects {
     );
   });
 
-  public getQuizzesResults$ = createEffect(() => {
+  getQuizzesResults$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(QuizzesActions.getQuizzesResults),
       switchMap(() => {

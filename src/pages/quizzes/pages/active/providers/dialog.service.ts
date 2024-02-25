@@ -9,7 +9,7 @@ export class DialogService {
 
   constructor(private dialog: MatDialog) { }
 
-  public open(config: IDialogConfig): MatDialogRef<ConfirmDialogComponent> {
+  open(config: IDialogConfig): MatDialogRef<ConfirmDialogComponent> {
     return this.dialog.open(ConfirmDialogComponent, { data: config });
   }
 

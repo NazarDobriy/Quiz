@@ -6,5 +6,5 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SkeletonQuizzesComponent {
-  @Input() limit: number = 0;
+  @Input() limit = 0;
 }

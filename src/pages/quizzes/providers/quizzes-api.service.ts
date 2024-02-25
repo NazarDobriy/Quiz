@@ -11,15 +11,19 @@ import { initialQuiz } from '@a-pages/quizzes/consts/quizzes.const';
 
 @Injectable()
 export class QuizzesApiService {
-  private primaryQuiz: IQuiz = initialQuiz;
+  private primaryQuiz = initialQuiz;
 
   constructor(private db: AngularFireDatabase, private userService: UserService) { }
 
-  public getAllQuizzes(): Promise<IQuiz[]> {
+  getAllQuizzes(): Promise<IQuiz[]> {
     return firstValueFrom(this.db.list<IQuiz>('quizzes').valueChanges());
   }
 
-  public getPaginatedQuizzes(offset: number, count: number): Promise<IPaginationScheme<IQuiz>> {
+  getAllQuizThemes(): Promise<IQuizTheme[]> {
+    return firstValueFrom(this.db.list<IQuizTheme>('quiz_themes').valueChanges());
+  }
+
+  getPaginatedQuizzes(offset: number, count: number): Promise<IPaginationScheme<IQuiz>> {
     return firstValueFrom(this.db.list<IQuiz>('quizzes', (ref: QueryReference) => {
       return ref.startAt(`${offset}`).endAt(`${offset + count - 1}`).orderByKey();
     }).valueChanges().pipe(
@@ -34,11 +38,7 @@ export class QuizzesApiService {
     ));
   }
 
-  public getAllQuizThemes(): Promise<IQuizTheme[]> {
-    return firstValueFrom(this.db.list<IQuizTheme>('quiz_themes').valueChanges());
-  }
-
-  public getQuizById(id: number): Promise<IQuiz> {
+  getQuizById(id: number): Promise<IQuiz> {
     return firstValueFrom(this.db.list<IQuiz>('quizzes').valueChanges().pipe(
       map((quizzes: IQuiz[]) => {
         const selectedQuiz: IQuiz | undefined = quizzes.find((quiz: IQuiz) => quiz.id === id);
@@ -47,7 +47,15 @@ export class QuizzesApiService {
     ));
   }
 
-  public setQuizAnswers(quizId: number, answers: string[], correctAnswers: number, duration: Duration): void {
+  getQuizResultById(id: number): Promise<IQuizResult | null> {
+    return firstValueFrom(this.db.object<IQuizResult>(`quiz_answers/${this.userService.id}/${id}`).valueChanges());
+  }
+
+  getQuizzesResults(): Promise<IQuizResult[]> {
+    return firstValueFrom(this.db.list<IQuizResult>(`quiz_answers/${this.userService.id}`).valueChanges());
+  }
+
+  setQuizAnswers(quizId: number, answers: string[], correctAnswers: number, duration: Duration): void {
     if (this.userService.id) {
       const path: string = `quiz_answers/${this.userService.id}/${quizId}`;
       this.db.object<IQuizResult>(path).set({
@@ -56,14 +64,6 @@ export class QuizzesApiService {
         seconds: duration.seconds
       });
     }
-  }
-
-  public getQuizResultById(id: number): Promise<IQuizResult | null> {
-    return firstValueFrom(this.db.object<IQuizResult>(`quiz_answers/${this.userService.id}/${id}`).valueChanges());
-  }
-
-  public getQuizzesResults(): Promise<IQuizResult[]> {
-    return firstValueFrom(this.db.list<IQuizResult>(`quiz_answers/${this.userService.id}`).valueChanges());
   }
 
 }

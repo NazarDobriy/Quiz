@@ -7,8 +7,8 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 })
 export class ScoreCounterComponent {
   @Input() backgroundClass = 'bg-warning';
-  @Input() textClass = 'text-primary';
-  @Input() secondaryTextClass = 'text-bright';
   @Input() counter = 0;
   @Input() limit = 0;
+  @Input() secondaryTextClass = 'text-bright';
+  @Input() textClass = 'text-primary';
 }

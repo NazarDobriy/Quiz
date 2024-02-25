@@ -6,23 +6,23 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RadioGroupButtonComponent {
-  @Input() selectedOption: string | null = null;
+  @Input() activeLabelClass = '';
+  @Input() buttonStyle = '';
+  @Input() labelClass = '';
   @Input() options: string[] = [];
-  @Input() buttonStyle: string = '';
-  @Input() labelClass: string = '';
-  @Input() activeLabelClass: string = '';
+  @Input() selectedOption: string | null = null;
 
   @Output() radioSelect = new EventEmitter<number>();
 
-  public inputName: string = 'question';
+  inputName = 'question';
 
-  public selectOption(index: number): void {
-    this.selectedOption = this.options[index];
-    this.radioSelect.emit(index);
+  isOptionSelected(optionIndex: number): boolean {
+    return this.options[optionIndex] === this.selectedOption;
   }
 
-  public isOptionSelected(optionIndex: number): boolean {
-    return this.options[optionIndex] === this.selectedOption;
+  selectOption(index: number): void {
+    this.selectedOption = this.options[index];
+    this.radioSelect.emit(index);
   }
 
 }
