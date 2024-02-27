@@ -11,8 +11,8 @@ import { IQuiz, IPaginationScheme, IQuizResult } from '@a-pages/quizzes/types/qu
 
 describe('QuizService', () => {
   let duration: Duration;
-  const id: number = 1, index: number = 0;
-  const start: Date = new Date(), end: Date = new Date();
+  const id = 1, index = 0;
+  const start = new Date(), end = new Date();
 
   let service: QuizService;
   let mockRouter: jasmine.SpyObj<Router>;
