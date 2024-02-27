@@ -7,7 +7,7 @@ import { IQuizTheme } from '@a-pages/quizzes/types/theme.type';
 @Injectable()
 export class ThemeService {
   isLoadingThemes$ = new BehaviorSubject<boolean>(true);
-  themes: IQuizTheme[] = [];
+  private themes: IQuizTheme[] = [];
 
   constructor(private quizzesApiService: QuizzesApiService) { }
 
