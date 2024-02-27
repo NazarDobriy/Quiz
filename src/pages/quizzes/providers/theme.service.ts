@@ -9,7 +9,7 @@ export class ThemeService {
   isLoadingThemes$ = new BehaviorSubject<boolean>(true);
   private themes: IQuizTheme[] = [];
 
-  constructor(private quizzesApiService: QuizzesApiService) { }
+  constructor(private quizzesApiService: QuizzesApiService) {}
 
   getThemeByText(text: string): IQuizTheme {
     return this.getThemeById(this.calculateTheme(text));
@@ -21,15 +21,13 @@ export class ThemeService {
   }
 
   private calculateTheme(text: string): number {
-    let sum: number = 0;
-    for (let i = 0; i < text.length; i++) {
-      sum += text.charCodeAt(i);
-    }
-    return sum % this.themes.length;
+    return (
+      text.split('').reduce((sum, char) => sum + char.charCodeAt(0), 0) %
+      this.themes.length
+    );
   }
 
   private getThemeById(id: number): IQuizTheme {
     return this.themes[id];
   }
-
 }
