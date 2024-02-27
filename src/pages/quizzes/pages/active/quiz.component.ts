@@ -8,8 +8,7 @@ import { Duration } from '@a-models/duration';
 import { IAnswer } from '@a-pages/quizzes/types/quiz.type';
 import { QuizService } from '@a-pages/quizzes/providers/quiz.service';
 import { ThemeService } from '@a-pages/quizzes/providers/theme.service';
-import { initialQuizTheme } from './consts/active-quiz.const';
-import { initialQuiz } from '@a-pages/quizzes/consts/quizzes.const';
+import { initialQuiz, initialQuizTheme } from '@a-pages/quizzes/consts/quizzes.const';
 import { combineLoadings } from '@a-pages/quizzes/utils';
 
 @Component({

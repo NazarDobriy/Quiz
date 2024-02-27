@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 
 import { IQuiz } from '@a-pages/quizzes/types/quiz.type';
-import { IQuizTheme } from '@a-pages/quizzes/types/theme.type';
 import { ThemeService } from '@a-pages/quizzes/providers/theme.service';
+import { initialQuizTheme } from '@a-pages/quizzes/consts/quizzes.const';
 
 @Component({
   selector: 'app-quiz-card',
@@ -12,7 +12,7 @@ import { ThemeService } from '@a-pages/quizzes/providers/theme.service';
 export class QuizCardComponent implements OnInit {
   @Input() quiz!: IQuiz;
 
-  theme!: IQuizTheme;
+  theme = initialQuizTheme;
 
   constructor(private themeService: ThemeService) {}
 
