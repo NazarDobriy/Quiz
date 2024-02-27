@@ -72,7 +72,7 @@ export class QuizzesComponent implements OnInit, OnDestroy {
       .subscribe((scheme: IPaginationScheme<IQuiz>) => {
         this.paginationQuizzes = scheme;
         const newQuizzes: IQuiz[] = this.paginationQuizzes.data;
-        this.quizzes = [...this.quizzes, ...newQuizzes];
+        this.quizzes.push(...newQuizzes);
       });
   }
 
