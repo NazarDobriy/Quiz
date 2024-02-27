@@ -33,11 +33,11 @@ export class QuizComponent implements OnInit {
     Jake: 'jake',
     Steven: 'steven'
   };
-  questionIndex = 0;
-  quizId = 0;
   quizTheme = initialQuizTheme;
-  timeStart!: Date;
 
+  private questionIndex = 0;
+  private quizId = 0;
+  private timeStart!: Date;
   private userAnswersIds: string[] = [];
   private readonly MIN_AMOUNT_QUESTIONS = 1;
 
