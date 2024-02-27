@@ -22,10 +22,6 @@ export class QuizService {
     this.router.navigateByUrl(`/quizzes/active/${quiz.id}/score`);
   }
 
-  getCorrectAnswers(quiz: IQuiz): string[] {
-    return quiz.questions.map((question: IQuestion) => question.correctAnswer);
-  }
-
   getPaginatedQuizzes(offset: number, count: number): Promise<IPaginationScheme<IQuiz>> {
     return this.quizzesApiService.getPaginatedQuizzes(offset, count);
   }
@@ -55,6 +51,10 @@ export class QuizService {
       }
     }
     return amountCorrectAnswers;
+  }
+
+  private getCorrectAnswers(quiz: IQuiz): string[] {
+    return quiz.questions.map((question: IQuestion) => question.correctAnswer);
   }
 
 }
