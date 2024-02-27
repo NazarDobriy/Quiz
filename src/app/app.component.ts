@@ -7,14 +7,11 @@ import { UserService } from '@a-core/providers/user.service';
   templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit {
-  title = 'Quiz';
-
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService) {}
 
   ngOnInit(): void {
     if (!this.userService.hasId) {
       this.userService.generateId();
     }
   }
-
 }
