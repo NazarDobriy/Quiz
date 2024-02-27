@@ -22,7 +22,7 @@ export class ThemeService {
 
   private calculateTheme(text: string): number {
     return (
-      text.split('').reduce((sum, char) => sum + char.charCodeAt(0), 0) %
+      text.split('').reduce((sum, symbol) => sum + symbol.charCodeAt(0), 0) %
       this.themes.length
     );
   }
