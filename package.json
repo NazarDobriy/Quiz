@@ -8,6 +8,7 @@
     "build:stats": "ng build --stats-json",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
+    "coverage": "ng test --watch=false --code-coverage",
     "lint": "ng lint",
     "dev:ssr": "ng run Quiz:serve-ssr",
     "serve:ssr": "node dist/Quiz/server/main.js",
