@@ -17,6 +17,7 @@ import { RadioGroupButtonComponent } from './components/radio-group-button/radio
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { DialogService } from './providers/dialog.service';
 import { SharedModule } from '@a-shared/shared.module';
+import { ScoreGuardService } from './providers/score-guard.service';
 
 const routes: Routes = [
   {
@@ -26,7 +27,7 @@ const routes: Routes = [
   },
   {
     path: 'score',
-    canActivate: [ScoreComponent],
+    canActivate: [ScoreGuardService],
     component: ScoreComponent
   }
 ];
@@ -56,7 +57,8 @@ const routes: Routes = [
     ScoreComponent,
     DialogService,
     SnackBarService,
-    QuizGuardService
+    QuizGuardService,
+    ScoreGuardService
   ]
 })
 export class ActiveQuizModule { }
