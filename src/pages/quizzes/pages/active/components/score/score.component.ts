@@ -1,11 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import {
-  ActivatedRoute,
-  ActivatedRouteSnapshot,
-  Router,
-  UrlTree
-} from '@angular/router';
-import { map, merge, Observable, of } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+import { map } from 'rxjs';
 
 import { PlatformService } from '@a-core/providers/platform.service';
 import { QuizStoreService } from '@a-core/providers/quiz-store.service';
@@ -39,7 +34,6 @@ export class ScoreComponent implements OnInit {
   private quizId = 0;
 
   constructor(
-    private router: Router,
     private quizStoreService: QuizStoreService,
     private quizzesStoreService: QuizzesStoreService,
     private activatedRoute: ActivatedRoute,
@@ -51,21 +45,8 @@ export class ScoreComponent implements OnInit {
 
     if (this.platformService.isBrowser) {
       this.quizStoreService.getQuiz(this.quizId);
-      this.quizStoreService.getQuizResult(this.quizId);
       this.quizzesStoreService.getQuizzes();
       this.quizzesStoreService.getQuizzesResults();
     }
-  }
-
-  canActivate(route: ActivatedRouteSnapshot): Observable<boolean | UrlTree> {
-    const quizId: number = parseInt(route.params['id']);
-    if (this.platformService.isBrowser) {
-      this.quizStoreService.getQuizResult(quizId);
-      return merge(
-        this.quizStoreService.isLoadingQuizResult$,
-        of(this.router.createUrlTree(['/']))
-      );
-    }
-    return of(true);
   }
 }
