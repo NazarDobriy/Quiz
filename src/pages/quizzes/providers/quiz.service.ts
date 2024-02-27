@@ -7,31 +7,11 @@ import { IPaginationScheme, IQuestion, IQuiz, IQuizResult } from '@a-pages/quizz
 
 @Injectable()
 export class QuizService {
-  public completed: boolean = false;
+  completed = false;
 
   constructor(private router: Router, private quizzesApiService: QuizzesApiService) {}
 
-  public getQuizzes(): Promise<IQuiz[]> {
-    return this.quizzesApiService.getAllQuizzes();
-  }
-
-  public getPaginatedQuizzes(offset: number, count: number): Promise<IPaginationScheme<IQuiz>> {
-    return this.quizzesApiService.getPaginatedQuizzes(offset, count);
-  }
-
-  public getQuizzesResults(): Promise<IQuizResult[]> {
-    return this.quizzesApiService.getQuizzesResults();
-  }
-
-  public getQuizById(id: number): Promise<IQuiz> {
-    return this.quizzesApiService.getQuizById(id);
-  }
-
-  public getQuizResultById(id: number): Promise<IQuizResult | null> {
-    return this.quizzesApiService.getQuizResultById(id);
-  }
-
-  public finishQuiz(quiz: IQuiz, answers: string[], duration: Duration): void {
+  finishQuiz(quiz: IQuiz, answers: string[], duration: Duration): void {
     this.completed = true;
     this.quizzesApiService.setQuizAnswers(
       quiz.id,
@@ -42,13 +22,33 @@ export class QuizService {
     this.router.navigateByUrl(`/quizzes/active/${quiz.id}/score`);
   }
 
-  private getCorrectAnswers(quiz: IQuiz): string[] {
+  getCorrectAnswers(quiz: IQuiz): string[] {
     return quiz.questions.map((question: IQuestion) => question.correctAnswer);
   }
 
-  public calcQuizResult(quiz: IQuiz, userAnswers: string[]): number {
-    const correctAnswers: string[] = this.getCorrectAnswers(quiz);
-    let amountCorrectAnswers: number = 0;
+  getPaginatedQuizzes(offset: number, count: number): Promise<IPaginationScheme<IQuiz>> {
+    return this.quizzesApiService.getPaginatedQuizzes(offset, count);
+  }
+
+  getQuizById(id: number): Promise<IQuiz> {
+    return this.quizzesApiService.getQuizById(id);
+  }
+
+  getQuizResultById(id: number): Promise<IQuizResult | null> {
+    return this.quizzesApiService.getQuizResultById(id);
+  }
+
+  getQuizzes(): Promise<IQuiz[]> {
+    return this.quizzesApiService.getAllQuizzes();
+  }
+
+  getQuizzesResults(): Promise<IQuizResult[]> {
+    return this.quizzesApiService.getQuizzesResults();
+  }
+
+  private calcQuizResult(quiz: IQuiz, userAnswers: string[]): number {
+    const correctAnswers = this.getCorrectAnswers(quiz);
+    let amountCorrectAnswers = 0;
     for (let i = 0; i < correctAnswers.length; i++) {
       if (userAnswers[i] === correctAnswers[i]) {
         amountCorrectAnswers++;

@@ -13,10 +13,7 @@ export class DoughnutChartComponent implements AfterViewInit {
 
   @ViewChild('donut') donut!: ElementRef;
 
-  private options: ChartOptions = {
-    responsive: false,
-    animation: false
-  };
+  chart: Chart | null = null;
 
   private data: { datasets: ChartDataset[]; } = {
     datasets: [{
@@ -30,7 +27,10 @@ export class DoughnutChartComponent implements AfterViewInit {
     }]
   };
 
-  public chart: Chart | null = null;
+  private options: ChartOptions = {
+    responsive: false,
+    animation: false
+  };
 
   ngAfterViewInit(): void {
     if (this.isEmpty()) { return; }

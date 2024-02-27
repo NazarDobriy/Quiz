@@ -128,10 +128,7 @@ describe('QuizService', () => {
   });
 
   it('should call setQuizAnswers with correct params after quiz finish', () => {
-    const correctAnswers: number = service.calcQuizResult(
-      mockQuizzes[0],
-      mockQuizAnswers
-    );
+    const correctAnswers = 1;
 
     service.finishQuiz(mockQuizzes[0], mockQuizAnswers, duration);
 
@@ -148,13 +145,5 @@ describe('QuizService', () => {
     service.finishQuiz(mockQuizzes[0], mockQuizAnswers, duration);
     expect(mockRouter.navigateByUrl).toHaveBeenCalled();
     expect(mockRouter.navigateByUrl).toHaveBeenCalledWith(`/quizzes/active/${mockQuizzes[0].id}/score`);
-  });
-
-  it('should calculate quiz result', () => {
-    const correctAnswers: number = service.calcQuizResult(
-      mockQuizzes[0],
-      mockQuizAnswers
-    );
-    expect(correctAnswers).toBe(1);
   });
 });

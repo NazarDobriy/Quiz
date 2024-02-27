@@ -7,7 +7,8 @@ const routes: Routes = [
   },
   {
     path: 'quizzes', loadChildren: ()=>import('../pages/quizzes/quizzes.module').then(m => m.QuizzesModule)
-  }
+  },
+  { path: '**', redirectTo: '/' }
 ];
 
 @NgModule({

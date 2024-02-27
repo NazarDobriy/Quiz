@@ -10,10 +10,10 @@ import { StatisticsService } from '@a-pages/quizzes/pages/active/providers/stati
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class StatisticsComponent implements OnInit {
-  @Input() quizzesResults: IQuizResult[] = [];
   @Input() quizzes: IQuiz[] = [];
+  @Input() quizzesResults: IQuizResult[] = [];
 
-  public questionStatistics: [number, number] = [0, 0];
+  questionStatistics: [number, number] = [0, 0];
 
   constructor(public statisticsService: StatisticsService) { }
 

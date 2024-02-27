@@ -1,9 +1,4 @@
 export class Duration {
-  constructor(
-    private _start: Date,
-    private _end: Date
-  ) { }
-
   get start(): Date {
     return this._start;
   }
@@ -20,4 +15,8 @@ export class Duration {
     return Math.floor(this.duration / 1000);
   }
 
+  constructor(
+    private _start: Date,
+    private _end: Date
+  ) {}
 }

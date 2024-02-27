@@ -12,7 +12,7 @@ import { ThemeService } from '@a-pages/quizzes/providers/theme.service';
 export class QuizCardComponent implements OnInit {
   @Input() quiz!: IQuiz;
 
-  public theme!: IQuizTheme;
+  theme!: IQuizTheme;
 
   constructor(private themeService: ThemeService) {}
 
