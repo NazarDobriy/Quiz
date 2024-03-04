@@ -30,9 +30,9 @@ export class QuizzesComponent implements OnInit, OnDestroy {
     count: this.INITIAL_AMOUNT_QUIZ_CARDS,
     offset: 0,
     total: 0,
-    data: [],
+    data: []
   };
-  private sub = new Subscription();
+  private subscription$ = new Subscription();
 
   get isLimitReached(): boolean {
     return this.quizzes.length >= this.paginationQuizzes.total;
@@ -58,7 +58,7 @@ export class QuizzesComponent implements OnInit, OnDestroy {
   loadCards(): void {
     this.paginationQuizzes = {
       ...this.paginationQuizzes,
-      offset: this.paginationQuizzes.offset + this.paginationQuizzes.count,
+      offset: this.paginationQuizzes.offset + this.paginationQuizzes.count
     };
     this.quizzesStoreService.getQuizzesScheme(
       this.paginationQuizzes.offset,
@@ -67,7 +67,7 @@ export class QuizzesComponent implements OnInit, OnDestroy {
   }
 
   private listenQuizzesScheme(): void {
-    this.sub = this.quizzesStoreService.quizzesScheme$
+    this.subscription$ = this.quizzesStoreService.quizzesScheme$
       .pipe(skip(1))
       .subscribe((scheme: IPaginationScheme<IQuiz>) => {
         this.paginationQuizzes = scheme;
@@ -81,6 +81,6 @@ export class QuizzesComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.sub.unsubscribe();
+    this.subscription$.unsubscribe();
   }
 }
