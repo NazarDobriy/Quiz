@@ -7,9 +7,9 @@ import { IQuizTheme } from '@a-pages/quizzes/types/theme.type';
 @Injectable()
 export class ThemeService {
   isLoadingThemes$ = new BehaviorSubject<boolean>(true);
-  themes: IQuizTheme[] = [];
+  private themes: IQuizTheme[] = [];
 
-  constructor(private quizzesApiService: QuizzesApiService) { }
+  constructor(private quizzesApiService: QuizzesApiService) {}
 
   getThemeByText(text: string): IQuizTheme {
     return this.getThemeById(this.calculateTheme(text));
@@ -21,7 +21,7 @@ export class ThemeService {
   }
 
   private calculateTheme(text: string): number {
-    let sum: number = 0;
+    let sum = 0;
     for (let i = 0; i < text.length; i++) {
       sum += text.charCodeAt(i);
     }
@@ -31,5 +31,4 @@ export class ThemeService {
   private getThemeById(id: number): IQuizTheme {
     return this.themes[id];
   }
-
 }
