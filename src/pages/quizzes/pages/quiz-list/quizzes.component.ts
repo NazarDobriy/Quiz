@@ -32,7 +32,7 @@ export class QuizzesComponent implements OnInit, OnDestroy {
     total: 0,
     data: []
   };
-  private subscription$ = new Subscription();
+  private subscription = new Subscription();
 
   get isLimitReached(): boolean {
     return this.quizzes.length >= this.paginationQuizzes.total;
@@ -67,11 +67,11 @@ export class QuizzesComponent implements OnInit, OnDestroy {
   }
 
   private listenQuizzesScheme(): void {
-    this.subscription$ = this.quizzesStoreService.quizzesScheme$
+    this.subscription = this.quizzesStoreService.quizzesScheme$
       .pipe(skip(1))
       .subscribe((scheme: IPaginationScheme<IQuiz>) => {
         this.paginationQuizzes = scheme;
-        const newQuizzes: IQuiz[] = this.paginationQuizzes.data;
+        const newQuizzes = this.paginationQuizzes.data;
         this.quizzes.push(...newQuizzes);
       });
   }
@@ -81,6 +81,6 @@ export class QuizzesComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscription$.unsubscribe();
+    this.subscription.unsubscribe();
   }
 }
