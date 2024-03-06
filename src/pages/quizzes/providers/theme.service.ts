@@ -21,10 +21,11 @@ export class ThemeService {
   }
 
   private calculateTheme(text: string): number {
-    return (
-      text.split('').reduce((sum, symbol) => sum + symbol.charCodeAt(0), 0) %
-      this.themes.length
-    );
+    let sum = 0;
+    for (let i = 0; i < text.length; i++) {
+      sum += text.charCodeAt(i);
+    }
+    return sum % this.themes.length;
   }
 
   private getThemeById(id: number): IQuizTheme {
